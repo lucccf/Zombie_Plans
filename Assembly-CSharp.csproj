@@ -56,15 +56,15 @@
     <Analyzer Include="D:\VS\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CountingDown.cs" />
-    <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Camara_move.cs" />
     <Compile Include="Assets\Scripts\Const_class.cs" />
+    <Compile Include="Assets\Scripts\CountingDown.cs" />
     <Compile Include="Assets\Scripts\Fix_col\Collider_ctrl.cs" />
     <Compile Include="Assets\Scripts\Fix_col\Fix_col2d.cs" />
     <Compile Include="Assets\Scripts\Fix_col\Fix_rig2d.cs" />
     <Compile Include="Assets\Scripts\Fix_col\Fixpoint.cs" />
     <Compile Include="Assets\Scripts\Fix_col\Rigid_ctrl.cs" />
+    <Compile Include="Assets\Scripts\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Login.cs" />
     <Compile Include="Assets\Scripts\Main_ctrl.cs" />
     <Compile Include="Assets\Scripts\Map_create.cs" />
@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatus.cs" />
     <Compile Include="Assets\Scripts\Player\zombie.cs" />
+    <Compile Include="Assets\Scripts\PlayerPanelController.cs" />
     <Compile Include="Assets\Scripts\Player_ctrl.cs" />
     <Compile Include="Assets\Scripts\Socket\ClientSend.cs" />
     <Compile Include="Assets\Scripts\Socket\Clisocket.cs" />
