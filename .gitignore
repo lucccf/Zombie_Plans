@@ -1,2 +1,5 @@
 Library/
-.vs
+.vs/
+obj/
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
