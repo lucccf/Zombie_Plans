@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Login.cs" />
     <Compile Include="Assets\Scripts\Main_ctrl.cs" />
     <Compile Include="Assets\Scripts\Map_create.cs" />
+    <Compile Include="Assets\Scripts\Moster_ctrl.cs" />
     <Compile Include="Assets\Scripts\Object_ctrl.cs" />
     <Compile Include="Assets\Scripts\Player\Attack.cs" />
     <Compile Include="Assets\Scripts\Player\MonsterStatus.cs" />

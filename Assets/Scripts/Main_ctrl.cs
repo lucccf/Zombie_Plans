@@ -32,6 +32,8 @@ public class Main_ctrl : MonoBehaviour
     public static GameObject camara;
     public static GameObject play;
 
+    public static long frame_index = 0;
+
     public enum objtype
     {
         Character,
@@ -208,6 +210,7 @@ public class Main_ctrl : MonoBehaviour
         while(Frames.Count > 0)
         {
             Frame f = Frames.Dequeue();
+            frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
                 if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
