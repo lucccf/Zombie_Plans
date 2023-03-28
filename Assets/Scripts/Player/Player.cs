@@ -374,7 +374,6 @@ public class Player : MonoBehaviour
             } else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Debug.Log("Trigger out");
-                Main_ctrl.Desobj(TriggerId);
             }
             if (a.type != Fix_col2d_act.col_action.Attack) continue;
             long AttackId = a.opsite.id;
