@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
     {
         //Debug.Log(AnimaStatus);
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
+        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
         switch (AnimaStatus)
         {
             case 0:
@@ -292,7 +292,7 @@ public class Player : MonoBehaviour
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward);
+        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
     }
 
     private void RemoveAttack()
@@ -332,8 +332,7 @@ public class Player : MonoBehaviour
         }
         if (AnimaAttack <= 0.5f) //刚进入，进入一段攻击状态
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaAttack = 1f;
+            AttackToNext();
         } else if(AnimaAttack > 0.5f && AnimaAttack <= 1.5f) //一段攻击
         {
             if(Press[KeyCode.J] && StatusTime > Attack1DuringTime)
