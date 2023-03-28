@@ -267,11 +267,13 @@ public class Player : MonoBehaviour
     private void Roll()
     {
         RemoveHited();
+        Debug.Log(StatusTime.to_float());
         if (StatusTime > new Fixpoint(1, 0))
         {
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
             AnimaRoll = false;
+            return;
         }
         if (AnimaToward == 1.0f)
         {
@@ -292,7 +294,7 @@ public class Player : MonoBehaviour
             StatusTime = new Fixpoint(0, 0);
             return;
         }
-        if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(1, 0) && AnimaAttack < 4.5f) )
+        if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(5, 1) && AnimaAttack < 4.5f) )
         {
             AnimaAttack = AnimaAttack + 1;
             StatusTime = new Fixpoint(0, 0);
@@ -302,7 +304,7 @@ public class Player : MonoBehaviour
             Main_ctrl.NewAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), status.Damage(), 50 ,id);
             return;
         }
-        if (StatusTime > new Fixpoint(15, 1))
+        if (StatusTime > new Fixpoint(8, 1))
         {
             AnimaAttack = 0f;
             StatusTime = new Fixpoint(0, 0);

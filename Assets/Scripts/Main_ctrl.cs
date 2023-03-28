@@ -65,8 +65,8 @@ public class Main_ctrl : MonoBehaviour
 
         Obj_info p = new Obj_info();
         p.name = "Player";
-        p.hei = new Fixpoint(2, 0);
-        p.wid = new Fixpoint(2, 0);
+        p.hei = new Fixpoint(216, 2);
+        p.wid = new Fixpoint(111, 2);
         p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
@@ -86,8 +86,8 @@ public class Main_ctrl : MonoBehaviour
     {
         Obj_info p = new Obj_info();
         p.name = "Monster1";
-        p.hei = new Fixpoint(2, 0);
-        p.wid = new Fixpoint(2, 0);
+        p.hei = new Fixpoint(225, 2);
+        p.wid = new Fixpoint(113, 2);
         p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
@@ -178,6 +178,7 @@ public class Main_ctrl : MonoBehaviour
                     a.HpDamage = info.HpDamage;
                     a.ToughnessDamage = info.ToughnessDamage;
                     a.attakcer_id = info.attacker_id;
+                    a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
                     break;
             }
         }
