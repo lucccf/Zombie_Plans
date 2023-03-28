@@ -33,11 +33,11 @@ public class Item_create : MonoBehaviour
             {
                 int pos = int.Parse(x.InnerText);
                 Obj_info info = new Obj_info();
-                info.name = "wall_b";
-                info.hei = new Fixpoint(wall_hei - (hf_thick << 1), 0);
+                info.name = "crystal";
+                info.hei = new Fixpoint(wall_hei-3 - (hf_thick << 1), 0);
                 info.wid = new Fixpoint(hf_thick << 1, 0);
                 info.col_type = Fix_col2d.col_status.Wall;
-                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id + 1) * wall_hei * 5, 1));
+                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id + 1) * wall_hei * 5 -15, 1));
                 Main_ctrl.CreateObj(info);
                 //info.classnames.Add(Object_ctrl.class_name.Wall);
             }
