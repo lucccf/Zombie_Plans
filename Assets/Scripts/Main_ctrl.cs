@@ -95,13 +95,16 @@ public class Main_ctrl : MonoBehaviour
         CreateObj(p);
     }
 
-    public static void NewAttack()
+    public static void NewAttack(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id)
     {
         Obj_info p = new Obj_info();
-        p.name = "Attack";
-        p.hei = new Fixpoint(2, 0);
-        p.wid = new Fixpoint(2, 0);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
+        p.name = "yellow";
+        p.hei = high.Clone();
+        p.wid = width.Clone();
+        p.pos = pos.Clone();
+        p.HpDamage = Hpdamage.Clone();
+        p.ToughnessDamage = Toughnessdamage;
+        p.attacker_id = attacker_id;
         p.col_type = Fix_col2d.col_status.Attack;
         p.classnames.Add(Object_ctrl.class_name.Attack);
         Creobj(p);
@@ -172,6 +175,9 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Attack] = a;
                     a.f = f;
                     a.id = cnt;
+                    a.HpDamage = info.HpDamage;
+                    a.ToughnessDamage = info.ToughnessDamage;
+                    a.attakcer_id = info.attacker_id;
                     break;
             }
         }
@@ -268,6 +274,9 @@ public class Obj_info
     public Fix_col2d.col_status col_type;
     public List<Object_ctrl.class_name> classnames;
     public long user_id;
+    public Fixpoint HpDamage;
+    public int ToughnessDamage;
+    public long attacker_id;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
