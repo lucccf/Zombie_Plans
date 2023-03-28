@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
     public void Updatex()
     {
         AliveTime += Dt.dt;
-        if(AliveTime > new Fixpoint(1,0))
+        if(AliveTime > new Fixpoint(7,1))
         {
             Main_ctrl.Desobj(id);
         }
