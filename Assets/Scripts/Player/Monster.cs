@@ -224,6 +224,7 @@ public class Monster : MonoBehaviour
     }
     private int GetHited()
     {
+        bool this_hited = false;
         while (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
         {
             Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
@@ -232,14 +233,16 @@ public class Monster : MonoBehaviour
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (a.type != Fix_col2d_act.col_action.Attack) continue;
             if (attack.attakcer_id == id) continue;
-            //Debug.Log("GetHited");
+            AnimaToward = attack.toward;
+
+            this_hited = true;
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
         }
+
         if (status.GetToughness() >= 75)
         {
             return 0;
@@ -248,6 +251,7 @@ public class Monster : MonoBehaviour
         {
             AnimaHited = 1;
             AnimaStatus = 3;
+            if(this_hited == true)
             StatusTime = new Fixpoint(0, 0);
             return 1;
         }
@@ -255,14 +259,16 @@ public class Monster : MonoBehaviour
         {
             AnimaHited = 2;
             AnimaStatus = 3;
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else if (status.GetToughness() < 25 && status.GetToughness() >= 0)
         {
             AnimaHited = 3;
             AnimaStatus = 3;
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else
@@ -270,7 +276,8 @@ public class Monster : MonoBehaviour
             AnimaHited = 4;
             AnimaStatus = 4;
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
             return 2;
         }
     }
@@ -283,6 +290,17 @@ public class Monster : MonoBehaviour
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 0;
             return;
+        }
+        if (StatusTime < new Fixpoint(2,1))
+        {
+            if (AnimaToward == 1.0f)
+            {
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 1);
+            }
+            else
+            {
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 1);
+            }
         }
 
     }
@@ -325,9 +343,9 @@ public class Monster : MonoBehaviour
         }
         
         Fixpoint Near = GetNearDistance();
-        if (first == true || StatusTime > new Fixpoint(1, 0))
+        if (first == true || StatusTime > new Fixpoint(75, 2))
         {
-            if (Near > new Fixpoint(15, 1) || AnimaAttack > 3.5f)
+            if (Near > new Fixpoint(1, 0) || AnimaAttack > 3.5f)
             {
                 StatusTime = new Fixpoint(0, 0);
                 AnimaAttack = 0;
@@ -339,9 +357,20 @@ public class Monster : MonoBehaviour
                 Fix_vector2 AttackPos = f.pos.Clone();
                 if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
                 else AttackPos.x -= new Fixpoint(1, 0);
-                Main_ctrl.NewAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), status.Damage(), 50, id);
+                Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 50, id , -AnimaToward);
                 ++AnimaAttack;
                 StatusTime = new Fixpoint(0, 0);
+            }
+        }
+        if (StatusTime <= new Fixpoint(2, 1))
+        {
+            if (AnimaToward > 0)
+            {
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);
+            }
+            else
+            {
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }
         }
 

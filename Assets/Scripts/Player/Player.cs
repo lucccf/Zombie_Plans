@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
+        Debug.Log(AnimaStatus);
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
         switch (AnimaStatus)
@@ -301,7 +302,7 @@ public class Player : MonoBehaviour
             Fix_vector2 AttackPos = f.pos.Clone();
             if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
             else AttackPos.x -= new Fixpoint(1, 0);
-            Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 50 ,id);
+            Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30 ,id , -AnimaToward);
             return;
         }
         if(StatusTime <= new Fixpoint(2,1))
@@ -351,6 +352,7 @@ public class Player : MonoBehaviour
     }
     private int GetHited()
     {
+        bool this_hited = false;
         while (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
         {
             Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
@@ -359,25 +361,15 @@ public class Player : MonoBehaviour
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-
             if (attack.attakcer_id == id) continue;
-            Debug.Log(attack.attakcer_id + " " + id);
+            AnimaToward = attack.toward;
+            this_hited = true;
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
         }
-        if(AnimaHited != 0)
-        {
-            if (AnimaToward == 1.0f)
-            {
-                f.pos.x = f.pos.x - Dt.dt * status.WalkSpeed;
-            }
-            else
-            {
-                f.pos.x = f.pos.x + Dt.dt * status.WalkSpeed;
-            }
-        }
+
         if (status.GetToughness() >= 75)
         {
             return 0;
@@ -386,28 +378,27 @@ public class Player : MonoBehaviour
         {
             AnimaHited = 1;
             AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else if (status.GetToughness() < 50 && status.GetToughness() >= 25)
         {
             AnimaHited = 2;
             AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else if (status.GetToughness() < 25 && status.GetToughness() >= 0)
         {
             AnimaHited = 3;
             AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else
         {
             AnimaHited = 4;
             AnimaStatus = 5;
-            //AnimaStatus = 4;
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
             StatusTime = new Fixpoint(0, 0);
             return 2;
@@ -424,29 +415,31 @@ public class Player : MonoBehaviour
             AnimaStatus = 0;
             return;
         }
+        if (StatusTime < new Fixpoint(2, 1))
+        {
+            if (AnimaToward == 1.0f)
+            {
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
+            }
+            else
+            {
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);
+            }
+        }
 
     }
 
     private void HitedFly()
     {
-        if (StatusTime > new Fixpoint(15, 1) && f.onground)
+        if (StatusTime > new Fixpoint(8, 1) && f.onground)
         {
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 0;
             AnimaHited = 0;
-            AnimaGround = false;
-            status.RecoverToughness(new Fixpoint(1000, 0));
-            return;
-        } else if (StatusTime > new Fixpoint(15, 1))
-        {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 6;
-            AnimaHited = 0;
-            AnimaGround = false;
-            AnimaFall = true;
             status.RecoverToughness(new Fixpoint(1000, 0));
             return;
         }
+
         if (AnimaToward > 0)
         {
             f.pos.x -= (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
@@ -459,7 +452,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("zzz");
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);
