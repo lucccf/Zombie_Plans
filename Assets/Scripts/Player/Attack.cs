@@ -10,6 +10,7 @@ public class Attack : MonoBehaviour
     public Fixpoint HpDamage;
     public int ToughnessDamage;
     public long attakcer_id = 0;
+    public float toward;
 
     private Fixpoint AliveTime = new Fixpoint(0, 0); 
 
