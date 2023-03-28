@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6241686318445789435}
   - component: {fileID: 4352243853874484975}
   m_Layer: 5
-  m_Name: CloseButton
+  m_Name: Building_CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 858367553810778596}
   - component: {fileID: 6283731085333762084}
   m_Layer: 5
-  m_Name: "\u8FDB\u5EA6\u6761"
+  m_Name: Building_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 3627516668195681616}
   - component: {fileID: 618626543473011574}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Building_TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 1693864821154255418}
   - component: {fileID: 7776083010890879794}
   m_Layer: 5
-  m_Name: "\u63D0\u4EA4"
+  m_Name: Building_CommitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,7 +680,7 @@ GameObject:
   - component: {fileID: 4028313372943117771}
   - component: {fileID: 3149217709161885037}
   m_Layer: 5
-  m_Name: Background
+  m_Name: Building_Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 5052075527996983857}
   - component: {fileID: 6243926230591617128}
   m_Layer: 5
-  m_Name: Title
+  m_Name: Building_Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -832,7 +832,7 @@ GameObject:
   - component: {fileID: 6048496297952496461}
   - component: {fileID: 3693601067466772138}
   m_Layer: 5
-  m_Name: "\u8FDB\u5EA6\u6761\u80CC\u666F"
+  m_Name: Building_BarBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,7 +1054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2383772392733092809}
   m_Layer: 5
-  m_Name: "\u8BBE\u65BDUI\uFF081920_1080\uFF09"
+  m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
