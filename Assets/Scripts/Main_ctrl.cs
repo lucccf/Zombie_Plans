@@ -182,6 +182,12 @@ public class Main_ctrl : MonoBehaviour
                     a.toward = info.toward;
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
                     break;
+                case Object_ctrl.class_name.Trigger:
+                    Trigger t = obj.AddComponent<Trigger>();
+                    ctrl.modules[Object_ctrl.class_name.Trigger] = t;
+                    t.triggertype = info.type;
+                    t.triggername = info.name;
+                    break;
             }
         }
 
@@ -275,6 +281,7 @@ public class Obj_info
     public Fixpoint hei, wid;
     public Fix_vector2 pos;
     public string name;
+    public string type;
     public Fix_col2d.col_status col_type;
     public List<Object_ctrl.class_name> classnames;
     public long user_id;
