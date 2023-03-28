@@ -304,6 +304,16 @@ public class Player : MonoBehaviour
             Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 50 ,id);
             return;
         }
+        if(StatusTime <= new Fixpoint(2,1))
+        {
+            if(AnimaToward > 0)
+            {
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1 , 0);
+            } else
+            {
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
+            }
+        }
         if (StatusTime > new Fixpoint(8, 1))
         {
             AnimaAttack = 0f;
@@ -356,6 +366,17 @@ public class Player : MonoBehaviour
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+        }
+        if(AnimaHited != 0)
+        {
+            if (AnimaToward == 1.0f)
+            {
+                f.pos.x = f.pos.x - Dt.dt * status.WalkSpeed;
+            }
+            else
+            {
+                f.pos.x = f.pos.x + Dt.dt * status.WalkSpeed;
+            }
         }
         if (status.GetToughness() >= 75)
         {

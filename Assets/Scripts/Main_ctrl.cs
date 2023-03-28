@@ -159,7 +159,7 @@ public class Main_ctrl : MonoBehaviour
                     Player_ctrl.plays.Add(p);
                     break;
                 case Object_ctrl.class_name.Fix_rig2d:
-                    Fix_rig2d r = new Fix_rig2d(cnt, new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(-10, 0)));
+                    Fix_rig2d r = new Fix_rig2d(cnt, new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(-15, 0)));
                     ctrl.modules[Object_ctrl.class_name.Fix_rig2d] = r;
                     Rigid_ctrl.rigs.Add(r);
                     break;
