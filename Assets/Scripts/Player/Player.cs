@@ -344,6 +344,7 @@ public class Player : MonoBehaviour
         while (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
         {
             Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
+            if (a.type != Fix_col2d_act.col_action.Attack) continue;
             ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
