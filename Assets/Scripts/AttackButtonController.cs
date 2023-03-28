@@ -47,7 +47,7 @@ public class AttackButtonController : MonoBehaviour
             {
                 buttonText.text = "User " + (i + 1);
             }
-            buttonObject.transform.position = new Vector3(120 * i + 200, 590, 0);
+            buttonObject.transform.position = new Vector3(120 * i + 240, 750, 0);
         }
     }
 
