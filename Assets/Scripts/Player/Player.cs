@@ -294,14 +294,14 @@ public class Player : MonoBehaviour
             StatusTime = new Fixpoint(0, 0);
             return;
         }
-        if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(5, 1) && AnimaAttack < 4.5f) )
+        if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
         {
             AnimaAttack = AnimaAttack + 1;
             StatusTime = new Fixpoint(0, 0);
             Fix_vector2 AttackPos = f.pos.Clone();
             if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
             else AttackPos.x -= new Fixpoint(1, 0);
-            Main_ctrl.NewAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), status.Damage(), 50 ,id);
+            Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 50 ,id);
             return;
         }
         if (StatusTime > new Fixpoint(8, 1))
