@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<background>
+    <map_info>
+        <floor_cnt>10</floor_cnt>
+        <room_cnt>9</room_cnt>
+        <floor_hei>7</floor_hei>
+        <floor_wid>28</floor_wid>
+        <floor_half_thick>1</floor_half_thick>
+    </map_info>
+    
+    <floor>
+        <floor_info>
+            <id>1</id>
+            <boss_pos>1</boss_pos>
+            <mill_pos>5</mill_pos>
+            <boss_pos>9</boss_pos>
+        </floor_info>
+        
+        <floor_info>
+            <id>2</id>
+            <battle_pos>5</battle_pos>
+        </floor_info>
+        
+        <floor_info>
+            <id>3</id>
+            <battle_pos>2</battle_pos>
+            <mill_pos>3</mill_pos>
+            <normal_pos>4</normal_pos>
+            <normal_pos>5</normal_pos>
+            <normal_pos>6</normal_pos>
+            <battle_pos>8</battle_pos>
+        </floor_info>
+        
+         <floor_info>
+            <id>4</id>
+            <normal_pos>3</normal_pos>
+            <normal_pos>4</normal_pos>
+            <normal_pos>5</normal_pos>
+            <normal_pos>6</normal_pos>
+            <normal_pos>7</normal_pos>
+            <mill_pos>8</mill_pos>
+        </floor_info>
+        <floor_info>
+            <id>5</id>
+            <normal_pos>3</normal_pos>
+            <home_pos>4</home_pos>
+            <home_pos>5</home_pos>
+            <home_pos>6</home_pos>
+            <normal_pos>7</normal_pos>
+            <normal_pos>8</normal_pos>
+        </floor_info>
+        <floor_info>
+            <id>6</id>
+            <battle_pos>1</battle_pos>
+            <normal_pos>2</normal_pos>
+            <normal_pos>3</normal_pos>
+            <home_pos>4</home_pos>
+            <home_pos>5</home_pos>
+            <home_pos>6</home_pos>
+            <normal_pos>7</normal_pos>
+            <normal_pos>8</normal_pos>
+            <battle_pos>9</battle_pos>
+        </floor_info>
+        <floor_info>
+            <id>7</id>
+            <mill_pos>1</mill_pos>
+            <normal_pos>2</normal_pos>
+            <normal_pos>3</normal_pos>
+            <home_pos>4</home_pos>
+            <home_pos>5</home_pos>
+            <home_pos>6</home_pos>
+            <normal_pos>7</normal_pos>
+            <normal_pos>8</normal_pos>
+            <mill_pos>9</mill_pos>
+        </floor_info>
+        <floor_info>
+            <id>8</id>
+            <battle_pos>2</battle_pos>
+            <normal_pos>3</normal_pos>
+            <normal_pos>4</normal_pos>
+            <normal_pos>5</normal_pos>
+            <normal_pos>6</normal_pos>
+            <normal_pos>7</normal_pos>
+            <battle_pos>8</battle_pos>
+        </floor_info>
+       <floor_info>
+            <id>9</id>
+            <mill_pos>2</mill_pos>
+            <battle_pos>3</battle_pos>
+            <normal_pos>4</normal_pos>
+            <normal_pos>5</normal_pos>
+            <normal_pos>6</normal_pos>
+            <mill_pos>7</mill_pos>
+        </floor_info>
+        
+        <floor_info>
+            <id>10</id>
+            <boss_pos>1</boss_pos>
+            <mill_pos>5</mill_pos>
+            <battle_pos>6</battle_pos>
+            <boss_pos>9</boss_pos>
+        </floor_info>
+       
+    </floor>
+    
+</background>

@@ -7,6 +7,12 @@ using static UnityEditor.PlayerSettings;
 public class Map_create : MonoBehaviour
 {
     // Start is called before the first frame update
+
+    static int floor_hei;
+    static int room_cnt;
+    static int floor_wid;
+    static int floor_cnt;
+
     public static void Wall_create()
     {
         XmlDocument xmlDoc = new XmlDocument();
@@ -17,9 +23,9 @@ public class Map_create : MonoBehaviour
 
         int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
         int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
-        int room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
-        int floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
-        int floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
+        room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
+        floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
+        floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
         int hol_len = int.Parse(xmlDoc.SelectSingleNode("/map/hole/hole_basic_info/length").InnerText);
 
         List<List<int>> holes = new List<List<int>>();
@@ -141,10 +147,37 @@ public class Map_create : MonoBehaviour
         //创建家
     }
 
+    public static void Background_create() {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/background.xml");
+        XmlNodeList Rooms = xmlDoc.SelectNodes("/background/floor/floor_info");
+        XmlNode map_info = xmlDoc.SelectSingleNode("/background/map_info");
 
-    // Update is called once per frame
-    void Update()
+        floor_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
+        room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
+        floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
+        floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
+
+        BK_create(Rooms, "boss_pos", "BK_monster");
+        BK_create(Rooms, "mill_pos", "BK_castle");
+        BK_create(Rooms, "normal_pos", "BK_castle");
+        BK_create(Rooms, "battle_pos", "BK_monster");
+        BK_create(Rooms, "home_pos", "BK_home");
+    }
+
+    static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
     {
-        
+        foreach (XmlNode p in Rooms)
+        {
+            int id = int.Parse(p.SelectSingleNode("id").InnerText);
+            foreach (XmlNode x in p.SelectNodes(xml_name))
+            {
+                int pos = int.Parse(x.InnerText);
+                GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/background/" + pre_name));
+                obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
+                SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+                spriteRenderer.size = new Vector2(floor_wid, floor_hei);
+            }
+        }
     }
 }

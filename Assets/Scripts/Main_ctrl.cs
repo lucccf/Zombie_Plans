@@ -50,6 +50,7 @@ public class Main_ctrl : MonoBehaviour
         camara = GameObject.Find("Main Camera");
         Map_create.Wall_create();
         Map_create.Item_create();
+        Map_create.Background_create();
     }
 
     public static void Desobj(long id)
