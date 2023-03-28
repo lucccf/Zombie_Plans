@@ -39,6 +39,7 @@ public class Item_create : MonoBehaviour
                 info.wid = new Fixpoint(hf_thick << 1, 0);
                 info.col_type = Fix_col2d.col_status.Trigger;
                 info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id + 1) * wall_hei * 5 -15, 1));
+                info.classnames.Add(Object_ctrl.class_name.Trigger);
                 Main_ctrl.CreateObj(info);
                 //info.classnames.Add(Object_ctrl.class_name.Wall);
             }
@@ -51,6 +52,7 @@ public class Item_create : MonoBehaviour
         home_info.col_type = Fix_col2d.col_status.Trigger;
         home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 -15, 1));
         home_info.type = "building";
+        home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
 

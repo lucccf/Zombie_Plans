@@ -466,7 +466,6 @@ public class Player : MonoBehaviour
         }
     }
     private GameObject Building;
-    private long TriggerId = 0;
     private int GetHited()
     {
         bool this_hited = false;
@@ -484,12 +483,11 @@ public class Player : MonoBehaviour
                     GameObject parent = GameObject.Find("PlayerPanel");
                     Building = (GameObject)Instantiate(Resources.Load("Prefabs/building"), parent.transform);
                     Building.name = trigger.name;
-                    TriggerId = a.opsite.id;
                 }
             } else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
+                Destroy(Building);
                 Debug.Log("Trigger out");
-                Main_ctrl.Desobj(TriggerId);
             }
             if (a.type != Fix_col2d_act.col_action.Attack) continue;
             long AttackId = a.opsite.id;
