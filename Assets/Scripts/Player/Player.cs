@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
     {
         //Debug.Log(AnimaStatus);
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
+        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
         switch (AnimaStatus)
         {
             case 0:
@@ -133,7 +134,7 @@ public class Player : MonoBehaviour
                 Roll();
                 break;
             case 3:
-                Attack(false);
+                Attack();
                 break;
             case 4:
                 //受击
@@ -205,10 +206,9 @@ public class Player : MonoBehaviour
         }
         if (Press[KeyCode.J] && f.onground)
         {
-            //AnimaAttack = 1f;
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 3;
-            Attack(true);
+            Attack();
             return;
         }
         if (Press[KeyCode.L] && f.onground)
@@ -285,7 +285,42 @@ public class Player : MonoBehaviour
             f.pos.x = f.pos.x - Dt.dt * status.WalkSpeed;
         }
     }
-    private void Attack(bool first)
+    private void AttackToNext()
+    {
+        AnimaAttack = AnimaAttack + 1;
+        StatusTime = new Fixpoint(0, 0);
+        Fix_vector2 AttackPos = f.pos.Clone();
+        if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
+        else AttackPos.x -= new Fixpoint(1, 0);
+        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
+    }
+
+    private void RemoveAttack()
+    {
+        AnimaAttack = 0f;
+        StatusTime = new Fixpoint(0, 0);
+        AnimaStatus = 0;
+        return;
+    }
+
+    private void CheckQuitAttack()
+    {
+        if (Press[KeyCode.A] || Press[KeyCode.D] || Press[KeyCode.L] || Press[KeyCode.K])
+        {
+            RemoveAttack();
+        }
+    }
+    private Fixpoint Attack1DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack1QuitTime = new Fixpoint(8, 1);
+    private Fixpoint Attack2DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack2QuitTime = new Fixpoint(8, 1);
+    private Fixpoint Attack3DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack3QuitTime = new Fixpoint(8, 1);
+    private Fixpoint Attack4DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack4QuitTime = new Fixpoint(8, 1);
+    private Fixpoint Attack5DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack5QuitTime = new Fixpoint(8, 1);
+    private void Attack()
     {
         int hit = GetHited();
         if (hit != 0)
@@ -295,6 +330,81 @@ public class Player : MonoBehaviour
             StatusTime = new Fixpoint(0, 0);
             return;
         }
+        if (AnimaAttack <= 0.5f) //刚进入，进入一段攻击状态
+        {
+            AttackToNext();
+        } else if(AnimaAttack > 0.5f && AnimaAttack <= 1.5f) //一段攻击
+        {
+            if(Press[KeyCode.J] && StatusTime > Attack1DuringTime)
+            {
+                AttackToNext();
+            }
+            else if(StatusTime > Attack1DuringTime && StatusTime < Attack1QuitTime)
+            {
+                CheckQuitAttack();
+            }
+            else if(StatusTime > Attack1QuitTime)
+            {
+                RemoveAttack();
+            }
+
+        } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
+        {
+            if (Press[KeyCode.J] && StatusTime > Attack2DuringTime)
+            {
+                AttackToNext();
+            }
+            else if (StatusTime > Attack2DuringTime && StatusTime < Attack2QuitTime)
+            {
+                CheckQuitAttack();
+            }
+            else if (StatusTime > Attack2QuitTime)
+            {
+                RemoveAttack();
+            }
+
+        } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
+        {
+            if (Press[KeyCode.J] && StatusTime > Attack3DuringTime)
+            {
+                AttackToNext();
+            }
+            else if (StatusTime > Attack3DuringTime && StatusTime < Attack3QuitTime)
+            {
+                CheckQuitAttack();
+            }
+            else if (StatusTime > Attack3QuitTime)
+            {
+                RemoveAttack();
+            }
+
+        } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
+        {
+            if (Press[KeyCode.J] && StatusTime > Attack4DuringTime)
+            {
+                AttackToNext();
+            }
+            else if (StatusTime > Attack4DuringTime && StatusTime < Attack4QuitTime)
+            {
+                CheckQuitAttack();
+            }
+            else if (StatusTime > Attack4QuitTime)
+            {
+                RemoveAttack();
+            }
+        }
+        else //五段攻击
+        {
+            if (StatusTime > Attack5DuringTime && StatusTime < Attack5QuitTime)
+            {
+                CheckQuitAttack();
+            }
+            else if (StatusTime > Attack5QuitTime)
+            {
+                RemoveAttack();
+            }
+        }
+        /*
         if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
         {
             AnimaAttack = AnimaAttack + 1;
@@ -305,6 +415,7 @@ public class Player : MonoBehaviour
             Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30 ,id , -AnimaToward);
             return;
         }
+        */
         if(StatusTime <= new Fixpoint(2,1))
         {
             if(AnimaToward > 0)
@@ -315,6 +426,7 @@ public class Player : MonoBehaviour
                 f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }
         }
+        /*
         if (StatusTime > new Fixpoint(8, 1))
         {
             AnimaAttack = 0f;
@@ -322,7 +434,9 @@ public class Player : MonoBehaviour
             AnimaStatus = 0;
             return;
         }
+        */
     }
+
     private void Fall()
     {
         if (Press[KeyCode.A] == true)
