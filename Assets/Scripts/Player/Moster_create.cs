@@ -8,7 +8,7 @@ public class Moster_create : MonoBehaviour
     void Start()
     {
         Obj_info p = new Obj_info();
-        p.name = "Moster1";
+        p.name = "Monster1";
         p.hei = new Fixpoint(2, 0);
         p.wid = new Fixpoint(2, 0);
         p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
