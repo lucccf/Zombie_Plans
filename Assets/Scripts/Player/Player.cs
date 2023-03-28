@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
-        Debug.Log(AnimaStatus);
+        //Debug.Log(AnimaStatus);
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
         switch (AnimaStatus)
@@ -350,6 +350,8 @@ public class Player : MonoBehaviour
             ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
         }
     }
+    private GameObject Building;
+    private long TriggerId = 0;
     private int GetHited()
     {
         bool this_hited = false;
@@ -357,6 +359,23 @@ public class Player : MonoBehaviour
         {
             Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
             ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
+            if(a.type == Fix_col2d_act.col_action.Trigger_in)
+            {
+                Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+                Debug.Log("Trigger in");
+                if (trigger.triggertype == "building")
+                {
+                    Debug.Log("Trigger");
+                    GameObject parent = GameObject.Find("PlayerPanel");
+                    Building = (GameObject)Instantiate(Resources.Load("Prefabs/building"), parent.transform);
+                    Building.name = trigger.name;
+                    TriggerId = a.opsite.id;
+                }
+            } else if (a.type == Fix_col2d_act.col_action.Trigger_out)
+            {
+                Debug.Log("Trigger out");
+                Main_ctrl.Desobj(TriggerId);
+            }
             if (a.type != Fix_col2d_act.col_action.Attack) continue;
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
