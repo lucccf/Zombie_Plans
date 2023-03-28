@@ -217,7 +217,6 @@ public class Main_ctrl : MonoBehaviour
         while(Frames.Count > 0)
         {
             Frame f = Frames.Dequeue();
-            Debug.Log(f);
             frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
