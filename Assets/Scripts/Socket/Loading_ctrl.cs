@@ -25,8 +25,16 @@ public class Loading_ctrl : MonoBehaviour
         while (Frames.Count > 0)
         {
             Frame f = Frames.Dequeue();
-            Main_ctrl.players.Enqueue(f.Userid);
-            roomcnt++;
+            if (f.Index == -1)
+            {
+                Main_ctrl.players.Add(f.Userid);
+                roomcnt++;
+            }
+            else if (f.Index == -2)
+            {
+                Main_ctrl.players.Remove(f.Userid);
+                roomcnt--;
+            }
 
             if (roomcnt >= 3)
             {

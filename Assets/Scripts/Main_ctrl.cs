@@ -14,7 +14,7 @@ using static UnityEditor.PlayerSettings;
 
 public class Main_ctrl : MonoBehaviour
 {
-    public static Queue<long> players = new Queue<long>();
+    public static List<long> players = new List<long>();
 
     // Start is called before the first frame update
     public static Dictionary<long, Object_ctrl> All_objs = new Dictionary<long, Object_ctrl>();
@@ -46,6 +46,14 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
+    void Play_create()
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            NewPlayer(players[i]);
+        }
+    }
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -55,6 +63,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Item_create();
         Map_create.Background_create();
         Monster_create.Mon_create();
+        Play_create();
     }
 
     public static void Desobj(long id)
@@ -67,7 +76,7 @@ public class Main_ctrl : MonoBehaviour
         Cre_objs.Enqueue(p);
     }
 
-    public static void NewPlayer(int player_id)
+    public static void NewPlayer(long player_id)
     {
 
         Obj_info p = new Obj_info();
@@ -236,10 +245,10 @@ public class Main_ctrl : MonoBehaviour
             frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
+                /*if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
                 {
                     NewPlayer(f.Opts[i].Userid);
-                }
+                }*/
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
