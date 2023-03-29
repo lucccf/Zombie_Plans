@@ -46,4 +46,27 @@ public class PlayerBag
             }
         }
     }
+    public bool BagGetItem(int id, int num ,Bag bagui)
+    {
+        if (!BagItem.ContainsKey(id))
+        {
+            BagItem.Add(id, 0);
+        }
+        if (num >= 0)
+        {
+            BagItem[id] += num;
+            bagui.GetItem(id, num);
+            return true;
+        }
+        else
+        {
+            if (BagItem[id] < -num) return false;
+            else
+            {
+                BagItem[id] += num;
+                bagui.GetItem(id, num);
+                return true;
+            }
+        }
+    }
 }

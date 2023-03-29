@@ -38,10 +38,12 @@ public class Player : MonoBehaviour
     private Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     private Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
     private PlayerBag bag = new PlayerBag();
+
+    public Bag BagUI;
     void Start()
     {
         animator = GetComponent<Animator>();
-        
+        BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
     }
 
     HashSet<PlayerOpt> list;
@@ -155,9 +157,12 @@ public class Player : MonoBehaviour
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
-        //transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
-
+   private bool checkid()
+    {
+        if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
+        else return false;
+    }
     void GetColider()
     {
         if (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
@@ -288,7 +293,7 @@ public class Player : MonoBehaviour
     private void Roll()
     {
         RemoveHited();
-        Debug.Log(StatusTime.to_float());
+        //Debug.Log(StatusTime.to_float());
         if (StatusTime > new Fixpoint(44, 2))//翻滚的总时间
         {
             AnimaStatus = 0;
@@ -493,9 +498,9 @@ public class Player : MonoBehaviour
             TriggerQueue.Dequeue();
             if (a.type == Fix_col2d_act.col_action.Trigger_in)
             {
-                Debug.Log("Trigger in");
+                //Debug.Log("Trigger in");
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
-                if (trigger.triggertype == "building")
+                if (trigger.triggertype == "building" && checkid() == true)
                 {
                     Debug.Log("Trigger");
                     GameObject parent = GameObject.Find("PlayerPanel");
@@ -503,13 +508,21 @@ public class Player : MonoBehaviour
                     Building.name = trigger.name;
                 } else if(trigger.triggername == "ItemSample")
                 {
-                    Debug.Log("Getx");
+                    if (checkid() == true)
+                    {
+                        bag.BagGetItem(trigger.itemid, trigger.itemnum, BagUI);
+                    }
+                    else
+                    {
+                        bag.BagGetItem(trigger.itemid, trigger.itemnum);
+                    }
+                    Main_ctrl.Desobj(a.opsite.id);
                 }
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Destroy(Building);
-                Debug.Log("Trigger out");
+                //Debug.Log("Trigger out");
             } else
             {
                 Debug.Log("Trigger error");

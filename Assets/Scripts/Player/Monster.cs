@@ -378,7 +378,7 @@ public class Monster : MonoBehaviour
     }
     private void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), "Knife");
+        Main_ctrl.NewItem(f.pos.Clone(), "Material", 10);
     }
     private void Death()
     {
@@ -389,7 +389,6 @@ public class Monster : MonoBehaviour
             Debug.Log("Death");
             DeathFall();
             Main_ctrl.Desobj(id);
-            //AnimaStatus = 100;
         }
     }
     // Update is called once per frame

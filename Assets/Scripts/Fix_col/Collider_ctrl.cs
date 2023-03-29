@@ -147,11 +147,11 @@ public class Collider_ctrl
         }
 
         //其他情况的交互
-        if (f1.type == Fix_col2d.col_status.Trigger)
+        if (f1.type == Fix_col2d.col_status.Trigger && f2.type != Fix_col2d.col_status.Trigger)
         {
             col_trigger(f2, f1);
         }
-        if (f2.type == Fix_col2d.col_status.Trigger)
+        if (f2.type == Fix_col2d.col_status.Trigger && f1.type != Fix_col2d.col_status.Trigger)
         {
             col_trigger(f1, f2);
         }

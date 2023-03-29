@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72be97719ac75124d90cb3fadd4c2088, type: 3}
   m_Name: Material
   m_EditorClassIdentifier: 
-  name: Material
+  itemname: Material
   description: It can make something
   image: {fileID: 21300036, guid: 03dd1ef6fb163214c9e1ac0242dab3ba, type: 3}
   id: 1

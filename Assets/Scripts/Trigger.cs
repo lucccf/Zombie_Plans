@@ -7,6 +7,8 @@ public class Trigger : MonoBehaviour
     // Start is called before the first frame update
     public string triggertype;
     public string triggername;
+    public int itemid;
+    public int itemnum;
     void Start()
     {
         

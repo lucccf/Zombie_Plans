@@ -128,7 +128,7 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
-    public static void NewItem(Fix_vector2 pos ,string itemname)
+    public static void NewItem(Fix_vector2 pos ,string itemname,int num)
     {
         Obj_info p = new Obj_info();
         p.name = "ItemSample";
@@ -137,6 +137,7 @@ public class Main_ctrl : MonoBehaviour
         p.pos = pos;
         p.col_type = Fix_col2d.col_status.Trigger;
         p.type = itemname;
+        p.ToughnessDamage = num;
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         Creobj(p);
     }
@@ -197,10 +198,12 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
-                        Item x =AssetDatabase.LoadAssetAtPath<Item>("bag/items/" + info.type);
-                        Debug.Log("Resouces:" + x.id);
+                        Item x = (Item)Resources.Load("items/" + info.type);
+                        //Debug.Log("Resouces:" + x.id);
+                        t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
                         obj.GetComponent<ItemOnGround>().item = x;
+                        t.itemid = x.id;
                     }
                     break;
             }
