@@ -7,17 +7,22 @@ public class BuildingButton : MonoBehaviour
 {
     GameObject playerpanel;
     GameObject tmp;
+    GameObject closebutton;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
         playerpanel = GameObject.Find("PlayerPanel");
-        if (gameObject.name == "home(clone)")
+        if (gameObject.name == "home(Clone)")
         {
             tmp = playerpanel.transform.Find("HomeUI").gameObject;
+            closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
+            closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
         else
         {
-            tmp = playerpanel.transform.Find("HomeUI").gameObject;
+            tmp = playerpanel.transform.Find("Facility").gameObject;
+            closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
+            closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
     }
 
@@ -43,6 +48,12 @@ public class BuildingButton : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
+    }
+
+    void CloseUI() 
+    {
+        tmp.SetActive(false);
+        gameObject.SetActive(true);
     }
 
     void OnDestroy()

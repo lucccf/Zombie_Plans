@@ -52,7 +52,7 @@ namespace Net {
             "DgoGcm9vbWlkGAEgASgFEg0KBWluZGV4GAIgASgFEiAKBG9wdHMYAyADKAsy",
             "Ei5OZXQuUGxheWVyT3B0RGF0YRIgCgRtc2dzGAQgAygLMhIuTmV0LlBsYXll",
             "ck1lc3NhZ2USIQoIc2VuZGNhc2UYBSABKA4yDy5OZXQuRnJhbWUuU2VuZBIO",
-            "CgZ1c2VyaWQYBiABKAUiGwoEU2VuZBIHCgNBbGwQABIKCgZTaW5nbGUQASrA",
+            "CgZ1c2VyaWQYBiABKAUiGwoEU2VuZBIHCgNBbGwQABIKCgZTaW5nbGUQASrS",
             "AgoJUGxheWVyT3B0EgsKB05vdGhpbmcQABIKCgZBX0Rvd24QFRIICgRBX1Vw",
             "EAESCgoGRF9Eb3duEAISCAoERF9VcBADEgoKBkpfRG93bhAEEggKBEpfVXAQ",
             "BRIKCgZLX0Rvd24QBhIICgRLX1VwEAcSCgoGTF9Eb3duEAgSCAoETF9VcBAJ",
@@ -60,7 +60,7 @@ namespace Net {
             "DgoKU2hpZnRfRG93bhAOEgwKCFNoaWZ0X1VwEA8SDgoKU3BhY2VfRG93bhAQ",
             "EgwKCFNwYWNlX1VwEBESDQoJTW92ZV9pdGVtEBISDwoLQ3JlYXRlX2l0ZW0Q",
             "ExIPCgtEZWxldGVfaXRlbRAUEg4KClVzZXJfTG9naW4QFhIPCgtVc2VyX0xv",
-            "Z291dBAXYgZwcm90bzM="));
+            "Z291dBAXEhAKDEZpeF9GYWNpbGl0eRAYYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Net.PlayerOpt), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -133,6 +133,7 @@ namespace Net {
     ///登出
     /// </summary>
     [pbr::OriginalName("User_Logout")] UserLogout = 23,
+    [pbr::OriginalName("Fix_Facility")] FixFacility = 24,
   }
 
   #endregion

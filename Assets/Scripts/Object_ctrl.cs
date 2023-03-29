@@ -18,6 +18,7 @@ public class Object_ctrl : MonoBehaviour
         Attack,
         Bag,
         Trigger,
+        Facility,
         //...
     }
 
