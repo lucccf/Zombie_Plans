@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 using static UnityEngine.ParticleSystem;
 
 public class Monster : MonoBehaviour
@@ -375,6 +376,10 @@ public class Monster : MonoBehaviour
         }
 
     }
+    private void DeathFall()
+    {
+        Main_ctrl.NewItem(f.pos.Clone(), "Knife");
+    }
     private void Death()
     {
         AnimaGround = true;
@@ -382,6 +387,7 @@ public class Monster : MonoBehaviour
         if(StatusTime > new Fixpoint(3,0))
         {
             Debug.Log("Death");
+            DeathFall();
             Main_ctrl.Desobj(id);
             //AnimaStatus = 100;
         }

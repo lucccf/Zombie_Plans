@@ -35,10 +35,13 @@ public class Player : MonoBehaviour
     private Fixpoint StatusTime = new Fixpoint(0, 0);
     public long id;
 
-
+    private Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
+    private Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
+    private PlayerBag bag = new PlayerBag();
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
     HashSet<PlayerOpt> list;
@@ -54,6 +57,8 @@ public class Player : MonoBehaviour
         [KeyCode.LeftShift] = false,
         [KeyCode.Space] = false
     };
+
+
 
     public void DealInputs(PlayerOptData inputs)
     {
@@ -118,7 +123,8 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
-        //Debug.Log(AnimaStatus);
+        GetColider();
+        GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
         switch (AnimaStatus)
@@ -150,6 +156,20 @@ public class Player : MonoBehaviour
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
         //transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
+    }
+
+    void GetColider()
+    {
+        if (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
+        {
+            Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
+            if(a.type == Fix_col2d_act.col_action.Trigger_in || a.type == Fix_col2d_act.col_action.Trigger_out)
+            {
+                TriggerQueue.Enqueue(a);
+            } else if (a.type == Fix_col2d_act.col_action.Attack) {
+                AttackQueue.Enqueue(a);
+            }
+        }
     }
     private void Normal()
     {
@@ -459,36 +479,55 @@ public class Player : MonoBehaviour
     }
     private void RemoveHited()
     {
-        if (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
+        if (AttackQueue.Count > 0)
         {
-            ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
+            AttackQueue.Dequeue();
         }
     }
     private GameObject Building;
-    private int GetHited()
+    private void GetTrigger()
     {
-        bool this_hited = false;
-        while (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
+        while(TriggerQueue.Count > 0)
         {
-            Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
-            ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
-            if(a.type == Fix_col2d_act.col_action.Trigger_in)
+            Fix_col2d_act a = TriggerQueue.Peek();
+            TriggerQueue.Dequeue();
+            if (a.type == Fix_col2d_act.col_action.Trigger_in)
             {
-                Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
                 Debug.Log("Trigger in");
+                Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
                 if (trigger.triggertype == "building")
                 {
                     Debug.Log("Trigger");
                     GameObject parent = GameObject.Find("PlayerPanel");
                     Building = (GameObject)Instantiate(Resources.Load("Prefabs/building"), parent.transform);
                     Building.name = trigger.name;
+                } else if(trigger.triggername == "ItemSample")
+                {
+                    Debug.Log("Getx");
                 }
-            } else if (a.type == Fix_col2d_act.col_action.Trigger_out)
+            }
+            else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Destroy(Building);
                 Debug.Log("Trigger out");
+            } else
+            {
+                Debug.Log("Trigger error");
             }
-            if (a.type != Fix_col2d_act.col_action.Attack) continue;
+        }
+    }
+    private int GetHited()
+    {
+        bool this_hited = false;
+        while (AttackQueue.Count > 0)
+        {
+            Fix_col2d_act a = AttackQueue.Peek();
+            AttackQueue.Dequeue();
+            if (a.type != Fix_col2d_act.col_action.Attack)
+            {
+                Debug.Log("Attack Geted Error");
+                continue;
+            }
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
