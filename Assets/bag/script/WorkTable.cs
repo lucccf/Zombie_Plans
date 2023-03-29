@@ -12,7 +12,6 @@ public class WorkTable : MonoBehaviour
     public GameObject ItemListParent;
     public GameObject NeedItemParent;
     public Text ItemDescription;
-    public Item[] ItemList;
     public Item[] MakedItemList;
     public GameObject MakeSuccess;
     public GameObject MakeFail;
@@ -24,10 +23,11 @@ public class WorkTable : MonoBehaviour
     private int NowChecking = -1;
     void Start()
     {
-        worktable.SetActive(false);
+
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
-        for(int i = 0; i < ItemList.Length; ++i)
+        Item[] ItemList = Resources.LoadAll<Item>("items/");
+        for (int i = 0; i < ItemList.Length; ++i)
         {
             OriginItem.Add(ItemList[i].id, ItemList[i]);
         }
@@ -44,6 +44,7 @@ public class WorkTable : MonoBehaviour
                     ItemOnClick(j);
                 });
         }
+        worktable.SetActive(false);
     }
     void Update()
     {
