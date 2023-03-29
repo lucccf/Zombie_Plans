@@ -83,7 +83,7 @@ public class Main_ctrl : MonoBehaviour
         p.name = "Player";
         p.hei = new Fixpoint(216, 2);
         p.wid = new Fixpoint(111, 2);
-        p.pos = new Fix_vector2(new Fixpoint(9 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
+        p.pos = new Fix_vector2(new Fixpoint(10 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Player);
