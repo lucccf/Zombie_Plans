@@ -246,10 +246,6 @@ public class Main_ctrl : MonoBehaviour
             frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                /*if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
-                {
-                    NewPlayer(f.Opts[i].Userid);
-                }*/
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
