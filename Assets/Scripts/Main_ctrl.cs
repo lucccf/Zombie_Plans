@@ -62,7 +62,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Wall_create();
         Map_create.Item_create();
         Map_create.Background_create();
-        Monster_create.Mon_create();
+        Monster_create.Mon_create1();
         Play_create();
     }
 

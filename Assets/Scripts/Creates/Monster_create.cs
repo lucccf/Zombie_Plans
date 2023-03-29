@@ -9,7 +9,7 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> pos_zombies = new List<Fix_vector2>();
     public static List<Fix_vector2> size_zombies = new List<Fix_vector2>();
 
-    public static void Mon_create()
+    public static void Mon_create1()
     {
         for(int i = 0; i < pos_monster.Count; i++)
         {
@@ -26,15 +26,20 @@ public class Monster_create : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public static void Mon_create2()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < pos_zombies.Count; i++)
+        {
+            Obj_info p = new Obj_info();
+            p.name = "Monster1";
+            p.hei = size_zombies[i].y.Clone();
+            p.wid = size_zombies[i].x.Clone();
+            p.pos = pos_zombies[i];
+            p.col_type = Fix_col2d.col_status.Collider;
+            p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+            p.classnames.Add(Object_ctrl.class_name.Moster);
+            Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
+            Main_ctrl.CreateObj(p);
+        }
     }
 }
