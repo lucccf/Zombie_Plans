@@ -146,6 +146,8 @@ public class Map_create : MonoBehaviour
         //创建家
     }
 
+    public static long Bud_cnt = 0;
+
     public static void Building_create()
     {
         XmlDocument ItemxmlDoc = new XmlDocument();
@@ -164,7 +166,9 @@ public class Map_create : MonoBehaviour
         home_info.col_type = Fix_col2d.col_status.Trigger;
         home_info.pos = new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1));
         home_info.type = "building";
+        home_info.attacker_id = Bud_cnt++;
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
+        home_info.classnames.Add(Object_ctrl.class_name.Facility);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
         //创建家

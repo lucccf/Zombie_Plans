@@ -5,7 +5,7 @@ using UnityEngine;
 public class Flow_path : MonoBehaviour
 {
     // Start is called before the first frame update
-    public static List<Facility> facilities = new List<Facility>();
+    public static Dictionary<long,Facility> facilities = new Dictionary<long, Facility>();
     void Start()
     {
         

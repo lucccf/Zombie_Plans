@@ -38,18 +38,10 @@ public class Player : MonoBehaviour
     private Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     private Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
     private PlayerBag bag = new PlayerBag();
-    private Dictionary<int, Item> ItemList = new Dictionary<int, Item>();
 
-    public Bag BagUI;
     void Start()
     {
         animator = GetComponent<Animator>();
-        BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
-        Item[] item = Resources.LoadAll<Item>("items/");
-        for(int i=0;i < item.Length; ++i)
-        {
-            ItemList.Add(item[i].id, item[i]);
-        }
     }
 
     HashSet<PlayerOpt> list;
@@ -129,9 +121,21 @@ public class Player : MonoBehaviour
                 break;
             case PlayerOpt.FixFacility:
                 Facility fa = Flow_path.facilities[inputs.Itemid];
+                bool flag = true;
                 foreach(var m in fa.materials)
                 {
-
+                    if (bag.BagGetItemsNums(m.Key) < m.Value)
+                    {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag)
+                {
+                    foreach (var m in fa.materials)
+                    {
+                        bag.BagGetItem(m.Key, -m.Value);
+                    }
                 }
                 break;
         }
@@ -540,7 +544,7 @@ public class Player : MonoBehaviour
                 {
                     if (checkid() == true)
                     {
-                        bag.BagGetItem(trigger.itemid, trigger.itemnum, BagUI);
+                        bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
                     }
                     else
                     {

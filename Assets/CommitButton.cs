@@ -16,7 +16,7 @@ public class CommitButton : MonoBehaviour
         PlayerOptData x = new PlayerOptData();
         x.Opt = PlayerOpt.FixFacility;
         x.Userid = (int)Main_ctrl.user_id;
-        x.Itemid = 1;
+        x.Itemid = 0;
 
         Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
     }

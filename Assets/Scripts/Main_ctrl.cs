@@ -65,6 +65,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Building_create();
         Map_create.Background_create();
         Monster_create.Mon_create1();
+        Player_ctrl.Init_bag();
 
         Play_create();
     }
@@ -211,12 +212,10 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Facility:
                     Facility fa = new Facility();
                     fa.id = cnt;
-                    Dictionary<string, int> tmp = new Dictionary<string, int>();
-                    tmp.Add("Material", 1);
+                    Dictionary<int, int> tmp = new Dictionary<int, int>();
+                    tmp[1] = 5;
                     fa.materials = tmp;
-                    fa.name = info.name;
-                    Flow_path.facilities.Add(fa);
-                    
+                    Flow_path.facilities[info.attacker_id] = fa;
                     break;
             }
         }
