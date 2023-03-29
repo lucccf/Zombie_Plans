@@ -7,12 +7,15 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs.LowLevel.Unsafe;
+using UnityEditor.PackageManager;
 using UnityEditor.UI;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
 public class Main_ctrl : MonoBehaviour
 {
+    public static Queue<long> players = new Queue<long>();
+
     // Start is called before the first frame update
     public static Dictionary<long, Object_ctrl> All_objs = new Dictionary<long, Object_ctrl>();
     public static Dictionary<long, long> Ser_to_cli = new Dictionary<long, long>();

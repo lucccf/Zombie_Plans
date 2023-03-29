@@ -52,7 +52,7 @@ public class LoginController : MonoBehaviour
         if (l.Result)
         {
             Main_ctrl.user_id = l.Userid;
-            SceneManager.LoadScene("Battle");
+            SceneManager.LoadScene("Loading");
         }
     }
 
