@@ -101,6 +101,7 @@ public class Collider_ctrl
                     {
                         if (cols[lst[i]].conditions[key] == 1)
                         {
+                            if (!Main_ctrl.All_objs.ContainsKey(key)) continue;
                             cols[lst[i]].actions.Enqueue(new Fix_col2d_act(col_action.Trigger_out, (Fix_col2d)Main_ctrl.All_objs[key].modules[Object_ctrl.class_name.Fix_col2d]));
 
                             ((Fix_col2d)Main_ctrl.All_objs[key].modules[Object_ctrl.class_name.Fix_col2d]).actions.Enqueue(new Fix_col2d_act(col_action.Trigger_out, cols[lst[i]]));
@@ -121,37 +122,36 @@ public class Collider_ctrl
     {
 
         //碰撞事件
-        if (f1.type == Fix_col2d.col_status.Wall)
+        if (f1.type == Fix_col2d.col_status.Wall && f2.type == Fix_col2d.col_status.Collider)
         {
             if (f2.type == Fix_col2d.col_status.Attack || f2.type == Fix_col2d.col_status.Wall) return;
             col_wall(f2, f1);
             return;
         }
-        if (f2.type == Fix_col2d.col_status.Wall)
+        if (f2.type == Fix_col2d.col_status.Wall && f1.type == Fix_col2d.col_status.Collider)
         {
             if (f1.type == Fix_col2d.col_status.Attack) return;
             col_wall(f1, f2);
             return;
         }
 
-        if (f1.type == Fix_col2d.col_status.Attack)
+        if (f1.type == Fix_col2d.col_status.Attack && f2.type == Fix_col2d.col_status.Collider)
         {
-            if (f2.type == Fix_col2d.col_status.Attack) return;
             col_attack(f2, f1);
             return;
         }
-        if (f2.type == Fix_col2d.col_status.Attack)
+        if (f2.type == Fix_col2d.col_status.Attack && f1.type == Fix_col2d.col_status.Collider)
         {
             col_attack(f1, f2);
             return;
         }
 
         //其他情况的交互
-        if (f1.type == Fix_col2d.col_status.Trigger && f2.type != Fix_col2d.col_status.Trigger)
+        if (f1.type == Fix_col2d.col_status.Trigger && f2.type == Fix_col2d.col_status.Collider)
         {
             col_trigger(f2, f1);
         }
-        if (f2.type == Fix_col2d.col_status.Trigger && f1.type != Fix_col2d.col_status.Trigger)
+        if (f2.type == Fix_col2d.col_status.Trigger && f1.type == Fix_col2d.col_status.Collider)
         {
             col_trigger(f1, f2);
         }
