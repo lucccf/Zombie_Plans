@@ -51,6 +51,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Wall_create();
         Map_create.Item_create();
         Map_create.Background_create();
+        Monster_create.Mon_create();
     }
 
     public static void Desobj(long id)
@@ -70,7 +71,7 @@ public class Main_ctrl : MonoBehaviour
         p.name = "Player";
         p.hei = new Fixpoint(216, 2);
         p.wid = new Fixpoint(111, 2);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
+        p.pos = new Fix_vector2(new Fixpoint(9 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Player);
@@ -138,6 +139,7 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
+        Debug.Log(cnt);
         GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/" + info.name));
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();

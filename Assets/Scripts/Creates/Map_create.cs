@@ -175,6 +175,16 @@ public class Map_create : MonoBehaviour
                 int pos = int.Parse(x.InnerText);
                 GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/background/" + pre_name));
                 obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
+                if (xml_name == "normal_pos")
+                {
+                    Monster_create.pos_monster.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid , 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
+                    Monster_create.size_monster.Add(new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2)));
+                }
+                if (xml_name == "battle_pos")
+                {
+                    Monster_create.pos_zombies.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
+                    Monster_create.size_zombies.Add(new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2)));
+                }
                 SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
                 spriteRenderer.size = new Vector2(floor_wid, floor_hei);
             }
