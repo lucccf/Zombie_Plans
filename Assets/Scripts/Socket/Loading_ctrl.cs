@@ -25,15 +25,18 @@ public class Loading_ctrl : MonoBehaviour
         while (Frames.Count > 0)
         {
             Frame f = Frames.Dequeue();
-            if (f.Index == -1)
+            for(int i = 0; i < f.Opts.Count; i++)
             {
-                Main_ctrl.players.Add(f.Userid);
-                roomcnt++;
-            }
-            else if (f.Index == -2)
-            {
-                Main_ctrl.players.Remove(f.Userid);
-                roomcnt--;
+                if (f.Opts[0].Opt == PlayerOpt.UserLogin)
+                {
+                    Main_ctrl.players.Add(f.Opts[0].Userid);
+                    roomcnt++;
+                }
+                else if (f.Opts[0].Opt == PlayerOpt.UserLogout)
+                {
+                    Main_ctrl.players.Remove(f.Opts[0].Userid);
+                    roomcnt--;
+                }
             }
 
             if (roomcnt >= 3)
