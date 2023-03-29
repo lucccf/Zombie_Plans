@@ -38,12 +38,18 @@ public class Player : MonoBehaviour
     private Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     private Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
     private PlayerBag bag = new PlayerBag();
+    private Dictionary<int, Item> ItemList = new Dictionary<int, Item>();
 
     public Bag BagUI;
     void Start()
     {
         animator = GetComponent<Animator>();
         BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
+        Item[] item = Resources.LoadAll<Item>("items/");
+        for(int i=0;i < item.Length; ++i)
+        {
+            ItemList.Add(item[i].id, item[i]);
+        }
     }
 
     HashSet<PlayerOpt> list;

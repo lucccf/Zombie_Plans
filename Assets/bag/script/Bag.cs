@@ -10,7 +10,6 @@ public class Bag : MonoBehaviour
     public GameObject ItemParent;
     public Text ItemNameText;
     public Text ItemDescriptionText;
-    public Item[] itemList;
 
     private bool OpenBag = false;
     private Dictionary<int, Item> OriginItem = new Dictionary<int, Item>();
@@ -19,12 +18,13 @@ public class Bag : MonoBehaviour
     void Start()
     {
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
-        bag.SetActive(false);
-        for(int i = 0; i < itemList.Length; ++i)
+        Item[] item = Resources.LoadAll<Item>("items/");
+        for (int i = 0; i < item.Length; ++i)
         {
-            OriginItem[itemList[i].id] = itemList[i];
-            ItemNumber[itemList[i].id] = 0;
+            OriginItem.Add(item[i].id, item[i]);
+            ItemNumber.Add(item[i].id, 0);
         }
+        bag.SetActive(false);
     }
 
     // Update is called once per frame
