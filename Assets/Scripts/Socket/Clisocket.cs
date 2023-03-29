@@ -203,7 +203,14 @@ public class Clisocket : MonoBehaviour
                     if (headType == BODYTYPE.Frame)
                     {
                         Frame opts = Frame.Parser.ParseFrom(body);
-                        Main_ctrl.Frames.Enqueue(opts);
+                        if (opts.Index == -1)
+                        {
+                            Loading_ctrl.Frames.Enqueue(opts);
+                        }
+                        else {
+                            Main_ctrl.Frames.Enqueue(opts);
+                        }
+                        
                         //Main_ctrl.Frame_update(opts);
                         //获取frame
                     }

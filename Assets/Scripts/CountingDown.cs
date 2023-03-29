@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CountingDown : MonoBehaviour
 {
     public Fixpoint curtime = new Fixpoint(0); // 目前时间，以秒为单位
-    public Fixpoint alltime = new Fixpoint(1500, 0); //总时间
+    public Fixpoint alltime = new Fixpoint(420, 0); //总时间
 
     public Text countingtext;
 

@@ -7,12 +7,16 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs.LowLevel.Unsafe;
+using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEditor.UI;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
 public class Main_ctrl : MonoBehaviour
 {
+    public static List<long> players = new List<long>();
+
     // Start is called before the first frame update
     public static Dictionary<long, Object_ctrl> All_objs = new Dictionary<long, Object_ctrl>();
     public static Dictionary<long, long> Ser_to_cli = new Dictionary<long, long>();
@@ -43,6 +47,14 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
+    void Play_create()
+    {
+        for(int i = 0; i < players.Count; i++)
+        {
+            NewPlayer(players[i]);
+        }
+    }
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -51,6 +63,8 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Wall_create();
         Map_create.Item_create();
         Map_create.Background_create();
+        Monster_create.Mon_create1();
+        Play_create();
     }
 
     public static void Desobj(long id)
@@ -63,14 +77,14 @@ public class Main_ctrl : MonoBehaviour
         Cre_objs.Enqueue(p);
     }
 
-    public static void NewPlayer(int player_id)
+    public static void NewPlayer(long player_id)
     {
 
         Obj_info p = new Obj_info();
         p.name = "Player";
         p.hei = new Fixpoint(216, 2);
         p.wid = new Fixpoint(111, 2);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
+        p.pos = new Fix_vector2(new Fixpoint(10 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Player);
@@ -114,30 +128,21 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
-    public static void NewArticle(int player_id)
+    public static void NewItem(Fix_vector2 pos ,string itemname)
     {
-        /*
         Obj_info p = new Obj_info();
-        p.name = "self";
-        p.hei = new Fixpoint(2, 0);
-        p.wid = new Fixpoint(2, 0);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
-        p.col_type = Fix_col2d.col_status.Collider;
-        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-        p.classnames.Add(Object_ctrl.class_name.Player);
-        p.user_id = player_id;
-        if (player_id == user_id)
-        {
-            play = CreateObj(p);
-        }
-        else
-        {
-            CreateObj(p);
-        }*/
+        p.name = "ItemSample";
+        p.hei = new Fixpoint(1, 0);
+        p.wid = new Fixpoint(1, 0);
+        p.pos = pos;
+        p.col_type = Fix_col2d.col_status.Trigger;
+        p.type = itemname;
+        p.classnames.Add(Object_ctrl.class_name.Trigger);
+        Creobj(p);
     }
-
     public static GameObject CreateObj(Obj_info info)
     {
+        //Debug.Log(cnt);
         GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/" + info.name));
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
@@ -190,6 +195,13 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Trigger] = t;
                     t.triggertype = info.type;
                     t.triggername = info.name;
+                    if(info.name == "ItemSample")
+                    {
+                        Item x =AssetDatabase.LoadAssetAtPath<Item>("bag/items/" + info.type);
+                        Debug.Log("Resouces:" + x.id);
+                        obj.GetComponent<SpriteRenderer>().sprite = x.image;
+                        obj.GetComponent<ItemOnGround>().item = x;
+                    }
                     break;
             }
         }
@@ -231,10 +243,10 @@ public class Main_ctrl : MonoBehaviour
             frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
+                /*if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
                 {
                     NewPlayer(f.Opts[i].Userid);
-                }
+                }*/
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
