@@ -269,7 +269,7 @@ public class Player : MonoBehaviour
     {
         RemoveHited();
         Debug.Log(StatusTime.to_float());
-        if (StatusTime > new Fixpoint(1, 0))
+        if (StatusTime > new Fixpoint(44, 2))//翻滚的总时间
         {
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
@@ -305,21 +305,21 @@ public class Player : MonoBehaviour
 
     private void CheckQuitAttack()
     {
-        if (Press[KeyCode.A] || Press[KeyCode.D] || Press[KeyCode.L] || Press[KeyCode.K])
-        {
-            RemoveAttack();
-        }
+        //if (Press[KeyCode.A] || Press[KeyCode.D] || Press[KeyCode.L] || Press[KeyCode.K])//尝试删除打断的操作
+        //{
+        //    RemoveAttack();
+        //}
     }
-    private Fixpoint Attack1DuringTime = new Fixpoint(33, 2);
-    private Fixpoint Attack1QuitTime = new Fixpoint(8, 1);
-    private Fixpoint Attack2DuringTime = new Fixpoint(33, 2);
-    private Fixpoint Attack2QuitTime = new Fixpoint(8, 1);
-    private Fixpoint Attack3DuringTime = new Fixpoint(33, 2);
-    private Fixpoint Attack3QuitTime = new Fixpoint(8, 1);
-    private Fixpoint Attack4DuringTime = new Fixpoint(33, 2);
-    private Fixpoint Attack4QuitTime = new Fixpoint(8, 1);
-    private Fixpoint Attack5DuringTime = new Fixpoint(33, 2);
-    private Fixpoint Attack5QuitTime = new Fixpoint(8, 1);
+    private Fixpoint Attack1DuringTime = new Fixpoint(27, 2);
+    private Fixpoint Attack1QuitTime = new Fixpoint(29, 2);
+    private Fixpoint Attack2DuringTime = new Fixpoint(27, 2);
+    private Fixpoint Attack2QuitTime = new Fixpoint(29, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(27, 2);
+    private Fixpoint Attack3QuitTime = new Fixpoint(29, 2);
+    private Fixpoint Attack4DuringTime = new Fixpoint(40, 2);
+    private Fixpoint Attack4QuitTime = new Fixpoint(43, 2);
+    private Fixpoint Attack5DuringTime = new Fixpoint(40, 2);
+    private Fixpoint Attack5QuitTime = new Fixpoint(43, 2);
     private void Attack()
     {
         int hit = GetHited();
