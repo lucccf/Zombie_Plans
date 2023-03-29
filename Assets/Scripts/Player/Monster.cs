@@ -92,7 +92,7 @@ public class Monster : MonoBehaviour
             else Moves(-1);
             return;
         }
-        else if (Dis < new Fixpoint(15, 1)) //攻击
+        else if (Dis < new Fixpoint(14, 1)) //攻击
         {
             if (f.pos.x < Pos) AnimaToward = 1;
             else AnimaToward = -1;
@@ -112,11 +112,11 @@ public class Monster : MonoBehaviour
         }
         else //靠近
         {
-            if (f.pos.x + new Fixpoint(2, 0) < Pos)
+            if (f.pos.x  < Pos)
             {
                 Moves(1);
             }
-            else if (f.pos.x - new Fixpoint(2, 0) > Pos)
+            else
             {
                 Moves(-1);
             }
@@ -335,6 +335,41 @@ public class Monster : MonoBehaviour
             AnimaGround = false;
         }
     }
+
+    private bool CreatedAttack = false;
+    private Fixpoint Attack1DuringTime = new Fixpoint(25, 2);
+    private Fixpoint Attack2DuringTime = new Fixpoint(25, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(25, 2);
+    private Fixpoint Attack4DuringTime = new Fixpoint(25, 2);
+
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(0, 0);
+
+    private void AttackToNext()
+    {
+        CreatedAttack = false;
+        AnimaAttack = AnimaAttack + 1;
+        StatusTime = new Fixpoint(0, 0);
+    }
+
+    private void CreateAttack()
+    {
+        CreatedAttack = true;
+        Fix_vector2 AttackPos = f.pos.Clone();
+        if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
+        else AttackPos.x -= new Fixpoint(1, 0);
+        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
+    }
+    private void RemoveAttack()
+    {
+        AnimaAttack = 0f;
+        StatusTime = new Fixpoint(0, 0);
+        AnimaStatus = 0;
+        return;
+    }
+
     private void Attack(bool first)
     {
         int hited = GetHited();
@@ -344,9 +379,45 @@ public class Monster : MonoBehaviour
         }
         
         Fixpoint Near = GetNearDistance();
+        if(first == true)
+        {
+            AttackToNext();
+        } else if(AnimaAttack > 0.5f && AnimaAttack <= 1.5f)
+        {
+            if(StatusTime > Attack1DuringTime)
+            {
+                if (Near <= new Fixpoint(15, 1)) AttackToNext();
+                else RemoveAttack();
+            }
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) CreateAttack();
+        } else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
+        {
+            if (StatusTime > Attack2DuringTime)
+            {
+                if (Near <= new Fixpoint(15, 1)) AttackToNext();
+                else RemoveAttack();
+            }
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) CreateAttack();
+        } else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
+        {
+            if (StatusTime > Attack3DuringTime)
+            {
+                if (Near <= new Fixpoint(15, 1)) AttackToNext();
+                else RemoveAttack();
+            }
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) CreateAttack();
+        } else if(AnimaAttack > 3.5f)
+        {
+            if (StatusTime > Attack4DuringTime)
+            {
+                RemoveAttack();
+            }
+            if (StatusTime > Attack4BeginToHitTime && CreatedAttack == false) CreateAttack();
+        }
+        /*
         if (first == true || StatusTime > new Fixpoint(75, 2))
         {
-            if (Near > new Fixpoint(1, 0) || AnimaAttack > 3.5f)
+            if (Near > new Fixpoint(15, 1) || AnimaAttack > 3.5f)
             {
                 StatusTime = new Fixpoint(0, 0);
                 AnimaAttack = 0;
@@ -363,6 +434,7 @@ public class Monster : MonoBehaviour
                 StatusTime = new Fixpoint(0, 0);
             }
         }
+        */
         if (StatusTime <= new Fixpoint(2, 1))
         {
             if (AnimaToward > 0)
