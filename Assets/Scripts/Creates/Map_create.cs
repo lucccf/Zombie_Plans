@@ -143,9 +143,35 @@ public class Map_create : MonoBehaviour
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
-
         //创建家
     }
+
+    public static void Building_create()
+    {
+        XmlDocument ItemxmlDoc = new XmlDocument();
+        ItemxmlDoc.Load(Application.dataPath + "/Configs/crystal.xml");
+        XmlNodeList Crystal_item = ItemxmlDoc.SelectNodes("/crystal/crystal_floor/crystal_info");
+        XmlNode map_info = ItemxmlDoc.SelectSingleNode("/crystal/map_info");
+
+        int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
+        int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
+
+
+        Obj_info home_info = new Obj_info();
+        home_info.name = "facility";
+        home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
+        home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
+        home_info.col_type = Fix_col2d.col_status.Trigger;
+        home_info.pos = new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1));
+        home_info.type = "building";
+        home_info.classnames.Add(Object_ctrl.class_name.Trigger);
+        GameObject home = Main_ctrl.CreateObj(home_info);
+        home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
+        //创建家
+    }
+
+
+
 
     public static void Background_create() {
         XmlDocument xmlDoc = new XmlDocument();

@@ -62,8 +62,10 @@ public class Main_ctrl : MonoBehaviour
         camara = GameObject.Find("Main Camera");
         Map_create.Wall_create();
         Map_create.Item_create();
+        Map_create.Building_create();
         Map_create.Background_create();
         Monster_create.Mon_create1();
+
         Play_create();
     }
 
@@ -205,6 +207,16 @@ public class Main_ctrl : MonoBehaviour
                         obj.GetComponent<ItemOnGround>().item = x;
                         t.itemid = x.id;
                     }
+                    break;
+                case Object_ctrl.class_name.Facility:
+                    Facility fa = new Facility();
+                    fa.id = cnt;
+                    Dictionary<string, int> tmp = new Dictionary<string, int>();
+                    tmp.Add("Material", 1);
+                    fa.materials = tmp;
+                    fa.name = info.name;
+                    Flow_path.facilities.Add(fa);
+                    
                     break;
             }
         }
