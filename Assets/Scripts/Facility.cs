@@ -5,7 +5,7 @@ using UnityEngine;
 public class Facility : MonoBehaviour
 {
     public long id;
-    public Dictionary<string, int> materials;
+    public Dictionary<int, int> materials;
     // Start is called before the first frame update
     void Start()
     {

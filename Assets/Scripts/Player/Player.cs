@@ -121,6 +121,13 @@ public class Player : MonoBehaviour
             case PlayerOpt.SpaceUp:
                 Press[KeyCode.Space] = false;
                 break;
+            case PlayerOpt.FixFacility:
+                Facility fa = Flow_path.facilities[inputs.Itemid];
+                foreach(var m in fa.materials)
+                {
+
+                }
+                break;
         }
     }
     public void Updatex()
