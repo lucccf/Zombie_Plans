@@ -312,14 +312,19 @@ public class Player : MonoBehaviour
     }
     private void AttackToNext()
     {
+        CreatedAttack = false;
         AnimaAttack = AnimaAttack + 1;
         StatusTime = new Fixpoint(0, 0);
+    }
+
+    private void CreateAttack()
+    {
+        CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
         Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
     }
-
     private void RemoveAttack()
     {
         AnimaAttack = 0f;
@@ -335,6 +340,7 @@ public class Player : MonoBehaviour
         //    RemoveAttack();
         //}
     }
+    private bool CreatedAttack = false;
     private Fixpoint Attack1DuringTime = new Fixpoint(27, 2);
     private Fixpoint Attack1QuitTime = new Fixpoint(29, 2);
     private Fixpoint Attack2DuringTime = new Fixpoint(27, 2);
@@ -345,6 +351,12 @@ public class Player : MonoBehaviour
     private Fixpoint Attack4QuitTime = new Fixpoint(43, 2);
     private Fixpoint Attack5DuringTime = new Fixpoint(40, 2);
     private Fixpoint Attack5QuitTime = new Fixpoint(43, 2);
+
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack5BeginToHitTime = new Fixpoint(0, 0);
     private void Attack()
     {
         int hit = GetHited();
@@ -372,6 +384,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
+            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack();
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
         {
@@ -387,6 +400,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
+            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack();
 
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -402,6 +416,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
+            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack();
 
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -417,6 +432,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
+            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack();
         }
         else //五段攻击
         {
@@ -428,6 +444,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
+            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack();
         }
         /*
         if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
