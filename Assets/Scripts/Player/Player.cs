@@ -145,11 +145,8 @@ public class Player : MonoBehaviour
     public void Updatex()
     {
         Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 1919 + id) % 19191919;
-<<<<<<< HEAD
         ++Main_ctrl.cnt2;
-=======
         ++Main_ctrl.count;
->>>>>>> a9dff44fcde53dbd9150905a4d6281f1a8469559
         if(Main_ctrl.count % 200 == 0)
         {
             Debug.Log(Main_ctrl.count / 200 + "   " + Main_ctrl.cnt2);
