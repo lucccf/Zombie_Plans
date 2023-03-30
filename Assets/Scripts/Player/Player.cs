@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         ++Main_ctrl.count;
         if(Main_ctrl.count % 200 == 0)
         {
-            Debug.Log(Main_ctrl.count / 200+ "   " + Main_ctrl.cnt2);
+            //Debug.Log(Main_ctrl.count / 200+ "   " + Main_ctrl.cnt2);
         }
         GetColider();
         GetTrigger();
