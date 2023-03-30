@@ -352,11 +352,11 @@ public class Player : MonoBehaviour
     private Fixpoint Attack5DuringTime = new Fixpoint(40, 2);
     private Fixpoint Attack5QuitTime = new Fixpoint(43, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack4BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack5BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(95, 3);
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(95, 3);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(95, 3);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(195, 3);
+    private Fixpoint Attack5BeginToHitTime = new Fixpoint(195, 3);
     private void Attack()
     {
         int hit = GetHited();

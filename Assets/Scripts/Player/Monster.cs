@@ -337,15 +337,15 @@ public class Monster : MonoBehaviour
     }
 
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(25, 2);
-    private Fixpoint Attack2DuringTime = new Fixpoint(25, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(25, 2);
-    private Fixpoint Attack4DuringTime = new Fixpoint(25, 2);
+    private Fixpoint Attack1DuringTime = new Fixpoint(78, 2);//攻击的持续时间
+    private Fixpoint Attack2DuringTime = new Fixpoint(39, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(39, 2);
+    private Fixpoint Attack4DuringTime = new Fixpoint(79, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(0, 0);
-    private Fixpoint Attack4BeginToHitTime = new Fixpoint(0, 0);
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(55, 2);//攻击的判定时间
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(13, 2);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(13, 2);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(27, 0);
 
     private void AttackToNext()
     {
