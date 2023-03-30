@@ -51,7 +51,9 @@ public class Main_ctrl : MonoBehaviour
     {
         for(int i = 0; i < players.Count; i++)
         {
+            Debug.Log(players[i]);
             NewPlayer(players[i]);
+            Debug.Log(cnt - 1);
         }
     }
 
@@ -269,7 +271,7 @@ public class Main_ctrl : MonoBehaviour
             }
             if (f.Index % 100 == 0)
             {
-                Debug.Log(cnt2);
+                //Debug.Log(cnt2);
             }
 
             frame_index = f.Index;

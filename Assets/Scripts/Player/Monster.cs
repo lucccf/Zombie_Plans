@@ -40,7 +40,7 @@ public class Monster : MonoBehaviour
         ++Main_ctrl.count;
         if (Main_ctrl.count % 300 == 0)
         {
-            Debug.Log("Monster" + Main_ctrl.count / 300 + "   " + Main_ctrl.cnt2);
+            //Debug.Log("Monster" + Main_ctrl.count / 300 + "   " + Main_ctrl.cnt2);
         }
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25,0));
