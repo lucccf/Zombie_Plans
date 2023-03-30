@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
                 }
                 if (flag)
                 {
+                    GameObject.Find("PlayerPanel").transform.Find("Facility").Find("progress").gameObject.GetComponent<ProgressBar>().endprogress = 100;
                     foreach (var m in fa.materials)
                     {
                         bag.BagGetItem(m.Key, -m.Value);

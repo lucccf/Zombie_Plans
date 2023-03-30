@@ -1243,6 +1243,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 643690165}
     m_Modifications:
+    - target: {fileID: 6649510612213562309, guid: fc2b38926e0501643a721ef70f5eead5,
+        type: 3}
+      propertyPath: m_Text
+      value: 0%
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649510612213562311, guid: fc2b38926e0501643a721ef70f5eead5,
+        type: 3}
+      propertyPath: m_Name
+      value: progressText
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649510612486481041, guid: fc2b38926e0501643a721ef70f5eead5,
+        type: 3}
+      propertyPath: m_Name
+      value: progress
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649510612486481055, guid: fc2b38926e0501643a721ef70f5eead5,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6649510612872555414, guid: fc2b38926e0501643a721ef70f5eead5,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1360,6 +1380,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2b38926e0501643a721ef70f5eead5, type: 3}
+--- !u!1 &1397838880630757824 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6649510612486481041, guid: fc2b38926e0501643a721ef70f5eead5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1397838880630757823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1397838880630757825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1397838880630757824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c2147a3a433954294663623f4131c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curprogress: 0
+  endprogress: 0
 --- !u!224 &5702069112902824489 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6649510612872555414, guid: fc2b38926e0501643a721ef70f5eead5,
