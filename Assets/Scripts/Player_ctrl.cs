@@ -7,9 +7,18 @@ public class Player_ctrl : MonoBehaviour
     // Start is called before the first frame update
     public static List<Player> plays = new List<Player>();
 
-    void Start()
+    public static Dictionary<int, Item> ItemList = new Dictionary<int, Item>();
+    static Item[] item;
+
+    public static Bag BagUI;
+    public static void Init_bag()
     {
-        
+        BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
+        item = Resources.LoadAll<Item>("items/");
+        for (int i = 0; i < item.Length; ++i)
+        {
+            Player_ctrl.ItemList.Add(item[i].id, item[i]);
+        }
     }
 
     // Update is called once per frame

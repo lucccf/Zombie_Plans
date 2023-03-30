@@ -450,7 +450,7 @@ public class Monster : MonoBehaviour
     }
     private void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), "Material", 10);
+        Main_ctrl.NewItem(f.pos.Clone(), "Material", 1000);
     }
     private void Death()
     {

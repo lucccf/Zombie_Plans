@@ -19,11 +19,13 @@ public enum ITEMTYPE
 public class Item_Bag
 {
     public int id;
+    public Item item;
     public ITEMTYPE type;
     bool abilityToUse;
 }
 public class Item_Scene {
     public int id;
+    public Item item;
     public ITEMTYPE type;
     bool abilityToUse;
     Fix_col2d f;

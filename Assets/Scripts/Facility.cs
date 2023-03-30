@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Flow_path : MonoBehaviour
+public class Facility : MonoBehaviour
 {
+    public long id;
+    public Dictionary<int, int> materials;
     // Start is called before the first frame update
-    public static Dictionary<long,Facility> facilities = new Dictionary<long, Facility>();
     void Start()
     {
         

@@ -62,8 +62,11 @@ public class Main_ctrl : MonoBehaviour
         camara = GameObject.Find("Main Camera");
         Map_create.Wall_create();
         Map_create.Item_create();
+        Map_create.Building_create();
         Map_create.Background_create();
         Monster_create.Mon_create1();
+        Player_ctrl.Init_bag();
+
         Play_create();
     }
 
@@ -206,6 +209,14 @@ public class Main_ctrl : MonoBehaviour
                         t.itemid = x.id;
                     }
                     break;
+                case Object_ctrl.class_name.Facility:
+                    Facility fa = new Facility();
+                    fa.id = cnt;
+                    Dictionary<int, int> tmp = new Dictionary<int, int>();
+                    tmp[1] = 5;
+                    fa.materials = tmp;
+                    Flow_path.facilities[info.attacker_id] = fa;
+                    break;
             }
         }
 
@@ -246,10 +257,6 @@ public class Main_ctrl : MonoBehaviour
             frame_index = f.Index;
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                /*if (!Ser_to_cli.ContainsKey(f.Opts[i].Userid))
-                {
-                    NewPlayer(f.Opts[i].Userid);
-                }*/
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
