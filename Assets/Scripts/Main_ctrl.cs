@@ -248,13 +248,15 @@ public class Main_ctrl : MonoBehaviour
         All_objs.Remove(id);
     }
 
-    long cnt2 = 0;
+    public static Int64 cnt2 = 0;
+    public static int count = 0;
 
     // Update is called once per frame
     void Update()
     {
         while(Frames.Count > 0)
         {
+            ++count;
             Frame f = Frames.Dequeue();
             if (f.Index == -3) continue;
 

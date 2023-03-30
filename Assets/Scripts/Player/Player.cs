@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using UnityEditorInternal;
 using UnityEngine;
@@ -143,6 +144,12 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
+        Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 1919 + Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) % 19191919;
+        ++Main_ctrl.cnt2;
+        if(Main_ctrl.count % 200 == 0)
+        {
+            Debug.Log(Main_ctrl.count / 200+ "   " + Main_ctrl.cnt2);
+        }
         GetColider();
         GetTrigger();
         StatusTime += Dt.dt;
