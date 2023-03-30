@@ -345,7 +345,7 @@ public class Monster : MonoBehaviour
     private Fixpoint Attack1BeginToHitTime = new Fixpoint(55, 2);//攻击的判定时间
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(13, 2);
     private Fixpoint Attack3BeginToHitTime = new Fixpoint(13, 2);
-    private Fixpoint Attack4BeginToHitTime = new Fixpoint(27, 0);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(27, 2);
 
     private void AttackToNext()
     {

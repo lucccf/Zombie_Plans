@@ -294,7 +294,7 @@ public class Player : MonoBehaviour
     {
         RemoveHited();
         //Debug.Log(StatusTime.to_float());
-        if (StatusTime > new Fixpoint(44, 2))//翻滚的总时间
+        if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
         {
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
