@@ -144,8 +144,8 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
-        Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 1919 + Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) % 19191919;
-        ++Main_ctrl.cnt2;
+        Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 1919 + id) % 19191919;
+        ++Main_ctrl.count;
         if(Main_ctrl.count % 200 == 0)
         {
             Debug.Log(Main_ctrl.count / 200+ "   " + Main_ctrl.cnt2);
