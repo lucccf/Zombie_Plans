@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     private Animator animator;
     private int AnimaStatus = 0;
-    private float AnimaToward = 1f;
+    public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private bool AnimaRoll = false;
     private bool AnimaDeath = false;
     private bool AnimaGround = false;
+    private bool Anima623Arrack = false;
     private Fixpoint StatusTime = new Fixpoint(0, 0);
     public long id;
 
@@ -144,6 +145,7 @@ public class Player : MonoBehaviour
     }
     public void Updatex()
     {
+        //Debug.Log(AnimaStatus);
         GetColider();
         GetTrigger();
         StatusTime += Dt.dt;
@@ -173,6 +175,15 @@ public class Player : MonoBehaviour
                 break;
             case 6://下落
                 Fall();
+                break;
+            case 7:
+                Kick();
+                break;
+            case 8:
+                HeavyAttack();
+                break;
+            case 9:
+                UpAttack(false);
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -248,13 +259,31 @@ public class Player : MonoBehaviour
             return;
 
         }
+
+        if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
+        {
+            AnimaStatus = 9;
+            StatusTime = new Fixpoint(0, 0);
+            Anima623Arrack = true;
+            UpAttack(true);
+            return;
+        }
+
         if (Press[KeyCode.J] && f.onground)
         {
+            if (Press[KeyCode.LeftShift])
+            {
+                StatusTime = new Fixpoint(0, 0);
+                AnimaStatus = 8;
+                HeavyAttack();
+                return;
+            }
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 3;
             Attack();
             return;
         }
+
         if (Press[KeyCode.L] && f.onground)
         {
             StatusTime = new Fixpoint(0, 0);
@@ -307,6 +336,15 @@ public class Player : MonoBehaviour
             AnimaJump = false;
             AnimaFall = true;
         }
+
+        if (Press[KeyCode.J] == true)
+        {
+            AnimaJump = false;
+            AnimaFall = true;
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 7;
+        }
+
         return;
     }
     private void Roll()
@@ -336,13 +374,13 @@ public class Player : MonoBehaviour
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void CreateAttack()
+    private void CreateAttack(Fixpoint wide, Fixpoint high ,int toughness , bool with)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
+        Main_ctrl.NewAttack(AttackPos, wide, high, status.Damage(), toughness, id, -AnimaToward, with);
     }
     private void RemoveAttack()
     {
@@ -403,7 +441,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0) , 30 , false);
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
         {
@@ -419,7 +457,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
 
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -435,7 +473,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
 
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -451,7 +489,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
         }
         else //五段攻击
         {
@@ -463,7 +501,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
         }
         /*
         if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
@@ -516,6 +554,12 @@ public class Player : MonoBehaviour
             AnimaFall = false;
             StatusTime = new Fixpoint(0, 0);
             return;
+        }
+
+        if (Press[KeyCode.J] == true)
+        {
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 7;
         }
     }
     private void RemoveHited()
@@ -669,6 +713,152 @@ public class Player : MonoBehaviour
         }
     }
 
+    private Fixpoint KickBeginToHit = new Fixpoint(15, 2);
+    private Fixpoint KickDuring = new Fixpoint(5, 1);
+    private bool is_kicked = false;
+    private void Kick()
+    {
+        AnimaAttack = 1f;
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaAttack = 0f;
+            AnimaStatus = 4;
+            AnimaFall = false;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+        if(StatusTime > KickBeginToHit && is_kicked == false)
+        {
+            is_kicked = true;
+            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120 , true);
+        }
+
+        if (Press[KeyCode.A])
+        {
+            AnimaToward = -1;
+            f.pos.x = f.pos.x - Dt.dt * status.WalkSpeed;
+        }
+        else if (Press[KeyCode.D])
+        {
+            AnimaToward = 1;
+            f.pos.x = f.pos.x + Dt.dt * status.WalkSpeed;
+        }
+
+        if (StatusTime > KickDuring || f.onground)
+        {
+            AnimaAttack = 0f;
+            is_kicked = false;
+            if(f.onground)
+            {
+                AnimaFall = false;
+                AnimaHited = 0;
+                StatusTime = new Fixpoint(0, 0);
+                AnimaStatus = 0;
+                return;
+            } else
+            {
+                AnimaHited = 0;
+                StatusTime = new Fixpoint(0, 0);
+                AnimaStatus = 6;
+                AnimaFall = true;
+                return;
+            }
+        }
+    }
+
+    private Fixpoint HeavyAttackBeginToHit = new Fixpoint(15, 2);
+    private Fixpoint HeavyAttackDuring = new Fixpoint(1, 0);
+    private bool HeavyAttackHasHited = false;
+    private void HeavyAttack()
+    {
+        AnimaAttack = 1f;
+        AnimaSpeed = status.RunSpeed.to_float();
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaAttack = 0f;
+            AnimaSpeed = 0f;
+            AnimaStatus = 4;
+            AnimaFall = false;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+
+        if (AnimaToward > 0)
+        {
+            f.pos.x = f.pos.x + Dt.dt * status.RunSpeed;
+        }
+        else
+        {
+            f.pos.x = f.pos.x - Dt.dt * status.RunSpeed;
+        }
+        if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
+        {
+            HeavyAttackHasHited = true;
+            CreateAttack(new Fixpoint(3, 0), new Fixpoint(2, 0), 120, true);
+        } 
+
+        if(!f.onground || StatusTime > HeavyAttackDuring)
+        {
+            HeavyAttackHasHited = false;
+            AnimaAttack = 0f;
+            AnimaSpeed = 0f;
+            AnimaStatus = 0;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+    }
+    private Fixpoint UpAttackBeginToHit = new Fixpoint(2, 1);
+    private Fixpoint UpAttackDuring = new Fixpoint(5, 1);
+    private bool UpAttackHasHited = false;
+    private void UpAttack(bool first)
+    {
+        if(first == true)
+        {
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
+        }
+
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaAttack = 0f;
+            AnimaSpeed = 0f;
+            AnimaStatus = 4;
+            AnimaFall = false;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+
+        if(!f.onground)
+        {
+            if(AnimaToward > 0)
+            {
+                f.pos.x += new Fixpoint(1, 0) * Dt.dt;
+            }
+            else
+            {
+                f.pos.x -= new Fixpoint(1, 0) * Dt.dt;
+            }
+        }
+
+        if (StatusTime > UpAttackBeginToHit && UpAttackHasHited == false)
+        {
+            //Debug.Log("AAAAAAAAA");
+            UpAttackHasHited = true;
+            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120, true);
+        }
+
+        if(StatusTime > UpAttackDuring)
+        {
+            AnimaStatus = 0;
+            StatusTime = new Fixpoint(0, 0);
+            Anima623Arrack = false;
+            UpAttackHasHited = false;
+            return;
+        }
+    }
+
     private void Update()
     {
         animator.SetFloat("speed", AnimaSpeed);
@@ -679,5 +869,6 @@ public class Player : MonoBehaviour
         animator.SetBool("fall", AnimaFall);
         animator.SetFloat("hited", AnimaHited);
         animator.SetBool("onground", AnimaGround);
+        animator.SetBool("623", Anima623Arrack);
     }
 }

@@ -117,7 +117,7 @@ public class Main_ctrl : MonoBehaviour
         CreateObj(p);
     }
 
-    public static void NewAttack(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id ,float toward)
+    public static void NewAttack(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id ,float toward,bool with)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -130,6 +130,10 @@ public class Main_ctrl : MonoBehaviour
         p.col_type = Fix_col2d.col_status.Attack;
         p.toward = toward;
         p.classnames.Add(Object_ctrl.class_name.Attack);
+        if(with == true)
+        {
+            p.type = "1";
+        }
         Creobj(p);
     }
 
@@ -194,6 +198,7 @@ public class Main_ctrl : MonoBehaviour
                     a.ToughnessDamage = info.ToughnessDamage;
                     a.attakcer_id = info.attacker_id;
                     a.toward = info.toward;
+                    if (info.type == "1") a.with_attacker = true;
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
                     break;
                 case Object_ctrl.class_name.Trigger:

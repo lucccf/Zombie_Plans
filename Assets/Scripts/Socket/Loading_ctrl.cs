@@ -39,7 +39,7 @@ public class Loading_ctrl : MonoBehaviour
                 }
             }
 
-            if (roomcnt >= 2)
+            if (roomcnt >= 1)
             {
                 SceneManager.LoadScene("Battle");
             }

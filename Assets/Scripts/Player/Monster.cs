@@ -250,6 +250,17 @@ public class Monster : MonoBehaviour
             status.GetAttacked(HpDamage, ToughnessDamage);
         }
 
+        if(status.GetToughness() < 75 && StatusTime < new Fixpoint(2,1))
+        {
+            if(AnimaToward > 0)
+            {
+                f.pos.x -= new Fixpoint(1, 0) * Dt.dt;
+            } else
+            {
+                f.pos.x += new Fixpoint(1, 0) * Dt.dt;
+            }
+        }
+
         if (status.GetToughness() >= 75)
         {
             return 0;
@@ -366,7 +377,7 @@ public class Monster : MonoBehaviour
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward); //30的位置代表韧性值
+        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward , false); //30的位置代表韧性值
     }
     private void RemoveAttack()
     {
