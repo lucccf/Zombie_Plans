@@ -12,7 +12,7 @@ public class Monster : MonoBehaviour
     public Fix_col2d f;
     public Fix_rig2d r;
     //public SpriteRenderer spriteRenderer;
-    private PlayerStatus status = new PlayerStatus(100, 10);
+    protected PlayerStatus status = new PlayerStatus(100, 10);
     //private Fixpoint WalkSpeed = new Fixpoint(5, 0);
 
     private Animator animator;
@@ -34,7 +34,7 @@ public class Monster : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void Updatex()
+    public virtual void Updatex()
     {
         Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 19196 + id) % 191919197;
         ++Main_ctrl.count;
@@ -72,6 +72,10 @@ public class Monster : MonoBehaviour
         //Debug.Log("Toughness:" + status.GetToughness());
         //Debug.Log("Status:" + AnimaStatus);
         //Debug.Log("HP:" + status.hp);
+    }
+    public float CheckHealth()
+    {
+        return 1f * status.hp / status.max_hp;
     }
     private void CheckDeath()
     {
@@ -377,7 +381,7 @@ public class Monster : MonoBehaviour
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward , false); //30的位置代表韧性值
+        Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward , false); //30的位置代表韧性值
     }
     private void RemoveAttack()
     {
@@ -467,7 +471,7 @@ public class Monster : MonoBehaviour
     }
     private void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), "Material", 1000);
+        Main_ctrl.NewItem(f.pos.Clone(), "Material", 1000,1f);
     }
     private void Death()
     {

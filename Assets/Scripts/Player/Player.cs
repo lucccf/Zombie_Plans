@@ -374,13 +374,20 @@ public class Player : MonoBehaviour
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void CreateAttack(Fixpoint wide, Fixpoint high ,int toughness , bool with)
+    private void CreateAttack(Fix_vector2 with_pos,Fixpoint wide, Fixpoint high ,int toughness , bool with)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, wide, high, status.Damage(), toughness, id, -AnimaToward, with);
+        if (with == false) 
+        { 
+            Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), wide, high, status.Damage(), toughness, id, -AnimaToward, with);
+        }
+        else
+        {
+            Main_ctrl.NewAttack(AttackPos, with_pos, wide, high, status.Damage(), toughness, id, -AnimaToward, with);
+        }
     }
     private void RemoveAttack()
     {
@@ -398,22 +405,22 @@ public class Player : MonoBehaviour
         //}
     }
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(27, 2);
-    private Fixpoint Attack1QuitTime = new Fixpoint(29, 2);
-    private Fixpoint Attack2DuringTime = new Fixpoint(27, 2);
-    private Fixpoint Attack2QuitTime = new Fixpoint(29, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(27, 2);
-    private Fixpoint Attack3QuitTime = new Fixpoint(29, 2);
-    private Fixpoint Attack4DuringTime = new Fixpoint(40, 2);
-    private Fixpoint Attack4QuitTime = new Fixpoint(43, 2);
-    private Fixpoint Attack5DuringTime = new Fixpoint(40, 2);
-    private Fixpoint Attack5QuitTime = new Fixpoint(43, 2);
+    private static Fixpoint Attack1DuringTime = new Fixpoint(27, 2);
+    private static Fixpoint Attack1QuitTime = new Fixpoint(29, 2);
+    private static Fixpoint Attack2DuringTime = new Fixpoint(27, 2);
+    private static Fixpoint Attack2QuitTime = new Fixpoint(29, 2);
+    private static Fixpoint Attack3DuringTime = new Fixpoint(27, 2);
+    private static Fixpoint Attack3QuitTime = new Fixpoint(29, 2);
+    private static Fixpoint Attack4DuringTime = new Fixpoint(40, 2);
+    private static Fixpoint Attack4QuitTime = new Fixpoint(43, 2);
+    private static Fixpoint Attack5DuringTime = new Fixpoint(40, 2);
+    private static Fixpoint Attack5QuitTime = new Fixpoint(43, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(95, 3);
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(95, 3);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(95, 3);
-    private Fixpoint Attack4BeginToHitTime = new Fixpoint(195, 3);
-    private Fixpoint Attack5BeginToHitTime = new Fixpoint(195, 3);
+    private static Fixpoint Attack1BeginToHitTime = new Fixpoint(95, 3);
+    private static Fixpoint Attack2BeginToHitTime = new Fixpoint(95, 3);
+    private static Fixpoint Attack3BeginToHitTime = new Fixpoint(95, 3);
+    private static Fixpoint Attack4BeginToHitTime = new Fixpoint(195, 3);
+    private static Fixpoint Attack5BeginToHitTime = new Fixpoint(195, 3);
     private void Attack()
     {
         int hit = GetHited();
@@ -441,7 +448,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0) , 30 , false);
+            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(new Fix_vector2(0,0), new Fixpoint(15, 1), new Fixpoint(2, 0) , 30 , false);
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
         {
@@ -457,7 +464,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
+            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
 
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -473,7 +480,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
+            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
 
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -489,7 +496,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
+            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
         }
         else //五段攻击
         {
@@ -501,7 +508,7 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack(new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
+            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack(new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), 30 , false);
         }
         /*
         if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
@@ -713,8 +720,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private Fixpoint KickBeginToHit = new Fixpoint(15, 2);
-    private Fixpoint KickDuring = new Fixpoint(5, 1);
+    private static Fixpoint KickBeginToHit = new Fixpoint(15, 2);
+    private static Fixpoint KickDuring = new Fixpoint(5, 1);
+    private static Fixpoint KickShiftx = new Fixpoint(1, 0);
+    private static Fixpoint KickShifty = new Fixpoint(-1, 0);
     private bool is_kicked = false;
     private void Kick()
     {
@@ -731,7 +740,7 @@ public class Player : MonoBehaviour
         if(StatusTime > KickBeginToHit && is_kicked == false)
         {
             is_kicked = true;
-            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120 , true);
+            CreateAttack(new Fix_vector2(KickShiftx,KickShifty), new Fixpoint(2, 0), new Fixpoint(3, 0), 120 , true);
         }
 
         if (Press[KeyCode.A])
@@ -767,8 +776,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    private Fixpoint HeavyAttackBeginToHit = new Fixpoint(15, 2);
-    private Fixpoint HeavyAttackDuring = new Fixpoint(1, 0);
+    private static Fixpoint HeavyAttackBeginToHit = new Fixpoint(15, 2);
+    private static Fixpoint HeavyAttackDuring = new Fixpoint(1, 0);
+    private static Fixpoint HeavyAttackShiftx = new Fixpoint(1, 0);
+    private static Fixpoint HeavyAttackShifty = new Fixpoint(0, 0);
     private bool HeavyAttackHasHited = false;
     private void HeavyAttack()
     {
@@ -796,7 +807,7 @@ public class Player : MonoBehaviour
         if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
         {
             HeavyAttackHasHited = true;
-            CreateAttack(new Fixpoint(3, 0), new Fixpoint(2, 0), 120, true);
+            CreateAttack(new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty), new Fixpoint(3, 0), new Fixpoint(2, 0), 120, true);
         } 
 
         if(!f.onground || StatusTime > HeavyAttackDuring)
@@ -809,9 +820,12 @@ public class Player : MonoBehaviour
             return;
         }
     }
-    private Fixpoint UpAttackBeginToHit = new Fixpoint(2, 1);
-    private Fixpoint UpAttackDuring = new Fixpoint(5, 1);
+    private static Fixpoint UpAttackBeginToHit = new Fixpoint(2, 1);
+    private static Fixpoint UpAttackDuring = new Fixpoint(5, 1);
+    private static Fixpoint UpattackShiftx = new Fixpoint(1, 0);
+    private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
+
     private void UpAttack(bool first)
     {
         if(first == true)
@@ -826,6 +840,7 @@ public class Player : MonoBehaviour
             AnimaSpeed = 0f;
             AnimaStatus = 4;
             AnimaFall = false;
+            UpAttackHasHited = false;
             StatusTime = new Fixpoint(0, 0);
             return;
         }
@@ -846,7 +861,7 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("AAAAAAAAA");
             UpAttackHasHited = true;
-            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120, true);
+            CreateAttack(new Fix_vector2(UpattackShiftx,UpattackShifty), new Fixpoint(2, 0), new Fixpoint(3, 0), 120, true);
         }
 
         if(StatusTime > UpAttackDuring)
