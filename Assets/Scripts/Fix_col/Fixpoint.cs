@@ -154,6 +154,7 @@ public class Fix_vector2
         this.y = new Fixpoint(y);
     }
 
+
     public Fix_vector2(Vector2 v)
     {
         this.x = new Fixpoint(v.x);

@@ -117,7 +117,7 @@ public class Main_ctrl : MonoBehaviour
         CreateObj(p);
     }
 
-    public static void NewAttack(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id ,float toward,bool with)
+    public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id ,float toward,bool with)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -129,6 +129,7 @@ public class Main_ctrl : MonoBehaviour
         p.attacker_id = attacker_id;
         p.col_type = Fix_col2d.col_status.Attack;
         p.toward = toward;
+        p.with_pos = with_pos;
         p.classnames.Add(Object_ctrl.class_name.Attack);
         if(with == true)
         {
@@ -137,7 +138,7 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
-    public static void NewItem(Fix_vector2 pos ,string itemname,int num)
+    public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size)
     {
         Obj_info p = new Obj_info();
         p.name = "ItemSample";
@@ -147,6 +148,7 @@ public class Main_ctrl : MonoBehaviour
         p.col_type = Fix_col2d.col_status.Trigger;
         p.type = itemname;
         p.ToughnessDamage = num;
+        p.toward = size;
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         Creobj(p);
     }
@@ -183,7 +185,7 @@ public class Main_ctrl : MonoBehaviour
                     Rigid_ctrl.rigs.Add(r);
                     break;
                 case Object_ctrl.class_name.Moster:
-                    Monster m = obj.AddComponent<Monster>();
+                    Monster m = obj.GetComponent<Monster>();
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
@@ -198,7 +200,10 @@ public class Main_ctrl : MonoBehaviour
                     a.ToughnessDamage = info.ToughnessDamage;
                     a.attakcer_id = info.attacker_id;
                     a.toward = info.toward;
-                    if (info.type == "1") a.with_attacker = true;
+                    if (info.type == "1") {
+                        a.with_attacker = true;
+                        a.with_pos = info.with_pos.Clone();
+                    }
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
                     break;
                 case Object_ctrl.class_name.Trigger:
@@ -213,7 +218,9 @@ public class Main_ctrl : MonoBehaviour
                         t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
                         obj.GetComponent<ItemOnGround>().item = x;
+                        obj.transform.localScale = new Vector3(info.toward, info.toward, 1f);
                         t.itemid = x.id;
+                        
                     }
                     break;
                 case Object_ctrl.class_name.Facility:
@@ -338,6 +345,7 @@ public class Obj_info
     public int ToughnessDamage;
     public long attacker_id;
     public float toward;
+    public Fix_vector2 with_pos;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();

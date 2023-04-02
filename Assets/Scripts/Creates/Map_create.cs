@@ -125,10 +125,24 @@ public class Map_create : MonoBehaviour
                 info.name = "crystal";
                 info.hei = new Fixpoint(wall_hei - 3 - (hf_thick << 1), 0);
                 info.wid = new Fixpoint(hf_thick << 1, 0);
-                info.col_type = Fix_col2d.col_status.Trigger;
+                info.col_type = Fix_col2d.col_status.Collider;
                 info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id + 1) * wall_hei * 5 - 15, 1));
-                info.classnames.Add(Object_ctrl.class_name.Trigger);
+                info.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+                info.classnames.Add(Object_ctrl.class_name.Moster);
                 Main_ctrl.CreateObj(info);
+
+                /*
+                Obj_info p = new Obj_info();
+                p.name = "Monster1";
+                p.hei = size_monster[i].y.Clone();
+                p.wid = size_monster[i].x.Clone();
+                p.pos = pos_monster[i];
+                p.col_type = Fix_col2d.col_status.Collider;
+                p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+                p.classnames.Add(Object_ctrl.class_name.Moster);
+                //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
+                Main_ctrl.CreateObj(p);
+                */
                 //info.classnames.Add(Object_ctrl.class_name.Wall);
             }
         }
