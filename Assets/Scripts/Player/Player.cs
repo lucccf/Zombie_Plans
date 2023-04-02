@@ -846,7 +846,7 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("AAAAAAAAA");
             UpAttackHasHited = true;
-            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120, true);
+            CreateAttack(new Fixpoint(2, 0), new Fixpoint(3, 0), 120, true);//宽，高，韧性值，攻击框是否跟随人物
         }
 
         if(StatusTime > UpAttackDuring)
