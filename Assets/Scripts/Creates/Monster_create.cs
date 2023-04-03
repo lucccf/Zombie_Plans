@@ -9,7 +9,7 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> pos_zombies = new List<Fix_vector2>();
     public static List<Fix_vector2> size_zombies = new List<Fix_vector2>();
 
-    public static void Mon_create1()
+    public static void Mon_create1()  //生成资源怪
     {
         for(int i = 0; i < pos_monster.Count; i++)
         {
@@ -26,7 +26,7 @@ public class Monster_create : MonoBehaviour
         }
     }
 
-    public static void Mon_create2()
+    public static void Mon_create2()  //生成僵尸，后期替换模型和ai
     {
         for (int i = 0; i < pos_zombies.Count; i++)
         {
@@ -40,6 +40,7 @@ public class Monster_create : MonoBehaviour
             p.classnames.Add(Object_ctrl.class_name.Moster);
             Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
             Main_ctrl.CreateObj(p);
+            Flow_path.zombie_cnt++;
         }
     }
 }

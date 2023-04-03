@@ -254,6 +254,9 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Fix_rig2d:
                     Rigid_ctrl.rigs.Remove((Fix_rig2d)obj.modules[m]);
                     break;
+                case Object_ctrl.class_name.Moster:
+                    //如果是僵尸则在控制流程中-1
+                    break;
             }
         }
         Collider_ctrl.cols.Remove((Fix_col2d)obj.modules[Object_ctrl.class_name.Fix_col2d]);
