@@ -315,6 +315,7 @@ public class Main_ctrl : MonoBehaviour
             }
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
+            Flow_path.Updatex();
             while (Des_objs.Count > 0)
             {
                 long id_des = Des_objs.Dequeue();

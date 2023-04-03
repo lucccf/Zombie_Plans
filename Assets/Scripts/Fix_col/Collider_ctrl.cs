@@ -122,25 +122,25 @@ public class Collider_ctrl
     {
 
         //碰撞事件
-        if (f1.type == Fix_col2d.col_status.Wall && f2.type == Fix_col2d.col_status.Collider)
+        if (f1.type == Fix_col2d.col_status.Wall && (f2.type == Fix_col2d.col_status.Collider || f2.type == Fix_col2d.col_status.Attack2))
         {
             if (f2.type == Fix_col2d.col_status.Attack || f2.type == Fix_col2d.col_status.Wall) return;
             col_wall(f2, f1);
             return;
         }
-        if (f2.type == Fix_col2d.col_status.Wall && f1.type == Fix_col2d.col_status.Collider)
+        if (f2.type == Fix_col2d.col_status.Wall && (f1.type == Fix_col2d.col_status.Collider || f1.type == Fix_col2d.col_status.Attack2))
         {
             if (f1.type == Fix_col2d.col_status.Attack) return;
             col_wall(f1, f2);
             return;
         }
 
-        if (f1.type == Fix_col2d.col_status.Attack && f2.type == Fix_col2d.col_status.Collider)
+        if ((f1.type == Fix_col2d.col_status.Attack || f1.type == Fix_col2d.col_status.Attack2) && f2.type == Fix_col2d.col_status.Collider)
         {
             col_attack(f2, f1);
             return;
         }
-        if (f2.type == Fix_col2d.col_status.Attack && f1.type == Fix_col2d.col_status.Collider)
+        if ((f2.type == Fix_col2d.col_status.Attack || f2.type == Fix_col2d.col_status.Attack2) && f1.type == Fix_col2d.col_status.Collider)
         {
             col_attack(f1, f2);
             return;

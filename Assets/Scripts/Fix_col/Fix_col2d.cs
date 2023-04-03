@@ -23,6 +23,7 @@ public class Fix_col2d
         Trigger,
         Collider,
         Attack,
+        Attack2,
         //...
     }
 
