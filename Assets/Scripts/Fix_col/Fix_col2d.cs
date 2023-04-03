@@ -23,6 +23,7 @@ public class Fix_col2d
         Trigger,
         Collider,
         Attack,
+        Attack2,
         //...
     }
 
@@ -121,6 +122,7 @@ public class Fix_col2d_act
         Attack,
         Trigger_in,
         Trigger_out,
+        On_wall,
         //...
     }
 

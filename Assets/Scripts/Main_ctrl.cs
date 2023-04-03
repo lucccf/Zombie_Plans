@@ -47,20 +47,11 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
-    void Play_create()
-    {
-        for(int i = 0; i < players.Count; i++)
-        {
-            Debug.Log(players[i]);
-            NewPlayer(players[i]);
-            Debug.Log(cnt - 1);
-        }
-    }
-
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         //play = CreateObj(p);
+        Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Map_create.Wall_create();
         Map_create.Item_create();
@@ -70,6 +61,16 @@ public class Main_ctrl : MonoBehaviour
         Player_ctrl.Init_bag();
 
         Play_create();
+    }
+
+    void Play_create()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            Debug.Log(players[i]);
+            NewPlayer(players[i]);
+            Debug.Log(cnt - 1);
+        }
     }
 
     public static void Desobj(long id)
@@ -137,7 +138,23 @@ public class Main_ctrl : MonoBehaviour
         }
         Creobj(p);
     }
+    public static void NewAttack2(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id, float toward)
+    {
+        Obj_info p = new Obj_info();
+        p.name = "LightBall";
+        p.hei = high.Clone();
+        p.wid = width.Clone();
+        p.pos = pos.Clone();
+        p.HpDamage = Hpdamage.Clone();
+        p.ToughnessDamage = Toughnessdamage;
+        p.attacker_id = attacker_id;
+        p.col_type = Fix_col2d.col_status.Attack2;
+        p.toward = toward;
+        p.type = "wave";
+        p.classnames.Add(Object_ctrl.class_name.Attack);
 
+        Creobj(p);
+    }
     public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size)
     {
         Obj_info p = new Obj_info();
@@ -192,7 +209,7 @@ public class Main_ctrl : MonoBehaviour
                     m.id = cnt;
                     break;
                 case Object_ctrl.class_name.Attack:
-                    Attack a = obj.AddComponent<Attack>();
+                    Attack a = obj.GetComponent<Attack>();
                     ctrl.modules[Object_ctrl.class_name.Attack] = a;
                     a.f = f;
                     a.id = cnt;
@@ -203,8 +220,17 @@ public class Main_ctrl : MonoBehaviour
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
+                    } else if(info.type == "wave")
+                    {
+                        a.type = 1;
                     }
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
+                    
+                    if(info.name == "LightBall")
+                    {
+                        obj.transform.localScale = new Vector3(3, 3, 1);
+                    }
+                    
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();
@@ -226,7 +252,7 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Facility:
                     Facility fa = new Facility();
                     fa.id = cnt;
-                    Dictionary<int, int> tmp = new Dictionary<int, int>();
+                    Dictionary<int, int> tmp = new Dictionary<int, int>(); //id和数量
                     tmp[1] = 5;
                     fa.materials = tmp;
                     Flow_path.facilities[info.attacker_id] = fa;
@@ -254,6 +280,9 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Fix_rig2d:
                     Rigid_ctrl.rigs.Remove((Fix_rig2d)obj.modules[m]);
                     break;
+                case Object_ctrl.class_name.Moster:
+                    //如果是僵尸则在控制流程中-1
+                    break;
             }
         }
         Collider_ctrl.cols.Remove((Fix_col2d)obj.modules[Object_ctrl.class_name.Fix_col2d]);
@@ -272,21 +301,8 @@ public class Main_ctrl : MonoBehaviour
         {
             ++count;
             Frame f = Frames.Dequeue();
-            if (f.Index == -3) continue;
-
-            cnt2 += f.Index;
-
-            for (int i = 0; i < f.Opts.Count; i++)
-            {
-                cnt2 += f.Opts[i].Userid;
-                cnt2 += (int)f.Opts[i].Opt;
-            }
-            if (f.Index % 100 == 0)
-            {
-                //Debug.Log(cnt2);
-            }
-
             frame_index = f.Index;
+
             for (int i = 0; i < f.Opts.Count; i++)
             {
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
@@ -312,6 +328,7 @@ public class Main_ctrl : MonoBehaviour
             }
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
+            Flow_path.Updatex();
             while (Des_objs.Count > 0)
             {
                 long id_des = Des_objs.Dequeue();

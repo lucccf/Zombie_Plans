@@ -173,19 +173,24 @@ public class Map_create : MonoBehaviour
         int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
 
 
+        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++);
+    }
+
+
+    public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id) 
+    {
         Obj_info home_info = new Obj_info();
-        home_info.name = "facility";
-        home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
-        home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
+        home_info.name = name;
+        home_info.hei = hei;
+        home_info.wid = wid;
         home_info.col_type = Fix_col2d.col_status.Trigger;
-        home_info.pos = new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1));
-        home_info.type = "building";
-        home_info.attacker_id = Bud_cnt++;
+        home_info.pos = pos;
+        home_info.type = type;
+        home_info.attacker_id = id;
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         home_info.classnames.Add(Object_ctrl.class_name.Facility);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
-        //创建家
     }
 
 

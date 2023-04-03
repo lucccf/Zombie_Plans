@@ -40,6 +40,11 @@ public class Mineral : Monster
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+            if (attack.type == 1)
+            {
+                Attack2 attack2 = (Attack2)attack;
+                attack2.DestroySelf();
+            }
         }
         if (status.death == true) return true;
         else return false;
