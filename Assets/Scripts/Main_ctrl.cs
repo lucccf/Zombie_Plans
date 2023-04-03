@@ -137,7 +137,23 @@ public class Main_ctrl : MonoBehaviour
         }
         Creobj(p);
     }
+    public static void NewAttack2(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id, float toward)
+    {
+        Obj_info p = new Obj_info();
+        p.name = "LightBall";
+        p.hei = high.Clone();
+        p.wid = width.Clone();
+        p.pos = pos.Clone();
+        p.HpDamage = Hpdamage.Clone();
+        p.ToughnessDamage = Toughnessdamage;
+        p.attacker_id = attacker_id;
+        p.col_type = Fix_col2d.col_status.Attack2;
+        p.toward = toward;
+        p.type = "wave";
+        p.classnames.Add(Object_ctrl.class_name.Attack);
 
+        Creobj(p);
+    }
     public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size)
     {
         Obj_info p = new Obj_info();
@@ -192,7 +208,7 @@ public class Main_ctrl : MonoBehaviour
                     m.id = cnt;
                     break;
                 case Object_ctrl.class_name.Attack:
-                    Attack a = obj.AddComponent<Attack>();
+                    Attack a = obj.GetComponent<Attack>();
                     ctrl.modules[Object_ctrl.class_name.Attack] = a;
                     a.f = f;
                     a.id = cnt;
@@ -203,8 +219,17 @@ public class Main_ctrl : MonoBehaviour
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
+                    } else if(info.type == "wave")
+                    {
+                        a.type = 1;
                     }
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
+                    
+                    if(info.name == "LightBall")
+                    {
+                        obj.transform.localScale = new Vector3(3, 3, 1);
+                    }
+                    
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();
