@@ -252,9 +252,7 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Facility:
                     Facility fa = new Facility();
                     fa.id = cnt;
-                    Dictionary<int, int> tmp = new Dictionary<int, int>(); //id和数量
-                    tmp[1] = 5;
-                    fa.materials = tmp;
+                    fa.materials = info.materials;
                     Flow_path.facilities[info.attacker_id] = fa;
                     break;
             }
@@ -363,6 +361,7 @@ public class Obj_info
     public long attacker_id;
     public float toward;
     public Fix_vector2 with_pos;
+    public Dictionary<int, int> materials;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
