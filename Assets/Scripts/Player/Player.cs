@@ -721,7 +721,7 @@ public class Player : MonoBehaviour
     }
 
     private static Fixpoint KickBeginToHit = new Fixpoint(1, 1);
-    private static Fixpoint KickDuring = new Fixpoint(39, 2);
+    private static Fixpoint KickDuring = new Fixpoint(20, 1);
     private static Fixpoint KickShiftx = new Fixpoint(1, 0);
     private static Fixpoint KickShifty = new Fixpoint(-1, 0);
     private bool is_kicked = false;
@@ -821,7 +821,7 @@ public class Player : MonoBehaviour
         }
     }
     private static Fixpoint UpAttackBeginToHit = new Fixpoint(13, 2);
-    private static Fixpoint UpAttackDuring = new Fixpoint(69, 2);
+    private static Fixpoint UpAttackDuring = new Fixpoint(20, 1);
     private static Fixpoint UpattackShiftx = new Fixpoint(1, 0);
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
