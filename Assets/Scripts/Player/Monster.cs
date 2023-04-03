@@ -245,13 +245,18 @@ public class Monster : MonoBehaviour
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
             if (attack.attakcer_id == id) continue;
-            AnimaToward = attack.toward;
+            AnimaToward = -attack.toward;
 
             this_hited = true;
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+            if (attack.type == 1)
+            {
+                Attack2 attack2 = (Attack2)attack;
+                attack2.DestroySelf();
+            }
         }
 
         if(status.GetToughness() < 75 && StatusTime < new Fixpoint(2,1))
@@ -348,6 +353,7 @@ public class Monster : MonoBehaviour
     }
     private void HitedOnGround()
     {
+        RemoveHited();
         if (StatusTime > new Fixpoint(1, 0))
         {
             StatusTime = new Fixpoint(0, 0);
@@ -471,7 +477,7 @@ public class Monster : MonoBehaviour
     }
     private void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), "Material", 1000,1f);
+        Main_ctrl.NewItem(f.pos.Clone(), "milk", 3,5f);
     }
     private void Death()
     {

@@ -34,6 +34,10 @@ public class Player : MonoBehaviour
     private bool AnimaDeath = false;
     private bool AnimaGround = false;
     private bool Anima623Arrack = false;
+
+    private int AnimaFire = 0;
+    private bool AnimaRecover = false;
+
     private Fixpoint StatusTime = new Fixpoint(0, 0);
     public long id;
 
@@ -185,6 +189,15 @@ public class Player : MonoBehaviour
             case 9:
                 UpAttack(false);
                 break;
+            case 10:
+                Fire1();
+                break;
+            case 11:
+                Fire2();
+                break;
+            case 12:
+                RecoverHp(false);
+                break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
@@ -299,6 +312,27 @@ public class Player : MonoBehaviour
             AnimaStatus = 1;
             return;
         }
+        if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11,1))
+        {
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 12;
+            AnimaRecover = true;
+            RecoverHp(true);
+            return;
+        }
+
+        if (Press[KeyCode.Q] && f.onground)
+        {
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 10;
+            return;
+        }
+        if (Press[KeyCode.E] && f.onground)
+        {
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 11;
+            return;
+        }
     }
 
     void Jump()
@@ -382,11 +416,11 @@ public class Player : MonoBehaviour
         else AttackPos.x -= new Fixpoint(1, 0);
         if (with == false) 
         { 
-            Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), wide, high, status.Damage(), toughness, id, -AnimaToward, with);
+            Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), wide, high, status.Damage(), toughness, id, AnimaToward, with);
         }
         else
         {
-            Main_ctrl.NewAttack(AttackPos, with_pos, wide, high, status.Damage(), toughness, id, -AnimaToward, with);
+            Main_ctrl.NewAttack(AttackPos, with_pos, wide, high, status.Damage(), toughness, id, AnimaToward, with);
         }
     }
     private void RemoveAttack()
@@ -638,6 +672,11 @@ public class Player : MonoBehaviour
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+            if(attack.type == 1)
+            {
+                Attack2 attack2 = (Attack2)attack;
+                attack2.DestroySelf();
+            }
         }
 
         if (status.GetToughness() >= 75)
@@ -874,6 +913,98 @@ public class Player : MonoBehaviour
         }
     }
 
+    private static Fixpoint Fire1DuringTime = new Fixpoint(12, 1);
+    private static Fixpoint Fire1BeginToAttackTime = new Fixpoint(5, 1);
+    private void Fire1()
+    {
+
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaStatus = 4;
+            AnimaFire = 0;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+
+        AnimaFire = 1;
+        if(StatusTime > Fire1BeginToAttackTime && StatusTime < Fire1DuringTime)
+        {
+
+        }
+        else if (StatusTime > Fire1DuringTime)
+        {
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 0;
+            AnimaFire = 0;
+        }
+    }
+    private static Fixpoint Fire2DuringTime = new Fixpoint(85, 2);
+    private static Fixpoint Fire2BeginToAttack1Time = new Fixpoint(2, 1);
+    private static Fixpoint Fire2BeginToAttack2Time = new Fixpoint(55, 2);
+    private static Fixpoint Fire2BeginToAttack3Time = new Fixpoint(8, 1);
+    private int HasFired1 = 0;
+    private void Fire2()
+    {
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaStatus = 4;
+            AnimaFire = 0;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+
+        AnimaFire = 2;
+        if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
+        {
+            ++HasFired1;
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+        } 
+        else if(StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
+        {
+            ++HasFired1;
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+        }
+        else if(StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
+        {
+            ++HasFired1;
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+        }
+        else if (StatusTime > Fire2DuringTime)
+        {
+            HasFired1 = 0;
+            StatusTime = new Fixpoint(0, 0);
+            AnimaStatus = 0;
+            AnimaFire = 0;
+        }
+    }
+
+    private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); 
+    private void RecoverHp(bool first)
+    {
+        AnimaRecover = true;
+        int hit = GetHited();
+        if (hit != 0)
+        {
+            AnimaStatus = 4;
+            AnimaRecover = false;
+            StatusTime = new Fixpoint(0, 0);
+            return;
+        }
+        if (first == true) {
+            Player_ctrl.BagUI.GetItem(11, -1);
+            bag.BagGetItem(11, -1);
+            status.RecoverHp(10); 
+        }
+        if(StatusTime > RecoverHpDuringTime)
+        {
+            AnimaStatus = 0;
+            StatusTime = new Fixpoint(0, 0);
+            AnimaRecover = false;
+        }
+    }
+
     private void Update()
     {
         animator.SetFloat("speed", AnimaSpeed);
@@ -885,5 +1016,7 @@ public class Player : MonoBehaviour
         animator.SetFloat("hited", AnimaHited);
         animator.SetBool("onground", AnimaGround);
         animator.SetBool("623", Anima623Arrack);
+        animator.SetInteger("firetype",AnimaFire);
+        animator.SetBool("recover", AnimaRecover);
     }
 }
