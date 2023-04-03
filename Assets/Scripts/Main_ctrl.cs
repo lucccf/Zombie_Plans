@@ -275,21 +275,8 @@ public class Main_ctrl : MonoBehaviour
         {
             ++count;
             Frame f = Frames.Dequeue();
-            if (f.Index == -3) continue;
-
-            cnt2 += f.Index;
-
-            for (int i = 0; i < f.Opts.Count; i++)
-            {
-                cnt2 += f.Opts[i].Userid;
-                cnt2 += (int)f.Opts[i].Opt;
-            }
-            if (f.Index % 100 == 0)
-            {
-                //Debug.Log(cnt2);
-            }
-
             frame_index = f.Index;
+
             for (int i = 0; i < f.Opts.Count; i++)
             {
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
