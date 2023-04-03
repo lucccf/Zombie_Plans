@@ -252,7 +252,7 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Facility:
                     Facility fa = new Facility();
                     fa.id = cnt;
-                    Dictionary<int, int> tmp = new Dictionary<int, int>();
+                    Dictionary<int, int> tmp = new Dictionary<int, int>(); //id和数量
                     tmp[1] = 5;
                     fa.materials = tmp;
                     Flow_path.facilities[info.attacker_id] = fa;
