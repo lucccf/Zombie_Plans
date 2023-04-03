@@ -159,6 +159,10 @@ public class Collider_ctrl
 
     static void col_wall(Fix_col2d col, Fix_col2d wall)
     {
+        if (col.type == Fix_col2d.col_status.Attack2)
+        {
+            col.actions.Enqueue(new Fix_col2d_act(col_action.On_wall, wall));
+        }
         if (col.up() > wall.up())
         {
             if (col.right() > wall.right())
