@@ -47,20 +47,11 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
-    void Play_create()
-    {
-        for(int i = 0; i < players.Count; i++)
-        {
-            Debug.Log(players[i]);
-            NewPlayer(players[i]);
-            Debug.Log(cnt - 1);
-        }
-    }
-
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         //play = CreateObj(p);
+        Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Map_create.Wall_create();
         Map_create.Item_create();
@@ -70,6 +61,16 @@ public class Main_ctrl : MonoBehaviour
         Player_ctrl.Init_bag();
 
         Play_create();
+    }
+
+    void Play_create()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            Debug.Log(players[i]);
+            NewPlayer(players[i]);
+            Debug.Log(cnt - 1);
+        }
     }
 
     public static void Desobj(long id)
