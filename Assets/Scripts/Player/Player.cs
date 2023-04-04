@@ -414,11 +414,11 @@ public class Player : MonoBehaviour
         CreatedAttack = true;
         if (with == false) 
         { 
-            Main_ctrl.NewAttack(with_pos, new Fix_vector2(0, 0), wide, high, status.Damage(), toughness, id, AnimaToward, with);
+            Main_ctrl.NewAttack(with_pos, new Fix_vector2(0, 0), wide, high, status.Damage() * new Fixpoint(25, 2), toughness, id, AnimaToward, with);
         }
         else
         {
-            Main_ctrl.NewAttack(NormalFixVector(), with_pos, wide, high, status.Damage(), toughness, id, AnimaToward, with);
+            Main_ctrl.NewAttack(NormalFixVector(), with_pos, wide, high, status.Damage() * new Fixpoint(50, 2), toughness, id, AnimaToward, with);
         }
     }
     private void RemoveAttack()
@@ -996,17 +996,17 @@ public class Player : MonoBehaviour
         if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * new Fixpoint(2, 1), 40, id, AnimaToward);
         } 
         else if(StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * new Fixpoint(2, 1), 40, id, AnimaToward);
         }
         else if(StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage(), 40, id, AnimaToward);
+            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * new Fixpoint(2, 1), 40, id, AnimaToward);
         }
         else if (StatusTime > Fire2DuringTime)
         {
