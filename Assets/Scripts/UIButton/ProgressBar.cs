@@ -19,11 +19,7 @@ public class ProgressBar : MonoBehaviour
     }
     void Update()
     {
-        while (curprogress < endprogress) {
-            curprogress++;
-            gameObject.GetComponent<Image>().fillAmount = endprogress;
-            gameObject.transform.Find("progressText").gameObject.GetComponent<Text>().text= curprogress.ToString()+"%";
-        }
+       
    
     }
 }

@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
                 Press[KeyCode.Space] = false;
                 break;
             case PlayerOpt.FixFacility:
-                Facility fa = (Facility)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Facility];
+                Facility fa = Flow_path.facilities[inputs.Itemid];
                 bool flag = true;
                 foreach(var m in fa.materials)
                 {
@@ -134,12 +134,13 @@ public class Player : MonoBehaviour
                 }
                 if (flag)
                 {
-                    GameObject.Find("PlayerPanel").transform.Find("Facility").Find("progress").gameObject.GetComponent<ProgressBar>().endprogress = 100;
+                    GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<ProgressBar>().endprogress = 100;
                     foreach (var m in fa.materials)
                     {
                         bag.BagGetItem(m.Key, -m.Value);
                     }
                 }
+                Debug.Log(flag);
                 break;
         }
     }
@@ -626,6 +627,7 @@ public class Player : MonoBehaviour
                     Debug.Log(a.opsite.id);
                     GameObject parent = GameObject.Find("PlayerPanel");
                     Building = Instantiate((GameObject)AB.getobj("building"), parent.transform);
+                    Building.GetComponent<BuildingButton>().buildingid = a.opsite.id;
                     Building.name = trigger.name;
                 } else if(trigger.triggername == "ItemSample")
                 {

@@ -1,14 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingButton : MonoBehaviour
 {
+    public long buildingid;
     GameObject playerpanel;
     GameObject tmp;
     GameObject titletext;
     GameObject closebutton;
+    GameObject itemimage;
+    GameObject itemtext;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
@@ -28,6 +34,18 @@ public class BuildingButton : MonoBehaviour
             //关闭键
             closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
+            //材料列表
+
+            itemimage = tmp.transform.Find("ItemTitle").transform.Find("ItemDetail").transform.Find("ItemImage").gameObject;
+            itemtext = tmp.transform.Find("ItemTitle").transform.Find("ItemDetail").transform.Find("ItemImage").transform.Find("Text").gameObject;
+            Facility fa = Flow_path.facilities[buildingid];
+            Dictionary<int, int> curmat = fa.materials;
+            foreach (KeyValuePair<int, int> mat in curmat)
+            {
+                Item x = Main_ctrl.GetItemById(mat.Key);
+                itemimage.GetComponent<Image>().sprite = x.image;
+                itemtext.GetComponent<Text>().text = "所需数量："+ mat.Value;
+            }
         }
     }
 
@@ -63,11 +81,6 @@ public class BuildingButton : MonoBehaviour
 
     void OnDestroy()
     {
-<<<<<<< HEAD
-        /*if (tmp.activeSelf == true) {
-            tmp.SetActive(false);
-        }*/
-=======
         if (tmp != null) 
         {
             if (tmp.activeSelf == true)
@@ -75,6 +88,5 @@ public class BuildingButton : MonoBehaviour
                 tmp.SetActive(false);
             }
         }
->>>>>>> 821c4be6f702e29654dcdacaa89180b4e50b521c
     }
 }

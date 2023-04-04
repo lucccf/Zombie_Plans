@@ -14,6 +14,9 @@ public class Main_ctrl : MonoBehaviour
     public static Queue<Frame> Frames = new Queue<Frame>();
     private static Queue<long> Des_objs = new Queue<long>();
     private static Queue<Obj_info> Cre_objs = new Queue<Obj_info>();
+    
+    private static Dictionary<int,Item>ItemList = new Dictionary<int,Item>();
+
 
     float t;
     float dt = 0.033f;
@@ -57,7 +60,18 @@ public class Main_ctrl : MonoBehaviour
         Player_ctrl.Init_bag();
         Debug.Log("???");
 
+        Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
+        for (int i = 0; i < Items.Length; ++i)
+        {
+            ItemList.Add(Items[i].id, Items[i]);
+        }
+
         Play_create();
+    }
+
+    public static Item GetItemById(int id)
+    {
+        return ItemList[id];
     }
 
     void Play_create()
@@ -244,10 +258,10 @@ public class Main_ctrl : MonoBehaviour
                     }
                     break;
                 case Object_ctrl.class_name.Facility:
-                    Facility fa = new Facility();
+                    Facility fa = obj.AddComponent<Facility>();
                     fa.id = cnt;
                     fa.materials = info.materials;
-                    Flow_path.facilities[info.attacker_id] = fa;
+                    Flow_path.facilities[cnt] = fa;
                     break;
             }
         }
