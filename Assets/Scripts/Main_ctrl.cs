@@ -171,8 +171,7 @@ public class Main_ctrl : MonoBehaviour
     }
     public static GameObject CreateObj(Obj_info info)
     {
-        //Debug.Log(cnt);
-        GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/" + info.name));
+        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
         spriteRenderer.size = new Vector2(info.wid.to_float(), info.hei.to_float());
@@ -239,7 +238,7 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
-                        Item x = (Item)Resources.Load("items/" + info.type);
+                        Item x = (Item)AB.getobj("items/" + info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
@@ -252,9 +251,7 @@ public class Main_ctrl : MonoBehaviour
                 case Object_ctrl.class_name.Facility:
                     Facility fa = new Facility();
                     fa.id = cnt;
-                    Dictionary<int, int> tmp = new Dictionary<int, int>(); //id和数量
-                    tmp[1] = 5;
-                    fa.materials = tmp;
+                    fa.materials = info.materials;
                     Flow_path.facilities[info.attacker_id] = fa;
                     break;
             }
@@ -363,6 +360,7 @@ public class Obj_info
     public long attacker_id;
     public float toward;
     public Fix_vector2 with_pos;
+    public Dictionary<int, int> materials;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();

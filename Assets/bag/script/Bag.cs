@@ -18,7 +18,7 @@ public class Bag : MonoBehaviour
     void Start()
     {
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
-        Item[] item = Resources.LoadAll<Item>("items/");
+        Item[] item = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < item.Length; ++i)
         {
             OriginItem.Add(item[i].id, item[i]);
@@ -39,7 +39,7 @@ public class Bag : MonoBehaviour
     public GameObject TmpBagItem;
     public void GetItem(int id,int number)
     {
-        Debug.Log(number);
+        //Debug.Log(number);
         //if (ItemManager.ContainsKey(x.id))
         if (ItemNumber[id] > 0)
         {

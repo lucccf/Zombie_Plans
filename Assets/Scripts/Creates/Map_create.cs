@@ -172,12 +172,20 @@ public class Map_create : MonoBehaviour
         int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
         int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
 
+        Dictionary<int,int> tmp = new Dictionary<int,int>(); //修復設施所需要材料id和数量
+        tmp[1] = 5;
+        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++ , tmp);
+    }
 
-        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++);
+    public static void Facility_create()
+    {
+        XmlDocument ItemxmlDoc = new XmlDocument();
+        ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
     }
 
 
-    public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id) 
+
+    public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
         Obj_info home_info = new Obj_info();
         home_info.name = name;
@@ -187,6 +195,7 @@ public class Map_create : MonoBehaviour
         home_info.pos = pos;
         home_info.type = type;
         home_info.attacker_id = id;
+        home_info.materials = material;
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         home_info.classnames.Add(Object_ctrl.class_name.Facility);
         GameObject home = Main_ctrl.CreateObj(home_info);
@@ -222,7 +231,7 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/background/" + pre_name));
+                GameObject obj = Instantiate((GameObject)AB.getobj("background/" + pre_name));
                 obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
                 if (xml_name == "normal_pos")
                 {

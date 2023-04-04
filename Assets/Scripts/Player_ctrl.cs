@@ -14,7 +14,7 @@ public class Player_ctrl : MonoBehaviour
     public static void Init_bag()
     {
         BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
-        item = Resources.LoadAll<Item>("items/");
+        item = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < item.Length; ++i)
         {
             Player_ctrl.ItemList.Add(item[i].id, item[i]);

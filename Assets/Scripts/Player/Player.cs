@@ -623,7 +623,7 @@ public class Player : MonoBehaviour
                 {
                     Debug.Log("Trigger");
                     GameObject parent = GameObject.Find("PlayerPanel");
-                    Building = (GameObject)Instantiate(Resources.Load("Prefabs/building"), parent.transform);
+                    Building = Instantiate((GameObject)AB.getobj("building"), parent.transform);
                     Building.name = trigger.name;
                 } else if(trigger.triggername == "ItemSample")
                 {
@@ -666,6 +666,14 @@ public class Player : MonoBehaviour
             if (attack.attakcer_id == id) continue;
             AnimaToward = attack.toward;
             this_hited = true;
+
+
+            GameObject beat = (GameObject)AB.getobj("beat");
+            beat.transform.localScale = new Vector3(3f, 3f, 1f);
+            Instantiate(beat, transform.position, transform.rotation);
+            GameObject num = (GameObject)AB.getobj("HurtNumber");
+            GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            num2.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
@@ -942,9 +950,9 @@ public class Player : MonoBehaviour
         {
             if(CreatedLighting == false)
             {
-                Debug.Log("xxxxxxxx");
+                //Debug.Log("xxxxxxxx");
                 CreatedLighting = true;
-                GameObject lighting = Instantiate((GameObject)Resources.Load("Prefabs/Lighting"));
+                GameObject lighting = Instantiate((GameObject)AB.getobj("Lighting"));
                 lighting.transform.position = new Vector3(f.pos.x.to_float() + 6.5f * AnimaToward, f.pos.y.to_float(), 0f);
                 lighting.transform.localScale = new Vector3(3f, 3f, 1f);
                 lighting.GetComponent<Lighting>().toward = AnimaToward;
