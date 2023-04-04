@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {

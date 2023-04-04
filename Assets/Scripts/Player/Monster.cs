@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.ParticleSystem;
 
 public class Monster : MonoBehaviour
 {
