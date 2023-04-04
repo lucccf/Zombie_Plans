@@ -9,13 +9,14 @@ public class BeatNumber : MonoBehaviour
         Debug.Log("Start");
         transform.localScale = new Vector3(MinSize, MinSize, 1);
         transform.Translate(new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0f));
+        Debug.Log(MemoryNum);
     }
     private float AilveTime = 0f;
     private static float MaxAliveTime = 0.7f;
     private static float ChangeColourTime = 0.35f;
     private static float MinSize = 2f;
     private static float MaxSize = 3f;
-    private int MemoryNum;
+    private int MemoryNum = 5;
     private bool changed = false;
     Sprite GetSpriteWrite(int n)
     {

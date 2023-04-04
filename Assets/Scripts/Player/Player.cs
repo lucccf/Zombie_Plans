@@ -672,8 +672,8 @@ public class Player : MonoBehaviour
             beat.transform.localScale = new Vector3(3f, 3f, 1f);
             Instantiate(beat, transform.position, transform.rotation);
             GameObject num = (GameObject)Resources.Load("Prefabs/HurtNumber");
-            Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
-            num.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
+            GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            num2.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
