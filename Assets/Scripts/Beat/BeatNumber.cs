@@ -9,7 +9,7 @@ public class BeatNumber : MonoBehaviour
         Debug.Log("Start");
         transform.localScale = new Vector3(MinSize, MinSize, 1);
         transform.Translate(new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0f));
-        Debug.Log(MemoryNum);
+        //Debug.Log(MemoryNum);
     }
     private float AilveTime = 0f; 
     private static float MaxAliveTime = 0.7f; //存活时间
@@ -38,7 +38,7 @@ public class BeatNumber : MonoBehaviour
     public void ChangeNumber(int num)
     {
         MemoryNum = num;
-        Debug.Log("MN:" + MemoryNum);
+        //Debug.Log("MN:" + MemoryNum);
         SpriteRenderer[] children = gameObject.GetComponentsInChildren<SpriteRenderer>();
         int x = num % 10;
         num /= 10;
@@ -65,7 +65,7 @@ public class BeatNumber : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(MemoryNum);
+        //Debug.Log(MemoryNum);
         AilveTime += Time.deltaTime;
         float size = MinSize + (AilveTime / MaxAliveTime) * (MaxSize - MinSize);
         transform.localScale = new Vector3(size, size, 0f);
