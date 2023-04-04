@@ -177,6 +177,13 @@ public class Map_create : MonoBehaviour
         Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++ , tmp);
     }
 
+    public static void Facility_create()
+    {
+        XmlDocument ItemxmlDoc = new XmlDocument();
+        ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
+    }
+
+
 
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
@@ -224,7 +231,7 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/background/" + pre_name));
+                GameObject obj = Instantiate((GameObject)AB.getobj("background/" + pre_name));
                 obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
                 if (xml_name == "normal_pos")
                 {
