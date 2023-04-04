@@ -16,17 +16,17 @@ public class Attack2 : Attack
     {
         AliveTime += Dt.dt;
         GetHited();
-        if(AliveTime <= new Fixpoint(25,1))
+        if(AliveTime <= new Fixpoint(25,1))//2.5s开始播放动画，停止移动，一开全要开
         {
             if(toward < 0)
             {
-                f.pos.x -= new Fixpoint(10, 0) * Dt.dt;
+                f.pos.x -= new Fixpoint(10, 0) * Dt.dt;     //气功波的飞行运动速度10/s
             } else
             {
                 f.pos.x += new Fixpoint(10, 0) * Dt.dt;
             }
         }
-        else if (AliveTime > new Fixpoint(25, 1) && AliveTime <= new Fixpoint(3,0))
+        else if (AliveTime > new Fixpoint(25, 1) && AliveTime <= new Fixpoint(3,0))//2.5s开始播放销毁动画，3s是逻辑上气功波消失的时间
         {
             AnimaDestroy = true;
         } else if(AliveTime > new Fixpoint(3,0))

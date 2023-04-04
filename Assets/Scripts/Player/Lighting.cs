@@ -18,7 +18,7 @@ public class Lighting : MonoBehaviour
     {
         Alivetime += Time.deltaTime;
         animator.SetFloat("toward", toward);
-        if(Alivetime > 1f)
+        if(Alivetime > 1f)//波的持续时间，要和player里面的动作总时长-判定命中，相协调
         {
             Destroy(gameObject);
         }

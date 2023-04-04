@@ -918,9 +918,9 @@ public class Player : MonoBehaviour
         return tmp;
     }
 
-    private static Fixpoint Fire1DuringTime = new Fixpoint(12, 1);
-    private static Fixpoint Fire1BeginToAttackTime = new Fixpoint(2, 1);
-    private static Fixpoint FireBetweenDuring = new Fixpoint(1, 1);
+    private static Fixpoint Fire1DuringTime = new Fixpoint(12, 1);//人物动作的总时间
+    private static Fixpoint Fire1BeginToAttackTime = new Fixpoint(2, 1);//发射激光的时间点
+    private static Fixpoint FireBetweenDuring = new Fixpoint(1, 1);//激光的攻击间隔
     private int FireTime = 0;
     private bool CreatedLighting = false;
     private void Fire1()
@@ -968,10 +968,10 @@ public class Player : MonoBehaviour
             FireTime = 0;
         }
     }
-    private static Fixpoint Fire2DuringTime = new Fixpoint(85, 2);
-    private static Fixpoint Fire2BeginToAttack1Time = new Fixpoint(2, 1);
-    private static Fixpoint Fire2BeginToAttack2Time = new Fixpoint(55, 2);
-    private static Fixpoint Fire2BeginToAttack3Time = new Fixpoint(8, 1);
+    private static Fixpoint Fire2DuringTime = new Fixpoint(85, 2);//三连波动作总时长
+    private static Fixpoint Fire2BeginToAttack1Time = new Fixpoint(2, 1);//第1次发射的时间
+    private static Fixpoint Fire2BeginToAttack2Time = new Fixpoint(55, 2);//第2次发射的时间
+    private static Fixpoint Fire2BeginToAttack3Time = new Fixpoint(8, 1);//第3次发射的时间
     private int HasFired1 = 0;
     private void Fire2()
     {
@@ -1024,13 +1024,13 @@ public class Player : MonoBehaviour
         if (first == true) {
             Player_ctrl.BagUI.GetItem(11, -1);
             bag.BagGetItem(11, -1);
-            status.RecoverHp(10); 
         }
         if(StatusTime > RecoverHpDuringTime)
         {
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
             AnimaRecover = false;
+            status.RecoverHp(10);
         }
     }
 
