@@ -377,6 +377,10 @@ public class Monster : MonoBehaviour
     private Fixpoint Attack3BeginToHitTime = new Fixpoint(13, 2);
     private Fixpoint Attack4BeginToHitTime = new Fixpoint(27, 2);
 
+    private Fixpoint Attack1Damage = new Fixpoint(2, 0);
+    private Fixpoint Attack2Damage = new Fixpoint(3, 0);
+    private Fixpoint Attack3Damage = new Fixpoint(4, 0);
+    private Fixpoint Attack4Damage = new Fixpoint(5, 0);
     private void AttackToNext()
     {
         CreatedAttack = false;
@@ -384,13 +388,13 @@ public class Monster : MonoBehaviour
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void CreateAttack()
+    private void CreateAttack(Fixpoint damage)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30, id, -AnimaToward , false); //30的位置代表韧性值
+        Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, id, -AnimaToward , false); //30的位置代表韧性值
     }
     private void RemoveAttack()
     {
@@ -419,7 +423,7 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(Attack1Damage);
         } else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
         {
             if (StatusTime > Attack2DuringTime)
@@ -427,7 +431,7 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(Attack2Damage);
         } else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
         {
             if (StatusTime > Attack3DuringTime)
@@ -435,14 +439,14 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(Attack3Damage);
         } else if(AnimaAttack > 3.5f)
         {
             if (StatusTime > Attack4DuringTime)
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack4BeginToHitTime && CreatedAttack == false) CreateAttack();
+            if (StatusTime > Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(Attack4Damage);
         }
         /*
         if (first == true || StatusTime > new Fixpoint(75, 2))
