@@ -667,6 +667,14 @@ public class Player : MonoBehaviour
             AnimaToward = attack.toward;
             this_hited = true;
 
+
+            GameObject beat = (GameObject)Resources.Load("Prefabs/beat");//特效
+            beat.transform.localScale = new Vector3(3f, 3f, 1f);
+            Instantiate(beat, transform.position, transform.rotation);
+            GameObject num = (GameObject)Resources.Load("Prefabs/HurtNumber");
+            Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            num.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
+
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
@@ -943,7 +951,7 @@ public class Player : MonoBehaviour
         {
             if(CreatedLighting == false)
             {
-                Debug.Log("xxxxxxxx");
+                //Debug.Log("xxxxxxxx");
                 CreatedLighting = true;
                 GameObject lighting = Instantiate((GameObject)Resources.Load("Prefabs/Lighting"));
                 lighting.transform.position = new Vector3(f.pos.x.to_float() + 6.5f * AnimaToward, f.pos.y.to_float(), 0f);
