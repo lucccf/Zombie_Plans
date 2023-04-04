@@ -7,6 +7,7 @@ public class BuildingButton : MonoBehaviour
 {
     GameObject playerpanel;
     GameObject tmp;
+    GameObject titletext;
     GameObject closebutton;
     void Start()
     {
@@ -21,6 +22,10 @@ public class BuildingButton : MonoBehaviour
         else
         {
             tmp = playerpanel.transform.Find("Facility").gameObject;
+            //标题
+            titletext = tmp.transform.Find("Title").transform.Find("Text").gameObject;
+            titletext.GetComponent<Text>().text = gameObject.name;
+            //关闭键
             closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
@@ -58,8 +63,18 @@ public class BuildingButton : MonoBehaviour
 
     void OnDestroy()
     {
+<<<<<<< HEAD
         /*if (tmp.activeSelf == true) {
             tmp.SetActive(false);
         }*/
+=======
+        if (tmp != null) 
+        {
+            if (tmp.activeSelf == true)
+            {
+                tmp.SetActive(false);
+            }
+        }
+>>>>>>> 821c4be6f702e29654dcdacaa89180b4e50b521c
     }
 }
