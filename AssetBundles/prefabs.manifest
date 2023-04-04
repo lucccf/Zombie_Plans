@@ -1,0 +1,78 @@
+ManifestFileVersion: 0
+CRC: 296681174
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2ce1acc7b0c6a7804642051d66581276
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c7bda209c4488af53bfd7abf26c6223d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ab4b6a30508be5f4ea4c131e1754b637, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e8119a724da3eec4bb4f91f7b2b4fa8b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d713e1748eec6dd47b59ee6c2bbfe28f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ac21057441b128b4ebac76d348b6e9c8, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 28552f77981411943a6bf567faa1d6a0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f0a8ea086d749d24cae3e46a08a63382, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e9b0fe5ce6451814e96a17fd537a6708, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Prefabs/crystal.prefab
+- Assets/Resources/Prefabs/LightBall.prefab
+- Assets/Resources/Prefabs/facility.prefab
+- Assets/Resources/Prefabs/home.prefab
+- Assets/Resources/Prefabs/Lighting.prefab
+- Assets/Resources/Prefabs/yellow.prefab
+- Assets/Resources/Prefabs/player.prefab
+- Assets/Resources/Prefabs/beat.prefab
+- Assets/Resources/Prefabs/ItemSample.prefab
+- Assets/Resources/Prefabs/wall_a.prefab
+- Assets/Resources/Prefabs/Monster1.prefab
+- Assets/Resources/Prefabs/wall_b.prefab
+Dependencies: []

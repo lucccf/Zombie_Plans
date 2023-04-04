@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -126,7 +125,7 @@ public class Map_create : MonoBehaviour
                 info.hei = new Fixpoint(wall_hei - 3 - (hf_thick << 1), 0);
                 info.wid = new Fixpoint(hf_thick << 1, 0);
                 info.col_type = Fix_col2d.col_status.Collider;
-                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id + 1) * wall_hei * 5 - 15, 1));
+                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-5 * id + 1) * wall_hei * 2 , 1));
                 info.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                 info.classnames.Add(Object_ctrl.class_name.Moster);
                 Main_ctrl.CreateObj(info);
@@ -152,7 +151,7 @@ public class Map_create : MonoBehaviour
         home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
         home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
         home_info.col_type = Fix_col2d.col_status.Trigger;
-        home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1));
+        home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-5 * 6 + 1) * wall_hei * 2, 1));
         home_info.type = "building";
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         GameObject home = Main_ctrl.CreateObj(home_info);
@@ -174,7 +173,7 @@ public class Map_create : MonoBehaviour
 
         Dictionary<int,int> tmp = new Dictionary<int,int>(); //修復設施所需要材料id和数量
         tmp[1] = 5;
-        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++ , tmp);
+        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-5* 6 + 1) * wall_hei * 2 , 1)), "building", Bud_cnt++ , tmp);
     }
 
     public static void Facility_create()

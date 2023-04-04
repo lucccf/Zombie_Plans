@@ -1,17 +1,7 @@
-﻿using JetBrains.Annotations;
-using Net;
+﻿using Net;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Jobs.LowLevel.Unsafe;
-using UnityEditor;
-using UnityEditor.PackageManager;
-using UnityEditor.UI;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Main_ctrl : MonoBehaviour
 {
