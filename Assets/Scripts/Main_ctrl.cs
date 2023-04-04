@@ -171,8 +171,6 @@ public class Main_ctrl : MonoBehaviour
     }
     public static GameObject CreateObj(Obj_info info)
     {
-        //Debug.Log(cnt);
-        //GameObject obj = (GameObject)Instantiate(Resources.Load("Prefabs/" + info.name));
         GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
@@ -240,7 +238,7 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
-                        Item x = (Item)Resources.Load("items/" + info.type);
+                        Item x = (Item)AB.getobj("items/" + info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
