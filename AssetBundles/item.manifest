@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 1013471606
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4e1617c2fc29a8c5c630315f0f7be2d2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9d77e6eae0edcdad553d2dedda84ea37
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 72be97719ac75124d90cb3fadd4c2088, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Prefabs/items/BlueBigMaterial.asset
+- Assets/Resources/Prefabs/items/YellowBigMaterial.asset
+- Assets/Resources/Prefabs/items/Herb.asset
+- Assets/Resources/Prefabs/items/Medicine.asset
+- Assets/Resources/Prefabs/items/RedMaterial.asset
+- Assets/Resources/Prefabs/items/Mineral.asset
+- Assets/Resources/Prefabs/items/BlueMaterial.asset
+- Assets/Resources/Prefabs/items/GreenMaterial.asset
+- Assets/Resources/Prefabs/items/YellowMaterial.asset
+- Assets/Resources/Prefabs/items/RedBigMaterial.asset
+- Assets/Resources/Prefabs/items/GreenBigMaterial.asset
+Dependencies: []

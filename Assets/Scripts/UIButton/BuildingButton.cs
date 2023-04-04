@@ -58,8 +58,8 @@ public class BuildingButton : MonoBehaviour
 
     void OnDestroy()
     {
-        if (tmp.activeSelf == true) {
+        /*if (tmp.activeSelf == true) {
             tmp.SetActive(false);
-        }
+        }*/
     }
 }

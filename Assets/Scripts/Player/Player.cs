@@ -1,6 +1,7 @@
 ﻿using Net;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class Player : MonoBehaviour
 {
@@ -121,7 +122,7 @@ public class Player : MonoBehaviour
                 Press[KeyCode.Space] = false;
                 break;
             case PlayerOpt.FixFacility:
-                Facility fa = Flow_path.facilities[inputs.Itemid];
+                Facility fa = (Facility)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Facility];
                 bool flag = true;
                 foreach(var m in fa.materials)
                 {
@@ -620,7 +621,9 @@ public class Player : MonoBehaviour
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
                 if (trigger.triggertype == "building" && checkid() == true)
                 {
+                    Flow_path.Now_fac = a.opsite.id;
                     Debug.Log("Trigger");
+                    Debug.Log(a.opsite.id);
                     GameObject parent = GameObject.Find("PlayerPanel");
                     Building = Instantiate((GameObject)AB.getobj("building"), parent.transform);
                     Building.name = trigger.name;

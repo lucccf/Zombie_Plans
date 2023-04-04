@@ -12,6 +12,8 @@ public class Flow_path : MonoBehaviour
 
     public static int zombie_cnt = 0;
 
+    public static long Now_fac = 0;
+
     void Start()
     {
         

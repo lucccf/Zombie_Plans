@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 296681174
+CRC: 357072664
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2ce1acc7b0c6a7804642051d66581276
+    Hash: 978bcd87a4789d33edd40d09c18edbb5
   TypeTreeHash:
     serializedVersion: 2
     Hash: c7bda209c4488af53bfd7abf26c6223d
@@ -65,14 +65,34 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Prefabs/crystal.prefab
 - Assets/Resources/Prefabs/LightBall.prefab
+- Assets/Resources/Prefabs/number/9.png
+- Assets/Resources/Prefabs/number/2.png
+- Assets/Resources/Prefabs/number/0.png
+- Assets/Resources/Prefabs/number/5.png
+- Assets/Resources/Prefabs/number/6.png
+- Assets/Resources/Prefabs/number/3.png
 - Assets/Resources/Prefabs/facility.prefab
 - Assets/Resources/Prefabs/home.prefab
+- Assets/Resources/Prefabs/number/33.png
+- Assets/Resources/Prefabs/number/22.png
 - Assets/Resources/Prefabs/Lighting.prefab
+- Assets/Resources/Prefabs/number/4.png
+- Assets/Resources/Prefabs/number/1.png
+- Assets/Resources/Prefabs/number/77.png
+- Assets/Resources/Prefabs/number/8.png
+- Assets/Resources/Prefabs/number/66.png
+- Assets/Resources/Prefabs/number/00.png
+- Assets/Resources/Prefabs/number/11.png
 - Assets/Resources/Prefabs/yellow.prefab
+- Assets/Resources/Prefabs/number/44.png
 - Assets/Resources/Prefabs/player.prefab
 - Assets/Resources/Prefabs/beat.prefab
+- Assets/Resources/Prefabs/number/7.png
 - Assets/Resources/Prefabs/ItemSample.prefab
+- Assets/Resources/Prefabs/number/88.png
+- Assets/Resources/Prefabs/number/55.png
 - Assets/Resources/Prefabs/wall_a.prefab
 - Assets/Resources/Prefabs/Monster1.prefab
 - Assets/Resources/Prefabs/wall_b.prefab
+- Assets/Resources/Prefabs/number/99.png
 Dependencies: []

@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 769766199
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: aeeea620a53ea0cea25913e1ed1eb667
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3976a22b184e1551c1e7bb361a93ad37
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Prefabs/background/BK_monster.prefab
+- Assets/Resources/Prefabs/background/BK_castle.prefab
+- Assets/Resources/Prefabs/background/Bk_home.prefab
+Dependencies: []

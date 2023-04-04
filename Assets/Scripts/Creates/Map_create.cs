@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Map_create : MonoBehaviour
 
         int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
         int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
+        floor_hei = wall_hei;
         room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
         floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
         floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
@@ -180,6 +182,24 @@ public class Map_create : MonoBehaviour
     {
         XmlDocument ItemxmlDoc = new XmlDocument();
         ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
+        XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
+
+        foreach (XmlNode p in mill_info)
+        {
+            Dictionary<int, int> tmp = new Dictionary<int, int>(); //修復設施所需要材料id和数量
+            int mat_id = int.Parse(p.SelectSingleNode("matrial_id").InnerText);
+            int mat_cnt = int.Parse(p.SelectSingleNode("matrial_number").InnerText);
+            tmp[mat_id] = mat_cnt;
+            int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
+            int mill_pos = int.Parse(p.SelectSingleNode("mill_pos").InnerText);
+            string name = p.SelectSingleNode("mill_name").InnerText;
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-2 * mill_id + 1) * floor_hei * 5, 1));
+
+            Debug.Log(Bud_cnt);
+
+            Building_single_create(name, new Fixpoint(floor_hei, 0), new Fixpoint(floor_hei, 0), pos, "building", Bud_cnt++, tmp);
+
+        }
     }
 
 
@@ -187,7 +207,7 @@ public class Map_create : MonoBehaviour
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
         Obj_info home_info = new Obj_info();
-        home_info.name = name;
+        home_info.name = "facility";
         home_info.hei = hei;
         home_info.wid = wid;
         home_info.col_type = Fix_col2d.col_status.Trigger;

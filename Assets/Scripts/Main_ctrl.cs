@@ -40,15 +40,22 @@ public class Main_ctrl : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //play = CreateObj(p);
+
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
+        Debug.Log("???");
         Map_create.Wall_create();
+        Debug.Log("???");
         Map_create.Item_create();
-        Map_create.Building_create();
+        Debug.Log("???");
+        Map_create.Facility_create();
+        Debug.Log("???");
         Map_create.Background_create();
+        Debug.Log("???");
         Monster_create.Mon_create1();
+        Debug.Log("???");
         Player_ctrl.Init_bag();
+        Debug.Log("???");
 
         Play_create();
     }
@@ -57,9 +64,7 @@ public class Main_ctrl : MonoBehaviour
     {
         for (int i = 0; i < players.Count; i++)
         {
-            Debug.Log(players[i]);
             NewPlayer(players[i]);
-            Debug.Log(cnt - 1);
         }
     }
 
