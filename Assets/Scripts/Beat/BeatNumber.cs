@@ -6,18 +6,38 @@ public class BeatNumber : MonoBehaviour
 {
     void Start()
     {
-        transform.localScale = new Vector3(2, 2, 1);
+        Debug.Log("Start");
+        transform.localScale = new Vector3(MinSize, MinSize, 1);
         transform.Translate(new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0f));
     }
     private float AilveTime = 0f;
-    Sprite GetSprite(int n)
+    private static float MaxAliveTime = 0.7f;
+    private static float ChangeColourTime = 0.35f;
+    private static float MinSize = 2f;
+    private static float MaxSize = 3f;
+    private int MemoryNum;
+    private bool changed = false;
+    Sprite GetSpriteWrite(int n)
     {
         Texture2D f = (Texture2D)Resources.Load("number/" + n.ToString());
         Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
         return g;
     }
+    Sprite GetSpriteYellow(int n)
+    {
+        Texture2D f = (Texture2D)Resources.Load("number/" + n.ToString() + n.ToString());
+        Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
+        return g;
+    }
+    Sprite GetSprite(int n)
+    {
+        if (AilveTime > ChangeColourTime) return GetSpriteYellow(n);
+        else return GetSpriteWrite(n);
+    }
     public void ChangeNumber(int num)
     {
+        MemoryNum = num;
+        Debug.Log("MN:" + MemoryNum);
         SpriteRenderer[] children = gameObject.GetComponentsInChildren<SpriteRenderer>();
         int x = num % 10;
         num /= 10;
@@ -34,7 +54,6 @@ public class BeatNumber : MonoBehaviour
             children[0].sprite = GetSprite(z);
         }
         else children[0].sprite = null;
-
         if (y != 0 || z != 0)
         {
             children[1].sprite = GetSprite(y);
@@ -45,8 +64,16 @@ public class BeatNumber : MonoBehaviour
     }
     void Update()
     {
+        Debug.Log(MemoryNum);
         AilveTime += Time.deltaTime;
-        if(AilveTime > 0.7f)
+        float size = MinSize + (AilveTime / MaxAliveTime) * (MaxSize - MinSize);
+        transform.localScale = new Vector3(size, size, 0f);
+        if(AilveTime > ChangeColourTime && changed == false)
+        {
+            changed = true;
+            ChangeNumber(MemoryNum);
+        }
+        if(AilveTime > MaxAliveTime)
         {
             Destroy(gameObject);
         }
