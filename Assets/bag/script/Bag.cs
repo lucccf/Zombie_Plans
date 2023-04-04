@@ -18,7 +18,7 @@ public class Bag : MonoBehaviour
     void Start()
     {
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
-        Item[] item = Resources.LoadAll<Item>("items/");
+        Item[] item = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < item.Length; ++i)
         {
             OriginItem.Add(item[i].id, item[i]);

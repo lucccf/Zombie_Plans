@@ -26,7 +26,7 @@ public class WorkTable : MonoBehaviour
 
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
-        Item[] ItemList = Resources.LoadAll<Item>("items/");
+        Item[] ItemList = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < ItemList.Length; ++i)
         {
             OriginItem.Add(ItemList[i].id, ItemList[i]);
