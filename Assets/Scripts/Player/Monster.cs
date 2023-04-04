@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using static UnityEditor.PlayerSettings;
 using static UnityEngine.ParticleSystem;
 
@@ -249,6 +250,13 @@ public class Monster : MonoBehaviour
 
             this_hited = true;
 
+            GameObject beat = (GameObject)Resources.Load("Prefabs/beat");//特效
+            beat.transform.localScale = new Vector3(3f, 3f, 1f);
+            Instantiate(beat, transform.position, transform.rotation);
+            GameObject num = (GameObject)Resources.Load("Prefabs/HurtNumber");
+            GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+            num2.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
+
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
@@ -477,7 +485,7 @@ public class Monster : MonoBehaviour
     }
     private void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), "milk", 3,5f);
+        Main_ctrl.NewItem(f.pos.Clone(), "Medicine", 3 , 1f);
     }
     private void Death()
     {
@@ -485,7 +493,7 @@ public class Monster : MonoBehaviour
         //Debug.Log(StatusTime.to_float());
         if(StatusTime > new Fixpoint(3,0))
         {
-            Debug.Log("Death");
+            //Debug.Log("Death");
             DeathFall();
             Main_ctrl.Desobj(id);
         }

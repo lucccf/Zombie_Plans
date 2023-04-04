@@ -39,7 +39,7 @@ public class Bag : MonoBehaviour
     public GameObject TmpBagItem;
     public void GetItem(int id,int number)
     {
-        Debug.Log(number);
+        //Debug.Log(number);
         //if (ItemManager.ContainsKey(x.id))
         if (ItemNumber[id] > 0)
         {
