@@ -177,6 +177,13 @@ public class Map_create : MonoBehaviour
         Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-2 * 6 + 1) * wall_hei * 5 - 15, 1)), "building", Bud_cnt++ , tmp);
     }
 
+    public static void Facility_create()
+    {
+        XmlDocument ItemxmlDoc = new XmlDocument();
+        ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
+    }
+
+
 
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
