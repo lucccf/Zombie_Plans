@@ -12,9 +12,9 @@ public class BeatNumber : MonoBehaviour
         //Debug.Log(MemoryNum);
     }
     private float AilveTime = 0f; 
-    private static float MaxAliveTime = 0.7f; //存活时间
-    private static float ChangeColourTime = 0.35f;//改变颜色时间
-    private static float MinSize = 2f;//最小大小
+    private static float MaxAliveTime = 0.4f; //存活时间
+    private static float ChangeColourTime = 0.01f;//改变颜色时间
+    private static float MinSize = 1f;//最小大小
     private static float MaxSize = 3f;//最大大小
     private int MemoryNum = 5;
     private bool changed = false;
