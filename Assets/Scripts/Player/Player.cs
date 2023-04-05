@@ -1,44 +1,18 @@
 ﻿using Net;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.WSA;
 
-public class Player : MonoBehaviour
+public class Player : BasicCharacter
 {
-    // 玩家状态
-    private PlayerStatus status = new PlayerStatus(100,10);
-
-    //碰撞体变量
-    public Fix_col2d f;
-    public Fix_rig2d r;
-    //public SpriteRenderer spriteRenderer;
-
-    //动画变量
-
-    //private Fixpoint WalkSpeed = new Fixpoint(5, 0);
-    //private Fixpoint RunSpeed = new Fixpoint(10, 0);
-
     private Animator animator;
     private int AnimaStatus = 0;
     public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
-    private bool AnimaFall = false;
-    private bool AnimaJump = false;
-    private bool AnimaRoll = false;
-    private bool AnimaDeath = false;
-    private bool AnimaGround = false;
-    private bool Anima623Arrack = false;
-
-    private int AnimaFire = 0;
-    private bool AnimaRecover = false;
-
     private Fixpoint StatusTime = new Fixpoint(0, 0);
-    public long id;
-
-    private Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
-    private Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
     private PlayerBag bag = new PlayerBag();
 
     void Start()
@@ -59,8 +33,6 @@ public class Player : MonoBehaviour
         [KeyCode.LeftShift] = false,
         [KeyCode.Space] = false
     };
-
-
 
     public void DealInputs(PlayerOptData inputs)
     {
@@ -144,10 +116,8 @@ public class Player : MonoBehaviour
                 break;
         }
     }
-    public void Updatex()
+    public override void Updatex()
     {
-        //Debug.Log(AnimaStatus);
-        GetColider();
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
@@ -203,28 +173,21 @@ public class Player : MonoBehaviour
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
         else return false;
     }
-    void GetColider()
+
+    private void ChangeStatus(int animastatus)
     {
-        if (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
-        {
-            Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
-            if(a.type == Fix_col2d_act.col_action.Trigger_in || a.type == Fix_col2d_act.col_action.Trigger_out)
-            {
-                TriggerQueue.Enqueue(a);
-            } else if (a.type == Fix_col2d_act.col_action.Attack) {
-                AttackQueue.Enqueue(a);
-            }
-        }
+        AnimaStatus = animastatus;
+        StatusTime = new Fixpoint(0, 0);
     }
+
     private void Normal()
     {
         //站立，走路，跑步
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
             AnimaSpeed = 0f;
-            AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             return;
         }
         if (Press[KeyCode.A])
@@ -261,73 +224,63 @@ public class Player : MonoBehaviour
         {
             AnimaSpeed = 0f;
         }
+
         if (!f.onground)
         {
-            AnimaFall = true;
-            AnimaStatus = 6;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(6);
             return;
 
         }
 
-        if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
+        else if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
         {
-            AnimaStatus = 9;
-            StatusTime = new Fixpoint(0, 0);
-            Anima623Arrack = true;
+            ChangeStatus(9);
             UpAttack(true);
             return;
         }
 
-        if (Press[KeyCode.J] && f.onground)
+        else if (Press[KeyCode.J])
         {
             if (Press[KeyCode.LeftShift])
             {
-                StatusTime = new Fixpoint(0, 0);
-                AnimaStatus = 8;
-                HeavyAttack();
+                ChangeStatus(8);
                 return;
             }
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 3;
-            Attack();
-            return;
+            else
+            {
+                StatusTime = new Fixpoint(0, 0);
+                AnimaStatus = 3;
+                Attack();
+                return;
+            }
         }
 
-        if (Press[KeyCode.L] && f.onground)
+        else if (Press[KeyCode.L])
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaRoll = true;
-            AnimaStatus = 2;
+            ChangeStatus(2);
             return;
         }
-        if (Press[KeyCode.K] && f.onground)
+        else if (Press[KeyCode.K])
         {
-            StatusTime = new Fixpoint(0, 0);
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(18, 0));
-            AnimaJump = true;
-            AnimaStatus = 1;
+            ChangeStatus(1);
             return;
         }
-        if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11,1))
+        else if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11,1))
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 12;
-            AnimaRecover = true;
+            ChangeStatus(12);
             RecoverHp(true);
             return;
         }
 
-        if (Press[KeyCode.Q] && f.onground)
+        else if (Press[KeyCode.Q])
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 10;
+            ChangeStatus(10);
             return;
         }
-        if (Press[KeyCode.E] && f.onground)
+        else if (Press[KeyCode.E])
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 11;
+            ChangeStatus(11);
             return;
         }
     }
@@ -335,20 +288,15 @@ public class Player : MonoBehaviour
     void Jump()
     {
         //跳跃
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaJump = false;
-            AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             return;
         }
         if (StatusTime > new Fixpoint(2, 1) && f.onground)
         {
-            AnimaStatus = 0;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaJump = false;
-            return;
+            ChangeStatus(0);
         }
         if (Press[KeyCode.A])
         {
@@ -362,18 +310,12 @@ public class Player : MonoBehaviour
         }
         if (StatusTime > new Fixpoint(5, 1) && !f.onground)
         {
-            AnimaStatus = 6;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaJump = false;
-            AnimaFall = true;
+            ChangeStatus(6);
         }
 
         if (Press[KeyCode.J] == true)
         {
-            AnimaJump = false;
-            AnimaFall = true;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 7;
+            ChangeStatus(7);
         }
 
         return;
@@ -383,9 +325,7 @@ public class Player : MonoBehaviour
         RemoveHited();
         if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
         {
-            AnimaStatus = 0;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaRoll = false;
+            ChangeStatus(0);
             return;
         }
         if (AnimaToward == 1.0f)
@@ -404,18 +344,6 @@ public class Player : MonoBehaviour
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void CreateAttack(Fix_vector2 with_pos,Fixpoint wide, Fixpoint high ,Fixpoint HpDamage,int toughness , bool with)
-    {
-        CreatedAttack = true;
-        if (with == false) 
-        { 
-            Main_ctrl.NewAttack(with_pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, AnimaToward, with);
-        }
-        else
-        {
-            Main_ctrl.NewAttack(NormalFixVector(), with_pos, wide, high, HpDamage, toughness, id, AnimaToward, with);
-        }
-    }
     private void RemoveAttack()
     {
         AnimaAttack = 0f;
@@ -456,12 +384,11 @@ public class Player : MonoBehaviour
     private static Fixpoint Attack5Damage = new Fixpoint(2, 0);
     private void Attack()
     {
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
             AnimaAttack = 0f;
-            AnimaStatus = 4;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             return;
         }
         if (AnimaAttack <= 0.5f) //刚进入，进入一段攻击状态
@@ -481,7 +408,11 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0) ,status.Damage() * Attack1Damage, 30 , false);
+            if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
+            {
+                CreatedAttack = true;
+                CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 30,AnimaToward);
+            }
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
         {
@@ -497,8 +428,11 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 30 , false);
-
+            if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
+            {
+                CreatedAttack = true;
+                CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 30,AnimaToward);
+            }
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
             if (Press[KeyCode.J] && StatusTime > Attack3DuringTime)
@@ -513,8 +447,11 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 30 , false);
-
+            if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
+            {
+                CreatedAttack = true;
+                CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 30, AnimaToward);
+            }
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
             if (Press[KeyCode.J] && StatusTime > Attack4DuringTime)
@@ -529,7 +466,11 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 30 , false);
+            if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
+            {
+                CreatedAttack = true;
+                CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 30, AnimaToward);
+            }
         }
         else //五段攻击
         {
@@ -541,20 +482,13 @@ public class Player : MonoBehaviour
             {
                 RemoveAttack();
             }
-            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false) CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 30 , false);
+            if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
+            {
+                CreatedAttack = true;
+                CreateAttack(NormalFixVector(), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 30, AnimaToward);
+            }
         }
-        /*
-        if (first == true || (Press[KeyCode.J] && StatusTime > new Fixpoint(33, 2) && AnimaAttack < 4.5f) )
-        {
-            AnimaAttack = AnimaAttack + 1;
-            StatusTime = new Fixpoint(0, 0);
-            Fix_vector2 AttackPos = f.pos.Clone();
-            if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
-            else AttackPos.x -= new Fixpoint(1, 0);
-            Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 30 ,id , -AnimaToward);
-            return;
-        }
-        */
+
         if(StatusTime <= new Fixpoint(2,1))
         {
             if(AnimaToward > 0)
@@ -565,15 +499,6 @@ public class Player : MonoBehaviour
                 f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }
         }
-        /*
-        if (StatusTime > new Fixpoint(8, 1))
-        {
-            AnimaAttack = 0f;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 0;
-            return;
-        }
-        */
     }
 
     private void Fall()
@@ -590,28 +515,20 @@ public class Player : MonoBehaviour
         }
         if (f.onground)
         {
-            AnimaStatus = 0;
-            AnimaFall = false;
-            StatusTime = new Fixpoint(0, 0);
-            return;
+            ChangeStatus(0);
         }
 
         if (Press[KeyCode.J] == true)
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 7;
+            ChangeStatus(7);
         }
     }
-    private void RemoveHited()
-    {
-        if (AttackQueue.Count > 0)
-        {
-            AttackQueue.Dequeue();
-        }
-    }
+
     private GameObject Building;
     private void GetTrigger()
     {
+        GetColider();
+
         while(TriggerQueue.Count > 0)
         {
             Fix_col2d_act a = TriggerQueue.Peek();
@@ -645,50 +562,14 @@ public class Player : MonoBehaviour
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Destroy(Building);
-                //Debug.Log("Trigger out");
             } else
             {
                 Debug.Log("Trigger error");
             }
         }
     }
-    private int GetHited()
+    private int CheckToughnessStatus(bool this_hited)
     {
-        bool this_hited = false;
-        while (AttackQueue.Count > 0)
-        {
-            Fix_col2d_act a = AttackQueue.Peek();
-            AttackQueue.Dequeue();
-            if (a.type != Fix_col2d_act.col_action.Attack)
-            {
-                Debug.Log("Attack Geted Error");
-                continue;
-            }
-            long AttackId = a.opsite.id;
-            if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
-            Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attakcer_id == id) continue;
-            AnimaToward = attack.toward;
-            this_hited = true;
-
-
-            GameObject beat = (GameObject)AB.getobj("beat");
-            beat.transform.localScale = new Vector3(3f, 3f, 1f);
-            Instantiate(beat, transform.position, transform.rotation);
-            GameObject num = (GameObject)AB.getobj("HurtNumber");
-            GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
-            num2.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
-
-            Fixpoint HpDamage = attack.HpDamage;
-            int ToughnessDamage = attack.ToughnessDamage;
-            status.GetAttacked(HpDamage, ToughnessDamage);
-            if(attack.type == 1)
-            {
-                Attack2 attack2 = (Attack2)attack;
-                attack2.DestroySelf();
-            }
-        }
-
         if (status.GetToughness() >= 75)
         {
             return 0;
@@ -697,7 +578,7 @@ public class Player : MonoBehaviour
         {
             AnimaHited = 1;
             AnimaStatus = 4;
-            if (this_hited == true)StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else if (status.GetToughness() < 50 && status.GetToughness() >= 25)
@@ -724,14 +605,18 @@ public class Player : MonoBehaviour
         }
     }
 
+    private int PlayerGetHited()
+    {
+        bool x = GetHited(AnimaToward);
+        return CheckToughnessStatus(x);
+    }
+
     private void Hited()
     {
-        int hited = GetHited();
+        int hited = PlayerGetHited();
         if (hited == 0)
         {
-            AnimaHited = 0;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 0;
+            ChangeStatus(0);
             return;
         }
         if (StatusTime < new Fixpoint(2, 1))
@@ -752,8 +637,7 @@ public class Player : MonoBehaviour
     {
         if (StatusTime > new Fixpoint(8, 1) && f.onground)
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 0;
+            ChangeStatus(0);
             AnimaHited = 0;
             status.RecoverToughness(new Fixpoint(1000, 0));
             return;
@@ -778,20 +662,18 @@ public class Player : MonoBehaviour
     private bool is_kicked = false;
     private void Kick()
     {
-        AnimaAttack = 1f;
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaAttack = 0f;
-            AnimaStatus = 4;
-            AnimaFall = false;
-            StatusTime = new Fixpoint(0, 0);
+            is_kicked = false;
+            ChangeStatus(4);
             return;
         }
         if(StatusTime > KickBeginToHit && is_kicked == false)
         {
             is_kicked = true;
-            CreateAttack(new Fix_vector2(KickShiftx,KickShifty), new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 120 , true);
+            CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 120, AnimaToward);
         }
 
         if (Press[KeyCode.A])
@@ -807,21 +689,14 @@ public class Player : MonoBehaviour
 
         if (StatusTime > KickDuring || f.onground)
         {
-            AnimaAttack = 0f;
             is_kicked = false;
             if(f.onground)
             {
-                AnimaFall = false;
-                AnimaHited = 0;
-                StatusTime = new Fixpoint(0, 0);
-                AnimaStatus = 0;
+                ChangeStatus(0);
                 return;
             } else
             {
-                AnimaHited = 0;
-                StatusTime = new Fixpoint(0, 0);
-                AnimaStatus = 6;
-                AnimaFall = true;
+                ChangeStatus(6);
                 return;
             }
         }
@@ -836,16 +711,11 @@ public class Player : MonoBehaviour
     private static Fixpoint HeavyAttackDamage = new Fixpoint(2,0);
     private void HeavyAttack()
     {
-        AnimaAttack = 1f;
-        AnimaSpeed = status.RunSpeed.to_float();
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaAttack = 0f;
-            AnimaSpeed = 0f;
-            AnimaStatus = 4;
-            AnimaFall = false;
-            StatusTime = new Fixpoint(0, 0);
+            HeavyAttackHasHited = false;
+            ChangeStatus(4);
             return;
         }
 
@@ -860,21 +730,20 @@ public class Player : MonoBehaviour
         if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
         {
             HeavyAttackHasHited = true;
-            CreateAttack(new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * HeavyAttackDamage, 120, true);
+            CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 120, AnimaToward);
         } 
 
         if(!f.onground || StatusTime > HeavyAttackDuring)
         {
             HeavyAttackHasHited = false;
-            AnimaAttack = 0f;
-            AnimaSpeed = 0f;
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
             return;
         }
     }
     private static Fixpoint UpAttackBeginToHit = new Fixpoint(13, 2);
-    private static Fixpoint UpAttackDuring = new Fixpoint(20, 1);
+    private static Fixpoint UpAttackDuring = new Fixpoint(2, 0);
     private static Fixpoint UpattackShiftx = new Fixpoint(1, 0);
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
@@ -888,15 +757,11 @@ public class Player : MonoBehaviour
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
         }
 
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaAttack = 0f;
-            AnimaSpeed = 0f;
-            AnimaStatus = 4;
-            AnimaFall = false;
             UpAttackHasHited = false;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             return;
         }
 
@@ -915,15 +780,14 @@ public class Player : MonoBehaviour
         if (StatusTime > UpAttackBeginToHit && UpAttackHasHited == false)
         {
             UpAttackHasHited = true;
-            CreateAttack(new Fix_vector2(UpattackShiftx,UpattackShifty), new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 120, true);
+            CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 120, AnimaToward);
         }
 
         if(StatusTime > UpAttackDuring)
         {
-            AnimaStatus = 0;
-            StatusTime = new Fixpoint(0, 0);
-            Anima623Arrack = false;
             UpAttackHasHited = false;
+            ChangeStatus(0);
             return;
         }
     }
@@ -946,23 +810,19 @@ public class Player : MonoBehaviour
     private void Fire1()
     {
 
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaStatus = 4;
-            AnimaFire = 0;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             CreatedLighting = false;
             FireTime = 0;
             return;
         }
 
-        AnimaFire = 1;
         if(StatusTime > Fire1BeginToAttackTime && StatusTime < Fire1DuringTime)
         {
             if(CreatedLighting == false)
             {
-                //Debug.Log("xxxxxxxx");
                 CreatedLighting = true;
                 GameObject lighting = Instantiate((GameObject)AB.getobj("Lighting"));
                 lighting.transform.position = new Vector3(f.pos.x.to_float() + 6.5f * AnimaToward, f.pos.y.to_float(), 0f);
@@ -975,15 +835,13 @@ public class Player : MonoBehaviour
                 Fix_vector2 tmp = f.pos.Clone();
                 if (AnimaToward > 0) tmp.x += new Fixpoint(65, 1);
                 else tmp.x -= new Fixpoint(65, 1);
-                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 10, false);
+                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 10, AnimaToward);
                 return;
             }
         }
         else if (StatusTime > Fire1DuringTime)
         {
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 0;
-            AnimaFire = 0;
+            ChangeStatus(0);
             CreatedLighting = false;
             FireTime = 0;
         }
@@ -999,16 +857,14 @@ public class Player : MonoBehaviour
     private static Fixpoint Fire2Attack3 = new Fixpoint(2, 0);
     private void Fire2()
     {
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaStatus = 4;
-            AnimaFire = 0;
-            StatusTime = new Fixpoint(0, 0);
+            HasFired1 = 0;
+            ChangeStatus(4);
             return;
         }
 
-        AnimaFire = 2;
         if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
         {
             ++HasFired1;
@@ -1027,22 +883,17 @@ public class Player : MonoBehaviour
         else if (StatusTime > Fire2DuringTime)
         {
             HasFired1 = 0;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 0;
-            AnimaFire = 0;
+            ChangeStatus(0);
         }
     }
 
     private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); 
     private void RecoverHp(bool first)
     {
-        AnimaRecover = true;
-        int hit = GetHited();
+        int hit = PlayerGetHited();
         if (hit != 0)
         {
-            AnimaStatus = 4;
-            AnimaRecover = false;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(4);
             return;
         }
         if (first == true) {
@@ -1051,9 +902,7 @@ public class Player : MonoBehaviour
         }
         if(StatusTime > RecoverHpDuringTime)
         {
-            AnimaStatus = 0;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaRecover = false;
+            ChangeStatus(0);
             status.RecoverHp(10);
         }
     }
@@ -1063,13 +912,7 @@ public class Player : MonoBehaviour
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);
-        animator.SetBool("jump", AnimaJump);
-        animator.SetBool("roll", AnimaRoll);
-        animator.SetBool("fall", AnimaFall);
         animator.SetFloat("hited", AnimaHited);
-        animator.SetBool("onground", AnimaGround);
-        animator.SetBool("623", Anima623Arrack);
-        animator.SetInteger("firetype",AnimaFire);
-        animator.SetBool("recover", AnimaRecover);
+        animator.SetInteger("status", AnimaStatus);
     }
 }
