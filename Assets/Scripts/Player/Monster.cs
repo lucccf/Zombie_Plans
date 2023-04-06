@@ -47,10 +47,6 @@ public class Monster : BasicCharacter
                 break;
         }
     }
-    public float CheckHealth()
-    {
-        return 1f * status.hp / status.max_hp;
-    }
     private void CheckDeath()
     {
         if(status.death == true)
@@ -269,11 +265,11 @@ public class Monster : BasicCharacter
         {
             if (AnimaToward > 0)
             {
-                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 1);
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }
             else
             {
-                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 1);
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);
             }
         }
 

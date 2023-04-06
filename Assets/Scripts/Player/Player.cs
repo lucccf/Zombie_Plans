@@ -117,6 +117,7 @@ public class Player : BasicCharacter
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
+        if (status.death == true) ChangeStatus(13);
         switch (AnimaStatus)
         {
             case 0:
@@ -160,6 +161,9 @@ public class Player : BasicCharacter
                 break;
             case 12:
                 RecoverHp(false);
+                break;
+            case 13:
+                Death();
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -896,6 +900,11 @@ public class Player : BasicCharacter
             ChangeStatus(0);
             status.RecoverHp(10);
         }
+    }
+
+    private void Death()
+    {
+        
     }
 
     private void Update()

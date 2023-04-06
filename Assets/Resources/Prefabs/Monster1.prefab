@@ -429,7 +429,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 3823900265337220878}
   target: {fileID: 6314639863504886877}
-  monster: {fileID: 7766540649915814741}
+  character: {fileID: 7766540649915814741}
 --- !u!1 &8354690130801614897
 GameObject:
   m_ObjectHideFlags: 0

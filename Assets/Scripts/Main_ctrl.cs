@@ -180,7 +180,8 @@ public class Main_ctrl : MonoBehaviour
     }
     public static GameObject CreateObj(Obj_info info)
     {
-        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        GameObject obj;
+        obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
         spriteRenderer.size = new Vector2(info.wid.to_float(), info.hei.to_float());
@@ -197,7 +198,7 @@ public class Main_ctrl : MonoBehaviour
             switch (c)
             {
                 case Object_ctrl.class_name.Player:
-                    Player p = obj.AddComponent<Player>();
+                    Player p = obj.GetComponent<Player>();
                     ctrl.modules[Object_ctrl.class_name.Player] = p;
                     p.id = cnt;
                     p.f = f;
@@ -211,6 +212,7 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Moster:
                     Monster m = obj.GetComponent<Monster>();
+                    Debug.Log(m);
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];

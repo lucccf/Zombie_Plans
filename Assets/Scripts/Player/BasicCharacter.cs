@@ -140,4 +140,9 @@ public class BasicCharacter : MonoBehaviour
     {
         Main_ctrl.NewItem(f.pos.Clone(), name, num, size);
     }
+
+    public float CheckHealth()
+    {
+        return 1f * status.hp / status.max_hp;
+    }
 }
