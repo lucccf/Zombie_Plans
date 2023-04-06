@@ -16,7 +16,8 @@ public class Mineral : Monster
 
     public override void Updatex()
     {
-        GetHited(1f);
+        float tmp = 0;
+        GetHited(ref tmp);
         if(status.death == true)
         {
             DeathFall("Mineral", 10, 1f);
@@ -24,3 +25,4 @@ public class Mineral : Monster
         }
     }
 }
+ 
