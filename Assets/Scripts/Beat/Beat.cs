@@ -14,7 +14,7 @@ public class Beat : MonoBehaviour
     void Update()
     {
         AilveTime += Time.deltaTime;
-        if(AilveTime > 0.5)
+        if(AilveTime > 0.133)
         {
             Destroy(gameObject);
         }

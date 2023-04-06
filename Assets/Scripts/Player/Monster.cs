@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : BasicCharacter
 {
-    public long id;
-
-    public Fix_col2d f;
-    public Fix_rig2d r;
-    //public SpriteRenderer spriteRenderer;
-    protected PlayerStatus status = new PlayerStatus(100, 10);
-    //private Fixpoint WalkSpeed = new Fixpoint(5, 0);
 
     private Animator animator;
     private int AnimaStatus = 0;
@@ -21,8 +15,6 @@ public class Monster : MonoBehaviour
     private bool AnimaGround = false;
     private Fixpoint StatusTime = new Fixpoint(0, 0);
 
-    //private Fixpoint HpDamage;
-    //private int ToughnessDamage;
 
     private Player player = null;
     void Start()
@@ -30,14 +22,8 @@ public class Monster : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public virtual void Updatex()
+    public override void Updatex()
     {
-        Main_ctrl.cnt2 = (Main_ctrl.cnt2 * 19196 + id) % 191919197;
-        ++Main_ctrl.count;
-        if (Main_ctrl.count % 300 == 0)
-        {
-            //Debug.Log("Monster" + Main_ctrl.count / 300 + "   " + Main_ctrl.cnt2);
-        }
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25,0));
         if(AnimaStatus != 6)CheckDeath();
@@ -65,9 +51,6 @@ public class Monster : MonoBehaviour
                 Death();
                 break;
         }
-        //Debug.Log("Toughness:" + status.GetToughness());
-        //Debug.Log("Status:" + AnimaStatus);
-        //Debug.Log("HP:" + status.hp);
     }
     public float CheckHealth()
     {
@@ -86,7 +69,7 @@ public class Monster : MonoBehaviour
     }
     private void Normal()
     {
-        int hited = GetHited();
+        int hited = MonsterGetHited();
         if (hited != 0) return;
 
         Fixpoint Pos = GetNear();
@@ -222,57 +205,8 @@ public class Monster : MonoBehaviour
         }
     }
 
-    private void RemoveHited()
+    private int CheckToughStatus(bool this_hited)
     {
-        if (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
-        {
-            ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
-        }
-    }
-    private int GetHited()
-    {
-        bool this_hited = false;
-        while (((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Count > 0)
-        {
-            Fix_col2d_act a = ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Peek();
-            ((Fix_col2d)Main_ctrl.All_objs[id].modules[Object_ctrl.class_name.Fix_col2d]).actions.Dequeue();
-            if (a.type != Fix_col2d_act.col_action.Attack) continue;
-            long AttackId = a.opsite.id;
-            if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
-            Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attakcer_id == id) continue;
-            AnimaToward = -attack.toward;
-
-            this_hited = true;
-
-            GameObject beat = (GameObject)AB.getobj("beat");
-            beat.transform.localScale = new Vector3(3f, 3f, 1f);
-            Instantiate(beat, transform.position, transform.rotation);
-            GameObject num = (GameObject)AB.getobj("HurtNumber");
-            GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
-            num2.GetComponent<BeatNumber>().ChangeNumber(attack.HpDamage.to_int());
-
-            Fixpoint HpDamage = attack.HpDamage;
-            int ToughnessDamage = attack.ToughnessDamage;
-            status.GetAttacked(HpDamage, ToughnessDamage);
-            if (attack.type == 1)
-            {
-                Attack2 attack2 = (Attack2)attack;
-                attack2.DestroySelf();
-            }
-        }
-
-        if(status.GetToughness() < 75 && StatusTime < new Fixpoint(2,1))
-        {
-            if(AnimaToward > 0)
-            {
-                f.pos.x -= new Fixpoint(1, 0) * Dt.dt;
-            } else
-            {
-                f.pos.x += new Fixpoint(1, 0) * Dt.dt;
-            }
-        }
-
         if (status.GetToughness() >= 75)
         {
             return 0;
@@ -281,8 +215,8 @@ public class Monster : MonoBehaviour
         {
             AnimaHited = 1;
             AnimaStatus = 3;
-            if(this_hited == true)
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
             return 1;
         }
         else if (status.GetToughness() < 50 && status.GetToughness() >= 25)
@@ -311,9 +245,26 @@ public class Monster : MonoBehaviour
             return 2;
         }
     }
+    
+    private void Preform(int damage)
+    {
+        GameObject beat = (GameObject)AB.getobj("beat");
+        beat.transform.localScale = new Vector3(3f, 3f, 1f);
+        Instantiate(beat, transform.position, transform.rotation);
+        GameObject num = (GameObject)AB.getobj("HurtNumber");
+        GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
+        num2.GetComponent<BeatNumber>().ChangeNumber(damage);
+    }
+
+    private int MonsterGetHited()
+    {
+        bool x =GetHited(AnimaToward);
+        return CheckToughStatus(x);
+    }
+
     private void Hited()
     {
-        int hited = GetHited();
+        int hited = MonsterGetHited();
         if(hited == 0)
         {
             AnimaHited = 0;
@@ -388,13 +339,14 @@ public class Monster : MonoBehaviour
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void CreateAttack(Fixpoint damage)
+    private void MonsterCreateAttack(Fixpoint damage)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        Main_ctrl.NewAttack(AttackPos, new Fix_vector2(0, 0), new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, id, -AnimaToward , false); //30的位置代表韧性值
+        CreateAttack(f.pos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward);
+
     }
     private void RemoveAttack()
     {
@@ -406,7 +358,7 @@ public class Monster : MonoBehaviour
 
     private void Attack(bool first)
     {
-        int hited = GetHited();
+        int hited = MonsterGetHited();
         if (hited != 0) {
             AnimaAttack = 0;
             return; 
@@ -423,7 +375,7 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) CreateAttack(Attack1Damage);
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack1Damage);
         } else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
         {
             if (StatusTime > Attack2DuringTime)
@@ -431,7 +383,7 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) CreateAttack(Attack2Damage);
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack2Damage);
         } else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
         {
             if (StatusTime > Attack3DuringTime)
@@ -439,36 +391,16 @@ public class Monster : MonoBehaviour
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) CreateAttack(Attack3Damage);
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack3Damage);
         } else if(AnimaAttack > 3.5f)
         {
             if (StatusTime > Attack4DuringTime)
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack4BeginToHitTime && CreatedAttack == false) CreateAttack(Attack4Damage);
+            if (StatusTime > Attack4BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack4Damage);
         }
-        /*
-        if (first == true || StatusTime > new Fixpoint(75, 2))
-        {
-            if (Near > new Fixpoint(15, 1) || AnimaAttack > 3.5f)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                AnimaAttack = 0;
-                AnimaStatus = 0;
-                return;
-            }
-            else
-            {
-                Fix_vector2 AttackPos = f.pos.Clone();
-                if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
-                else AttackPos.x -= new Fixpoint(1, 0);
-                Main_ctrl.NewAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage(), 50, id , -AnimaToward);
-                ++AnimaAttack;
-                StatusTime = new Fixpoint(0, 0);
-            }
-        }
-        */
+
         if (StatusTime <= new Fixpoint(2, 1))
         {
             if (AnimaToward > 0)
@@ -482,18 +414,12 @@ public class Monster : MonoBehaviour
         }
 
     }
-    private void DeathFall()
-    {
-        Main_ctrl.NewItem(f.pos.Clone(), "Medicine", 3 , 1f);
-    }
     private void Death()
     {
         AnimaGround = true;
-        //Debug.Log(StatusTime.to_float());
         if(StatusTime > new Fixpoint(3,0))
         {
-            //Debug.Log("Death");
-            DeathFall();
+            DeathFall("Medicine",3,1f);
             Main_ctrl.Desobj(id);
         }
     }
