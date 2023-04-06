@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2238662511
+CRC: 3998082622
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: be3366d3eb34bccfaf4f43af12cb1189
+    Hash: 8c610010123019b334937fd582461032
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c7bda209c4488af53bfd7abf26c6223d
+    Hash: 36a78e1ac0e44d45adb017ad46592ab9
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,6 +26,8 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
@@ -36,13 +38,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: e8119a724da3eec4bb4f91f7b2b4fa8b, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 1c8cab923766b264dbfd891511002c8b, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: d713e1748eec6dd47b59ee6c2bbfe28f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ac21057441b128b4ebac76d348b6e9c8, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 5d0c0227ec89bea47b81b2234bf96c70, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 28552f77981411943a6bf567faa1d6a0, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: f0a8ea086d749d24cae3e46a08a63382, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: e9b0fe5ce6451814e96a17fd537a6708, type: 3}
 - Class: 114
@@ -50,6 +58,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 212
   Script: {instanceID: 0}
@@ -73,6 +83,7 @@ Assets:
 - Assets/Resources/Prefabs/number/3.png
 - Assets/Resources/Prefabs/facility.prefab
 - Assets/Resources/Prefabs/home.prefab
+- Assets/Resources/Prefabs/Attack.prefab
 - Assets/Resources/Prefabs/number/33.png
 - Assets/Resources/Prefabs/number/22.png
 - Assets/Resources/Prefabs/Lighting.prefab
@@ -88,6 +99,7 @@ Assets:
 - Assets/Resources/Prefabs/player.prefab
 - Assets/Resources/Prefabs/beat.prefab
 - Assets/Resources/Prefabs/number/7.png
+- Assets/Resources/Prefabs/Building.prefab
 - Assets/Resources/Prefabs/ItemSample.prefab
 - Assets/Resources/Prefabs/number/88.png
 - Assets/Resources/Prefabs/number/55.png
