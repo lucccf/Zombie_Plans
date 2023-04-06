@@ -27,6 +27,7 @@ public class Main_ctrl : MonoBehaviour
     public static long user_id = -1;
 
     public static GameObject camara;
+    public static GameObject Tiny_map;
     public static GameObject play;
 
     public static long frame_index = 0;
@@ -46,6 +47,7 @@ public class Main_ctrl : MonoBehaviour
 
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
+        Tiny_map = GameObject.Find("Tiny_map");
         Debug.Log("???");
         Map_create.Wall_create();
         Debug.Log("???");
@@ -265,6 +267,7 @@ public class Main_ctrl : MonoBehaviour
                     Flow_path.facilities[cnt] = fa;
                     break;
                 case Object_ctrl.class_name.Tinymap:
+                    Tiny_map_cre.Create_tiny(info);
                     break;
                 case Object_ctrl.class_name.Tinybutton:
                     break;
@@ -356,6 +359,8 @@ public class Main_ctrl : MonoBehaviour
         {
             camara.transform.position = play.transform.position;
             camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y, -10);
+            Tiny_map.transform.position = play.transform.position;
+            Tiny_map.transform.position = new Vector3(Tiny_map.transform.position.x / 3 + Tiny_map_cre.pos_x, Tiny_map.transform.position.y / 3 + Tiny_map_cre.pos_y, -10);
         }
     }
 }
