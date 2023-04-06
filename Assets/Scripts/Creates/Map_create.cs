@@ -41,6 +41,7 @@ public class Map_create : MonoBehaviour
                 int pos = int.Parse(x.InnerText);
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
+                info.classnames.Add(Object_ctrl.class_name.Tinymap);
                 info.hei = new Fixpoint(wall_hei - (hf_thick << 1), 0);
                 info.wid = new Fixpoint(hf_thick << 1, 0);
                 info.col_type = Fix_col2d.col_status.Wall;
@@ -67,6 +68,7 @@ public class Map_create : MonoBehaviour
             {
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
+                info.classnames.Add(Object_ctrl.class_name.Tinymap);
                 info.hei = new Fixpoint(hf_thick << 1, 0);
                 info.wid = new Fixpoint(holes[i][j + 1] - holes[i][j] - hol_len, 0);
                 info.col_type = Fix_col2d.col_status.Wall;
@@ -77,6 +79,7 @@ public class Map_create : MonoBehaviour
         {
             Obj_info info = new Obj_info();
             info.name = "wall_b";
+            info.classnames.Add(Object_ctrl.class_name.Tinymap);
             info.hei = new Fixpoint(wall_hei * floor_cnt + (hf_thick << 1), 0);
             info.wid = new Fixpoint(hf_thick << 1, 0);
             info.col_type = Fix_col2d.col_status.Wall;
@@ -86,6 +89,7 @@ public class Map_create : MonoBehaviour
         {
             Obj_info info = new Obj_info();
             info.name = "wall_b";
+            info.classnames.Add(Object_ctrl.class_name.Tinymap);
             info.hei = new Fixpoint(wall_hei * floor_cnt + (hf_thick << 1), 0);
             info.wid = new Fixpoint(hf_thick << 1, 0);
             info.col_type = Fix_col2d.col_status.Wall;
@@ -129,25 +133,13 @@ public class Map_create : MonoBehaviour
                 info.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                 info.classnames.Add(Object_ctrl.class_name.Moster);
                 Main_ctrl.CreateObj(info);
-
-                /*
-                Obj_info p = new Obj_info();
-                p.name = "Monster1";
-                p.hei = size_monster[i].y.Clone();
-                p.wid = size_monster[i].x.Clone();
-                p.pos = pos_monster[i];
-                p.col_type = Fix_col2d.col_status.Collider;
-                p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-                p.classnames.Add(Object_ctrl.class_name.Moster);
-                //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
-                Main_ctrl.CreateObj(p);
-                */
-                //info.classnames.Add(Object_ctrl.class_name.Wall);
             }
         }
 
         Obj_info home_info = new Obj_info();
         home_info.name = "home";
+        home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+        home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
         home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
         home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
         home_info.col_type = Fix_col2d.col_status.Trigger;
@@ -160,21 +152,6 @@ public class Map_create : MonoBehaviour
     }
 
     public static long Bud_cnt = 0;
-
-    public static void Building_create()
-    {
-        XmlDocument ItemxmlDoc = new XmlDocument();
-        ItemxmlDoc.Load(Application.dataPath + "/Configs/crystal.xml");
-        XmlNodeList Crystal_item = ItemxmlDoc.SelectNodes("/crystal/crystal_floor/crystal_info");
-        XmlNode map_info = ItemxmlDoc.SelectSingleNode("/crystal/map_info");
-
-        int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
-        int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
-
-        Dictionary<int,int> tmp = new Dictionary<int,int>(); //修復設施所需要材料id和数量
-        tmp[1] = 5;
-        Building_single_create("facility", new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0), new Fixpoint(hf_thick << 1 + 2, 0), new Fix_vector2(new Fixpoint(170, 0), new Fixpoint((-5* 6 + 1) * wall_hei * 2 , 1)), "building", Bud_cnt++ , tmp);
-    }
 
     public static void Facility_create()
     {
@@ -200,12 +177,12 @@ public class Map_create : MonoBehaviour
         }
     }
 
-
-
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
         Obj_info home_info = new Obj_info();
         home_info.name = "facility";
+        home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+        home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
         home_info.hei = hei;
         home_info.wid = wid;
         home_info.col_type = Fix_col2d.col_status.Trigger;
@@ -218,9 +195,6 @@ public class Map_create : MonoBehaviour
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
     }
-
-
-
 
     public static void Background_create() {
         XmlDocument xmlDoc = new XmlDocument();
