@@ -18,15 +18,16 @@ public class BeatNumber : MonoBehaviour
     private bool changed = false;
     Sprite GetSpriteWrite(int n)
     {
-        Texture2D f = (Texture2D)AB.getobj(n.ToString());
-        Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
-        return g;
+        Debug.Log(AB.getobj(n.ToString()).GetType());
+        Sprite f = (Sprite)AB.getobj(n.ToString());
+        //Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
+        return f;
     }
     Sprite GetSpriteYellow(int n)
     {
-        Texture2D f = (Texture2D)AB.getobj(n.ToString() + n.ToString());
-        Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
-        return g;
+        Sprite f = (Sprite)AB.getobj(n.ToString() + n.ToString());
+        //Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
+        return f;
     }
     Sprite GetSprite(int n)
     {
