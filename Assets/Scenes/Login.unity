@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 518194730}
   - component: {fileID: 518194729}
   - component: {fileID: 518194728}
+  - component: {fileID: 518194732}
   m_Layer: 0
   m_Name: Socket
   m_TagString: Untagged
@@ -278,6 +279,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &518194732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518194727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bfad9ce75da71a4b9f7647d45de2dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &527773677
 GameObject:
   m_ObjectHideFlags: 0

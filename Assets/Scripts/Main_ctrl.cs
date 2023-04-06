@@ -96,7 +96,7 @@ public class Main_ctrl : MonoBehaviour
     {
 
         Obj_info p = new Obj_info();
-        p.name = "Player";
+        p.name = "player";
         p.hei = new Fixpoint(216, 2);
         p.wid = new Fixpoint(111, 2);
         p.pos = new Fix_vector2(new Fixpoint(10 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
@@ -247,7 +247,7 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
-                        Item x = (Item)AB.getobj("items/" + info.type);
+                        Item x = (Item)AB.getobj(info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;

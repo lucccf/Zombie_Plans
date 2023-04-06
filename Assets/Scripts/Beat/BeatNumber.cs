@@ -18,13 +18,13 @@ public class BeatNumber : MonoBehaviour
     private bool changed = false;
     Sprite GetSpriteWrite(int n)
     {
-        Texture2D f = (Texture2D)AB.getobj("number/" + n.ToString());
+        Texture2D f = (Texture2D)AB.getobj(n.ToString());
         Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
         return g;
     }
     Sprite GetSpriteYellow(int n)
     {
-        Texture2D f = (Texture2D)AB.getobj("number/" + n.ToString() + n.ToString());
+        Texture2D f = (Texture2D)AB.getobj(n.ToString() + n.ToString());
         Sprite g = Sprite.Create(f, new Rect(0, 0, f.width, f.height), Vector2.zero);
         return g;
     }

@@ -248,7 +248,7 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                GameObject obj = Instantiate((GameObject)AB.getobj("background/" + pre_name));
+                GameObject obj = Instantiate((GameObject)AB.getobj(pre_name));
                 obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
                 if (xml_name == "normal_pos")
                 {

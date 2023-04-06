@@ -15,7 +15,6 @@ public class LoginController : MonoBehaviour
 
     void Start()
     {
-        AB.LoadALL();
         inputField1 = GameObject.Find("name").GetComponent<InputField>();
         inputField2 = GameObject.Find("pwd").GetComponent<InputField>();
     }
