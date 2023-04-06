@@ -14,6 +14,7 @@ public class Player : BasicCharacter
     void Start()
     {
         animator = GetComponent<Animator>();
+        SetStatus(1000, 5);
     }
 
     HashSet<PlayerOpt> list;
@@ -537,7 +538,7 @@ public class Player : BasicCharacter
                     Debug.Log("Trigger");
                     Debug.Log(a.opsite.id);
                     GameObject parent = GameObject.Find("PlayerPanel");
-                    Building = Instantiate((GameObject)AB.getobj("building"), parent.transform);
+                    Building = Instantiate((GameObject)AB.getobj("Building"), parent.transform);
                     Building.GetComponent<BuildingButton>().buildingid = a.opsite.id;
                     Building.name = trigger.name;
                 } else if(trigger.triggername == "ItemSample")
@@ -898,13 +899,15 @@ public class Player : BasicCharacter
         if(StatusTime > RecoverHpDuringTime)
         {
             ChangeStatus(0);
-            status.RecoverHp(10);
+            status.RecoverHp(100);
         }
     }
 
     private void Death()
     {
-        
+        AnimaAttack = 0;
+        AnimaHited = 0;
+        AnimaSpeed = 0;
     }
 
     private void Update()

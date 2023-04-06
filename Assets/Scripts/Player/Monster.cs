@@ -14,6 +14,7 @@ public class Monster : BasicCharacter
     private Player player = null;
     void Start()
     {
+        SetStatus(1000, 10);
         animator = GetComponent<Animator>();
     }
 
