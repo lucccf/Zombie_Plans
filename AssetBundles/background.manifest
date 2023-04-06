@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 769766199
+CRC: 641192453
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 76d63e5a210b0eca443ced2fe4c9db48
+    Hash: eaf9abd22d4c4fe43c59a35ed4b826ac
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3976a22b184e1551c1e7bb361a93ad37
@@ -27,5 +27,5 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Prefabs/background/BK_monster.prefab
 - Assets/Resources/Prefabs/background/BK_castle.prefab
-- Assets/Resources/Prefabs/background/Bk_home.prefab
+- Assets/Resources/Prefabs/background/BK_home.prefab
 Dependencies: []
