@@ -21,10 +21,9 @@ public class WorkTable : MonoBehaviour
     private bool OpenNemu = false;
     private int NowChecking = -1;
 
-    long MainPlayerid = Main_ctrl.Ser_to_cli[Main_ctrl.user_id];
     void Start()
     {
-
+        
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
         for(int i = 0; i < MakedItemList.Length; ++i)
@@ -75,7 +74,6 @@ public class WorkTable : MonoBehaviour
             return;
         }
 
-        Debug.Log("Send" + NowChecking);
 
         PlayerOptData x = new PlayerOptData();
         x.Opt = PlayerOpt.MoveItem;

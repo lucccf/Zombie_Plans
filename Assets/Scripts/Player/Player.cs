@@ -112,7 +112,6 @@ public class Player : BasicCharacter
                 Debug.Log(flag);
                 break;
             case PlayerOpt.MoveItem:
-                Debug.Log("Recevie:" + inputs.Itemid);
                 Item Makeitem = Main_ctrl.GetItemById(inputs.Itemid);
                 bool flag2 = true;
                 for(int i=0;i<Makeitem.MakeNeeds.Length;++i)
@@ -127,11 +126,11 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    Player_ctrl.MakeSuccessUI.SetActive(true);
+                    //Player_ctrl.MakeSuccessUI.SetActive(true);
                 }
                 else
                 {
-                    Player_ctrl.MakeFailedUI.SetActive(true);
+                    //Player_ctrl.MakeFailedUI.SetActive(true);
                 }
                 break;
         }

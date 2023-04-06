@@ -11,15 +11,15 @@ public class Player_ctrl : MonoBehaviour
     static Item[] item;
 
     public static Bag BagUI;
-    public static GameObject MakeSuccessUI;
-    public static GameObject MakeFailedUI;
+    //public static GameObject MakeSuccessUI;
+   // public static GameObject MakeFailedUI;
     public static void Init_bag()
     {
         BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
-        MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
-        MakeFailedUI = GameObject.Find("Canvas/MakeFail");
-        MakeSuccessUI.SetActive(false);
-        MakeFailedUI.SetActive(false);
+        //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
+        //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
+        //MakeSuccessUI.SetActive(false);
+        //MakeFailedUI.SetActive(false);
         item = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < item.Length; ++i)
         {
