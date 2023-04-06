@@ -30,6 +30,11 @@ public class BasicCharacter : MonoBehaviour
         
     }
 
+    protected void SetStatus(int hp,int attack)
+    {
+        status = new PlayerStatus(hp, attack);
+    }
+
     public virtual void Updatex()
     {
 
