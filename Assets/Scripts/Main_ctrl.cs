@@ -264,6 +264,10 @@ public class Main_ctrl : MonoBehaviour
                     fa.materials = info.materials;
                     Flow_path.facilities[cnt] = fa;
                     break;
+                case Object_ctrl.class_name.Tinymap:
+                    break;
+                case Object_ctrl.class_name.Tinybutton:
+                    break;
             }
         }
 

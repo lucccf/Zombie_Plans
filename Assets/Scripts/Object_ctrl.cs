@@ -19,6 +19,8 @@ public class Object_ctrl : MonoBehaviour
         Bag,
         Trigger,
         Facility,
+        Tinymap,
+        Tinybutton,
         //...
     }
 

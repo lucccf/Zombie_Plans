@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 641192453
+CRC: 1214643784
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: eaf9abd22d4c4fe43c59a35ed4b826ac
+    Hash: 31a2dcc94981226f653dfb411ea9de65
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3976a22b184e1551c1e7bb361a93ad37
@@ -25,6 +25,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Resources/Prefabs/background/Tiny_wall_a.prefab
 - Assets/Resources/Prefabs/background/BK_monster.prefab
 - Assets/Resources/Prefabs/background/BK_castle.prefab
 - Assets/Resources/Prefabs/background/BK_home.prefab
