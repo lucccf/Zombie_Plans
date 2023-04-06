@@ -16,6 +16,9 @@ public class BasicCharacter : MonoBehaviour
     protected Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     protected Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
 
+    protected int AnimaStatus = 0;
+    protected Fixpoint StatusTime = new Fixpoint(0, 0);
+
     void Start()
     {
         
@@ -32,6 +35,23 @@ public class BasicCharacter : MonoBehaviour
 
     }
 
+    protected void ChangeStatus(int animastatus)
+    {
+        AnimaStatus = animastatus;
+        StatusTime = new Fixpoint(0, 0);
+    }
+    protected void Moves(float toward,Fixpoint speed)
+    {
+        if (toward < 0)
+        {
+            f.pos.x -= speed * Dt.dt;
+        }
+        else
+        {
+            f.pos.x += speed * Dt.dt;
+        }
+    }
+    
     protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward)
     {
         Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false);
@@ -95,6 +115,8 @@ public class BasicCharacter : MonoBehaviour
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+
+            Debug.Log(HpDamage + " " + ToughnessDamage);
 
             if (attack.type == 1)
             {

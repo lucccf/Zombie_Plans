@@ -5,12 +5,10 @@ using UnityEngine;
 public class Player : BasicCharacter
 {
     private Animator animator;
-    private int AnimaStatus = 0;
     public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
-    private Fixpoint StatusTime = new Fixpoint(0, 0);
     private PlayerBag bag = new PlayerBag();
 
     void Start()
@@ -170,12 +168,6 @@ public class Player : BasicCharacter
     {
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
         else return false;
-    }
-
-    private void ChangeStatus(int animastatus)
-    {
-        AnimaStatus = animastatus;
-        StatusTime = new Fixpoint(0, 0);
     }
 
     private void Normal()
@@ -570,6 +562,7 @@ public class Player : BasicCharacter
     {
         if (status.GetToughness() >= 75)
         {
+            AnimaHited = 0;
             return 0;
         }
         else if (status.GetToughness() < 75 && status.GetToughness() >= 50)
@@ -619,7 +612,7 @@ public class Player : BasicCharacter
         }
         if (StatusTime < new Fixpoint(2, 1))
         {
-            if (AnimaToward == 1.0f)
+            if (AnimaToward > 0)
             {
                 f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }

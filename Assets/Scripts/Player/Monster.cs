@@ -6,15 +6,10 @@ public class Monster : BasicCharacter
 {
 
     private Animator animator;
-    private int AnimaStatus = 0;
     private float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
-    private bool AnimaRoll = false;
-    private bool AnimaGround = false;
-    private Fixpoint StatusTime = new Fixpoint(0, 0);
-
 
     private Player player = null;
     void Start()
@@ -62,7 +57,6 @@ public class Monster : BasicCharacter
         {
             AnimaAttack = 0f;
             AnimaHited = 0f;
-            AnimaRoll = false;
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 6;
         }
@@ -94,7 +88,6 @@ public class Monster : BasicCharacter
         {
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 1;
-            AnimaRoll = true;
             if (f.pos.x < Pos) AnimaToward = 1;
             else AnimaToward = -1;
             return;
@@ -193,7 +186,6 @@ public class Monster : BasicCharacter
         {
             AnimaStatus = 0;
             StatusTime = new Fixpoint(0, 0);
-            AnimaRoll = false;
         }
         if (AnimaToward == 1.0f)
         {
@@ -209,6 +201,7 @@ public class Monster : BasicCharacter
     {
         if (status.GetToughness() >= 75)
         {
+            AnimaHited = 0;
             return 0;
         }
         else if (status.GetToughness() < 75 && status.GetToughness() >= 50)
@@ -274,7 +267,7 @@ public class Monster : BasicCharacter
         }
         if (StatusTime < new Fixpoint(2,1))
         {
-            if (AnimaToward == 1.0f)
+            if (AnimaToward > 0)
             {
                 f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 1);
             }
@@ -292,7 +285,6 @@ public class Monster : BasicCharacter
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 5;
             AnimaHited = 0;
-            AnimaGround = true;
             status.RecoverToughness(new Fixpoint(1000, 0));
             return;
         }
@@ -313,7 +305,6 @@ public class Monster : BasicCharacter
             StatusTime = new Fixpoint(0, 0);
             AnimaStatus = 0;
             AnimaHited = 0;
-            AnimaGround = false;
         }
     }
 
@@ -345,7 +336,7 @@ public class Monster : BasicCharacter
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(f.pos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward);
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward);
 
     }
     private void RemoveAttack()
@@ -416,7 +407,6 @@ public class Monster : BasicCharacter
     }
     private void Death()
     {
-        AnimaGround = true;
         if(StatusTime > new Fixpoint(3,0))
         {
             DeathFall("Medicine",3,1f);
@@ -430,8 +420,7 @@ public class Monster : BasicCharacter
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);
         animator.SetFloat("hited", AnimaHited);
-        animator.SetBool("roll", AnimaRoll);
-        animator.SetBool("ground", AnimaGround);
+        animator.SetInteger("status", AnimaStatus);
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
 }
