@@ -193,7 +193,7 @@ public class Map_create : MonoBehaviour
             int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
             int mill_pos = int.Parse(p.SelectSingleNode("mill_pos").InnerText);
             string name = p.SelectSingleNode("mill_name").InnerText;
-            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-2 * mill_id + 1) * floor_hei * 5, 1));
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
 
             Debug.Log(Bud_cnt);
 
