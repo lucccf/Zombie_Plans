@@ -14,7 +14,7 @@ public class Player : BasicCharacter
     void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(1000, 5);
+        SetStatus(1000, 10);
     }
 
     HashSet<PlayerOpt> list;

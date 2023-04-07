@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Knight : Monster
 {
@@ -29,6 +28,10 @@ public class Knight : Monster
     {
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
+        if(status.death == true && AnimaStatus != 8)
+        {
+            ChangeStatus(8);
+        }
         switch (AnimaStatus)
         {
             case 0:
@@ -63,6 +66,7 @@ public class Knight : Monster
     }
     private int CheckToughStatus(bool this_hited)
     {
+
         if (status.GetToughness() >= 20)
         {
             AnimaHited = 0;
@@ -139,7 +143,10 @@ public class Knight : Monster
     private void Normal()
     {
         int hited = KnightGetHited();
-        if (hited != 0) return;
+        if (hited != 0) {
+            AnimaSpeed = 0;
+            return; 
+        }
 
         if(!f.onground)
         {
@@ -175,9 +182,15 @@ public class Knight : Monster
             Attack(true);
             return;
         }
-        else if (Dis > new Fixpoint(5, 0) && Dis < new Fixpoint(7, 0)) //翻滚
+        else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))
         {
-            ChangeStatus(3);
+            if (Rand.rand() % 2 == 0)
+            {
+                ChangeStatus(3);
+            } else
+            {
+                ChangeStatus(4);
+            }
             return;
         }
         else //靠近
@@ -288,7 +301,6 @@ public class Knight : Monster
 
     }
 
-    bool HitFly = false;
     private void Hited()
     {
         int hit = KnightGetHited();
@@ -298,7 +310,6 @@ public class Knight : Monster
         }
         else if(hit == 2)
         {
-            HitFly = true;
             status.toughness = -100;
             if(f.onground && StatusTime > new Fixpoint(3,1))
             {
@@ -321,9 +332,43 @@ public class Knight : Monster
         }
     }
 
+    private static Fixpoint SkillBeginToHitTime = new Fixpoint(1, 0);
+    private static Fixpoint SkillDruingTime = new Fixpoint(2, 0);
+    private static Fixpoint SkillBetweenTime = new Fixpoint(3, 1);
+    private static Fixpoint SkillAttackRate = new Fixpoint(5, 0);
+    private int SkillAttackTimes = 0;
     private void Skill()
     {
-
+        int hited = KnightGetHited();
+        if (hited != 0)
+        {
+            SkillAttackTimes = 0;
+            return;
+        }
+        Fixpoint Pos = GetNear();
+        if (f.pos.x < Pos) AnimaToward = 1;
+        else AnimaToward = -1;
+        if (StatusTime > SkillBeginToHitTime + SkillBetweenTime * new Fixpoint(SkillAttackTimes,0))
+        {
+            if(SkillAttackTimes == 0)
+            {
+                Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
+                if (AnimaToward < 0) pos.x -= 3f;
+                else pos.x += 3f;
+                Instantiate(Resources.Load("Prefabs/knightskill"),pos,Quaternion.identity);
+            }
+            ++SkillAttackTimes;
+            Fix_vector2 tmp_pos = f.pos.Clone();
+            if (AnimaToward > 0) tmp_pos.x += new Fixpoint(3, 0);
+            else tmp_pos.x -= new Fixpoint(3, 0);
+            tmp_pos.y += new Fixpoint(25, 1);
+            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward);
+        }
+        if(StatusTime > SkillDruingTime)
+        {
+            SkillAttackTimes = 0;
+            ChangeStatus(0);
+        }
     }
 
     private static Fixpoint OnGroundTime = new Fixpoint(1, 0);
@@ -348,6 +393,11 @@ public class Knight : Monster
 
     private void Death()
     {
-
+        AnimaHited = 0;
+        AnimaAttack = 0;
+        if(StatusTime > new Fixpoint(3,0))
+        {
+            Main_ctrl.Desobj(id);
+        }
     }
 }
