@@ -10,7 +10,7 @@ public class Knight : Monster
     private int AnimaHited = 0;
     void Start()
     {
-        SetStatus(1000, 100);//血量，基础攻击力
+        SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
 
@@ -27,7 +27,7 @@ public class Knight : Monster
     public override void Updatex()
     {
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0));
+        status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
         if(status.death == true && AnimaStatus != 8)
         {
             ChangeStatus(8);
@@ -223,17 +223,17 @@ public class Knight : Monster
 
 
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(5, 1);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(5, 1);
-    private Fixpoint Attack3DuringTime = new Fixpoint(5, 1);
+    private Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
+    private Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(2, 1);//攻击的判定时间
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(2, 1);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
 
-    private Fixpoint Attack1Damage = new Fixpoint(1, 0);//伤害倍率
-    private Fixpoint Attack2Damage = new Fixpoint(1, 0);
-    private Fixpoint Attack3Damage = new Fixpoint(1, 0);
+    private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
+    private Fixpoint Attack2Damage = new Fixpoint(4, 0);
+    private Fixpoint Attack3Damage = new Fixpoint(4, 0);
     private void AttackToNext()
     {
         CreatedAttack = false;
@@ -252,7 +252,7 @@ public class Knight : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward);
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 40, AnimaToward);
 
     }
     private void Attack(bool first)
@@ -331,8 +331,8 @@ public class Knight : Monster
         }
     }
 
-    private static Fixpoint DefenceTime = new Fixpoint(1, 0);
-    private static Fixpoint DefenceRate = new Fixpoint(2, 1);
+    private static Fixpoint DefenceTime = new Fixpoint(5, 1);//防御时间
+    private static Fixpoint DefenceRate = new Fixpoint(5, 1);//承受伤害倍率
     private void Defence()
     {
         status.defence_rate = DefenceRate;
@@ -351,9 +351,9 @@ public class Knight : Monster
         }
     }
 
-    private static Fixpoint SkillBeginToHitTime = new Fixpoint(1, 0);//技能的结算开始时间
-    private static Fixpoint SkillDruingTime = new Fixpoint(2, 0);
-    private static Fixpoint SkillBetweenTime = new Fixpoint(3, 1);//两段伤害的间隔
+    private static Fixpoint SkillBeginToHitTime = new Fixpoint(133, 2);//技能的结算开始时间
+    private static Fixpoint SkillDruingTime = new Fixpoint(163, 2);
+    private static Fixpoint SkillBetweenTime = new Fixpoint(21, 2);//伤害的间隔
     private static Fixpoint SkillAttackRate = new Fixpoint(5, 0);//攻击倍率
     private int SkillAttackTimes = 0;
     private void Skill()
@@ -393,7 +393,7 @@ public class Knight : Monster
         }
     }
 
-    private static Fixpoint OnGroundTime = new Fixpoint(1, 0);
+    private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
     private void Ground()
     {
         RemoveHited();

@@ -15,7 +15,7 @@ public class KnightCut : MonoBehaviour
     void Update()
     {
         alivetime += Time.deltaTime;
-        if(alivetime > 1.15f)
+        if(alivetime > 0.59f)
         {
             Destroy(gameObject);
         }
