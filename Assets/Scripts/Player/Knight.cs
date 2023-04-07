@@ -6,9 +6,9 @@ using static UnityEngine.ParticleSystem;
 public class Knight : Monster
 {
     private Animator animator;
-    private float AnimaSpeed = 0f;
-    private int AnimaAttack = 0;
-    private int AnimaHited = 0;
+    private new float AnimaSpeed = 0f;
+    private new int AnimaAttack = 0;
+    private new int AnimaHited = 0;
     void Start()
     {
         SetStatus(1000, 100);
@@ -59,6 +59,7 @@ public class Knight : Monster
                 Death();
                 break;
         }
+        transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
     private int CheckToughStatus(bool this_hited)
     {
@@ -140,13 +141,29 @@ public class Knight : Monster
         int hited = KnightGetHited();
         if (hited != 0) return;
 
+        if(!f.onground)
+        {
+            AnimaSpeed = 0;
+            ChangeStatus(7);
+            return;
+        }
+
         Fixpoint Pos = GetNear();
         Fixpoint Dis = GetNearDistance(Pos);
         if (Dis > new Fixpoint(15, 0)) // 巡逻
         {
             if (StatusTime > new Fixpoint(2, 0)) StatusTime -= new Fixpoint(2, 0);
-            if (StatusTime > new Fixpoint(1, 0)) Moves(1);
-            else Moves(-1);
+            if (StatusTime > new Fixpoint(1, 0))
+            {
+                AnimaToward = 1f;
+                AnimaSpeed = status.WalkSpeed.to_float();
+                Moves(AnimaToward, status.WalkSpeed);
+            }
+            else {
+                AnimaToward = -1f;
+                AnimaSpeed = status.WalkSpeed.to_float();
+                Moves(AnimaToward,status.WalkSpeed); 
+            }
             return;
         }
         else if (Dis < new Fixpoint(14, 1)) //攻击
@@ -167,11 +184,13 @@ public class Knight : Monster
         {
             if (f.pos.x < Pos)
             {
-                Moves(1);
+                AnimaToward = 1;
+                Moves(AnimaToward,status.WalkSpeed);
             }
             else
             {
-                Moves(-1);
+                AnimaToward = -1;
+                Moves(AnimaToward,status.WalkSpeed);
             }
         }
     }
@@ -316,7 +335,10 @@ public class Knight : Monster
 
     private void Fall()
     {
-
+        if(f.onground)
+        {
+            ChangeStatus(0);
+        }
     }
 
     private void Death()

@@ -183,7 +183,9 @@ public class Main_ctrl : MonoBehaviour
     }
     public static GameObject CreateObj(Obj_info info)
     {
-        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
         spriteRenderer.size = new Vector2(info.wid.to_float(), info.hei.to_float());

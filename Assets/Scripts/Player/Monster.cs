@@ -156,7 +156,7 @@ public class Monster : BasicCharacter
             return x - f.pos.x;
         }
     }
-    protected void Moves(int toward)
+    private void Moves(int toward)
     {
         if (toward == -1)
         {
