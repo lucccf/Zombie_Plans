@@ -14,7 +14,7 @@ public class Monster : BasicCharacter
     private Player player = null;
     void Start()
     {
-        SetStatus(1000, 10);
+        SetStatus(250, 10);
         animator = GetComponent<Animator>();
     }
 
@@ -101,7 +101,7 @@ public class Monster : BasicCharacter
             }
         }
     }
-    private Fixpoint GetNear()
+    protected Fixpoint GetNear()
     {
         List<Fixpoint> list = new List<Fixpoint>();
         foreach (Player i in Player_ctrl.plays)
@@ -134,7 +134,7 @@ public class Monster : BasicCharacter
         }
         else return new Fixpoint(10000,0);
     }
-    private Fixpoint GetNearDistance()
+    protected Fixpoint GetNearDistance()
     {
         Fixpoint x = GetNear();
         if(f.pos.x > x)
@@ -145,7 +145,7 @@ public class Monster : BasicCharacter
             return x - f.pos.x;
         }
     }
-    private Fixpoint GetNearDistance(Fixpoint x)
+    protected Fixpoint GetNearDistance(Fixpoint x)
     {
         if (f.pos.x > x)
         {
@@ -156,7 +156,7 @@ public class Monster : BasicCharacter
             return x - f.pos.x;
         }
     }
-    private void Moves(int toward)
+    protected void Moves(int toward)
     {
         if (toward == -1)
         {
@@ -275,7 +275,7 @@ public class Monster : BasicCharacter
         }
 
     }
-    private void HitedFly()
+    protected void HitedFly()
     {
         if (StatusTime > new Fixpoint(15, 1) && f.onground)
         {
@@ -294,7 +294,7 @@ public class Monster : BasicCharacter
             f.pos.x += (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
         }
     }
-    private void HitedOnGround()
+    protected void HitedOnGround()
     {
         RemoveHited();
         if (StatusTime > new Fixpoint(1, 0))
@@ -327,7 +327,7 @@ public class Monster : BasicCharacter
         StatusTime = new Fixpoint(0, 0);
     }
 
-    private void MonsterCreateAttack(Fixpoint damage)
+    protected void MonsterCreateAttack(Fixpoint damage)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
