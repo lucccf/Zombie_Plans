@@ -47,8 +47,9 @@ public class Attack2 : Attack
 
     public void ChangeOwner(long id)
     {
+        AliveTime = new Fixpoint(0, 0);
         attakcer_id = id;
-
+        toward = -toward;
     }
     void GetHited()
     {

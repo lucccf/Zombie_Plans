@@ -99,7 +99,7 @@ public class Knight : Monster
     }
 
 
-    private bool DefenceGetHited()
+    private int DefenceGetHited()
     {
 
         GetColider();
@@ -119,38 +119,51 @@ public class Knight : Monster
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
             if (attack.attakcer_id == id) continue;
 
-            AnimaToward = -attack.toward;
-            this_hited = true;
-
-
-            Preform(attack.HpDamage.to_int());
-
-            Fixpoint HpDamage = attack.HpDamage;
-            int ToughnessDamage = attack.ToughnessDamage;
-            status.GetAttacked(HpDamage, ToughnessDamage);
-
-            Debug.Log(HpDamage + " " + ToughnessDamage);
-
             if (attack.type == 1)
             {
                 Attack2 attack2 = (Attack2)attack;
-                attack2.DestroySelf();
+                if (attack2.toward * AnimaToward < 0)
+                {
+                    Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward);
+                    Main_ctrl.Desobj(attack2.id);
+                } else
+                {
+                    status.GetAttacked(attack.HpDamage/DefenceRate, attack.ToughnessDamage);
+                    attack2.DestroySelf();
+                    Preform(status.last_damage);
+                }
+                continue;
             }
+
+            this_hited = true;
+
+            Fixpoint HpDamage = attack.HpDamage;
+            int ToughnessDamage = attack.ToughnessDamage;
+
+            if (attack.toward * AnimaToward < 0)
+            {
+                status.GetAttacked(HpDamage, ToughnessDamage/2);
+            }
+            else
+            {
+                status.GetAttacked(HpDamage/DefenceRate, ToughnessDamage);
+            }
+
+            Preform(status.last_damage);
         }
-        return this_hited;
+        return CheckToughStatus(this_hited);
     }
 
     private void Normal()
     {
         int hited = KnightGetHited();
         if (hited != 0) {
-            AnimaSpeed = 0;
+            ChangeStatus(5);
             return; 
         }
 
         if(!f.onground)
         {
-            AnimaSpeed = 0;
             ChangeStatus(7);
             return;
         }
@@ -323,8 +336,14 @@ public class Knight : Monster
     private void Defence()
     {
         status.defence_rate = DefenceRate;
-        status.toughness = 100;
-        KnightGetHited();
+        int hited = DefenceGetHited();
+        if (hited != 0)
+        {
+            ChangeStatus(5);
+            status.defence_rate = new Fixpoint(1, 0);
+            Debug.Log(status.toughness);
+            return;
+        }
         if (StatusTime > DefenceTime)
         {
             status.defence_rate = new Fixpoint(1, 0);
@@ -345,9 +364,12 @@ public class Knight : Monster
             SkillAttackTimes = 0;
             return;
         }
-        Fixpoint Pos = GetNear();
-        if (f.pos.x < Pos) AnimaToward = 1;
-        else AnimaToward = -1;
+        if(StatusTime < SkillBeginToHitTime) 
+        { 
+            Fixpoint Pos = GetNear();
+            if (f.pos.x < Pos) AnimaToward = 1;
+            else AnimaToward = -1;
+        }
         if (StatusTime > SkillBeginToHitTime + SkillBetweenTime * new Fixpoint(SkillAttackTimes,0))
         {
             if(SkillAttackTimes == 0)
