@@ -10,7 +10,7 @@ public class Knight : Monster
     private int AnimaHited = 0;
     void Start()
     {
-        SetStatus(1000, 100);
+        SetStatus(1000, 100);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
 
@@ -218,7 +218,7 @@ public class Knight : Monster
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
     private Fixpoint Attack3BeginToHitTime = new Fixpoint(2, 1);
 
-    private Fixpoint Attack1Damage = new Fixpoint(1, 0);
+    private Fixpoint Attack1Damage = new Fixpoint(1, 0);//伤害倍率
     private Fixpoint Attack2Damage = new Fixpoint(1, 0);
     private Fixpoint Attack3Damage = new Fixpoint(1, 0);
     private void AttackToNext()
@@ -332,10 +332,10 @@ public class Knight : Monster
         }
     }
 
-    private static Fixpoint SkillBeginToHitTime = new Fixpoint(1, 0);
+    private static Fixpoint SkillBeginToHitTime = new Fixpoint(1, 0);//技能的结算开始时间
     private static Fixpoint SkillDruingTime = new Fixpoint(2, 0);
-    private static Fixpoint SkillBetweenTime = new Fixpoint(3, 1);
-    private static Fixpoint SkillAttackRate = new Fixpoint(5, 0);
+    private static Fixpoint SkillBetweenTime = new Fixpoint(3, 1);//两段伤害的间隔
+    private static Fixpoint SkillAttackRate = new Fixpoint(5, 0);//攻击倍率
     private int SkillAttackTimes = 0;
     private void Skill()
     {
