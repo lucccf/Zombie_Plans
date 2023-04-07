@@ -270,7 +270,7 @@ public class Main_ctrl : MonoBehaviour
                     Flow_path.facilities[cnt] = fa;
                     break;
                 case Object_ctrl.class_name.Tinymap:
-                    Tiny_map_cre.Create_tiny(info);
+                    Map_ctrl.Map_items[cnt] = Tiny_map_cre.Create_tiny(info);
                     break;
                 case Object_ctrl.class_name.Tinybutton:
                     break;
@@ -346,6 +346,7 @@ public class Main_ctrl : MonoBehaviour
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
             Flow_path.Updatex();
+            Map_ctrl.Updatex();
             while (Des_objs.Count > 0)
             {
                 long id_des = Des_objs.Dequeue();
