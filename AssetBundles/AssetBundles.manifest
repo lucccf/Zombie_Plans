@@ -1,17 +1,13 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 673825167
-=======
-CRC: 1909647267
->>>>>>> d3d26e433f0436cd0273784dcfe64b6abd294cce
+CRC: 977265637
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: prefabs
       Dependencies: {}
     Info_1:
-      Name: item
+      Name: background
       Dependencies: {}
     Info_2:
-      Name: background
+      Name: item
       Dependencies: {}
