@@ -1,5 +1,9 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 2078890696
+=======
+CRC: 2828509321
+>>>>>>> f1674f5879ceadfb8cd8283c726b6fb5b0a54f07
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:

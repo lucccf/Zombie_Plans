@@ -265,11 +265,14 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Facility:
                     Facility fa = obj.AddComponent<Facility>();
+                    ctrl.modules[Object_ctrl.class_name.Facility] = fa;
                     fa.id = cnt;
                     fa.materials = info.materials;
                     Flow_path.facilities[cnt] = fa;
                     break;
                 case Object_ctrl.class_name.Tinymap:
+                    Tiny_map ti = new Tiny_map();
+                    ctrl.modules[Object_ctrl.class_name.Tinymap] = ti;
                     Map_ctrl.Map_items[cnt] = Tiny_map_cre.Create_tiny(info);
                     break;
                 case Object_ctrl.class_name.Tinybutton:
@@ -299,6 +302,10 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Moster:
                     //如果是僵尸则在控制流程中-1
+                    break;
+                case Object_ctrl.class_name.Tinymap:
+                    Destroy(Map_ctrl.Map_items[id]);
+                    Map_ctrl.Map_items.Remove(id);
                     break;
             }
         }
