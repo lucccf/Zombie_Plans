@@ -21,6 +21,7 @@ public class PlayerStatus
 
     public Fixpoint TmpToughness;
 
+    public int last_damage;
     
     public PlayerStatus(int max_hp,int attack,int max_toughness,int walk_speed,int run_speed,
         Fixpoint attack_rate,Fixpoint defence_rate)
@@ -77,9 +78,10 @@ public class PlayerStatus
     }
     public void GetAttacked(Fixpoint damage, int toughness_damage)
     {
-        Fixpoint real_damage = damage * defence_rate;
+        Fixpoint real_damage = damage * defence_rate + new Fixpoint(1,3);
         hp -= real_damage.to_int();
         toughness -= toughness_damage;
+        last_damage = real_damage.to_int();
         if(hp <= 0)
         {
             death = true;

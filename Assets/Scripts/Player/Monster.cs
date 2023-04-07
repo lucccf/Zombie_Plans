@@ -327,7 +327,7 @@ public class Monster : BasicCharacter
         StatusTime = new Fixpoint(0, 0);
     }
 
-    protected void MonsterCreateAttack(Fixpoint damage)
+    private void MonsterCreateAttack(Fixpoint damage)
     {
         CreatedAttack = true;
         Fix_vector2 AttackPos = f.pos.Clone();

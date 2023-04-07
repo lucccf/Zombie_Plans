@@ -6,9 +6,9 @@ using static UnityEngine.ParticleSystem;
 public class Knight : Monster
 {
     private Animator animator;
-    private new float AnimaSpeed = 0f;
-    private new int AnimaAttack = 0;
-    private new int AnimaHited = 0;
+    private float AnimaSpeed = 0f;
+    private int AnimaAttack = 0;
+    private int AnimaHited = 0;
     void Start()
     {
         SetStatus(1000, 100);
@@ -197,9 +197,9 @@ public class Knight : Monster
 
 
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(8, 1);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(8, 1);
-    private Fixpoint Attack3DuringTime = new Fixpoint(8, 1);
+    private Fixpoint Attack1DuringTime = new Fixpoint(5, 1);//攻击的持续时间
+    private Fixpoint Attack2DuringTime = new Fixpoint(5, 1);
+    private Fixpoint Attack3DuringTime = new Fixpoint(5, 1);
 
     private Fixpoint Attack1BeginToHitTime = new Fixpoint(2, 1);//攻击的判定时间
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
@@ -217,9 +217,17 @@ public class Knight : Monster
     private void RemoveAttack()
     {
         AnimaAttack = 0;
-        StatusTime = new Fixpoint(0, 0);
-        AnimaStatus = 0;
+        ChangeStatus(0);
         return;
+    }
+    private void KnightCreateAttack(Fixpoint damage)
+    {
+        CreatedAttack = true;
+        Fix_vector2 AttackPos = f.pos.Clone();
+        if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
+        else AttackPos.x -= new Fixpoint(1, 0);
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward);
+
     }
     private void Attack(bool first)
     {
@@ -242,7 +250,7 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack1Damage);
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack1Damage);
         }
         else if (AnimaAttack == 2)
         {
@@ -251,16 +259,15 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack2Damage);
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack2Damage);
         }
         else if (AnimaAttack == 3)
         {
             if (StatusTime > Attack3DuringTime)
             {
-                if (Near <= new Fixpoint(15, 1)) AttackToNext();
-                else RemoveAttack();
+                RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack3Damage);
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack3Damage);
         }
 
         if (StatusTime <= new Fixpoint(2, 1))
@@ -304,17 +311,13 @@ public class Knight : Monster
     private static Fixpoint DefenceRate = new Fixpoint(2, 1);
     private void Defence()
     {
-        int hit = KnightGetHited();
-        if (hit != 0)
-        {
-            return;
-        }
         status.defence_rate = DefenceRate;
         status.toughness = 100;
-        if(StatusTime > DefenceTime)
+        KnightGetHited();
+        if (StatusTime > DefenceTime)
         {
             status.defence_rate = new Fixpoint(1, 0);
-            ChangeStatus(1);
+            ChangeStatus(0);
         }
     }
 
@@ -326,9 +329,11 @@ public class Knight : Monster
     private static Fixpoint OnGroundTime = new Fixpoint(1, 0);
     private void Ground()
     {
-        RemoveAttack();
-        if(StatusTime > OnGroundTime)
+        RemoveHited();
+        AnimaHited = 0;
+        if (StatusTime > OnGroundTime)
         {
+            status.toughness = 100;
             ChangeStatus(0);
         }
     }

@@ -117,11 +117,12 @@ public class BasicCharacter : MonoBehaviour
             this_hited = true;
 
 
-            Preform(attack.HpDamage.to_int());
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
             status.GetAttacked(HpDamage, ToughnessDamage);
+
+            Preform(status.last_damage);
 
             Debug.Log(HpDamage + " " + ToughnessDamage);
 
