@@ -44,6 +44,12 @@ public class Attack2 : Attack
             AliveTime = new Fixpoint(25, 1);
         }
     }
+
+    public void ChangeOwner(long id)
+    {
+        attakcer_id = id;
+
+    }
     void GetHited()
     {
         while (f.actions.Count > 0)

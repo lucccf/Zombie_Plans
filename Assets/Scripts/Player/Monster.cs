@@ -236,7 +236,7 @@ public class Monster : BasicCharacter
         }
     }
     
-    private void Preform(int damage)
+    protected void Preform(int damage)
     {
         GameObject beat = (GameObject)AB.getobj("beat");
         beat.transform.localScale = new Vector3(3f, 3f, 1f);

@@ -93,6 +93,48 @@ public class Knight : Monster
         return CheckToughStatus(x);
     }
 
+
+    private bool DefenceGetHited()
+    {
+
+        GetColider();
+
+        bool this_hited = false;
+        while (AttackQueue.Count > 0)
+        {
+            Fix_col2d_act a = AttackQueue.Peek();
+            AttackQueue.Dequeue();
+            if (a.type != Fix_col2d_act.col_action.Attack)
+            {
+                Debug.Log("Attack Geted Error");
+                continue;
+            }
+            long AttackId = a.opsite.id;
+            if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
+            Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
+            if (attack.attakcer_id == id) continue;
+
+            AnimaToward = -attack.toward;
+            this_hited = true;
+
+
+            Preform(attack.HpDamage.to_int());
+
+            Fixpoint HpDamage = attack.HpDamage;
+            int ToughnessDamage = attack.ToughnessDamage;
+            status.GetAttacked(HpDamage, ToughnessDamage);
+
+            Debug.Log(HpDamage + " " + ToughnessDamage);
+
+            if (attack.type == 1)
+            {
+                Attack2 attack2 = (Attack2)attack;
+                attack2.DestroySelf();
+            }
+        }
+        return this_hited;
+    }
+
     private void Normal()
     {
         int hited = KnightGetHited();
