@@ -105,6 +105,7 @@ public class Main_ctrl : MonoBehaviour
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Player);
+        p.classnames.Add(Object_ctrl.class_name.Tinymap);
         p.user_id = player_id;
         if (player_id == user_id)
         {

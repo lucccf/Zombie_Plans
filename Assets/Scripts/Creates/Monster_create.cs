@@ -14,7 +14,7 @@ public class Monster_create : MonoBehaviour
         for(int i = 0; i < pos_monster.Count; i++)
         {
             Obj_info p = new Obj_info();
-            p.name = "Monster1";
+            p.name = "knight";
             p.hei = size_monster[i].y.Clone();
             p.wid = size_monster[i].x.Clone();
             p.pos = pos_monster[i];
