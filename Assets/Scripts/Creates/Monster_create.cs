@@ -14,7 +14,14 @@ public class Monster_create : MonoBehaviour
         for(int i = 0; i < pos_monster.Count; i++)
         {
             Obj_info p = new Obj_info();
-            p.name = "knight";
+            if (pos_monster[i].x < new Fixpoint(130, 0))
+            {
+                p.name = "Monster1";
+            }
+            else
+            {
+                p.name = "knight";
+            }
             p.hei = size_monster[i].y.Clone();
             p.wid = size_monster[i].x.Clone();
             p.pos = pos_monster[i];
@@ -27,7 +34,7 @@ public class Monster_create : MonoBehaviour
         }
     }
 
-    public static void Mon_create2()  //生成僵尸，后期替换模型和ai
+    public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
         for (int i = 0; i < pos_zombies.Count; i++)
         {
