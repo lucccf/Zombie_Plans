@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 293272811
+CRC: 24067458
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e0ec9af858ffecae92aa53f6cd1653ee
+    Hash: 524fa4d6ae343730284506d9b64cf31b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 841281f7f96ce1d0d8213c808c0616bc
+    Hash: 8c3b0351dbcf7ed8a854f8a017d356d7
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -26,17 +26,19 @@ ClassTypes:
 - Class: 95
   Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: c0606e10920cabb4e9be2acf04e7c378, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: ab4b6a30508be5f4ea4c131e1754b637, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 7a7994c038438dc4495c66163f70fc63, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: e8119a724da3eec4bb4f91f7b2b4fa8b, type: 3}
 - Class: 114
@@ -78,6 +80,7 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Resources/Prefabs/crystal.prefab
+- Assets/Resources/Prefabs/knight.prefab
 - Assets/Resources/Prefabs/LightBall.prefab
 - Assets/Resources/Prefabs/number/9.png
 - Assets/Resources/Prefabs/number/2.png
