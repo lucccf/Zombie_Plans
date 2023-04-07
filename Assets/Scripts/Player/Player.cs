@@ -106,10 +106,32 @@ public class Player : BasicCharacter
                     GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<ProgressBar>().endprogress = 100;
                     foreach (var m in fa.materials)
                     {
-                        bag.BagGetItem(m.Key, -m.Value);
+                        bag.BagGetItem(m.Key, -m.Value,Player_ctrl.BagUI);
                     }
                 }
                 Debug.Log(flag);
+                break;
+            case PlayerOpt.MoveItem:
+                Item Makeitem = Main_ctrl.GetItemById(inputs.Itemid);
+                bool flag2 = true;
+                for(int i=0;i<Makeitem.MakeNeeds.Length;++i)
+                {
+                    if (bag.BagCheckItemNums(Makeitem.MakeNeeds[i], Makeitem.NeedsNumber[i]) == false) flag2 = false;
+                }
+                if(flag2 == true)
+                {
+                    bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
+                    
+                    for (int i = 0; i < Makeitem.MakeNeeds.Length; ++i)
+                    {
+                        bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
+                    }
+                    //Player_ctrl.MakeSuccessUI.SetActive(true);
+                }
+                else
+                {
+                    //Player_ctrl.MakeFailedUI.SetActive(true);
+                }
                 break;
         }
     }
@@ -603,7 +625,7 @@ public class Player : BasicCharacter
 
     private int PlayerGetHited()
     {
-        bool x = GetHited(AnimaToward);
+        bool x = GetHited(ref AnimaToward);
         return CheckToughnessStatus(x);
     }
 

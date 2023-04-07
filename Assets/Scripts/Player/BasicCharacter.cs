@@ -93,7 +93,7 @@ public class BasicCharacter : MonoBehaviour
         num2.GetComponent<BeatNumber>().ChangeNumber(damage);
     }
 
-    protected bool GetHited(float Toward)
+    protected bool GetHited(ref float Toward)
     {
 
         GetColider();
@@ -112,8 +112,10 @@ public class BasicCharacter : MonoBehaviour
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
             if (attack.attakcer_id == id) continue;
-            Toward = attack.toward;
+            
+            Toward = -attack.toward;
             this_hited = true;
+
 
             Preform(attack.HpDamage.to_int());
 

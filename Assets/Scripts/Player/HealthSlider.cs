@@ -25,6 +25,6 @@ public class HealthSlider : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        Debug.Log(healthSlider.value);
+        //Debug.Log(healthSlider.value);
     }
 }

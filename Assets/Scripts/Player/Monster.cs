@@ -6,7 +6,7 @@ public class Monster : BasicCharacter
 {
 
     private Animator animator;
-    private float AnimaToward = 1f;
+    public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
@@ -248,7 +248,7 @@ public class Monster : BasicCharacter
 
     private int MonsterGetHited()
     {
-        bool x =GetHited(AnimaToward);
+        bool x =GetHited(ref AnimaToward);
         return CheckToughStatus(x);
     }
 
