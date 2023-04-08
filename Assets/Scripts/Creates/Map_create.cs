@@ -101,7 +101,7 @@ public class Map_create : MonoBehaviour
             Main_ctrl.CreateObj(info);
         }
 
-        
+        /*
         for(int i = 0; i < holes.Count;++i )
         {
             for(int j=0;j< holes[i].Count;++j)
@@ -116,7 +116,7 @@ public class Map_create : MonoBehaviour
                 Debug.Log("wall:" + i + " " + j + " " + walls[i][j]);
             }
         }
-
+        */
         Main_ctrl.walls = walls;
         Main_ctrl.holes = holes;
         Main_ctrl.hole_len = hol_len;
@@ -195,7 +195,7 @@ public class Map_create : MonoBehaviour
             string name = p.SelectSingleNode("mill_name").InnerText;
             Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
 
-            Debug.Log(Bud_cnt);
+            //Debug.Log(Bud_cnt);
 
             Building_single_create(name, new Fixpoint(floor_hei, 0), new Fixpoint(floor_hei, 0), pos, "building", Bud_cnt++, tmp);
 
