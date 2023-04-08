@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class Main_ctrl : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Main_ctrl : MonoBehaviour
     
     private static Dictionary<int,Item>ItemList = new Dictionary<int,Item>();
 
+    public static List<List<int>> holes = new List<List<int>>();
+    public static List<List<int>> walls = new List<List<int>>();
+    public static int wall_len;
+    public static int hole_len;
 
     float t;
     float dt = 0.033f;
@@ -61,7 +66,7 @@ public class Main_ctrl : MonoBehaviour
         Debug.Log("???");
         Player_ctrl.Init_bag();
         Debug.Log("???");
-
+        CalRoad();
         Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < Items.Length; ++i)
         {
@@ -69,6 +74,173 @@ public class Main_ctrl : MonoBehaviour
         }
 
         Play_create();
+    }
+
+    struct node
+    {
+        public int id;
+        public int idx;
+        public int left,right;
+        public enum type
+        {
+            wall,
+            hole
+        };
+        public enum TravelType
+        {
+            Fall,
+            JumpLeft,
+            JumpRight,
+            LittleJumpLeft,
+            LittleJumpRight
+        };
+        public type LeftType, RightType;
+        public List<int> to;
+        public List<Fixpoint> pos;
+        public List<TravelType> action;
+        public node (int id,int posx,int posyl,int posyr,type x,type y)
+        {
+            this.id = id;
+            this.idx = posx;
+            this.left = posyl;
+            this.right = posyr;
+            this.to = new List<int>();
+            this.pos = new List<Fixpoint>();
+            this.action = new List<TravelType>();
+            this.LeftType = x;
+            this.RightType = y;
+        }
+    }
+    private void CalRoad()
+    {
+        List<List<node>> nodes;
+        Debug.Log("wallscount" + walls.Count);
+        Debug.Log("holescout" + holes.Count);
+        int NodeCount = 0;
+        nodes = new List<List<node>>();
+        nodes.Add(new List<node>());
+        for (int i = 1; i < walls.Count; ++i)
+        {
+            nodes.Add(new List<node>());
+            List<int> wall = walls[i];
+            List<int> hole = holes[i];
+            node.type last = node.type.wall;
+            int lastpos = 0;
+            for (int j = 0, k = 1; j < wall.Count || k < hole.Count;)
+            {
+                if (j >= wall.Count || (wall[j] > hole[k] && k < hole.Count ))
+                {
+                    if (hole[k] <= lastpos)
+                    {
+                        lastpos = hole[k] + hole_len;
+                        ++k;
+                        continue;
+                    }
+                    ++NodeCount;
+                    nodes[i].Add(new node(NodeCount,i,lastpos, hole[k],last,node.type.hole));
+                    last = node.type.hole;
+                    lastpos = hole[k] + hole_len;
+                    ++k;
+                } else
+                {
+                    if(wall[j] - wall_len <= lastpos)
+                    {
+                        lastpos = wall[j] + wall_len;
+                        ++j;
+                        continue;
+                    }
+                    ++NodeCount;
+                    nodes[i].Add(new node(NodeCount ,i,lastpos, wall[j] - wall_len,last,node.type.wall));
+                    last = node.type.wall;
+                    lastpos = wall[j] + wall_len;
+                    ++j;
+                }
+            }
+        }
+
+        for (int i = 1; i < nodes.Count; ++i)
+        {
+            for (int j = 0; j < nodes[i].Count; ++j)
+            {
+                Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
+                    nodes[i][j].LeftType + " " + nodes[i][j].RightType);
+                for (int k = 0; k < nodes[i][j].to.Count; ++k)
+                {
+                    Debug.Log(nodes[i][j].action[k] + " " + nodes[i][j].pos[k].to_float() + " " + nodes[i][j].to[k]);
+                }
+            }
+        }
+
+        for (int i=1;i< nodes.Count;++i)
+        {
+            List<node> down;
+            if (i != nodes.Count - 1)
+            {
+                down = nodes[i + 1];
+            } else
+            {
+                down = new List<node>();
+            }
+            int k = 0;
+            for(int j = 0;j< nodes[i].Count;++j)
+            {
+                if(j!= 0 && nodes[i][j].LeftType == node.type.hole && nodes[i][j].left == nodes[i][j-1].right + hole_len)
+                {
+                    nodes[i][j].action.Add(node.TravelType.LittleJumpLeft);
+                    nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].left, 0));
+                    nodes[i][j].to.Add(nodes[i][j - 1].id);
+                    nodes[i][j-1].action.Add(node.TravelType.LittleJumpRight);
+                    nodes[i][j-1].pos.Add(new Fixpoint(nodes[i][j-1].right, 0));
+                    nodes[i][j-1].to.Add(nodes[i][j].id);
+
+                }
+                if (nodes[i][j].LeftType == node.type.hole)
+                {
+                    while (k < down.Count && down[k].right < nodes[i][j].left - (hole_len + 1) / 2)
+                    {
+                        ++k;
+                        Debug.Log(i + " y " + k);
+                    }
+                    if (k < down.Count && down[k].right > nodes[i][j].left - (hole_len + 1) / 2)
+                    {
+                        nodes[i][j].action.Add(node.TravelType.Fall);
+                        nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].left - (hole_len + 1) / 2, 0));
+                        nodes[i][j].to.Add(down[k].id);
+                        down[k].action.Add(node.TravelType.JumpRight);
+                        down[k].pos.Add(new Fixpoint(nodes[i][j].left - (hole_len + 1) / 2, 0));
+                        down[k].to.Add(nodes[i][j].id);
+                    }
+                }
+                if (nodes[i][j].RightType == node.type.hole) 
+                { 
+                    while (k < down.Count && down[k].right < nodes[i][j].right + (hole_len + 1) / 2)
+                    {
+                        ++k;
+                    }
+                    if (k < down.Count && down[k].left < nodes[i][j].right + (hole_len + 1) / 2)
+                    {
+                        nodes[i][j].action.Add(node.TravelType.Fall);
+                        nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].right + (hole_len + 1) / 2, 0));
+                        nodes[i][j].to.Add(down[k].id);
+                        down[k].action.Add(node.TravelType.JumpLeft);
+                        down[k].pos.Add(new Fixpoint(nodes[i][j].right + (hole_len + 1) / 2, 0));
+                        down[k].to.Add(nodes[i][j].id);
+                    }
+                }
+            }
+        }
+        for (int i = 1; i < nodes.Count; ++i)
+        {
+            for (int j = 0; j < nodes[i].Count; ++j)
+            {
+                Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
+                    nodes[i][j].LeftType + " " + nodes[i][j].RightType);
+                for(int k = 0; k < nodes[i][j].to.Count;++k)
+                {
+                    Debug.Log(nodes[i][j].action[k] + " " + nodes[i][j].pos[k].to_float() + " " + nodes[i][j].to[k]);
+                }
+            }
+        }
     }
 
     public static Item GetItemById(int id)

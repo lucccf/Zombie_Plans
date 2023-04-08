@@ -28,9 +28,12 @@ public class Map_create : MonoBehaviour
         int hol_len = int.Parse(xmlDoc.SelectSingleNode("/map/hole/hole_basic_info/length").InnerText);
 
         List<List<int>> holes = new List<List<int>>();
-        for(int i = 0; i <= floor_cnt; i++)
+        List<List<int>> walls = new List<List<int>>();
+
+        for (int i = 0; i <= floor_cnt; i++)
         {
             holes.Add(new List<int>());
+            walls.Add(new List<int>());
         }
 
         foreach (XmlNode p in Ver_walls)
@@ -39,6 +42,7 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes("wall_pos"))
             {
                 int pos = int.Parse(x.InnerText);
+                walls[id].Add(pos);
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
                 info.classnames.Add(Object_ctrl.class_name.Tinymap);
@@ -96,6 +100,27 @@ public class Map_create : MonoBehaviour
             info.pos = new Fix_vector2(new Fixpoint(room_cnt * floor_wid + hf_thick, 0), new Fixpoint(-floor_cnt * wall_hei * 5, 1));
             Main_ctrl.CreateObj(info);
         }
+
+        
+        for(int i = 0; i < holes.Count;++i )
+        {
+            for(int j=0;j< holes[i].Count;++j)
+            {
+                Debug.Log("hole:" + i + " " + j + " " + holes[i][j]);
+            }
+        }
+        for (int i = 0; i < walls.Count; ++i)
+        {
+            for (int j = 0; j < walls[i].Count; ++j)
+            {
+                Debug.Log("wall:" + i + " " + j + " " + walls[i][j]);
+            }
+        }
+
+        Main_ctrl.walls = walls;
+        Main_ctrl.holes = holes;
+        Main_ctrl.hole_len = hol_len;
+        Main_ctrl.wall_len = hf_thick;
     }
 
     public static void Item_create()
