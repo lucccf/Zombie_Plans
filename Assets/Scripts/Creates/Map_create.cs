@@ -139,7 +139,7 @@ public class Map_create : MonoBehaviour
         Obj_info home_info = new Obj_info();
         home_info.name = "home";
         home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
-        home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
+        //home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
         home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
         home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
         home_info.col_type = Fix_col2d.col_status.Trigger;

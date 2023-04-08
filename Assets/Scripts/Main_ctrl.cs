@@ -276,6 +276,7 @@ public class Main_ctrl : MonoBehaviour
                     Map_ctrl.Map_items[cnt] = Tiny_map_cre.Create_tiny(info);
                     break;
                 case Object_ctrl.class_name.Tinybutton:
+                    Tiny_button_cre.Create_tinybutton(info, cnt);
                     break;
             }
         }
