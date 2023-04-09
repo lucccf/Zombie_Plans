@@ -192,7 +192,7 @@ public class Knight : Monster
                 nearx = i.f.pos.x;
             }
         }
-        if (Min > new Fixpoint(3000, 0)) return -1;
+        if (Min > new Fixpoint(30, 0)) return -1;
         else return Main_ctrl.CalPos(Minx, Miny);
     }
 
