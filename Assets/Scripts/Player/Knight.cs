@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Knight : Monster
@@ -38,7 +39,7 @@ public class Knight : Monster
                 Normal();
                 break;
             case 1:
-                Jump();
+                Jump(0);
                 break;
             case 2:
                 Attack(false);
@@ -60,6 +61,12 @@ public class Knight : Monster
                 break;
             case 8:
                 Death();
+                break;
+            case 9:
+                Search();
+                break;
+            case 10:
+                LittleJump(0);
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -154,8 +161,44 @@ public class Knight : Monster
         return CheckToughStatus(this_hited);
     }
 
+    private int KnightGetNear(ref Fixpoint nearx)
+    {
+        Fixpoint Min = new Fixpoint(10000000, 0);
+        Fixpoint Minx = new Fixpoint(100, 0);
+        Fixpoint Miny = new Fixpoint(100, 0);
+        foreach (Player i in Player_ctrl.plays)
+        {
+            Fixpoint Dis = new Fixpoint(0,0);
+            if(i.f.pos.x < f.pos.x)
+            {
+                Dis += f.pos.x - i.f.pos.x;
+            } else
+            {
+                Dis += i.f.pos.x - f.pos.x;
+            }
+            if (i.f.pos.y < f.pos.y)
+            {
+                Dis += f.pos.y - i.f.pos.y;
+            }
+            else
+            {
+                Dis += i.f.pos.y - f.pos.y;
+            }
+            if(Dis < Min)
+            {
+                Min = Dis;
+                Minx = i.f.pos.x;
+                Miny = i.f.pos.y;
+                nearx = i.f.pos.x;
+            }
+        }
+        if (Min > new Fixpoint(3000, 0)) return -1;
+        else return Main_ctrl.CalPos(Minx, Miny);
+    }
+
     private void Normal()
     {
+        AnimaSpeed = 5f;
         int hited = KnightGetHited();
         if (hited != 0) {
             ChangeStatus(5);
@@ -168,56 +211,70 @@ public class Knight : Monster
             return;
         }
 
-        Fixpoint Pos = GetNear();
-        Fixpoint Dis = GetNearDistance(Pos);
-        if (Dis > new Fixpoint(15, 0)) // 巡逻
+        int Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if(Location == -1)
         {
-            if (StatusTime > new Fixpoint(2, 0)) StatusTime -= new Fixpoint(2, 0);
-            if (StatusTime > new Fixpoint(1, 0))
-            {
-                AnimaToward = 1f;
-                AnimaSpeed = status.WalkSpeed.to_float();
-                Moves(AnimaToward, status.WalkSpeed);
-            }
-            else {
-                AnimaToward = -1f;
-                AnimaSpeed = status.WalkSpeed.to_float();
-                Moves(AnimaToward,status.WalkSpeed); 
-            }
-            return;
+            Moves(AnimaToward, status.WalkSpeed);
         }
-        else if (Dis < new Fixpoint(14, 1)) //攻击
+        Fixpoint Nearx = new Fixpoint(0, 0);
+        int Pos = KnightGetNear(ref Nearx);
+        if (Pos == -1) // 如果距离太远，巡逻
         {
-            if (f.pos.x < Pos) AnimaToward = 1;
-            else AnimaToward = -1;
-            StatusTime = new Fixpoint(0, 0);
-            AnimaStatus = 2;
-            Attack(true);
-            return;
-        }
-        else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))
-        {
-            if (Rand.rand() % 2 == 0)
-            {
-                ChangeStatus(3);
-            } else
-            {
-                ChangeStatus(4);
-            }
-            return;
-        }
-        else //靠近
-        {
-            if (f.pos.x < Pos)
+            Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+            Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15,1);
+            Fixpoint Right = new Fixpoint(area.right, 0)- new Fixpoint(15,1);
+            if(f.pos.x < Left)
             {
                 AnimaToward = 1;
-                Moves(AnimaToward,status.WalkSpeed);
-            }
-            else
+            } else if (f.pos.x > Right)
             {
                 AnimaToward = -1;
-                Moves(AnimaToward,status.WalkSpeed);
             }
+            Moves(AnimaToward, status.WalkSpeed);
+            return;
+        } else if (Location == Pos) //如果在同一区域
+        {
+            Fixpoint Dis = f.pos.x - Nearx;
+            if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
+
+            if (Dis < new Fixpoint(14, 1)) //攻击
+            {
+                if (f.pos.x < Nearx) AnimaToward = 1;
+                else AnimaToward = -1;
+                StatusTime = new Fixpoint(0, 0);
+                AnimaStatus = 2;
+                Attack(true);
+                return;
+            }
+            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))
+            {
+                if (Rand.rand() % 2 == 0)
+                {
+                    ChangeStatus(3);
+                }
+                else
+                {
+                    ChangeStatus(4);
+                }
+                return;
+            }
+            else //靠近
+            {
+                if (f.pos.x < Nearx)
+                {
+                    AnimaToward = 1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                else
+                {
+                    AnimaToward = -1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+            }
+        }
+        else //否则寻路
+        {
+            ChangeStatus(9);
         }
     }
 
@@ -309,9 +366,41 @@ public class Knight : Monster
         }
     }
 
-    private void Jump()
+    private void Jump(int type)
     {
-
+        int hited = KnightGetHited();
+        if (hited != 0)
+        {
+            return;
+        }
+        if (type == 1)
+        {
+            AnimaToward = 1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(20, 0));
+        }
+        else if (type == -1)
+        {
+            AnimaToward = -1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(20, 0));
+        }
+        else
+        {
+            if (f.onground)
+            {
+                ChangeStatus(0);
+            }
+            if (StatusTime > new Fixpoint(1, 0))
+            {
+                if (AnimaToward > 0)
+                {
+                    f.pos.x += status.WalkSpeed * Dt.dt;
+                }
+                else
+                {
+                    f.pos.x -= status.WalkSpeed * Dt.dt;
+                }
+            }
+        }
     }
 
     private void Hited()
@@ -420,6 +509,121 @@ public class Knight : Monster
         if(StatusTime > new Fixpoint(3,0))
         {
             Main_ctrl.Desobj(id);
+        }
+    }
+
+    private int last_pos = -1;
+    private void Search()
+    {
+        int hited = KnightGetHited();
+        if (hited != 0)
+        {
+            return;
+        }
+        int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if(x == -1)
+        {
+            if(AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            } else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+            ChangeStatus(0);
+            return;
+        }
+        last_pos = x;
+
+        Fixpoint nearx = new Fixpoint(0,0);
+        int y = KnightGetNear(ref nearx);
+
+        if(y ==  -1)
+        {
+            ChangeStatus(0);
+            return;
+        }
+        if(x == y)
+        {
+            ChangeStatus(0);
+            return;
+        }
+        Main_ctrl.TranslateMethod method = Main_ctrl.Guide(x, y);
+        if(method.able == false)
+        {
+            ChangeStatus(0);
+            return;
+        }
+        if (f.pos.x < method.pos - new Fixpoint(1,1))
+        {
+            AnimaToward = 1;
+            f.pos.x += status.WalkSpeed * Dt.dt;
+        } else if (f.pos.x > method.pos + new Fixpoint(1,1))
+        {
+            AnimaToward = -1;
+            f.pos.x -= status.WalkSpeed * Dt.dt;
+        } else
+        {
+            switch(method.action)
+            {
+                case Main_ctrl.node.TravelType.LittleJumpLeft:
+                    ChangeStatus(10);
+                    LittleJump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.LittleJumpRight:
+                    ChangeStatus(10);
+                    LittleJump(1);
+                    break;
+                case Main_ctrl.node.TravelType.Fall:
+                    if(AnimaToward > 0)
+                    {
+                        f.pos.x += status.WalkSpeed * Dt.dt;
+                    } else
+                    {
+                        f.pos.x -= status.WalkSpeed * Dt.dt;
+                    }
+                    break;
+                case Main_ctrl.node.TravelType.JumpLeft:
+                    ChangeStatus(1);
+                    Jump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.JumpRight:
+                    ChangeStatus(1);
+                    Jump(1);
+                    break;
+            }
+        }
+
+    }
+
+    private void LittleJump(int type)
+    {
+        int hited = KnightGetHited();
+        if (hited != 0)
+        {
+            return;
+        }
+        if (type == 1)
+        {
+            AnimaToward = 1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 0));
+        } else if (type == -1)
+        {
+            AnimaToward = -1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 0));
+        } else
+        {
+            if(f.onground)
+            {
+                ChangeStatus(0);
+            }
+            if(AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            } else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
         }
     }
 }

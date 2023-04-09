@@ -10,13 +10,13 @@ public class BeatNumber : MonoBehaviour
         transform.Translate(new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f), 0f));
     }
     private float AilveTime = 0f; 
-    //private static float MaxAliveTime = 0.4f; //存活时间
-    private static float MaxAliveTime = 100000f; //存活时间
+    private static float MaxAliveTime = 0.4f; //存活时间
+    //private static float MaxAliveTime = 100000f; //存活时间
     private static float ChangeColourTime = 0.01f;//改变颜色时间
-    //private static float MinSize = 1f;//最小大小
-    //private static float MaxSize = 3f;//最大大小
-    private static float MinSize = 10f;//最小大小
-    private static float MaxSize = 10f;//最大大小
+    private static float MinSize = 1f;//最小大小
+    private static float MaxSize = 3f;//最大大小
+    //private static float MinSize = 10f;//最小大小
+    //private static float MaxSize = 10f;//最大大小
     private int MemoryNum = 5;
     private bool changed = false;
     Sprite GetSpriteWrite(int n)

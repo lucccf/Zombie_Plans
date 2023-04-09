@@ -79,7 +79,7 @@ public class Main_ctrl : MonoBehaviour
         Play_create();
     }
 
-    struct node
+    public struct node
     {
         public int id;
         public int idx;
@@ -114,7 +114,7 @@ public class Main_ctrl : MonoBehaviour
             this.RightType = y;
         }
     }
-    struct TranslateMethod
+    public struct TranslateMethod
     {
         public TranslateMethod(Fixpoint pos, node.TravelType action)
         {
@@ -132,12 +132,16 @@ public class Main_ctrl : MonoBehaviour
         Num = -Num;
         return Num / 9 + 1;
     }
-    static TranslateMethod[,] TranslateTo;
-    private static TranslateMethod Guide(Fixpoint x, Fixpoint y, Fixpoint tox, Fixpoint toy)
+    private static TranslateMethod[,] TranslateTo;
+    public static TranslateMethod Guide(Fixpoint x, Fixpoint y, Fixpoint tox, Fixpoint toy)
     {
         int from = CalPos(tox, toy);
         int to = CalPos(tox, toy);
         return TranslateTo[from,to];
+    }
+    public static TranslateMethod Guide(int x,int y)
+    {
+        return TranslateTo[x, y];
     }
     public static int CalPos(Fixpoint posx , Fixpoint posy)
     {
@@ -157,6 +161,26 @@ public class Main_ctrl : MonoBehaviour
         }
         if (MapNode[y][l].left <= x && MapNode[y][l].right >= x) return MapNode[y][l].id;
         else return -1;
+    }
+    public static node GetMapNode(Fixpoint posx, Fixpoint posy)
+    {
+        int x = (posx + new Fixpoint(5, 1)).to_int();
+        int y = PostionToY(posy);
+        int l = 1, r = MapNode[y].Count - 1;
+        while (l != r)
+        {
+            int mid = (l + r) / 2;
+            if (MapNode[y][mid].right < x)
+            {
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid;
+            }
+        }
+        if (MapNode[y][l].left <= x && MapNode[y][l].right >= x) return MapNode[y][l];
+        else return new node();
     }
     private static void CalRoad()
     {
@@ -263,7 +287,7 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
         }
-        
+        /*
         for (int i = 1; i < nodes.Count; ++i)
         {
             for (int j = 0; j < nodes[i].Count; ++j)
@@ -279,7 +303,7 @@ public class Main_ctrl : MonoBehaviour
                 //}
             }
         }
-        
+        */
         List<node> a = new List<node>();
         a.Add(new node());
         for (int i = 1; i < nodes.Count; ++i)
@@ -290,7 +314,6 @@ public class Main_ctrl : MonoBehaviour
             }
         }
         TranslateTo = new TranslateMethod[a.Count, a.Count];
-        int kkk = 0;
         for (int i=1 ; i < a.Count ; ++i)
         {
             Queue<int> q = new Queue<int>();
@@ -309,10 +332,9 @@ public class Main_ctrl : MonoBehaviour
                 q.Dequeue();
                 for(int j = 0; j < a[u].to.Count; ++j)
                 {
-                    ++kkk;
                     if (dis[a[u].to[j]] > dis[u] + 1)
                     {
-                        if (beg[u].able == false)
+                        if (beg[u].able == true)
                         {
                             beg[a[u].to[j]] = beg[u];
                         }
@@ -327,14 +349,17 @@ public class Main_ctrl : MonoBehaviour
             }
             for(int j = 1;j < beg.Length; ++j)
             {
-                Debug.Log(i + " " + j);
-                Debug.Log(TranslateTo[i, j]);
-                Debug.Log(beg[j]);
                 TranslateTo[i,j] = beg[j];
             }
         }
         MapNode = nodes;
-        Debug.Log("XXXXXXXXXXXXXXXXXXX" + kkk);
+        for(int i=1;i<=60;++i)
+        {
+            for(int j=1;j<=60;++j)
+            {
+                Debug.Log(i + " " + j + " " + Guide(i, j).able);
+            }
+        }
     }
 
     public static Item GetItemById(int id)
