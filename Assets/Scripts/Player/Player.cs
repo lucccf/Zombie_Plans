@@ -551,6 +551,7 @@ public class Player : BasicCharacter
     }
 
     private GameObject Building;
+    private GameObject Protal;
     private void GetTrigger()
     {
         GetColider();
@@ -572,7 +573,8 @@ public class Player : BasicCharacter
                     Building = Instantiate((GameObject)AB.getobj("Building"), parent.transform);
                     Building.GetComponent<BuildingButton>().buildingid = a.opsite.id;
                     Building.name = trigger.name;
-                } else if(trigger.triggername == "ItemSample")
+                }
+                else if (trigger.triggername == "ItemSample")
                 {
                     if (checkid() == true)
                     {
@@ -584,10 +586,22 @@ public class Player : BasicCharacter
                     }
                     Main_ctrl.Desobj(a.opsite.id);
                 }
+                else if (trigger.triggername == "protal") {
+                    GameObject parent = GameObject.Find("PlayerPanel");
+                    GameObject protalbutton = (GameObject)Resources.Load("Prefabs/ProtalButton");
+                    Protal = Instantiate(protalbutton, parent.transform);
+                }
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
-                Destroy(Building);
+                Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+                if (trigger.triggertype == "building")
+                {
+                    Destroy(Building);
+                }
+                else if (trigger.triggertype == "protal") {
+                    Destroy(Protal);
+                }
             } else
             {
                 Debug.Log("Trigger error");

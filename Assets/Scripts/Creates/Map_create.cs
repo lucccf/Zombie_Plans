@@ -223,8 +223,8 @@ public class Map_create : MonoBehaviour
             protal_info.name = "protal";
             //protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
             protal_info.classnames.Add(Object_ctrl.class_name.Protalbutton);
-            protal_info.hei = new Fixpoint(floor_hei, 1);
-            protal_info.wid = new Fixpoint(floor_hei, 1);
+            protal_info.hei = new Fixpoint(floor_hei*2, 1);
+            protal_info.wid = new Fixpoint(floor_hei*2, 1);
             protal_info.col_type = Fix_col2d.col_status.Trigger;
             protal_info.pos = pos;
             protal_info.type = "protal";
