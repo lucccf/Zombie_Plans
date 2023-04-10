@@ -15,6 +15,7 @@ public class BuildingButton : MonoBehaviour
     GameObject closebutton;
     GameObject itemimage;
     GameObject itemtext;
+    GameObject homeuiclosebutton;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
@@ -22,29 +23,31 @@ public class BuildingButton : MonoBehaviour
         if (gameObject.name == "home(Clone)")
         {
             tmp = playerpanel.transform.Find("HomeUI").gameObject;
-            closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
-            closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
+            homeuiclosebutton = playerpanel.transform.Find("HomeUI/Background/CloseButton").gameObject;
+            homeuiclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
+            homeuiclosebutton = playerpanel.transform.Find("AllFacility/Background/CloseButton").gameObject;
+            homeuiclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
         else
         {
             tmp = playerpanel.transform.Find("Facility").gameObject;
             //标题
-            titletext = tmp.transform.Find("Title").transform.Find("Text").gameObject;
+            titletext = playerpanel.transform.Find("Facility/Title/Text").gameObject;
             titletext.GetComponent<Text>().text = gameObject.name;
             //关闭键
-            closebutton = tmp.transform.Find("Background").transform.Find("CloseButton").gameObject;
+            closebutton = playerpanel.transform.Find("Facility/Background/CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
             //材料列表
 
-            itemimage = tmp.transform.Find("ItemTitle").transform.Find("ItemDetail").transform.Find("ItemImage").gameObject;
-            itemtext = tmp.transform.Find("ItemTitle").transform.Find("ItemDetail").transform.Find("ItemImage").transform.Find("Text").gameObject;
+            itemimage = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage").gameObject;
+            itemtext = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage/Text").gameObject;
             Facility fa = Flow_path.facilities[buildingid];
             Dictionary<int, int> curmat = fa.materials;
             foreach (KeyValuePair<int, int> mat in curmat)
             {
                 Item x = Main_ctrl.GetItemById(mat.Key);
                 itemimage.GetComponent<Image>().sprite = x.image;
-                itemtext.GetComponent<Text>().text = "所需数量："+ mat.Value;
+                itemtext.GetComponent<Text>().text = "还需数量："+ (mat.Value - fa.commited[mat.Key]);
             }
         }
     }

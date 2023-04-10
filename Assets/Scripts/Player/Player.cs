@@ -95,7 +95,7 @@ public class Player : BasicCharacter
                 bool flag = true;
                 foreach(var m in fa.materials)
                 {
-                    if (bag.BagGetItemsNums(m.Key) < m.Value)
+                    if (bag.BagGetItemsNums(m.Key) < 0)
                     {
                         flag = false;
                         break;
@@ -103,10 +103,18 @@ public class Player : BasicCharacter
                 }
                 if (flag)
                 {
-                    GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<ProgressBar>().endprogress = 100;
+                    
                     foreach (var m in fa.materials)
                     {
                         bag.BagGetItem(m.Key, -m.Value,Player_ctrl.BagUI);
+                        if (!fa.commited.ContainsKey(m.Key))
+                        {
+                            fa.commited[m.Key] = m.Value;
+                        }
+                        else {
+                            fa.commited[m.Key] += m.Value;
+                        }
+                        GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<ProgressBar>().endprogress = (fa.commited[m.Key] / fa.materials[m.Key]);
                     }
                 }
                 Debug.Log(flag);

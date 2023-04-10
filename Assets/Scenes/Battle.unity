@@ -341,6 +341,12 @@ MonoBehaviour:
   closebutton: {fileID: 1738441833}
   tinymap: {fileID: 160976566}
   tinybuttons: []
+  factitile: {fileID: 1150995963}
+  matimage: {fileID: 1724025126}
+  mattext: {fileID: 1441625995}
+  facprogress: {fileID: 1640074864}
+  progresstext: {fileID: 2096354515}
+  init: {fileID: 0}
 --- !u!224 &376252422 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 979278403265677609, guid: 40fff3ca6814f9444b4b6bcc75020b0d,

@@ -6,6 +6,7 @@ public class Facility : MonoBehaviour
 {
     public long id;
     public Dictionary<int, int> materials;
+    public Dictionary<int, int> commited; 
     // Start is called before the first frame update
     void Start()
     {

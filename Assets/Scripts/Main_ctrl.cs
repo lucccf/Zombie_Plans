@@ -268,6 +268,12 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Facility] = fa;
                     fa.id = cnt;
                     fa.materials = info.materials;
+                    Dictionary<int, int> newCommited = new Dictionary<int, int>();
+                    foreach (KeyValuePair<int, int> mat in info.materials)
+                    {
+                        newCommited.Add(mat.Key, 0);
+                    }
+                    fa.commited = newCommited;
                     Flow_path.facilities[cnt] = fa;
                     break;
                 case Object_ctrl.class_name.Tinymap:
