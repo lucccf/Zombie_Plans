@@ -17,7 +17,27 @@ public class BasicCharacter : MonoBehaviour
     protected Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
 
     protected int AnimaStatus = 0;
+    protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
+
+    protected enum StatusType
+    {
+        Normal,
+        Attack,
+        LittleJump,
+        Jump,
+        Death,
+        Fall,
+        Hit,
+        Ground,
+        Recover,
+        Appear,
+        Disappear,
+        Defence,
+        Skill,
+        Search,
+        Fire
+    }
 
     void Start()
     {
@@ -43,6 +63,11 @@ public class BasicCharacter : MonoBehaviour
     protected void ChangeStatus(int animastatus)
     {
         AnimaStatus = animastatus;
+        StatusTime = new Fixpoint(0, 0);
+    }
+    protected void ChangeStatus(StatusType realstatus)
+    {
+        RealStatus = realstatus;
         StatusTime = new Fixpoint(0, 0);
     }
     protected void Moves(float toward,Fixpoint speed)

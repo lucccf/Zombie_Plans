@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Knight : Monster
 {
     private Animator animator;
-    private float AnimaSpeed = 0f;
-    private int AnimaAttack = 0;
-    private int AnimaHited = 0;
+    protected float KnightAnimaSpeed = 0f;
+    protected int KnightAnimaAttack = 0;
+    protected int KnightAnimaHited = 0;
     void Start()
     {
         SetStatus(1000, 10);//血量，基础攻击力
@@ -18,10 +17,10 @@ public class Knight : Monster
     // Update is called once per frame
     void Update()
     {
-        animator.SetFloat("speed", AnimaSpeed);
+        animator.SetFloat("speed", KnightAnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
-        animator.SetInteger("attack", AnimaAttack);
-        animator.SetInteger("hited", AnimaHited);
+        animator.SetInteger("attack", KnightAnimaAttack);
+        animator.SetInteger("hited", KnightAnimaHited);
         animator.SetInteger("status", AnimaStatus);
     }
 
@@ -31,41 +30,62 @@ public class Knight : Monster
         status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
         if(status.death == true && AnimaStatus != 8)
         {
-            ChangeStatus(8);
+            ChangeStatus(StatusType.Death);
         }
-        switch (AnimaStatus)
+        if(AnimaStatus != 3 && AnimaStatus != 5 && AnimaStatus !=8 && AnimaStatus != 6)
         {
-            case 0:
+            int hited = KnightGetHited();
+            if (hited != 0)
+            {
+                ChangeStatus(StatusType.Hit);
+                KnightAnimaAttack = 0;
+                SkillAttackTimes = 0;
+            }
+        }
+        switch (RealStatus)
+        {
+            case StatusType.Normal:
+                AnimaStatus = 0;
                 Normal();
                 break;
-            case 1:
+            case StatusType.Jump:
+                AnimaStatus = 1;
                 Jump(0);
                 break;
-            case 2:
+            case StatusType.Attack:
+                AnimaStatus = 2;
                 Attack(false);
                 break;
-            case 3:
+            case StatusType.Defence:
+                AnimaStatus = 3;
                 Defence();
                 break;
-            case 4:
+            case StatusType.Skill:
+                AnimaStatus = 4;
                 Skill();
                 break;
-            case 5:
+            case StatusType.Hit:
+                AnimaStatus = 5;
                 Hited();
                 break;
-            case 6:
+            case StatusType.Ground:
+                AnimaStatus = 6;
                 Ground();
                 break;
-            case 7:
+            case StatusType.Fall:
+                AnimaStatus = 7;
                 Fall();
                 break;
-            case 8:
+            case StatusType.Death:
+                AnimaStatus = 8;
                 Death();
                 break;
-            case 9:
+            case StatusType.Search:
+                AnimaStatus = 9;
                 Search();
                 break;
-            case 10:
+            case StatusType.LittleJump:
+                AnimaStatus = 10;
                 LittleJump(0);
                 break;
         }
@@ -76,20 +96,20 @@ public class Knight : Monster
 
         if (status.GetToughness() >= 20)
         {
-            AnimaHited = 0;
+            KnightAnimaHited = 0;
             return 0;
         }
         else if (status.GetToughness() >= 0)
         {
-            AnimaHited = 1;
-            AnimaStatus = 5;
+            KnightAnimaHited = 1;
+            RealStatus = StatusType.Hit;
             if (this_hited == true)
                 StatusTime = new Fixpoint(0, 0);
             return 1;
         } else
         {
-            AnimaHited = 2;
-            AnimaStatus = 5;
+            KnightAnimaHited = 2;
+            RealStatus = StatusType.Hit;
             if (this_hited == true)
             {
                 StatusTime = new Fixpoint(0, 0);
@@ -161,7 +181,7 @@ public class Knight : Monster
         return CheckToughStatus(this_hited);
     }
 
-    private int KnightGetNear(ref Fixpoint nearx)
+    protected int KnightGetNear(ref Fixpoint nearx)
     {
         Fixpoint Min = new Fixpoint(10000000, 0);
         Fixpoint Minx = new Fixpoint(100, 0);
@@ -198,16 +218,11 @@ public class Knight : Monster
 
     private void Normal()
     {
-        AnimaSpeed = 5f;
-        int hited = KnightGetHited();
-        if (hited != 0) {
-            ChangeStatus(5);
-            return; 
-        }
-
+        KnightAnimaSpeed = 5f;
+        
         if(!f.onground)
         {
-            ChangeStatus(7);
+            ChangeStatus(StatusType.Fall);
             return;
         }
 
@@ -241,8 +256,7 @@ public class Knight : Monster
             {
                 if (f.pos.x < Nearx) AnimaToward = 1;
                 else AnimaToward = -1;
-                StatusTime = new Fixpoint(0, 0);
-                AnimaStatus = 2;
+                ChangeStatus(StatusType.Attack);
                 Attack(true);
                 return;
             }
@@ -250,11 +264,11 @@ public class Knight : Monster
             {
                 if (Rand.rand() % 2 == 0)
                 {
-                    ChangeStatus(3);
+                    ChangeStatus(StatusType.Defence);
                 }
                 else
                 {
-                    ChangeStatus(4);
+                    ChangeStatus(StatusType.Skill);
                 }
                 return;
             }
@@ -274,12 +288,12 @@ public class Knight : Monster
         }
         else //否则寻路
         {
-            ChangeStatus(9);
+            ChangeStatus(StatusType.Search);
         }
     }
 
 
-    private bool CreatedAttack = false;
+    private bool KnightCreatedAttack = false;
     private Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
     private Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
     private Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
@@ -291,66 +305,58 @@ public class Knight : Monster
     private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
     private Fixpoint Attack2Damage = new Fixpoint(4, 0);
     private Fixpoint Attack3Damage = new Fixpoint(4, 0);
-    private void AttackToNext()
+    protected virtual void AttackToNext()
     {
-        CreatedAttack = false;
-        AnimaAttack = AnimaAttack + 1;
+        KnightCreatedAttack = false;
+        KnightAnimaAttack = KnightAnimaAttack + 1;
         StatusTime = new Fixpoint(0, 0);
     }
-    private void RemoveAttack()
+    protected virtual void RemoveAttack()
     {
-        AnimaAttack = 0;
-        ChangeStatus(0);
+        KnightAnimaAttack = 0;
+        ChangeStatus(StatusType.Normal);
         return;
     }
-    private void KnightCreateAttack(Fixpoint damage)
+    protected void KnightCreateAttack(Fixpoint damage , ref bool created_attack)
     {
-        CreatedAttack = true;
+        created_attack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
         CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 40, AnimaToward);
-
     }
     private void Attack(bool first)
     {
-        int hited = KnightGetHited();
-        if (hited != 0)
-        {
-            AnimaAttack = 0;
-            return;
-        }
-
         Fixpoint Near = GetNearDistance();
         if (first == true)
         {
             AttackToNext();
         }
-        else if (AnimaAttack  == 1)
+        else if (KnightAnimaAttack == 1)
         {
             if (StatusTime > Attack1DuringTime)
             {
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack1Damage);
+            if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack1Damage,ref KnightCreatedAttack);
         }
-        else if (AnimaAttack == 2)
+        else if (KnightAnimaAttack == 2)
         {
             if (StatusTime > Attack2DuringTime)
             {
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack2Damage);
+            if (StatusTime > Attack2BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack2Damage, ref KnightCreatedAttack);
         }
-        else if (AnimaAttack == 3)
+        else if (KnightAnimaAttack == 3)
         {
             if (StatusTime > Attack3DuringTime)
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) KnightCreateAttack(Attack3Damage);
+            if (StatusTime > Attack3BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack3Damage, ref KnightCreatedAttack);
         }
 
         if (StatusTime <= new Fixpoint(2, 1))
@@ -366,13 +372,8 @@ public class Knight : Monster
         }
     }
 
-    private void Jump(int type)
+    protected void Jump(int type)
     {
-        int hited = KnightGetHited();
-        if (hited != 0)
-        {
-            return;
-        }
         if (type == 1)
         {
             AnimaToward = 1;
@@ -387,7 +388,7 @@ public class Knight : Monster
         {
             if (f.onground)
             {
-                ChangeStatus(0);
+                ChangeStatus(StatusType.Normal);
             }
             if (StatusTime > new Fixpoint(1, 0))
             {
@@ -408,14 +409,14 @@ public class Knight : Monster
         int hit = KnightGetHited();
         if(hit == 0)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
         else if(hit == 2)
         {
             status.toughness = -100;
             if(f.onground && StatusTime > new Fixpoint(3,1))
             {
-                ChangeStatus(6);
+                ChangeStatus(StatusType.Ground);
             }
         }
     }
@@ -428,7 +429,7 @@ public class Knight : Monster
         int hited = DefenceGetHited();
         if (hited != 0)
         {
-            ChangeStatus(5);
+            ChangeStatus(StatusType.Hit);
             status.defence_rate = new Fixpoint(1, 0);
             Debug.Log(status.toughness);
             return;
@@ -436,7 +437,7 @@ public class Knight : Monster
         if (StatusTime > DefenceTime)
         {
             status.defence_rate = new Fixpoint(1, 0);
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
 
@@ -447,12 +448,12 @@ public class Knight : Monster
     private int SkillAttackTimes = 0;
     private void Skill()
     {
-        int hited = KnightGetHited();
-        if (hited != 0)
-        {
-            SkillAttackTimes = 0;
-            return;
-        }
+        //int hited = KnightGetHited();
+        //if (hited != 0)
+        //{
+        //    SkillAttackTimes = 0;
+        //    return;
+        //}
         if(StatusTime < SkillBeginToHitTime) 
         { 
             Fixpoint Pos = GetNear();
@@ -478,34 +479,34 @@ public class Knight : Monster
         if(StatusTime > SkillDruingTime)
         {
             SkillAttackTimes = 0;
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
 
     private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
-    private void Ground()
+    protected void Ground()
     {
         RemoveHited();
-        AnimaHited = 0;
+        KnightAnimaHited = 0;
         if (StatusTime > OnGroundTime)
         {
             status.toughness = 100;
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
 
-    private void Fall()
+    protected void Fall()
     {
         if(f.onground)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
 
-    private void Death()
+    protected void Death()
     {
-        AnimaHited = 0;
-        AnimaAttack = 0;
+        KnightAnimaHited = 0;
+        KnightAnimaAttack = 0;
         if(StatusTime > new Fixpoint(3,0))
         {
             Main_ctrl.Desobj(id);
@@ -513,13 +514,8 @@ public class Knight : Monster
     }
 
     private int last_pos = -1;
-    private void Search()
+    protected void Search()
     {
-        int hited = KnightGetHited();
-        if (hited != 0)
-        {
-            return;
-        }
         int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
         if(x == -1)
         {
@@ -530,7 +526,7 @@ public class Knight : Monster
             {
                 f.pos.x -= status.WalkSpeed * Dt.dt;
             }
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
         last_pos = x;
@@ -540,18 +536,18 @@ public class Knight : Monster
 
         if(y ==  -1)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
         if(x == y)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
         Main_ctrl.TranslateMethod method = Main_ctrl.Guide(x, y);
         if(method.able == false)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
         if (f.pos.x < method.pos - new Fixpoint(1,1))
@@ -567,11 +563,11 @@ public class Knight : Monster
             switch(method.action)
             {
                 case Main_ctrl.node.TravelType.LittleJumpLeft:
-                    ChangeStatus(10);
+                    ChangeStatus(StatusType.LittleJump);
                     LittleJump(-1);
                     break;
                 case Main_ctrl.node.TravelType.LittleJumpRight:
-                    ChangeStatus(10);
+                    ChangeStatus(StatusType.LittleJump);
                     LittleJump(1);
                     break;
                 case Main_ctrl.node.TravelType.Fall:
@@ -584,11 +580,11 @@ public class Knight : Monster
                     }
                     break;
                 case Main_ctrl.node.TravelType.JumpLeft:
-                    ChangeStatus(1);
+                    ChangeStatus(StatusType.Jump);
                     Jump(-1);
                     break;
                 case Main_ctrl.node.TravelType.JumpRight:
-                    ChangeStatus(1);
+                    ChangeStatus(StatusType.Jump);
                     Jump(1);
                     break;
             }
@@ -596,13 +592,13 @@ public class Knight : Monster
 
     }
 
-    private void LittleJump(int type)
+    protected void LittleJump(int type)
     {
-        int hited = KnightGetHited();
-        if (hited != 0)
-        {
-            return;
-        }
+        //int hited = KnightGetHited();
+        //if (hited != 0)
+        //{
+        //    return;
+        //}
         if (type == 1)
         {
             AnimaToward = 1;
@@ -615,7 +611,7 @@ public class Knight : Monster
         {
             if(f.onground)
             {
-                ChangeStatus(0);
+                ChangeStatus(StatusType.Normal);
             }
             if(AnimaToward > 0)
             {

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Xml;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class Map_create : MonoBehaviour
