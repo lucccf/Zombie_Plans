@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3478019365
+CRC: 2649785439
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 385b74206c58fcd291b12dcf017d8b63
+    Hash: 7e147b7a09e0399ae408610bd916ce05
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8c3b0351dbcf7ed8a854f8a017d356d7
+    Hash: 075bc33e3f1653fa94413926193f9e1a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -63,6 +63,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: aee607920057d704fb5ac714f0990cc9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -98,6 +100,7 @@ Assets:
 - Assets/Resources/Prefabs/number/1.png
 - Assets/Resources/Prefabs/number/77.png
 - Assets/Resources/Prefabs/number/8.png
+- Assets/Resources/Prefabs/Mage.prefab
 - Assets/Resources/Prefabs/number/66.png
 - Assets/Resources/Prefabs/number/00.png
 - Assets/Resources/Prefabs/HurtNumber.prefab

@@ -16,7 +16,7 @@ public class Monster_create : MonoBehaviour
             Obj_info p = new Obj_info();
             if (pos_monster[i].x < new Fixpoint(130, 0))
             {
-                p.name = "Monster1";
+                p.name = "Mage";
             }
             else
             {
