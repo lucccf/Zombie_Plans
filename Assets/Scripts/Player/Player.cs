@@ -145,6 +145,7 @@ public class Player : BasicCharacter
     }
     public override void Updatex()
     {
+        Debug.Log(Main_ctrl.CalPos(f.pos.x, f.pos.y));
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值

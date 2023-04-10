@@ -1,7 +1,10 @@
 ﻿using Net;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.XR;
 
 public class Main_ctrl : MonoBehaviour
 {
@@ -17,6 +20,11 @@ public class Main_ctrl : MonoBehaviour
     
     private static Dictionary<int,Item>ItemList = new Dictionary<int,Item>();
 
+    public static List<List<int>> holes = new List<List<int>>();
+    public static List<List<int>> walls = new List<List<int>>();
+    public static int wall_len;
+    public static int hole_len;
+    private static List<List<node>> MapNode;
 
     float t;
     float dt = 0.033f;
@@ -61,7 +69,7 @@ public class Main_ctrl : MonoBehaviour
         Debug.Log("???");
         Player_ctrl.Init_bag();
         Debug.Log("???");
-
+        CalRoad();
         Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < Items.Length; ++i)
         {
@@ -69,6 +77,289 @@ public class Main_ctrl : MonoBehaviour
         }
 
         Play_create();
+    }
+
+    public struct node
+    {
+        public int id;
+        public int idx;
+        public int left,right;
+        public enum type
+        {
+            wall,
+            hole
+        };
+        public enum TravelType
+        {
+            Fall,
+            JumpLeft,
+            JumpRight,
+            LittleJumpLeft,
+            LittleJumpRight
+        };
+        public type LeftType, RightType;
+        public List<int> to;
+        public List<Fixpoint> pos;
+        public List<TravelType> action;
+        public node (int id,int posx,int posyl,int posyr,type x,type y)
+        {
+            this.id = id;
+            this.idx = posx;
+            this.left = posyl;
+            this.right = posyr;
+            this.to = new List<int>();
+            this.pos = new List<Fixpoint>();
+            this.action = new List<TravelType>();
+            this.LeftType = x;
+            this.RightType = y;
+        }
+    }
+    public struct TranslateMethod
+    {
+        public TranslateMethod(Fixpoint pos, node.TravelType action)
+        {
+            this.pos = pos;
+            this.action = action;
+            able = true;
+        }
+        public Fixpoint pos;
+        public node.TravelType action;
+        public bool able;
+    }
+    public static int PostionToY(Fixpoint num)
+    {
+        int Num = (new Fixpoint(5,1) + num).to_int();
+        Num = -Num;
+        return Num / 9 + 1;
+    }
+    private static TranslateMethod[,] TranslateTo;
+    public static TranslateMethod Guide(Fixpoint x, Fixpoint y, Fixpoint tox, Fixpoint toy)
+    {
+        int from = CalPos(tox, toy);
+        int to = CalPos(tox, toy);
+        return TranslateTo[from,to];
+    }
+    public static TranslateMethod Guide(int x,int y)
+    {
+        return TranslateTo[x, y];
+    }
+    public static int CalPos(Fixpoint posx , Fixpoint posy)
+    {
+        int x = (posx + new Fixpoint(5, 1)).to_int();
+        int y = PostionToY(posy);
+        int l = 1, r = MapNode[y].Count - 1;
+        while(l!=r)
+        {
+            int mid = (l + r) / 2;
+            if (MapNode[y][mid].right < x)
+            {
+                l = mid + 1;
+            } else
+            {
+                r = mid;
+            }
+        }
+        if (MapNode[y][l].left <= x && MapNode[y][l].right >= x) return MapNode[y][l].id;
+        else return -1;
+    }
+    public static node GetMapNode(Fixpoint posx, Fixpoint posy)
+    {
+        int x = (posx + new Fixpoint(5, 1)).to_int();
+        int y = PostionToY(posy);
+        int l = 1, r = MapNode[y].Count - 1;
+        while (l != r)
+        {
+            int mid = (l + r) / 2;
+            if (MapNode[y][mid].right < x)
+            {
+                l = mid + 1;
+            }
+            else
+            {
+                r = mid;
+            }
+        }
+        if (MapNode[y][l].left <= x && MapNode[y][l].right >= x) return MapNode[y][l];
+        else return new node();
+    }
+    private static void CalRoad()
+    {
+        List<List<node>> nodes;
+        int NodeCount = 0;
+        nodes = new List<List<node>>();
+        nodes.Add(new List<node>());
+        for (int i = 1; i < walls.Count; ++i)
+        {
+            nodes.Add(new List<node>());
+            List<int> wall = walls[i];
+            List<int> hole = holes[i];
+            node.type last = node.type.wall;
+            int lastpos = 0;
+            for (int j = 0, k = 1; j < wall.Count || k < hole.Count;)
+            {
+                if (j >= wall.Count || (wall[j] > hole[k] && k < hole.Count))
+                {
+                    if (hole[k] <= lastpos)
+                    {
+                        last = node.type.hole;
+                        lastpos = hole[k] + hole_len;
+                        ++k;
+                        continue;
+                    }
+                    ++NodeCount;
+                    nodes[i].Add(new node(NodeCount,i,lastpos, hole[k],last,node.type.hole));
+                    last = node.type.hole;
+                    lastpos = hole[k] + hole_len;
+                    ++k;
+                } else
+                {
+                    if(wall[j] - wall_len <= lastpos)
+                    {
+                        last = node.type.wall;
+                        lastpos = wall[j] + wall_len;
+                        ++j;
+                        continue;
+                    }
+                    ++NodeCount;
+                    nodes[i].Add(new node(NodeCount ,i,lastpos, wall[j] - wall_len,last,node.type.wall));
+                    last = node.type.wall;
+                    lastpos = wall[j] + wall_len;
+                    ++j;
+                }
+            }
+        }
+
+        for (int i=1;i< nodes.Count;++i)
+        {
+            List<node> down;
+            if (i != nodes.Count - 1)
+            {
+                down = nodes[i + 1];
+            } else
+            {
+                down = new List<node>();
+            }
+            int k = 0;
+            for(int j = 0;j< nodes[i].Count;++j)
+            {
+                if(j!= 0 && nodes[i][j].LeftType == node.type.hole && nodes[i][j].left == nodes[i][j-1].right + hole_len)
+                {
+                    nodes[i][j].action.Add(node.TravelType.LittleJumpLeft);
+                    nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].left, 0));
+                    nodes[i][j].to.Add(nodes[i][j - 1].id);
+                    nodes[i][j-1].action.Add(node.TravelType.LittleJumpRight);
+                    nodes[i][j-1].pos.Add(new Fixpoint(nodes[i][j-1].right, 0));
+                    nodes[i][j-1].to.Add(nodes[i][j].id);
+
+                }
+                if (nodes[i][j].LeftType == node.type.hole)
+                {
+                    while (k < down.Count && down[k].right < nodes[i][j].left - (hole_len + 1) / 2)
+                    {
+                        ++k;
+                        Debug.Log(i + " y " + k);
+                    }
+                    if (k < down.Count && down[k].left < nodes[i][j].left - (hole_len + 1) / 2)
+                    {
+                        nodes[i][j].action.Add(node.TravelType.Fall);
+                        nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].left - (hole_len + 1) / 2, 0));
+                        nodes[i][j].to.Add(down[k].id);
+                        down[k].action.Add(node.TravelType.JumpRight);
+                        down[k].pos.Add(new Fixpoint(nodes[i][j].left - (hole_len + 1) / 2, 0));
+                        down[k].to.Add(nodes[i][j].id);
+                    }
+                }
+                if (nodes[i][j].RightType == node.type.hole) 
+                { 
+                    while (k < down.Count && down[k].right < nodes[i][j].right + (hole_len + 1) / 2)
+                    {
+                        ++k;
+                    }
+                    if (k < down.Count && down[k].left < nodes[i][j].right + (hole_len + 1) / 2)
+                    {
+                        nodes[i][j].action.Add(node.TravelType.Fall);
+                        nodes[i][j].pos.Add(new Fixpoint(nodes[i][j].right + (hole_len + 1) / 2, 0));
+                        nodes[i][j].to.Add(down[k].id);
+                        down[k].action.Add(node.TravelType.JumpLeft);
+                        down[k].pos.Add(new Fixpoint(nodes[i][j].right + (hole_len + 1) / 2, 0));
+                        down[k].to.Add(nodes[i][j].id);
+                    }
+                }
+            }
+        }
+        /*
+        for (int i = 1; i < nodes.Count; ++i)
+        {
+            for (int j = 0; j < nodes[i].Count; ++j)
+            {
+                GameObject g =Instantiate((GameObject)Resources.Load("Prefabs/HurtNumber"),new Vector3(1f * (nodes[i][j].left + nodes[i][j].right) / 2,
+                    nodes[i][j].idx * -9 + 4, -1f),Quaternion.identity);
+                g.GetComponent<BeatNumber>().ChangeNumber(nodes[i][j].id);
+               // Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
+               //     nodes[i][j].LeftType + " " + nodes[i][j].RightType);
+               // for(int k = 0; k < nodes[i][j].to.Count;++k)
+                //{
+                    //Debug.Log(nodes[i][j].action[k] + " " + nodes[i][j].pos[k].to_float() + " " + nodes[i][j].to[k]);
+                //}
+            }
+        }
+        */
+        List<node> a = new List<node>();
+        a.Add(new node());
+        for (int i = 1; i < nodes.Count; ++i)
+        {
+            for (int j = 0; j < nodes[i].Count; ++j)
+            {
+                a.Add(nodes[i][j]);
+            }
+        }
+        TranslateTo = new TranslateMethod[a.Count, a.Count];
+        for (int i=1 ; i < a.Count ; ++i)
+        {
+            Queue<int> q = new Queue<int>();
+            int[] dis = new int[a.Count];
+            TranslateMethod[] beg = new TranslateMethod[a.Count];
+            for(int j=0;j<dis.Length;++j)
+            {
+                dis[j] = 0x3f3f3f3f;
+                beg[j].able = false;
+            }
+            dis[i] = 0;
+            q.Enqueue(i);
+            while(q.Count > 0)
+            {
+                int u = q.Peek();
+                q.Dequeue();
+                for(int j = 0; j < a[u].to.Count; ++j)
+                {
+                    if (dis[a[u].to[j]] > dis[u] + 1)
+                    {
+                        if (beg[u].able == true)
+                        {
+                            beg[a[u].to[j]] = beg[u];
+                        }
+                        else
+                        {
+                            beg[a[u].to[j]] = new TranslateMethod(a[u].pos[j], a[u].action[j]);
+                        }
+                        dis[a[u].to[j]] = dis[u] + 1;
+                        q.Enqueue(a[u].to[j]);
+                    }
+                }
+            }
+            for(int j = 1;j < beg.Length; ++j)
+            {
+                TranslateTo[i,j] = beg[j];
+            }
+        }
+        MapNode = nodes;
+        for(int i=1;i<=60;++i)
+        {
+            for(int j=1;j<=60;++j)
+            {
+                Debug.Log(i + " " + j + " " + Guide(i, j).able);
+            }
+        }
     }
 
     public static Item GetItemById(int id)
@@ -216,7 +507,7 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Moster:
                     Monster m = obj.GetComponent<Monster>();
-                    Debug.Log(m);
+                    //Debug.Log(m);
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];

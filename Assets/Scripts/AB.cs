@@ -58,7 +58,7 @@ public class AB : MonoBehaviour
             foreach (var y in x.allAssets)
             {
                 objs[y.name] = y;
-                Debug.Log(y.name);
+                //Debug.Log(y.name);
             }
         }
         foreach (var x in bundle_req)
@@ -69,7 +69,7 @@ public class AB : MonoBehaviour
 
     public static object getobj(string name)
     {
-        Debug.Log(name);
+        //Debug.Log(name);
         return objs[name];
         //return Resources.Load("Prefabs/" + name);
     }
