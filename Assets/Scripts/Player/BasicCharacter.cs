@@ -20,6 +20,7 @@ public class BasicCharacter : MonoBehaviour
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 
+    protected int CharacterType = 0;
     protected enum StatusType
     {
         Normal,
@@ -84,12 +85,12 @@ public class BasicCharacter : MonoBehaviour
     
     protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward)
     {
-        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false);
+        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false,CharacterType);
     }
 
     protected void CreateAttackWithCharacter(Fix_vector2 pos , Fix_vector2 with_pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward)
     {
-        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true);
+        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true, CharacterType);
     }
 
     protected void GetColider()
@@ -136,7 +137,7 @@ public class BasicCharacter : MonoBehaviour
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attakcer_id == id) continue;
+            if (attack.attacker_type == CharacterType) continue;
             
             Toward = -attack.toward;
             this_hited = true;
@@ -149,7 +150,7 @@ public class BasicCharacter : MonoBehaviour
 
             Preform(status.last_damage);
 
-            Debug.Log(HpDamage + " " + ToughnessDamage);
+            //Debug.Log(HpDamage + " " + ToughnessDamage);
 
             if (attack.type == 1)
             {

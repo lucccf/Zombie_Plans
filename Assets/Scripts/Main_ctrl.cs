@@ -422,7 +422,8 @@ public class Main_ctrl : MonoBehaviour
         CreateObj(p);
     }
 
-    public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id ,float toward,bool with)
+    public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
+        long attacker_id ,float toward,bool with,int attacker_type)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -435,6 +436,7 @@ public class Main_ctrl : MonoBehaviour
         p.col_type = Fix_col2d.col_status.Attack;
         p.toward = toward;
         p.with_pos = with_pos;
+        p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
         if(with == true)
         {
@@ -442,10 +444,11 @@ public class Main_ctrl : MonoBehaviour
         }
         Creobj(p);
     }
-    public static void NewAttack2(Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, long attacker_id, float toward)
+    public static void NewAttack2(string name,Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
+        long attacker_id, float toward,int attacker_type)
     {
         Obj_info p = new Obj_info();
-        p.name = "LightBall";
+        p.name = name;
         p.hei = high.Clone();
         p.wid = width.Clone();
         p.pos = pos.Clone();
@@ -455,6 +458,7 @@ public class Main_ctrl : MonoBehaviour
         p.col_type = Fix_col2d.col_status.Attack2;
         p.toward = toward;
         p.type = "wave";
+        p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
 
         Creobj(p);
@@ -523,6 +527,7 @@ public class Main_ctrl : MonoBehaviour
                     a.ToughnessDamage = info.ToughnessDamage;
                     a.attakcer_id = info.attacker_id;
                     a.toward = info.toward;
+                    a.attacker_type = info.attacker_type;
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
@@ -536,7 +541,11 @@ public class Main_ctrl : MonoBehaviour
                     {
                         obj.transform.localScale = new Vector3(3, 3, 1);
                     }
-                    
+                    if (info.name == "FireBall")
+                    {
+                        obj.transform.localScale = new Vector3(3, 3, 1);
+                    }
+
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();
@@ -693,6 +702,7 @@ public class Obj_info
     public int ToughnessDamage;
     public long attacker_id;
     public float toward;
+    public int attacker_type;
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
     public Obj_info()

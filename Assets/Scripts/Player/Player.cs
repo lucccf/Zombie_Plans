@@ -145,7 +145,7 @@ public class Player : BasicCharacter
     }
     public override void Updatex()
     {
-        Debug.Log(Main_ctrl.CalPos(f.pos.x, f.pos.y));
+        //Debug.Log(Main_ctrl.CalPos(f.pos.x, f.pos.y));
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
@@ -909,17 +909,17 @@ public class Player : BasicCharacter
         if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1 , 40, id, AnimaToward);
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1 , 40, id, AnimaToward, CharacterType);
         } 
         else if(StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward);
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward, CharacterType);
         }
         else if(StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward);
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward, CharacterType);
         }
         else if (StatusTime > Fire2DuringTime)
         {

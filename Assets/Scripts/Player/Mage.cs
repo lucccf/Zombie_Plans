@@ -7,6 +7,7 @@ public class Mage : Knight
     private Animator animator;
     void Start()
     {
+        CharacterType = 1;
         SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
@@ -170,9 +171,22 @@ public class Mage : Knight
         }
         else if (Location == Pos) //如果在同一区域
         {
+            Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+            Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
+            Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
             Fixpoint Dis = f.pos.x - Nearx;
             if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
-
+            if(Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))
+            {
+                if(Rand.rand()%2 == 1 || Dis > new Fixpoint(10,0))
+                {
+                    ChangeStatus(StatusType.Recover);
+                } else
+                {
+                    ChangeStatus(StatusType.Disappear);
+                }
+                return;
+            }
             if (Dis < new Fixpoint(14, 1)) //攻击
             {
                 if (f.pos.x < Nearx) AnimaToward = 1;
@@ -182,7 +196,34 @@ public class Mage : Knight
                 Attack(true);
                 return;
             }
-            else if (Dis > new Fixpoint(5, 0) && Dis < new Fixpoint(10, 0))
+            else if (Dis < new Fixpoint(3,0)) //靠近攻击
+            {
+                if (f.pos.x < Nearx)
+                {
+                    AnimaToward = 1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                else
+                {
+                    AnimaToward = -1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                return;
+            } else if(Dis < new Fixpoint(9,0) && f.pos.x > Left && f.pos.x < Right ) //远离射击
+            {
+                if (f.pos.x > Nearx)
+                {
+                    AnimaToward = 1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                else
+                {
+                    AnimaToward = -1;
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                return;
+            }
+            else if (Dis < new Fixpoint(15, 0) || f.pos.x < Left || f.pos.x > Right) //射击
             {
                 if (f.pos.x < Nearx)
                 {
@@ -207,6 +248,7 @@ public class Mage : Knight
                     AnimaToward = -1;
                     Moves(AnimaToward, status.WalkSpeed);
                 }
+                return;
             }
         }
         else //否则寻路
@@ -296,7 +338,7 @@ public class Mage : Knight
         if(StatusTime > FireBeginToHitTime && Fired == false)
         {
             Fired = true;
-            Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward);
+            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType);
         }
         if(StatusTime > FireDuringTime)
         {
@@ -315,13 +357,41 @@ public class Mage : Knight
             ChangeStatus(StatusType.Normal);
         }
     }
+    private static Fixpoint DisappearTime = new Fixpoint(1, 0);
     private void Disappaer()
     {
-
+        if(StatusTime > DisappearTime)
+        {
+            int Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+            if (Location == -1)
+            {
+                Moves(AnimaToward, status.WalkSpeed);
+            }
+            else
+            {
+                Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+                Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
+                Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
+                Fixpoint DisL = f.pos.x - Left;
+                Fixpoint DisR = Right - f.pos.x;
+                if(DisL > DisR)
+                {
+                    f.pos.x = Left + new Fixpoint(15, 1);
+                } else
+                {
+                    f.pos.x = Right - new Fixpoint(15, 1);
+                }
+            }
+            ChangeStatus(StatusType.Appear);
+        }
     }
+    private static Fixpoint AppearTime = new Fixpoint(1, 0);
     private void Appear()
     {
-
+        if(StatusTime > AppearTime)
+        {
+            ChangeStatus(StatusType.Normal);
+        }
     }
     private void Hited()
     {

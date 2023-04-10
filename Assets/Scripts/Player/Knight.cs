@@ -10,6 +10,7 @@ public class Knight : Monster
     protected int KnightAnimaHited = 0;
     void Start()
     {
+        CharacterType = 1;
         SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
@@ -144,14 +145,14 @@ public class Knight : Monster
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attakcer_id == id) continue;
+            if (attack.attacker_type == CharacterType) continue;
 
             if (attack.type == 1)
             {
                 Attack2 attack2 = (Attack2)attack;
                 if (attack2.toward * AnimaToward < 0)
                 {
-                    Main_ctrl.NewAttack2(f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward);
+                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType);
                     Main_ctrl.Desobj(attack2.id);
                 } else
                 {
@@ -212,7 +213,7 @@ public class Knight : Monster
                 nearx = i.f.pos.x;
             }
         }
-        if (Min > new Fixpoint(30, 0)) return -1;
+        if (Min > new Fixpoint(20, 0)) return -1;
         else return Main_ctrl.CalPos(Minx, Miny);
     }
 

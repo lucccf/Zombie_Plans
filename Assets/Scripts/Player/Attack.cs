@@ -14,6 +14,7 @@ public class Attack : MonoBehaviour
     public bool with_attacker = false;
     public Fix_vector2 with_pos;
     public int type;
+    public int attacker_type;
 
     protected Fixpoint AliveTime = new Fixpoint(0, 0); 
 
