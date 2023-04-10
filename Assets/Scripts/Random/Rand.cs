@@ -2,16 +2,16 @@
 
 public class Rand : MonoBehaviour
 {
-    public static long seed = 114514;
-    private static long nw = 114514;
+    public static ulong seed = 114514;
+    private static ulong nw = 114514;
 
-    public static void Setseed(long s)
+    public static void Setseed(ulong s)
     {
         seed = s;
         nw = s;
     }
 
-    public static long rand()
+    public static ulong rand()
     {
         nw ^= nw << 13;
         nw ^= nw >> 7;
