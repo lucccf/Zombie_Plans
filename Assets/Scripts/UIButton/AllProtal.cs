@@ -37,7 +37,7 @@ public class AllProtal : MonoBehaviour
         x.Opt = PlayerOpt.MovePlayer;
         x.Userid = (int)Main_ctrl.user_id;
         x.Itemid = (int)tinybutton.GetComponent<TinyProtalButton>().tinyprotalid;
-
+        gameObject.SetActive(false);
         Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
     }
 }
