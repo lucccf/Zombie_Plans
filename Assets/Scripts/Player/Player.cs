@@ -11,6 +11,15 @@ public class Player : BasicCharacter
     private float AnimaHited = 0f;
     private PlayerBag bag = new PlayerBag();
 
+    public enum Identity
+    {
+        Populace,
+        Wolf,
+        //...
+    }
+
+    public Identity identity = Identity.Populace;
+
     void Start()
     {
         animator = GetComponent<Animator>();
