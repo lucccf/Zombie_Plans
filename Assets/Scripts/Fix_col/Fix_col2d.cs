@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 public class Fix_col2d
 {
