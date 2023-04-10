@@ -574,6 +574,7 @@ public class Main_ctrl : MonoBehaviour
                     Tiny_button_cre.Create_tinybutton(info, cnt);
                     break;
                 case Object_ctrl.class_name.Protalbutton:
+                    Tiny_button_cre.Create_tinyprotalbutton(info, cnt);
                     break;
                 case Object_ctrl.class_name.Protal:
           

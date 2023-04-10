@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtalButton : MonoBehaviour
+public class TinyProtalButton : MonoBehaviour
 {
+    public long tinyprotalid;
     // Start is called before the first frame update
     void Start()
     {
