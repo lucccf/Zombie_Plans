@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Xml;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 
 public class Map_create : MonoBehaviour
@@ -68,7 +70,7 @@ public class Map_create : MonoBehaviour
             holes[i].Add(0 - hol_len);
             holes[i].Add(room_cnt * floor_wid);
             holes[i].Sort();
-            for(int j = 0; j < holes[i].Count - 1; j++)
+            for (int j = 0; j < holes[i].Count - 1; j++)
             {
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
@@ -154,7 +156,7 @@ public class Map_create : MonoBehaviour
                 info.hei = new Fixpoint(wall_hei - 3 - (hf_thick << 1), 0);
                 info.wid = new Fixpoint(hf_thick << 1, 0);
                 info.col_type = Fix_col2d.col_status.Collider;
-                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-5 * id + 1) * wall_hei * 2 , 1));
+                info.pos = new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-5 * id + 1) * wall_hei * 2, 1));
                 info.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                 info.classnames.Add(Object_ctrl.class_name.Moster);
                 Main_ctrl.CreateObj(info);
@@ -165,8 +167,8 @@ public class Map_create : MonoBehaviour
         home_info.name = "home";
         home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
         //home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
-        home_info.hei = new Fixpoint(wall_hei + 1 - (hf_thick << 1), 0);
-        home_info.wid = new Fixpoint(hf_thick << 1 + 2, 0);
+        home_info.hei = new Fixpoint(wall_hei*4, 1);
+        home_info.wid = new Fixpoint(hf_thick*5, 0);
         home_info.col_type = Fix_col2d.col_status.Trigger;
         home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-5 * 6 + 1) * wall_hei * 2, 1));
         home_info.type = "building";
@@ -197,10 +199,45 @@ public class Map_create : MonoBehaviour
 
             //Debug.Log(Bud_cnt);
 
-            Building_single_create(name, new Fixpoint(floor_hei, 0), new Fixpoint(floor_hei, 0), pos, "building", Bud_cnt++, tmp);
+            Building_single_create(name, new Fixpoint(floor_hei*3, 1), new Fixpoint(floor_hei*4, 1), pos, "building", Bud_cnt++, tmp);
 
         }
     }
+
+    public static void Protal_create()
+    {
+
+        XmlDocument ProtalxmlDoc = new XmlDocument();
+        ProtalxmlDoc.Load(Application.dataPath + "/Configs/protal.xml");
+        XmlNodeList gate_info = ProtalxmlDoc.SelectNodes("/background/gate/gate_info");
+
+        foreach (XmlNode p in gate_info)
+        {
+            Debug.Log("gate");
+            int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
+            int mill_pos = int.Parse(p.SelectSingleNode("gate_pos").InnerText);
+            string name = p.SelectSingleNode("gate_name").InnerText;
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
+
+            Obj_info protal_info = new Obj_info();
+            protal_info.name = "protal";
+            //protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+            protal_info.classnames.Add(Object_ctrl.class_name.Protalbutton);
+            protal_info.hei = new Fixpoint(floor_hei, 1);
+            protal_info.wid = new Fixpoint(floor_hei, 1);
+            protal_info.col_type = Fix_col2d.col_status.Trigger;
+            protal_info.pos = pos;
+            protal_info.type = "protal";
+            protal_info.classnames.Add(Object_ctrl.class_name.Trigger);
+            protal_info.classnames.Add(Object_ctrl.class_name.Protal);
+            GameObject gate = Main_ctrl.CreateObj(protal_info);
+            gate.transform.position = new Vector3(gate.transform.position.x, gate.transform.position.y, 10);
+
+        }
+    }
+
+
+
 
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {

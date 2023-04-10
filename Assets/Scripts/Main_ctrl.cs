@@ -63,6 +63,7 @@ public class Main_ctrl : MonoBehaviour
         Debug.Log("???");
         Map_create.Facility_create();
         Debug.Log("???");
+        Map_create.Protal_create();
         Map_create.Background_create();
         Debug.Log("???");
         Monster_create.Mon_create1();
@@ -574,6 +575,11 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Tinybutton:
                     Tiny_button_cre.Create_tinybutton(info, cnt);
+                    break;
+                case Object_ctrl.class_name.Protalbutton:
+                    break;
+                case Object_ctrl.class_name.Protal:
+          
                     break;
             }
         }

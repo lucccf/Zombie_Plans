@@ -21,6 +21,8 @@ public class Object_ctrl : MonoBehaviour
         Facility,
         Tinymap,
         Tinybutton,
+        Protalbutton,
+        Protal,
         //...
     }
 
