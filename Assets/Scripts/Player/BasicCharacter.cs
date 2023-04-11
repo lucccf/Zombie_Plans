@@ -143,6 +143,12 @@ public class BasicCharacter : MonoBehaviour
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
+
+            if(!f.onground)
+            {
+                ToughnessDamage = 1100;
+            }
+
             status.GetAttacked(HpDamage, ToughnessDamage);
 
             Preform(status.last_damage);

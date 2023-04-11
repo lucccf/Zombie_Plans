@@ -10,7 +10,8 @@ public class Player : BasicCharacter
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;
     private PlayerBag bag = new PlayerBag();
-
+    private Fixpoint QCD = new Fixpoint(0, 0);
+    private Fixpoint ECD = new Fixpoint(0, 0);
     public enum Identity
     {
         Populace,
@@ -159,6 +160,10 @@ public class Player : BasicCharacter
     public override void Updatex()
     {
         //Debug.Log(Main_ctrl.CalPos(f.pos.x, f.pos.y));
+        QCD = QCD - Dt.dt;
+        if (QCD < new Fixpoint(0, 0)) QCD = new Fixpoint(0, 0);
+        ECD = ECD - Dt.dt;
+        if (ECD < new Fixpoint(0, 0)) ECD = new Fixpoint(0, 0);
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
@@ -301,7 +306,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(18, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
             ChangeStatus(1);
             return;
         }
@@ -312,18 +317,21 @@ public class Player : BasicCharacter
             return;
         }
 
-        else if (Press[KeyCode.Q])
+        else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
+            QCD = new Fixpoint(5, 0);
             ChangeStatus(10);
             return;
         }
-        else if (Press[KeyCode.E])
+        else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
+            ECD = new Fixpoint(2, 0);
             ChangeStatus(11);
             return;
         }
     }
 
+    private int JumpNumber = 0;
     void Jump()
     {
         //跳跃
@@ -554,12 +562,23 @@ public class Player : BasicCharacter
         }
         if (f.onground)
         {
+            JumpNumber = 0;
             ChangeStatus(0);
+            return;
         }
 
         if (Press[KeyCode.J] == true)
         {
             ChangeStatus(7);
+            return;
+        }
+
+        if (Press[KeyCode.K] == true && JumpNumber == 0)
+        {
+            ++JumpNumber;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
+            ChangeStatus(1);
+            return;
         }
     }
 
@@ -970,6 +989,11 @@ public class Player : BasicCharacter
 
     private void Update()
     {
+        if(checkid() == true)
+        {
+            Player_ctrl.QCD.text = "Q:" + QCD.to_float().ToString();
+            Player_ctrl.ECD.text = "E:" + ECD.to_float().ToString();
+        }
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);

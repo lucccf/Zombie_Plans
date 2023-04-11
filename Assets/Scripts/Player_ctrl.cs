@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player_ctrl : MonoBehaviour
 {
@@ -10,11 +11,15 @@ public class Player_ctrl : MonoBehaviour
     static Item[] item;
 
     public static Bag BagUI;
+    public static Text QCD;
+    public static Text ECD;
     //public static GameObject MakeSuccessUI;
    // public static GameObject MakeFailedUI;
     public static void Init_bag()
     {
         BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
+        QCD = GameObject.Find("Canvas/QCD").GetComponent<Text>();
+        ECD = GameObject.Find("Canvas/ECD").GetComponent<Text>();
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
         //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
         //MakeSuccessUI.SetActive(false);
