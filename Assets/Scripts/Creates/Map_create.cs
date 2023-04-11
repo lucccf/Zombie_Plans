@@ -264,7 +264,7 @@ public class Map_create : MonoBehaviour
         BK_create(Rooms, "normal_pos", "BK_castle");
         BKitem_create(Rooms, "normal_pos", "bg_common");
         BK_create(Rooms, "battle_pos", "BK_monster");
-        BKitem_create(Rooms, "battle_pos", "bg_common");
+        BKitem_create(Rooms, "battle_pos", "bg_epic");
         BK_create(Rooms, "home_pos", "BK_home");
         BKitem_create(Rooms, "home_pos", "bg_common");
     }
