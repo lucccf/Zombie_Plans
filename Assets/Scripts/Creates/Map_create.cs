@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
-using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
-using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -14,6 +12,7 @@ public class Map_create : MonoBehaviour
     static int floor_cnt;
 
     static List<List<float>> col_list = new List<List<float>>();
+    static List<List<bool>> ok_list = new List<List<bool>>();
 
     public static void Wall_create()
     {
@@ -39,6 +38,14 @@ public class Map_create : MonoBehaviour
             holes.Add(new List<int>());
             walls.Add(new List<int>());
             col_list.Add(new List<float>());
+            ok_list.Add(new List<bool>());
+        }
+        for(int i = 1; i <= floor_cnt; i++)
+        {
+            for(int j = 0; j <= room_cnt; j++)
+            {
+                ok_list[i].Add(false);
+            }
         }
 
         foreach (XmlNode p in Ver_walls)
@@ -260,13 +267,14 @@ public class Map_create : MonoBehaviour
         BK_create(Rooms, "boss_pos", "BK_monster");
         BKitem_create(Rooms, "boss_pos", "bg_common");
         BK_create(Rooms, "mill_pos", "BK_castle");
-        BKitem_create(Rooms, "mill_pos", "bg_common");
+        BKitem_create(Rooms, "mill_pos", "bg_epic");
         BK_create(Rooms, "normal_pos", "BK_castle");
         BKitem_create(Rooms, "normal_pos", "bg_common");
         BK_create(Rooms, "battle_pos", "BK_monster");
-        BKitem_create(Rooms, "battle_pos", "bg_common");
+        BKitem_create(Rooms, "battle_pos", "bg_epic");
         BK_create(Rooms, "home_pos", "BK_home");
         BKitem_create(Rooms, "home_pos", "bg_common");
+        BKother_create("bg_outerlayer");
     }
 
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
@@ -277,8 +285,6 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                GameObject obj = Instantiate((GameObject)AB.getobj("BK_home"));
-                obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
                 if (xml_name == "normal_pos")
                 {
                     Monster_create.pos_monster.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid , 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
@@ -289,8 +295,44 @@ public class Map_create : MonoBehaviour
                     Monster_create.pos_zombies.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
                     Monster_create.size_zombies.Add(new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2)));
                 }
-                SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
-                spriteRenderer.size = new Vector2(floor_wid, floor_hei);
+            }
+        }
+    }
+
+    static void BKother_create(string pre_name)
+    {
+        for(int f = 1; f <= floor_cnt; f++)
+        {
+            for(int j = 1; j <= room_cnt; j++)
+            {
+                if (!ok_list[f][j])
+                {
+                    int id = f;
+                    int pos = j;
+                    int q_pi = (int)(Rand.rand() % 3 + 1);
+                    for (int i = 0; i < q_pi; i++)
+                    {
+                        float sl = (int)(Rand.rand() % 101 - 50) / 10f;
+                        float sh = (int)(Rand.rand() % 101 - 50) / 200f;
+                        float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
+                        float y1 = -(id - 0.5f) * floor_hei + sh;
+                        Debug.Log(sl + " " + sh);
+                        bool flag = true;
+                        foreach (var l in col_list[id])
+                        {
+                            if ((x1 < l + 1 && x1 > l - 1) || x1 < 0 || x1 > 250)
+                            {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (!flag) continue;
+                        int k = (int)(Rand.rand() % 3 + 1);
+                        Debug.Log(pre_name + "_" + k);
+                        GameObject obj = Instantiate((GameObject)AB.getobj(pre_name + "_" + k));
+                        obj.transform.position = new Vector3(x1, y1, 19);
+                    }
+                }
             }
         }
     }
@@ -303,16 +345,18 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
+                ok_list[id][pos] = true;
                 int q_pi = (int)(Rand.rand() % 3 + 1);
-                for(int i = 0; i < q_pi; i++)
+                for (int i = 0; i < q_pi; i++)
                 {
-                    float sl = (Rand.rand() % 101 - 50) / 10f;
+                    float sl = (int)(Rand.rand() % 101 - 50) / 15f;
+                    float sh = (int)(Rand.rand() % 101 - 50) / 200f;
                     float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
-                    float y1 = -(id - 0.5f) * floor_hei;
+                    float y1 = -(id - 0.5f) * floor_hei + sh;
                     bool flag = true;
                     foreach (var l in col_list[id])
                     {
-                        if (x1 < l + 3 && x1 > l - 3 || x1 < 0 || x1 > 280)
+                        if ((x1 < l + 1 && x1 > l - 1) || x1 < 0 || x1 > 250)
                         {
                             flag = false;
                             break;
@@ -321,11 +365,8 @@ public class Map_create : MonoBehaviour
                     if (!flag) continue;
                     int k = (int)(Rand.rand() % 3 + 1);
                     Debug.Log(pre_name + "_" + k);
-                    GameObject obj = new GameObject("pillar");
-                    SpriteRenderer ren = obj.AddComponent<SpriteRenderer>();
-                    ren.sprite = (Sprite)AB.getobj(pre_name + "_" + k);
+                    GameObject obj = Instantiate((GameObject)AB.getobj(pre_name + "_" + k));
                     obj.transform.position = new Vector3(x1, y1, 19);
-                    obj.transform.localScale = new Vector3(1.8f, 1.8f, 1f);
                 }
             }
         }
