@@ -32,7 +32,6 @@ public class AllProtal : MonoBehaviour
     }
     void HandleTinyButton(GameObject tinybutton)
     {
-        Debug.Log(tinybutton.GetComponent<TinyProtalButton>().tinyprotalid);
         PlayerOptData x = new PlayerOptData();
         x.Opt = PlayerOpt.MovePlayer;
         x.Userid = (int)Main_ctrl.user_id;
