@@ -1,5 +1,6 @@
 ﻿using Net;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class Main_ctrl : MonoBehaviour
     public static Dictionary<long, Object_ctrl> All_objs = new Dictionary<long, Object_ctrl>();
     public static Dictionary<long, long> Ser_to_cli = new Dictionary<long, long>();
 
-    public static Queue<Frame> Frames = new Queue<Frame>();
+    public static ConcurrentQueue<Frame> Frames = new ConcurrentQueue<Frame>();
     private static Queue<long> Des_objs = new Queue<long>();
     private static Queue<Obj_info> Cre_objs = new Queue<Obj_info>();
     
@@ -621,7 +622,8 @@ public class Main_ctrl : MonoBehaviour
         while(Frames.Count > 0)
         {
             ++count;
-            Frame f = Frames.Dequeue();
+            Frame f;
+            if (!Frames.TryDequeue(out f)) break;
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)

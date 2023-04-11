@@ -303,11 +303,11 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                int q = (int)(Rand.rand() % 3 + 1);
-                for(int i = 0; i < q; i++)
+                int q_pi = (int)(Rand.rand() % 3 + 1);
+                for(int i = 0; i < q_pi; i++)
                 {
                     float sl = (Rand.rand() % 101 - 50) / 10f;
-                    float x1 = (pos - 0.5f) * floor_wid + sl + (-q / 2 + i + 0.5f) * (floor_wid / q);
+                    float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
                     float y1 = -(id - 0.5f) * floor_hei;
                     bool flag = true;
                     foreach (var l in col_list[id])
