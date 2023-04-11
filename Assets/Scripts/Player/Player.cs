@@ -215,6 +215,9 @@ public class Player : BasicCharacter
             case 13:
                 Death();
                 break;
+            case 14:
+                Ground();
+                break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
@@ -306,7 +309,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
             ChangeStatus(1);
             return;
         }
@@ -550,6 +553,13 @@ public class Player : BasicCharacter
 
     private void Fall()
     {
+        int hit = PlayerGetHited();
+        if (hit != 0)
+        {
+            AnimaAttack = 0f;
+            ChangeStatus(4);
+            return;
+        }
         if (Press[KeyCode.A] == true)
         {
             AnimaToward = -1;
@@ -576,7 +586,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(15, 0));
             ChangeStatus(1);
             return;
         }
@@ -668,12 +678,28 @@ public class Player : BasicCharacter
             if (this_hited == true) StatusTime = new Fixpoint(0, 0);
             return 1;
         }
-        else
+        else if(status.GetToughness() > -1000)
         {
             AnimaHited = 4;
             AnimaStatus = 5;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+            {
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
+                StatusTime = new Fixpoint(0, 0);
+            }
+            return 2;
+        } else
+        {
+            AnimaHited = 4;
+            AnimaStatus = 5;
+            if (this_hited == true)
+            {
+                if (AnimaToward > 0)
+                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                else
+                    r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+                StatusTime = new Fixpoint(0, 0);
+            }
             return 2;
         }
     }
@@ -708,14 +734,14 @@ public class Player : BasicCharacter
 
     private void HitedFly()
     {
-        if (StatusTime > new Fixpoint(8, 1) && f.onground)
+        PlayerGetHited();
+        if (f.onground)
         {
-            ChangeStatus(0);
+            ChangeStatus(14);
             AnimaHited = 0;
-            status.RecoverToughness(new Fixpoint(1000, 0));
             return;
         }
-
+        /*
         if (AnimaToward > 0)
         {
             f.pos.x -= (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
@@ -724,6 +750,7 @@ public class Player : BasicCharacter
         {
             f.pos.x += (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
         }
+        */
     }
 
     private static Fixpoint KickBeginToHit = new Fixpoint(1, 1);
@@ -986,13 +1013,25 @@ public class Player : BasicCharacter
         AnimaHited = 0;
         AnimaSpeed = 0;
     }
+    private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
+    protected void Ground()
+    {
+        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+        RemoveHited();
+        AnimaHited = 0;
+        if (StatusTime > OnGroundTime)
+        {
+            status.toughness = 100;
+            ChangeStatus(0);
+        }
+    }
 
     private void Update()
     {
         if(checkid() == true)
         {
-            Player_ctrl.QCD.text = "Q:" + QCD.to_float().ToString();
-            Player_ctrl.ECD.text = "E:" + ECD.to_float().ToString();
+            Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+            Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
         }
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);

@@ -499,6 +499,7 @@ public class Knight : Monster
     private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
     protected void Ground()
     {
+        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
         RemoveHited();
         KnightAnimaHited = 0;
         if (StatusTime > OnGroundTime)
