@@ -249,7 +249,6 @@ public class Main_ctrl : MonoBehaviour
                     while (k < down.Count && down[k].right < nodes[i][j].left - (hole_len + 1) / 2)
                     {
                         ++k;
-                        Debug.Log(i + " y " + k);
                     }
                     if (k < down.Count && down[k].left < nodes[i][j].left - (hole_len + 1) / 2)
                     {

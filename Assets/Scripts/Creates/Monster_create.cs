@@ -46,7 +46,6 @@ public class Monster_create : MonoBehaviour
             p.col_type = Fix_col2d.col_status.Collider;
             p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
             p.classnames.Add(Object_ctrl.class_name.Moster);
-            Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
             Main_ctrl.CreateObj(p);
             Flow_path.zombie_cnt++;
         }

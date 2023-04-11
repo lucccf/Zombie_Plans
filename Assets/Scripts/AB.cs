@@ -69,7 +69,7 @@ public class AB : MonoBehaviour
 
     public static object getobj(string name)
     {
-        //Debug.Log(name);
+        Debug.Log(name);
         return objs[name];
         //return Resources.Load("Prefabs/" + name);
     }
