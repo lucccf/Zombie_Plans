@@ -134,7 +134,8 @@ namespace Net {
     /// </summary>
     [pbr::OriginalName("User_Logout")] UserLogout = 23,
     [pbr::OriginalName("Fix_Facility")] FixFacility = 24,
-  }
+        [pbr::OriginalName("Move_Player")] MovePlayer = 25,
+    }
 
   #endregion
 

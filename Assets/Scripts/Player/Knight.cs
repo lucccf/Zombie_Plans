@@ -107,7 +107,7 @@ public class Knight : Monster
             if (this_hited == true)
                 StatusTime = new Fixpoint(0, 0);
             return 1;
-        } else
+        } else if(status.toughness > -1000)
         {
             KnightAnimaHited = 2;
             RealStatus = StatusType.Hit;
@@ -116,6 +116,18 @@ public class Knight : Monster
                 StatusTime = new Fixpoint(0, 0);
                 r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
             } 
+            return 2;
+        } else
+        {
+            KnightAnimaHited = 2;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+            {
+                StatusTime = new Fixpoint(0, 0);
+                if(AnimaToward > 0)
+                r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+            }
             return 2;
         }
     }
