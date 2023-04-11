@@ -53,20 +53,13 @@ public class Main_ctrl : MonoBehaviour
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tiny_map = GameObject.Find("Tiny_map");
-        Debug.Log("???");
         Map_create.Wall_create();
-        Debug.Log("???");
         Map_create.Item_create();
-        Debug.Log("???");
         Map_create.Facility_create();
-        Debug.Log("???");
         Map_create.Protal_create();
         Map_create.Background_create();
-        Debug.Log("???");
         Monster_create.Mon_create1();
-        Debug.Log("???");
         Player_ctrl.Init_bag();
-        Debug.Log("???");
         CalRoad();
         Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < Items.Length; ++i)
@@ -351,13 +344,6 @@ public class Main_ctrl : MonoBehaviour
             }
         }
         MapNode = nodes;
-        for(int i=1;i<=60;++i)
-        {
-            for(int j=1;j<=60;++j)
-            {
-                Debug.Log(i + " " + j + " " + Guide(i, j).able);
-            }
-        }
     }
 
     public static Item GetItemById(int id)

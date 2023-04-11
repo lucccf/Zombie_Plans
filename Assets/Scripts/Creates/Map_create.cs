@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
+using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class Map_create : MonoBehaviour
     static int room_cnt;
     static int floor_wid;
     static int floor_cnt;
+
+    static List<List<float>> col_list = new List<List<float>>();
 
     public static void Wall_create()
     {
@@ -34,6 +38,7 @@ public class Map_create : MonoBehaviour
         {
             holes.Add(new List<int>());
             walls.Add(new List<int>());
+            col_list.Add(new List<float>());
         }
 
         foreach (XmlNode p in Ver_walls)
@@ -43,6 +48,7 @@ public class Map_create : MonoBehaviour
             {
                 int pos = int.Parse(x.InnerText);
                 walls[id].Add(pos);
+                col_list[id].Add(pos);
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
                 info.classnames.Add(Object_ctrl.class_name.Tinymap);
@@ -60,7 +66,10 @@ public class Map_create : MonoBehaviour
             int id = int.Parse(p.SelectSingleNode("id").InnerText);
             foreach (XmlNode x in p.SelectNodes("hole_pos"))
             {
-                holes[id].Add(int.Parse(x.InnerText));
+                int pos = int.Parse(x.InnerText);
+                col_list[id].Add(pos + 1.5f);
+                col_list[id + 1].Add(pos + 1.5f);
+                holes[id].Add(pos);
             }
         }
         for (int i = 0; i <= floor_cnt; i++)
@@ -101,22 +110,6 @@ public class Map_create : MonoBehaviour
             Main_ctrl.CreateObj(info);
         }
 
-        /*
-        for(int i = 0; i < holes.Count;++i )
-        {
-            for(int j=0;j< holes[i].Count;++j)
-            {
-                Debug.Log("hole:" + i + " " + j + " " + holes[i][j]);
-            }
-        }
-        for (int i = 0; i < walls.Count; ++i)
-        {
-            for (int j = 0; j < walls[i].Count; ++j)
-            {
-                Debug.Log("wall:" + i + " " + j + " " + walls[i][j]);
-            }
-        }
-        */
         Main_ctrl.walls = walls;
         Main_ctrl.holes = holes;
         Main_ctrl.hole_len = hol_len;
@@ -132,9 +125,9 @@ public class Map_create : MonoBehaviour
 
         int hf_thick = int.Parse(map_info.SelectSingleNode("floor_half_thick").InnerText);
         int wall_hei = int.Parse(map_info.SelectSingleNode("floor_hei").InnerText);
-        int room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
-        int floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
-        int floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
+        room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
+        floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
+        floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
 
         List<List<int>> holes = new List<List<int>>();
         for (int i = 0; i <= floor_cnt; i++)
@@ -211,7 +204,6 @@ public class Map_create : MonoBehaviour
 
         foreach (XmlNode p in gate_info)
         {
-            Debug.Log("gate");
             int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
             int mill_pos = int.Parse(p.SelectSingleNode("gate_pos").InnerText);
             string name = p.SelectSingleNode("gate_name").InnerText;
@@ -233,8 +225,6 @@ public class Map_create : MonoBehaviour
 
         }
     }
-
-
 
 
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
@@ -268,10 +258,15 @@ public class Map_create : MonoBehaviour
         floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
 
         BK_create(Rooms, "boss_pos", "BK_monster");
+        BKitem_create(Rooms, "boss_pos", "bg_common");
         BK_create(Rooms, "mill_pos", "BK_castle");
+        BKitem_create(Rooms, "mill_pos", "bg_common");
         BK_create(Rooms, "normal_pos", "BK_castle");
+        BKitem_create(Rooms, "normal_pos", "bg_common");
         BK_create(Rooms, "battle_pos", "BK_monster");
+        BKitem_create(Rooms, "battle_pos", "bg_common");
         BK_create(Rooms, "home_pos", "BK_home");
+        BKitem_create(Rooms, "home_pos", "bg_common");
     }
 
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
@@ -282,7 +277,7 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
-                GameObject obj = Instantiate((GameObject)AB.getobj(pre_name));
+                GameObject obj = Instantiate((GameObject)AB.getobj("BK_home"));
                 obj.transform.position = new Vector3((pos - 0.5f) * floor_wid, - (id - 0.5f) * floor_hei, 20);
                 if (xml_name == "normal_pos")
                 {
@@ -296,6 +291,42 @@ public class Map_create : MonoBehaviour
                 }
                 SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
                 spriteRenderer.size = new Vector2(floor_wid, floor_hei);
+            }
+        }
+    }
+
+    static void BKitem_create(XmlNodeList Rooms, string xml_name, string pre_name)
+    {
+        foreach (XmlNode p in Rooms)
+        {
+            int id = int.Parse(p.SelectSingleNode("id").InnerText);
+            foreach (XmlNode x in p.SelectNodes(xml_name))
+            {
+                int pos = int.Parse(x.InnerText);
+                int q = (int)(Rand.rand() % 3 + 1);
+                for(int i = 0; i < q; i++)
+                {
+                    float sl = (Rand.rand() % 101 - 50) / 10f;
+                    float x1 = (pos - 0.5f) * floor_wid + sl + (-q / 2 + i + 0.5f) * (floor_wid / q);
+                    float y1 = -(id - 0.5f) * floor_hei;
+                    bool flag = true;
+                    foreach (var l in col_list[id])
+                    {
+                        if (x1 < l + 3 && x1 > l - 3 || x1 < 0 || x1 > 280)
+                        {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (!flag) continue;
+                    int k = (int)(Rand.rand() % 3 + 1);
+                    Debug.Log(pre_name + "_" + k);
+                    GameObject obj = new GameObject("pillar");
+                    SpriteRenderer ren = obj.AddComponent<SpriteRenderer>();
+                    ren.sprite = (Sprite)AB.getobj(pre_name + "_" + k);
+                    obj.transform.position = new Vector3(x1, y1, 19);
+                    obj.transform.localScale = new Vector3(1.8f, 1.8f, 1f);
+                }
             }
         }
     }
