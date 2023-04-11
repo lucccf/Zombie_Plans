@@ -351,13 +351,6 @@ public class Main_ctrl : MonoBehaviour
             }
         }
         MapNode = nodes;
-        for(int i=1;i<=60;++i)
-        {
-            for(int j=1;j<=60;++j)
-            {
-                Debug.Log(i + " " + j + " " + Guide(i, j).able);
-            }
-        }
     }
 
     public static Item GetItemById(int id)
