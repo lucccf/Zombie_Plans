@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 3452924560240152835}
   - component: {fileID: 3452924560240152832}
   m_Layer: 5
-  m_Name: "\u51B7\u5374\u65F6\u95F4"
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
