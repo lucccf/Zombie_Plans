@@ -309,7 +309,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
             ChangeStatus(1);
             return;
         }
@@ -553,6 +553,13 @@ public class Player : BasicCharacter
 
     private void Fall()
     {
+        int hit = PlayerGetHited();
+        if (hit != 0)
+        {
+            AnimaAttack = 0f;
+            ChangeStatus(4);
+            return;
+        }
         if (Press[KeyCode.A] == true)
         {
             AnimaToward = -1;
@@ -579,7 +586,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(12, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(15, 0));
             ChangeStatus(1);
             return;
         }
@@ -675,18 +682,24 @@ public class Player : BasicCharacter
         {
             AnimaHited = 4;
             AnimaStatus = 5;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+            {
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
+                StatusTime = new Fixpoint(0, 0);
+            }
             return 2;
         } else
         {
             AnimaHited = 4;
             AnimaStatus = 5;
-            if (AnimaToward > 0)
-                r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
-            else 
-                r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
-            StatusTime = new Fixpoint(0, 0);
+            if (this_hited == true)
+            {
+                if (AnimaToward > 0)
+                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                else
+                    r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+                StatusTime = new Fixpoint(0, 0);
+            }
             return 2;
         }
     }
@@ -721,7 +734,8 @@ public class Player : BasicCharacter
 
     private void HitedFly()
     {
-        if (StatusTime > new Fixpoint(8, 1) && f.onground)
+        PlayerGetHited();
+        if (f.onground)
         {
             ChangeStatus(14);
             AnimaHited = 0;
@@ -1016,7 +1030,7 @@ public class Player : BasicCharacter
     {
         if(checkid() == true)
         {
-            Player_ctrl.QCD.text = (((int)(QCD.to_float()*10))*1.0/10).ToString();
+            Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
             Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
         }
         animator.SetFloat("speed", AnimaSpeed);
