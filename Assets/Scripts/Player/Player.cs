@@ -152,8 +152,11 @@ public class Player : BasicCharacter
                 }
                 break;
             case PlayerOpt.MovePlayer:
-                Fix_vector2 pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
-                f.pos = pos.Clone();
+                if (identity == Identity.Wolf)
+                {
+                    Fix_vector2 pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
+                    f.pos = pos.Clone();
+                }
                 break;
         }
     }
