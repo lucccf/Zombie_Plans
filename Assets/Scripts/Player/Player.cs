@@ -24,7 +24,7 @@ public class Player : BasicCharacter
     void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(100000, 10);
+        SetStatus(100000, 10);//血量。基础攻击力
     }
 
     HashSet<PlayerOpt> list;
@@ -315,7 +315,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));//跳跃起始速度
             ChangeStatus(1);
             return;
         }
@@ -328,13 +328,13 @@ public class Player : BasicCharacter
 
         else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
-            QCD = new Fixpoint(5, 0);
+            QCD = new Fixpoint(5, 0);//Q的CD
             ChangeStatus(10);
             return;
         }
         else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
-            ECD = new Fixpoint(2, 0);
+            ECD = new Fixpoint(2, 0);//E的CD
             ChangeStatus(11);
             return;
         }
@@ -364,7 +364,7 @@ public class Player : BasicCharacter
             AnimaToward = 1;
             f.pos.x = f.pos.x + Dt.dt * status.WalkSpeed;
         }
-        if (StatusTime > new Fixpoint(5, 1) && !f.onground)
+        if (StatusTime > new Fixpoint(5, 1) && !f.onground)//跳的持续时间
         {
             ChangeStatus(6);
         }
@@ -592,7 +592,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(15, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(15, 0));//二段跳的起始速度
             ChangeStatus(1);
             return;
         }
@@ -663,7 +663,7 @@ public class Player : BasicCharacter
             AnimaHited = 0;
             return 0;
         }
-        else if (status.GetToughness() < 75 && status.GetToughness() >= 50)
+        else if (status.GetToughness() < 75 && status.GetToughness() >= 50)//韧性值阶段
         {
             AnimaHited = 1;
             AnimaStatus = 4;
@@ -724,15 +724,15 @@ public class Player : BasicCharacter
             ChangeStatus(0);
             return;
         }
-        if (StatusTime < new Fixpoint(2, 1))
+        if (StatusTime < new Fixpoint(2, 1))//受击后退的时间
         {
             if (AnimaToward > 0)
             {
-                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);//击退位移的速度
             }
             else
             {
-                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);//击退位移的速度
             }
         }
 
@@ -861,7 +861,7 @@ public class Player : BasicCharacter
     {
         if(first == true)
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));//升龙拳向上的速度
         }
 
         int hit = PlayerGetHited();
@@ -876,11 +876,11 @@ public class Player : BasicCharacter
         {
             if(AnimaToward > 0)
             {
-                f.pos.x += new Fixpoint(1, 0) * Dt.dt;
+                f.pos.x += new Fixpoint(1, 0) * Dt.dt;//升龙拳x轴速度
             }
             else
             {
-                f.pos.x -= new Fixpoint(1, 0) * Dt.dt;
+                f.pos.x -= new Fixpoint(1, 0) * Dt.dt;//升龙拳x轴速度
             }
         }
 
@@ -891,7 +891,7 @@ public class Player : BasicCharacter
                 new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 120, AnimaToward);
         }
 
-        if(f.onground && StatusTime > new Fixpoint(5,1))
+        if(f.onground && StatusTime > new Fixpoint(5,1))//最短进入下蹲状态的时间
         {
             UpAttackHasHited = false;
             ChangeStatus(16);
@@ -1001,7 +1001,7 @@ public class Player : BasicCharacter
         }
     }
 
-    private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); 
+    private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); //喝药的时间
     private void RecoverHp(bool first)
     {
         int hit = PlayerGetHited();
@@ -1017,7 +1017,7 @@ public class Player : BasicCharacter
         if(StatusTime > RecoverHpDuringTime)
         {
             ChangeStatus(0);
-            status.RecoverHp(100);
+            status.RecoverHp(100);//恢复的血量
         }
     }
 
@@ -1036,13 +1036,13 @@ public class Player : BasicCharacter
         if(GroundTimes == 0)
         {
             ++GroundTimes;
-            r.velocity.y = new Fixpoint(3, 0);
+            r.velocity.y = new Fixpoint(3, 0);//向上弹的速度
             if (r.velocity.x < new Fixpoint(0,0))
             {
-                r.velocity.y = new Fixpoint(-3, 0);
+                r.velocity.x = new Fixpoint(-3, 0);//x轴的速度
             } else if (r.velocity.x > new Fixpoint(0,0))
             {
-                r.velocity.y = new Fixpoint(3, 0);
+                r.velocity.x = new Fixpoint(3, 0);//x轴的速度
             }
             ChangeStatus(15);
             return;
@@ -1071,7 +1071,7 @@ public class Player : BasicCharacter
             ChangeStatus(14);
         }
     }
-    private static Fixpoint StayTime = new Fixpoint(5, 1);
+    private static Fixpoint StayTime = new Fixpoint(5, 1);//下蹲的持续时间
     private void Stay()
     {
         int hit = PlayerGetHited();

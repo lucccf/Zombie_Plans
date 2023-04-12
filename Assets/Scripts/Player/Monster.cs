@@ -306,15 +306,15 @@ public class Monster : BasicCharacter
     }
 
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(78, 2);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(39, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(39, 2);
-    private Fixpoint Attack4DuringTime = new Fixpoint(79, 2);
+    private Fixpoint Attack1DuringTime = new Fixpoint(49, 2);//攻击的持续时间
+    private Fixpoint Attack2DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(33, 2);
+    private Fixpoint Attack4DuringTime = new Fixpoint(58, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(55, 2);//攻击的判定时间
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(13, 2);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(13, 2);
-    private Fixpoint Attack4BeginToHitTime = new Fixpoint(27, 2);
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(25, 2);//攻击的判定时间
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(8, 2);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(8, 2);
+    private Fixpoint Attack4BeginToHitTime = new Fixpoint(17, 2);
 
     private Fixpoint Attack1Damage = new Fixpoint(2, 0);
     private Fixpoint Attack2Damage = new Fixpoint(3, 0);

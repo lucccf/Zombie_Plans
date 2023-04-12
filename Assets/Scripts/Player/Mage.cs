@@ -143,7 +143,7 @@ public class Mage : Knight
             {
                 StatusTime = new Fixpoint(0, 0);
                 if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));//击飞的速度
                 else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
             }
             return 2;
@@ -190,7 +190,7 @@ public class Mage : Knight
             Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
             Fixpoint Dis = f.pos.x - Nearx;
             if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
-            if(Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))
+            if(Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))//使用技能的概率
             {
                 if(Rand.rand()%2 == 1 || Dis > new Fixpoint(10,0))
                 {
@@ -361,8 +361,8 @@ public class Mage : Knight
         }
     }
 
-    private static Fixpoint RecoverTime = new Fixpoint(1, 0);
-    private static int RecoverHp = 100;
+    private static Fixpoint RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一针回血
+    private static int RecoverHp = 100;//回血量
     private void Recover()
     {
         if(StatusTime > RecoverTime)
@@ -371,7 +371,7 @@ public class Mage : Knight
             ChangeStatus(StatusType.Normal);
         }
     }
-    private static Fixpoint DisappearTime = new Fixpoint(1, 0);
+    private static Fixpoint DisappearTime = new Fixpoint(1, 0);//瞬移的时间，默认最后一针消失
     private void Disappaer()
     {
         if(StatusTime > DisappearTime)
@@ -399,7 +399,7 @@ public class Mage : Knight
             ChangeStatus(StatusType.Appear);
         }
     }
-    private static Fixpoint AppearTime = new Fixpoint(1, 0);
+    private static Fixpoint AppearTime = new Fixpoint(1, 0);//出现所需时间
     private void Appear()
     {
         if(StatusTime > AppearTime)
