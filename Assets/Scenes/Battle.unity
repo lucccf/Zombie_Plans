@@ -143,7 +143,6 @@ GameObject:
   m_Component:
   - component: {fileID: 27887493}
   - component: {fileID: 27887492}
-  - component: {fileID: 27887491}
   m_Layer: 0
   m_Name: UICamera
   m_TagString: Untagged
@@ -151,14 +150,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &27887491
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27887490}
-  m_Enabled: 1
 --- !u!20 &27887492
 Camera:
   m_ObjectHideFlags: 0
@@ -460,7 +451,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -40.558937}
+  m_AnchoredPosition: {x: 0, y: -40.55893}
   m_SizeDelta: {x: 432.62866, y: 81.117874}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &84216494
@@ -2538,7 +2529,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1579057740}
   - component: {fileID: 1579057739}
-  - component: {fileID: 1579057738}
   - component: {fileID: 1579057741}
   m_Layer: 0
   m_Name: EffectCamera
@@ -2547,14 +2537,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1579057738
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579057737}
-  m_Enabled: 1
 --- !u!20 &1579057739
 Camera:
   m_ObjectHideFlags: 0
