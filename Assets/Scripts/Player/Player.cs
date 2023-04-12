@@ -704,9 +704,9 @@ public class Player : BasicCharacter
             if (this_hited == true)
             {
                 if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-15, 1), new Fixpoint(46, 1)); //击飞2，有x只有y
+                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(46, 1)); //击飞2，有x只有y
                 else
-                    r.velocity = new Fix_vector2(new Fixpoint(15, 1), new Fixpoint(46, 1));
+                    r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(46, 1));
                 StatusTime = new Fixpoint(0, 0);
             }
             return 2;
