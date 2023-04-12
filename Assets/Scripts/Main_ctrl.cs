@@ -638,21 +638,27 @@ public class Main_ctrl : MonoBehaviour
     public static int count = 0;
 
     // Update is called once per frame
+
+    static uint cp = 0;
+
     void Update()
     {
         while(Frames.Count > 0)
         {
-            ++count;
-            if (count % 100 == 0)
-            {
-                Debug.Log(Rand.rand() % 1000);
-            }
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
+            ++count;
+
+            if (count % 1000 == 0)
+            {
+                Debug.Log(count / 1000 + " " + cp);
+            }
+            
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
+                cp = cp * 233 + (uint)f.Opts[i].Userid + (uint)f.Opts[i].Opt;
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
