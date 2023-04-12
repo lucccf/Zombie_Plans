@@ -23,6 +23,7 @@ public class Object_ctrl : MonoBehaviour
         Tinybutton,
         Protalbutton,
         Protal,
+        Home,
         //...
     }
 

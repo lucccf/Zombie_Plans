@@ -171,6 +171,7 @@ public class Map_create : MonoBehaviour
         home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-5 * 6 + 1) * wall_hei * 2, 1));
         home_info.type = "building";
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
+        home_info.classnames.Add(Object_ctrl.class_name.Home);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
         //创建家
