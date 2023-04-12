@@ -643,6 +643,10 @@ public class Main_ctrl : MonoBehaviour
         while(Frames.Count > 0)
         {
             ++count;
+            if (count % 100 == 0)
+            {
+                Debug.Log(Rand.rand() % 1000);
+            }
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
             frame_index = f.Index;
