@@ -266,9 +266,8 @@ public class Clisocket : MonoBehaviour
                         }
                     }
                 }
-                clientSocket.BeginReceive(buffer, offset, buffer.Length - offset, SocketFlags.None, ReceiveCallback, null);
             }
-
+            clientSocket.BeginReceive(buffer, offset, buffer.Length - offset, SocketFlags.None, ReceiveCallback, null);
         }
         catch (SocketException ex)
         {
