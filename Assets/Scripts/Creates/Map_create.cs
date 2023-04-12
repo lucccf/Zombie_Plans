@@ -265,16 +265,17 @@ public class Map_create : MonoBehaviour
         floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
 
         BK_create(Rooms, "boss_pos", "BK_monster");
-        BKitem_create(Rooms, "boss_pos", "bg_common");
+        BKitem_create(Rooms, "boss_pos", "bg_outerlayer");
         BK_create(Rooms, "mill_pos", "BK_castle");
-        BKitem_create(Rooms, "mill_pos", "bg_epic");
+        BKitem_create(Rooms, "mill_pos", "bg_outerlayer");
         BK_create(Rooms, "normal_pos", "BK_castle");
-        BKitem_create(Rooms, "normal_pos", "bg_common");
+        BKitem_create(Rooms, "normal_pos", "bg_epic");
         BK_create(Rooms, "battle_pos", "BK_monster");
-        BKitem_create(Rooms, "battle_pos", "bg_epic");
+        BKitem_create(Rooms, "battle_pos", "bg_outerlayer");
         BK_create(Rooms, "home_pos", "BK_home");
         BKitem_create(Rooms, "home_pos", "bg_common");
         BKother_create("bg_outerlayer");
+        BKwood_create();
     }
 
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
@@ -310,28 +311,11 @@ public class Map_create : MonoBehaviour
                     int id = f;
                     int pos = j;
                     int q_pi = (int)(Rand.rand() % 3 + 1);
-                    for (int i = 0; i < q_pi; i++)
-                    {
-                        float sl = (int)(Rand.rand() % 101 - 50) / 10f;
-                        float sh = (int)(Rand.rand() % 101 - 50) / 200f;
-                        float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
-                        float y1 = -(id - 0.5f) * floor_hei + sh;
-                        Debug.Log(sl + " " + sh);
-                        bool flag = true;
-                        foreach (var l in col_list[id])
-                        {
-                            if ((x1 < l + 1 && x1 > l - 1) || x1 < 0 || x1 > 250)
-                            {
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (!flag) continue;
-                        int k = (int)(Rand.rand() % 3 + 1);
-                        Debug.Log(pre_name + "_" + k);
-                        GameObject obj = Instantiate((GameObject)AB.getobj(pre_name + "_" + k));
-                        obj.transform.position = new Vector3(x1, y1, 19);
-                    }
+                    Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, 0);
+                    q_pi = (int)(Rand.rand() % 2 + 1);
+                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, 3.08f, 6);
+                    q_pi = (int)(Rand.rand() % 2 + 1);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, -2.8f, 4);
                 }
             }
         }
@@ -347,27 +331,59 @@ public class Map_create : MonoBehaviour
                 int pos = int.Parse(x.InnerText);
                 ok_list[id][pos] = true;
                 int q_pi = (int)(Rand.rand() % 3 + 1);
-                for (int i = 0; i < q_pi; i++)
+                Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, 0);
+                if (pre_name == "bg_outerlayer")
                 {
-                    float sl = (int)(Rand.rand() % 101 - 50) / 15f;
-                    float sh = (int)(Rand.rand() % 101 - 50) / 200f;
-                    float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
-                    float y1 = -(id - 0.5f) * floor_hei + sh;
-                    bool flag = true;
-                    foreach (var l in col_list[id])
-                    {
-                        if ((x1 < l + 1 && x1 > l - 1) || x1 < 0 || x1 > 250)
-                        {
-                            flag = false;
-                            break;
-                        }
-                    }
-                    if (!flag) continue;
-                    int k = (int)(Rand.rand() % 3 + 1);
-                    Debug.Log(pre_name + "_" + k);
-                    GameObject obj = Instantiate((GameObject)AB.getobj(pre_name + "_" + k));
-                    obj.transform.position = new Vector3(x1, y1, 19);
+                    q_pi = (int)(Rand.rand() % 2 + 1);
+                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, 3.08f, 6);
+                    q_pi = (int)(Rand.rand() % 2 + 1);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, -2.8f, 4);
                 }
+                else if (pre_name == "bg_epic")
+                {
+                    q_pi = (int)(Rand.rand() % 2 + 1);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 5, 2, -3.1f, 4);
+                }
+            }
+        }
+    }
+
+    static void Load_BL(int id, int pos, float y, string name, int q_pi, int hei, int fst, int id_cnt, float to_ground, float x = 10f)
+    {
+        for (int i = 0; i < q_pi; i++)
+        {
+            float sl = (int)(Rand.rand() % 101 - 50) / x;
+            float sh = (int)(Rand.rand() % 101 - 50) / y;
+            float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
+            float y1 = -(id - 0.5f) * floor_hei + sh + to_ground;
+            bool flag = true;
+            foreach (var l in col_list[id])
+            {
+                if ((x1 < l + 2 && x1 > l - 2) || x1 < 0 || x1 > 250)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (!flag) continue;
+            int k = (int)(Rand.rand() % (ulong)id_cnt + (ulong)fst);
+            GameObject obj = Instantiate((GameObject)AB.getobj(name + "_" + k));
+            obj.transform.position = new Vector3(x1, y1, hei);
+        }
+    }
+
+    static void BKwood_create()
+    {
+        for(int f = 1; f <= floor_cnt; f++)
+        {
+            for(int j = 1; j < room_cnt; j++)
+            {
+                int id = f;
+                int pos = j;
+                int q_pi = (int)(Rand.rand() % 3 + 1);
+                Load_BL(id, pos, 10000, "flower", q_pi, 17, 1, 3, -3.08f);
+                q_pi = (int)(Rand.rand() % 3 + 1);
+                Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, -3.08f);
             }
         }
     }
