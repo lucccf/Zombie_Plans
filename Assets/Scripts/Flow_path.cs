@@ -28,8 +28,9 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0))
                 {
                     cnt_flag = 1;
-                    countdown = new Fixpoint(300);
-                    //召唤僵尸
+                    countdown = new Fixpoint(300, 0);
+                    //召唤第一波僵尸
+                    Monster_create.Zom_create1();
                 }
                 break;
             case 1:
@@ -37,7 +38,7 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {
                     cnt_flag = 2;
-                    countdown = new Fixpoint(180);
+                    countdown = new Fixpoint(180, 0);
                 }
                 break;
             case 2:
@@ -45,8 +46,9 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0))
                 {
                     cnt_flag = 3;
-                    countdown = new Fixpoint(180);
+                    countdown = new Fixpoint(180, 0);
                     //召唤第二波僵尸
+                    Monster_create.Zom_create1();
                 }
                 break;
             case 3:
