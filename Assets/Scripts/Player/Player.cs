@@ -1032,7 +1032,7 @@ public class Player : BasicCharacter
     {
         RemoveHited();
         //r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
-        Debug.Log(GroundTimes);
+        //Debug.Log(GroundTimes);
         if(GroundTimes == 0)
         {
             ++GroundTimes;

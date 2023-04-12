@@ -34,7 +34,11 @@ public class BasicCharacter : MonoBehaviour
         Defence,
         Skill,
         Search,
-        Fire
+        Fire,
+        Bomb,
+        CallMagic,
+        CannonMagic,
+        SuckerPunch
     }
 
     void Start()

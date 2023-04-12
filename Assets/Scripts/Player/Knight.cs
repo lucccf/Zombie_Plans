@@ -504,7 +504,7 @@ public class Knight : Monster
         KnightAnimaHited = 0;
         if (StatusTime > OnGroundTime)
         {
-            status.toughness = 100;
+            status.toughness = status.max_toughness;
             ChangeStatus(StatusType.Normal);
         }
     }

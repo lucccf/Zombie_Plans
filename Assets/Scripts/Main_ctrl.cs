@@ -158,7 +158,7 @@ public class Main_ctrl : MonoBehaviour
     {
         int x = (posx + new Fixpoint(5, 1)).to_int();
         int y = PostionToY(posy);
-        int l = 1, r = MapNode[y].Count - 1;
+        int l = 0, r = MapNode[y].Count - 1;
         while (l != r)
         {
             int mid = (l + r) / 2;
@@ -278,7 +278,7 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
         }
-        
+        /*
         for (int i = 1; i < nodes.Count; ++i)
         {
             for (int j = 0; j < nodes[i].Count; ++j)
@@ -294,7 +294,7 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
         }
-        
+        */
         List<node> a = new List<node>();
         a.Add(new node());
         for (int i = 1; i < nodes.Count; ++i)
