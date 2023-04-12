@@ -74,6 +74,7 @@ public class Main_ctrl : MonoBehaviour
         Play_create();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
+        Debug.Log(Monster_create.cnt1);
     }
 
     static void Wolf_create()
