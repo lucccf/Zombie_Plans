@@ -1,4 +1,5 @@
 ﻿using Net;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class LoginController : MonoBehaviour
     // Start is called before the first frame update
     public static InputField inputField1;
     public static InputField inputField2;
-    public static Queue<LoginResponse> q = new Queue<LoginResponse>();
+    public static ConcurrentQueue<LoginResponse> q = new ConcurrentQueue<LoginResponse>();
 
     void Start()
     {
@@ -59,8 +60,8 @@ public class LoginController : MonoBehaviour
     {
         while(q.Count > 0)
         {
-            LoginResponse x = q.Peek();
-            q.Dequeue();
+            LoginResponse x;
+            if (!q.TryDequeue(out x)) break;
             Trans(x);
         }
     }
