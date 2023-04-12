@@ -95,7 +95,7 @@ public class Knight : Monster
     private int CheckToughStatus(bool this_hited)
     {
 
-        if (status.GetToughness() >= 20)
+        if (status.GetToughness() >= 20)//韧性值
         {
             KnightAnimaHited = 0;
             return 0;
@@ -114,7 +114,7 @@ public class Knight : Monster
             if (this_hited == true)
             {
                 StatusTime = new Fixpoint(0, 0);
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//受击击飞的，y轴的上升速度
             } 
             return 2;
         } else
@@ -125,7 +125,7 @@ public class Knight : Monster
             {
                 StatusTime = new Fixpoint(0, 0);
                 if(AnimaToward > 0)
-                r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));//空中被击飞的x,y轴的上升速度
                 else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
             }
             return 2;
@@ -225,7 +225,7 @@ public class Knight : Monster
                 nearx = i.f.pos.x;
             }
         }
-        if (Min > new Fixpoint(20, 0)) return -1;
+        if (Min > new Fixpoint(20, 0)) return -1;//寻路距离
         else return Main_ctrl.CalPos(Minx, Miny);
     }
 
@@ -273,15 +273,15 @@ public class Knight : Monster
                 Attack(true);
                 return;
             }
-            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))
+            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
             {
                 if (Rand.rand() % 2 == 0)
                 {
-                    ChangeStatus(StatusType.Defence);
+                    ChangeStatus(StatusType.Defence);//随机防御
                 }
                 else
                 {
-                    ChangeStatus(StatusType.Skill);
+                    ChangeStatus(StatusType.Skill);//随机技能
                 }
                 return;
             }
@@ -521,7 +521,7 @@ public class Knight : Monster
     {
         KnightAnimaHited = 0;
         KnightAnimaAttack = 0;
-        if(StatusTime > new Fixpoint(3,0))
+        if(StatusTime > new Fixpoint(3,0))//死亡到消失的时间
         {
             Main_ctrl.Desobj(id);
         }
