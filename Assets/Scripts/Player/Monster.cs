@@ -16,6 +16,7 @@ public class Monster : BasicCharacter
     {
         SetStatus(250, 10);
         animator = GetComponent<Animator>();
+        CharacterType = 1;
     }
 
     public override void Updatex()

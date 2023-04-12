@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   AnimaToward: 1
+  identity: 0
 --- !u!1 &3209599193999019857
 GameObject:
   m_ObjectHideFlags: 0
