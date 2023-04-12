@@ -24,7 +24,7 @@ public class Player : BasicCharacter
     void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(1000, 10);
+        SetStatus(100000, 10);
     }
 
     HashSet<PlayerOpt> list;
@@ -217,6 +217,12 @@ public class Player : BasicCharacter
                 break;
             case 14:
                 Ground();
+                break;
+            case 15:
+                Fly2();
+                break;
+            case 16:
+                Stay();
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -734,6 +740,7 @@ public class Player : BasicCharacter
 
     private void HitedFly()
     {
+        AnimaHited = 0f;
         PlayerGetHited();
         if (f.onground)
         {
@@ -884,6 +891,13 @@ public class Player : BasicCharacter
                 new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 120, AnimaToward);
         }
 
+        if(f.onground && StatusTime > new Fixpoint(5,1))
+        {
+            UpAttackHasHited = false;
+            ChangeStatus(16);
+            return;
+        }
+
         if(StatusTime > UpAttackDuring)
         {
             UpAttackHasHited = false;
@@ -1016,16 +1030,61 @@ public class Player : BasicCharacter
     private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
     protected void Ground()
     {
-        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
         RemoveHited();
+        //r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+        Debug.Log(GroundTimes);
+        if(GroundTimes == 0)
+        {
+            ++GroundTimes;
+            r.velocity.y = new Fixpoint(3, 0);
+            if (r.velocity.x < new Fixpoint(0,0))
+            {
+                r.velocity.y = new Fixpoint(-3, 0);
+            } else if (r.velocity.x > new Fixpoint(0,0))
+            {
+                r.velocity.y = new Fixpoint(3, 0);
+            }
+            ChangeStatus(15);
+            return;
+        }
+        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+        //RemoveHited();
         AnimaHited = 0;
         if (StatusTime > OnGroundTime)
         {
+            GroundTimes = 0;
             status.toughness = 100;
             ChangeStatus(0);
         }
     }
 
+    private int GroundTimes = 0;
+    private void Fly2()
+    {
+        if(StatusTime < new Fixpoint(5,2))
+        {
+            animator.Rebind();
+        }
+        RemoveHited();
+        if(f.onground)
+        {
+            ChangeStatus(14);
+        }
+    }
+    private static Fixpoint StayTime = new Fixpoint(5, 1);
+    private void Stay()
+    {
+        int hit = PlayerGetHited();
+        if (hit != 0)
+        {
+            ChangeStatus(4);
+            return;
+        }
+        if (StatusTime > StayTime)
+        {
+            ChangeStatus(0);
+        }
+    }
     private void Update()
     {
         if(checkid() == true)

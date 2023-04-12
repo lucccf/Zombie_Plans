@@ -203,7 +203,7 @@ public class Clisocket : MonoBehaviour
                             Loading_ctrl.Frames.Enqueue(opts);
                         }
                         else {
-                            Debug.Log(opts);
+                            //Debug.Log(opts);
                             Main_ctrl.Frames.Enqueue(opts);
                         }
                         
