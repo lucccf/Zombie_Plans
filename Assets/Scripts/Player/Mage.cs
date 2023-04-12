@@ -8,7 +8,7 @@ public class Mage : Knight
     void Start()
     {
         CharacterType = 1;
-        SetStatus(1000, 10);//血量，基础攻击力
+        SetStatus(250, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
     void Update()
@@ -143,8 +143,8 @@ public class Mage : Knight
             {
                 StatusTime = new Fixpoint(0, 0);
                 if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));//击飞的速度
-                else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+                    r.velocity = new Fix_vector2(new Fixpoint(-1, 0), new Fixpoint(46, 1));//击飞的速度
+                else r.velocity = new Fix_vector2(new Fixpoint(1, 0), new Fixpoint(46, 1));
             }
             return 2;
         }
@@ -272,13 +272,13 @@ public class Mage : Knight
     }
 
     private bool MageCreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
+    private Fixpoint Attack1DuringTime = new Fixpoint(74, 2);//攻击的持续时间
+    private Fixpoint Attack2DuringTime = new Fixpoint(29, 2);
+    private Fixpoint Attack3DuringTime = new Fixpoint(84, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(59, 2);//攻击的判定时间
+    private Fixpoint Attack2BeginToHitTime = new Fixpoint(1, 1);
+    private Fixpoint Attack3BeginToHitTime = new Fixpoint(41, 2);
 
     private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
     private Fixpoint Attack2Damage = new Fixpoint(4, 0);
@@ -361,7 +361,7 @@ public class Mage : Knight
         }
     }
 
-    private static Fixpoint RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一针回血
+    private static Fixpoint RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一帧回血
     private static int RecoverHp = 100;//回血量
     private void Recover()
     {
@@ -371,7 +371,7 @@ public class Mage : Knight
             ChangeStatus(StatusType.Normal);
         }
     }
-    private static Fixpoint DisappearTime = new Fixpoint(1, 0);//瞬移的时间，默认最后一针消失
+    private static Fixpoint DisappearTime = new Fixpoint(1, 0);//瞬移的时间，默认最后一帧消失
     private void Disappaer()
     {
         if(StatusTime > DisappearTime)

@@ -166,7 +166,7 @@ public class Player : BasicCharacter
         if (ECD < new Fixpoint(0, 0)) ECD = new Fixpoint(0, 0);
         GetTrigger();
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //25的位置是每秒恢复韧性值
+        status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //是每秒恢复韧性值
         if (status.death == true) ChangeStatus(13);
         switch (AnimaStatus)
         {
@@ -701,9 +701,9 @@ public class Player : BasicCharacter
             if (this_hited == true)
             {
                 if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-2, 1), new Fixpoint(46, 1)); //击飞2，有x只有y
+                    r.velocity = new Fix_vector2(new Fixpoint(-15, 1), new Fixpoint(46, 1)); //击飞2，有x只有y
                 else
-                    r.velocity = new Fix_vector2(new Fixpoint(2, 1), new Fixpoint(46, 1));
+                    r.velocity = new Fix_vector2(new Fixpoint(15, 1), new Fixpoint(46, 1));
                 StatusTime = new Fixpoint(0, 0);
             }
             return 2;
