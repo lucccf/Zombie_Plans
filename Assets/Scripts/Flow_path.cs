@@ -14,11 +14,6 @@ public class Flow_path : MonoBehaviour
 
     public static long Now_fac = 0;
 
-    void Start()
-    {
-        
-    }
-
     public static void Updatex()
     {
         switch (cnt_flag)
