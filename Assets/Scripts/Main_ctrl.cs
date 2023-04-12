@@ -279,7 +279,7 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
         }
-        /*
+        
         for (int i = 1; i < nodes.Count; ++i)
         {
             for (int j = 0; j < nodes[i].Count; ++j)
@@ -287,15 +287,15 @@ public class Main_ctrl : MonoBehaviour
                 GameObject g =Instantiate((GameObject)Resources.Load("Prefabs/HurtNumber"),new Vector3(1f * (nodes[i][j].left + nodes[i][j].right) / 2,
                     nodes[i][j].idx * -9 + 4, -1f),Quaternion.identity);
                 g.GetComponent<BeatNumber>().ChangeNumber(nodes[i][j].id);
-               // Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
-               //     nodes[i][j].LeftType + " " + nodes[i][j].RightType);
-               // for(int k = 0; k < nodes[i][j].to.Count;++k)
-                //{
+                Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
+                    nodes[i][j].LeftType + " " + nodes[i][j].RightType);
+                for(int k = 0; k < nodes[i][j].to.Count;++k)
+                {
                     //Debug.Log(nodes[i][j].action[k] + " " + nodes[i][j].pos[k].to_float() + " " + nodes[i][j].to[k]);
-                //}
+                }
             }
         }
-        */
+        
         List<node> a = new List<node>();
         a.Add(new node());
         for (int i = 1; i < nodes.Count; ++i)
