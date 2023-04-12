@@ -166,7 +166,7 @@ public class Player : BasicCharacter
         if (ECD < new Fixpoint(0, 0)) ECD = new Fixpoint(0, 0);
         GetTrigger();
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(25, 0)); //25的位置是每秒恢复韧性值
+        status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //25的位置是每秒恢复韧性值
         if (status.death == true) ChangeStatus(13);
         switch (AnimaStatus)
         {
@@ -315,7 +315,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));//跳跃起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(845, 2));//跳跃起始速度
             ChangeStatus(1);
             return;
         }
@@ -328,13 +328,13 @@ public class Player : BasicCharacter
 
         else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
-            QCD = new Fixpoint(5, 0);//Q的CD
+            QCD = new Fixpoint(10, 0);//Q的CD
             ChangeStatus(10);
             return;
         }
         else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
-            ECD = new Fixpoint(2, 0);//E的CD
+            ECD = new Fixpoint(10, 0);//E的CD
             ChangeStatus(11);
             return;
         }
@@ -364,7 +364,7 @@ public class Player : BasicCharacter
             AnimaToward = 1;
             f.pos.x = f.pos.x + Dt.dt * status.WalkSpeed;
         }
-        if (StatusTime > new Fixpoint(5, 1) && !f.onground)//跳的持续时间
+        if (StatusTime > new Fixpoint(2, 1) && !f.onground)//跳的持续时间
         {
             ChangeStatus(6);
         }
@@ -433,11 +433,11 @@ public class Player : BasicCharacter
     private static Fixpoint Attack4BeginToHitTime = new Fixpoint(167, 3);
     private static Fixpoint Attack5BeginToHitTime = new Fixpoint(167, 3);
 
-    private static Fixpoint Attack1Damage = new Fixpoint(2, 0);
-    private static Fixpoint Attack2Damage = new Fixpoint(2, 0);
-    private static Fixpoint Attack3Damage = new Fixpoint(2, 0);
-    private static Fixpoint Attack4Damage = new Fixpoint(2, 0);
-    private static Fixpoint Attack5Damage = new Fixpoint(2, 0);
+    private static Fixpoint Attack1Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack2Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack3Damage = new Fixpoint(5, 0);
+    private static Fixpoint Attack4Damage = new Fixpoint(5, 0);
+    private static Fixpoint Attack5Damage = new Fixpoint(6, 0);
     private void Attack()
     {
         int hit = PlayerGetHited();
@@ -592,7 +592,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(15, 0));//二段跳的起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(16, 0));//二段跳的起始速度
             ChangeStatus(1);
             return;
         }
@@ -690,7 +690,7 @@ public class Player : BasicCharacter
             AnimaStatus = 5;
             if (this_hited == true)
             {
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//击飞1，没有x只有y
                 StatusTime = new Fixpoint(0, 0);
             }
             return 2;
@@ -701,9 +701,9 @@ public class Player : BasicCharacter
             if (this_hited == true)
             {
                 if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));
+                    r.velocity = new Fix_vector2(new Fixpoint(-2, 1), new Fixpoint(46, 1)); //击飞2，有x只有y
                 else
-                    r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+                    r.velocity = new Fix_vector2(new Fixpoint(2, 1), new Fixpoint(46, 1));
                 StatusTime = new Fixpoint(0, 0);
             }
             return 2;
@@ -724,15 +724,15 @@ public class Player : BasicCharacter
             ChangeStatus(0);
             return;
         }
-        if (StatusTime < new Fixpoint(2, 1))//受击后退的时间
+        if (StatusTime < new Fixpoint(3, 1))//受击后退的时间
         {
             if (AnimaToward > 0)
             {
-                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);//击退位移的速度
+                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(5, 1);//击退位移的速度
             }
             else
             {
-                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);//击退位移的速度
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(5, 1);//击退位移的速度
             }
         }
 
@@ -760,12 +760,12 @@ public class Player : BasicCharacter
         */
     }
 
-    private static Fixpoint KickBeginToHit = new Fixpoint(1, 1);
-    private static Fixpoint KickDuring = new Fixpoint(20, 1);
-    private static Fixpoint KickShiftx = new Fixpoint(1, 0);
+    private static Fixpoint KickBeginToHit = new Fixpoint(1, 1);//空中飞踢
+    private static Fixpoint KickDuring = new Fixpoint(5, 0);
+    private static Fixpoint KickShiftx = new Fixpoint(1, 0);//飞踢攻击框
     private static Fixpoint KickShifty = new Fixpoint(-1, 0);
 
-    private static Fixpoint KickDamage = new Fixpoint(2, 0);
+    private static Fixpoint KickDamage = new Fixpoint(6, 0);
     private bool is_kicked = false;
     private void Kick()
     {
@@ -809,13 +809,13 @@ public class Player : BasicCharacter
         }
     }
 
-    private static Fixpoint HeavyAttackBeginToHit = new Fixpoint(17, 2);
+    private static Fixpoint HeavyAttackBeginToHit = new Fixpoint(17, 2);//前冲拳
     private static Fixpoint HeavyAttackDuring = new Fixpoint(64, 2);
     private static Fixpoint HeavyAttackShiftx = new Fixpoint(1, 0);
     private static Fixpoint HeavyAttackShifty = new Fixpoint(0, 0);
     private bool HeavyAttackHasHited = false;
 
-    private static Fixpoint HeavyAttackDamage = new Fixpoint(2,0);
+    private static Fixpoint HeavyAttackDamage = new Fixpoint(6,0);
     private void HeavyAttack()
     {
         int hit = PlayerGetHited();
@@ -838,7 +838,7 @@ public class Player : BasicCharacter
         {
             HeavyAttackHasHited = true;
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 120, AnimaToward);
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 85, AnimaToward);
         } 
 
         if(!f.onground || StatusTime > HeavyAttackDuring)
@@ -849,8 +849,8 @@ public class Player : BasicCharacter
             return;
         }
     }
-    private static Fixpoint UpAttackBeginToHit = new Fixpoint(13, 2);
-    private static Fixpoint UpAttackDuring = new Fixpoint(2, 0);
+    private static Fixpoint UpAttackBeginToHit = new Fixpoint(13, 2);//升龙拳
+    private static Fixpoint UpAttackDuring = new Fixpoint(5, 0);
     private static Fixpoint UpattackShiftx = new Fixpoint(1, 0);
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
