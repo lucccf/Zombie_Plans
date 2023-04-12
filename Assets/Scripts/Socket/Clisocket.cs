@@ -34,8 +34,10 @@ public class Clisocket : MonoBehaviour
     static int HEAD_SIZE = 4;
     static int offset = 0;
     static byte[] buffer = new byte[1024];
+    static byte[] sendbuffer = new byte[1024];
     static Socket clientSocket;
-
+    static Dog timer;
+    static Cat rectimer;
     public struct op
     {
         public KeyCode key;
@@ -56,16 +58,18 @@ public class Clisocket : MonoBehaviour
         StartSocket();
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+        timer = new Dog();
+        rectimer = new Cat();
     }
 
     public static void Headercreate(int len, BODYTYPE type)
     {
         for (int i = 0; i < 3; i++)
         {
-            buffer[i] = (byte)(len & 255);
+            sendbuffer[i] = (byte)(len & 255);
             len = len >> 8;
         }
-        buffer[3] = (byte)type;
+        sendbuffer[3] = (byte)type;
     }
 
     void StartSocket()
@@ -94,9 +98,9 @@ public class Clisocket : MonoBehaviour
         Headercreate(len, bodyType);
         for (int i = 0; i < len; i++)
         {
-            buffer[i + 4] = buf[i];
+            sendbuffer[i + 4] = buf[i];
         }
-        clientSocket.Send(buffer, len + 4, 0);
+        clientSocket.Send(sendbuffer, len + 4, 0);
     }
 
      
@@ -142,61 +146,47 @@ public class Clisocket : MonoBehaviour
 
     private static void ReceiveCallback(IAsyncResult ar)
     {
+        Cat.elapsedTime = 0.0f;
         //Header respHeader = new Header();
         try
         {
             int bytesReceive = clientSocket.EndReceive(ar);
+            
             if (bytesReceive > 0)
             {
-
-                int headLen = 0;
-                BODYTYPE headType = BODYTYPE.Frame;
+                if (Dog.ka) {
+                    Debug.Log("offset:" + offset);
+                    Debug.Log("Cat.ka" + Cat.ka);
+                }
                 offset += bytesReceive;
 
-
-                if (offset >= HEAD_SIZE)
-                {
-                    try
-                    {
-                        byte[] head = GetResponseHeader(buffer, HEAD_SIZE);
-                        byte[] head_len = new byte[3];
-                        byte[] head_type = new byte[1];
-                        for (int i = 0; i < 3; i++)
-                        {
-                            head_len[i] = head[i];
-                        }
-                        for (int i = 3; i < 4; i++)
-                        {
-                            head_type[i - 3] = head[i];
-                        }
-
-                        headLen = (head_len[2] << 16) | (head_len[1] << 8) | head_len[0];
-                        headType = (BODYTYPE)head_type[0];
-                    }
-                    catch (Exception ex)
-                    {
-                        offset = 0;
-                        headLen = 0;
-
-                        Debug.LogError("反序列化出错，Exception = " + ex.ToString());
-
-                        // 既然要return， 就要继续开启异步监听，以持续接受服务端的消息
-                        clientSocket.BeginReceive(buffer, offset, 1024 - offset, SocketFlags.None, ReceiveCallback, null);
-                        return;
-                    }
-                }
-
                 // 处理包体
-                while (headLen > 0 && offset >= headLen + HEAD_SIZE)
+                while (offset >= HEAD_SIZE)
                 {
-                    // 当前包的包体
-                    byte[] body = GetResponseBody(buffer, headLen);
-
-                    int bodyLen = body.Length; // 获取 body 数组的长度
-
-
-                    if (headType == BODYTYPE.Frame)
+                    BODYTYPE bodyType = BODYTYPE.Frame;
+                    byte[] head = GetResponseHeader(buffer, HEAD_SIZE);
+                    byte[] body_len = new byte[3];
+                    byte[] body_type = new byte[1];
+                    for (int i = 0; i < 3; i++)
                     {
+                        body_len[i] = head[i];
+                    }
+                    for (int i = 3; i < 4; i++)
+                    {
+                        body_type[i - 3] = head[i];
+                    }
+
+                    int bodyLen = (body_len[2] << 16) | (body_len[1] << 8) | body_len[0];
+                    bodyType = (BODYTYPE)body_type[0];
+
+                    if (offset < bodyLen + HEAD_SIZE) break;
+
+                    // 当前包的包体
+                    byte[] body = GetResponseBody(buffer, bodyLen);
+
+                    if (bodyType == BODYTYPE.Frame)
+                    {
+                        Dog.elapsedTime = 0.0f;
                         Frame opts = Frame.Parser.ParseFrom(body);
                         if (opts.Index == -1)
                         {
@@ -210,7 +200,8 @@ public class Clisocket : MonoBehaviour
                         //Main_ctrl.Frame_update(opts);
                         //获取frame
                     }
-                    if (headType == BODYTYPE.LoginResponse)
+
+                    if (bodyType == BODYTYPE.LoginResponse)
                     {
                         LoginResponse loginresponse = LoginResponse.Parser.ParseFrom(body);
 
@@ -221,50 +212,14 @@ public class Clisocket : MonoBehaviour
                         Debug.Log(loginresponse.Msg);
                     }
 
+                    int packageLen = bodyLen + HEAD_SIZE;
 
-                    headLen += HEAD_SIZE;
-
-                    for (int i = 0; i < offset - headLen; i++)
+                    for (int i = 0; i < offset - packageLen; i++)
                     {
-                        buffer[i] = buffer[i + headLen];
+                        buffer[i] = buffer[i + packageLen];
                     }
 
-                    offset -= headLen;
-                    headLen = 0;
-                    headType = BODYTYPE.Frame;
-
-
-                    // 因为会粘包，所以要继续判断后面是否有包
-
-                    if (offset >= HEAD_SIZE)
-                    {
-                        try
-                        {
-                            byte[] head = GetResponseHeader(buffer, HEAD_SIZE);
-                            byte[] head_len = new byte[3];
-                            byte[] head_type = new byte[1];
-                            for (int i = 0; i < 3; i++)
-                            {
-                                head_len[i] = head[i];
-                            }
-                            for (int i = 3; i < 4; i++)
-                            {
-                                head_type[i - 3] = head[i];
-                            }
-
-                            headLen = (head_len[2] << 16) | (head_len[1] << 8) | head_len[0];
-                            headType = (BODYTYPE)head_type[0];
-
-                        }
-                        catch (Exception ex)
-                        {
-                            offset = 0;
-                            headLen = 0;
-
-                            Debug.LogError("反序列化出错，Exception = " + ex.ToString());
-                            break;
-                        }
-                    }
+                    offset -= packageLen;
                 }
             }
             clientSocket.BeginReceive(buffer, offset, buffer.Length - offset, SocketFlags.None, ReceiveCallback, null);

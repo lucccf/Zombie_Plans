@@ -6,7 +6,7 @@ public class Flow_path : MonoBehaviour
     // Start is called before the first frame update
     public static Dictionary<long, Facility> facilities = new Dictionary<long, Facility>();
 
-    public static Fixpoint countdown = new Fixpoint(300, 0);
+    public static Fixpoint countdown = new Fixpoint(10, 0);
 
     private static int cnt_flag;
 
