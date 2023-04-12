@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Facility : BasicCharacter
+public class Home : MonoBehaviour
 {
-    public long id;
-    public Dictionary<int, int> materials;
-    public Dictionary<int, int> commited; 
     // Start is called before the first frame update
+    public long hp;
     void Start()
     {
         
@@ -17,5 +16,4 @@ public class Facility : BasicCharacter
     {
         
     }
-    
 }

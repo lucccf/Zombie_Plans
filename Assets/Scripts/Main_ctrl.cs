@@ -573,7 +573,11 @@ public class Main_ctrl : MonoBehaviour
                     Tiny_button_cre.Create_tinyprotalbutton(info, cnt);
                     break;
                 case Object_ctrl.class_name.Protal:
-          
+                    break;
+                case Object_ctrl.class_name.Home:
+                    Home h = obj.AddComponent<Home>();
+                    ctrl.modules[Object_ctrl.class_name.Home] = h;
+                    h.hp = 100;
                     break;
             }
         }
