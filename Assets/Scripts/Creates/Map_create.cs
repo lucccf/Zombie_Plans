@@ -312,11 +312,11 @@ public class Map_create : MonoBehaviour
                     int id = f;
                     int pos = j;
                     int q_pi = (int)(Rand.rand() % 3 + 1);
-                    Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, 0);
+                    Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, true, 13);
                     q_pi = (int)(Rand.rand() % 2 + 1);
-                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, 3.08f, 6);
+                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, false, 6);
                     q_pi = (int)(Rand.rand() % 2 + 1);
-                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, -2.8f, 4);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, true, 4);
                 }
             }
         }
@@ -332,31 +332,30 @@ public class Map_create : MonoBehaviour
                 int pos = int.Parse(x.InnerText);
                 ok_list[id][pos] = true;
                 int q_pi = (int)(Rand.rand() % 3 + 1);
-                Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, 0);
+                Load_BL(id, pos, 200, pre_name, q_pi, 19, 1, 3, true, 13);
                 if (pre_name == "bg_outerlayer")
                 {
                     q_pi = (int)(Rand.rand() % 2 + 1);
-                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, 3.08f, 6);
+                    Load_BL(id, pos, 10000, "stalactite", q_pi, 18, 1, 4, false, 6);
                     q_pi = (int)(Rand.rand() % 2 + 1);
-                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, -2.8f, 4);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 1, 4, true, 4);
                 }
                 else if (pre_name == "bg_epic")
                 {
                     q_pi = (int)(Rand.rand() % 2 + 1);
-                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 5, 2, -3.1f, 4);
+                    Load_BL(id, pos, 10000, "rocks", q_pi, 18, 5, 2, true, 4);
                 }
             }
         }
     }
 
-    static void Load_BL(int id, int pos, float y, string name, int q_pi, int hei, int fst, int id_cnt, float to_ground, float x = 10f)
+    static void Load_BL(int id, int pos, float y, string name, int q_pi, int hei, int fst, int id_cnt, bool to_ground, float x = 10f)
     {
         for (int i = 0; i < q_pi; i++)
         {
             float sl = (int)(Rand.rand() % 101 - 50) / x;
             float sh = (int)(Rand.rand() % 101 - 50) / y;
             float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
-            float y1 = -(id - 0.5f) * floor_hei + sh + to_ground;
             bool flag = true;
             foreach (var l in col_list[id])
             {
@@ -369,6 +368,17 @@ public class Map_create : MonoBehaviour
             if (!flag) continue;
             int k = (int)(Rand.rand() % (ulong)id_cnt + (ulong)fst);
             GameObject obj = Instantiate((GameObject)AB.getobj(name + "_" + k));
+            SpriteRenderer ren = obj.GetComponent<SpriteRenderer>();
+            float y2 = ren.size.y / 2 * obj.transform.localScale.y;
+            float y1;
+            if (to_ground)
+            {
+                y1 = -(id - 0.5f) * floor_hei + sh - floor_hei / 2f + 1 + y2;
+            }
+            else
+            {
+                y1 = -(id - 0.5f) * floor_hei + sh + floor_hei / 2f - 1 - y2;
+            }
             obj.transform.position = new Vector3(x1, y1, hei);
         }
     }
@@ -382,9 +392,9 @@ public class Map_create : MonoBehaviour
                 int id = f;
                 int pos = j;
                 int q_pi = (int)(Rand.rand() % 3 + 1);
-                Load_BL(id, pos, 10000, "flower", q_pi, 17, 1, 3, -3.08f);
+                Load_BL(id, pos, 10000, "flower", q_pi, 17, 1, 3, true);
                 q_pi = (int)(Rand.rand() % 3 + 1);
-                Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, -3.08f);
+                Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, true);
             }
         }
     }
