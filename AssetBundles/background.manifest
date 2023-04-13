@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2568009586
+CRC: 2976424131
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 15c6c75075271894c1569bcc8d6bb1b5
+    Hash: 0398e764545cd5bbdc6a3567fcce06f5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4a8b5a38571d4f2d9b28b913371ebb2c
@@ -30,6 +30,7 @@ Assets:
 - Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_4.prefab
 - Assets/Resources/Prefabs/Map_item/wall_b_m.prefab
 - Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_2.prefab
+- Assets/Resources/Prefabs/Map_item/protal_m.prefab
 - Assets/Resources/Prefabs/background/Tiny_wall_a.prefab
 - Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_6.prefab
 - Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_4.prefab

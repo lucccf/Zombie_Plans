@@ -283,6 +283,7 @@ public class Map_create : MonoBehaviour
             protal_info.type = "protal";
             protal_info.classnames.Add(Object_ctrl.class_name.Trigger);
             protal_info.classnames.Add(Object_ctrl.class_name.Protal);
+            protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
             GameObject gate = Main_ctrl.CreateObj(protal_info);
             gate.transform.position = new Vector3(gate.transform.position.x, gate.transform.position.y, 10);
 
