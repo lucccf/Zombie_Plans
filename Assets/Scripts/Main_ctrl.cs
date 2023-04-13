@@ -543,22 +543,19 @@ public class Main_ctrl : MonoBehaviour
                     {
                         Attack2 a2 = obj.GetComponent<Attack2>();
                         a2.SetDestroyTime(new Fixpoint(1,0));
+                    } else if (info.name == "skull")
+                    {
+                        Attack2 a2 = obj.GetComponent<Attack2>();
+                        a2.SetSpeed(new Fixpoint(15, 0));
+                        a2.SetAliveTime(new Fixpoint(9, 1));
+                        a2.SetDestroyTime(new Fixpoint(25, 2));
                     }
 
                     if (info.type == "wave")
                     {
                         obj.transform.localScale = new Vector3(3, 3, 1);
                     }
-                    /*
-                    if(info.name == "LightBall")
-                    {
-                        obj.transform.localScale = new Vector3(3, 3, 1);
-                    }
-                    if (info.name == "FireBall")
-                    {
-                        obj.transform.localScale = new Vector3(3, 3, 1);
-                    }
-                    */
+
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();

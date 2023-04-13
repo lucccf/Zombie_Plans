@@ -15,7 +15,7 @@ public class Devil : Knight
     void Start()
     {
         CharacterType = 1;
-        SetStatus(10000, 10);//血量，基础攻击力
+        SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         status.max_toughness = 200;
         status.toughness = 200;
@@ -151,20 +151,17 @@ public class Devil : Knight
         {
             Fixpoint Dis = f.pos.x - Nearx;
             if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
-
-            if (Dis < new Fixpoint(14, 1)) //攻击
+            if (Dis < new Fixpoint(2, 0) && BombCD == new Fixpoint(0, 0))
+            {
+                BombCD = new Fixpoint(5, 0);
+                ChangeStatus(StatusType.Bomb);
+                return;
+            }
+            else if (Dis <= new Fixpoint(3, 0)) //攻击
             {   
                 if (f.pos.x < Nearx) AnimaToward = 1;
                 else AnimaToward = -1;
-                if (BombCD == new Fixpoint(0,0))
-                {
-                    BombCD = new Fixpoint(5, 0);
-                    ChangeStatus(StatusType.Bomb);
-                }
-                else
-                {
-                    ChangeStatus(StatusType.Attack);
-                }
+                ChangeStatus(StatusType.Attack);
                 return;
             }
             else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(9, 0))//距离判定
@@ -234,15 +231,21 @@ public class Devil : Knight
         else if(StatusTime <= DevilAttack2HitTime && DevilAttackTimes == 0)
         {
             ++DevilAttackTimes;
-            DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
+            Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x + new Fixpoint(5,1), f.pos.y), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
+                DevilAttack1Damage, 30, id, AnimaToward, CharacterType);
+            //DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
         } else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
         {
             ++DevilAttackTimes;
-            DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
+            Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x ,f.pos.y + new Fixpoint(5,1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
+                DevilAttack2Damage, 30, id, AnimaToward, CharacterType);
+            //DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
         } else if(StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
         {
             ++DevilAttackTimes;
-            DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
+            Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y - new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
+                DevilAttack3Damage, 30, id, AnimaToward, CharacterType);
+            //DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
         } else
         {
             DevilAttackTimes = 0;
@@ -259,7 +262,8 @@ public class Devil : Knight
         if(StatusTime > DevilCannonMagicShootTime && DevilCannonMagicShooted == false)
         {
             DevilCannonMagicShooted = true;
-            Main_ctrl.NewAttack2("MagicCannon", f.pos, new Fixpoint(2, 0), new Fixpoint(2, 0), status.Damage() * DevilCannonMagicAttack, 120, id, AnimaToward, CharacterType);
+            Main_ctrl.NewAttack2("MagicCannon", new Fix_vector2(f.pos.x, f.pos.y + new Fixpoint(5, 1)), new Fixpoint(2, 0), new Fixpoint(2, 0),
+                status.Damage() * DevilCannonMagicAttack, 120, id, AnimaToward, CharacterType);
         }
         if(StatusTime > DevilCannonMagicQuitTime)
         {
