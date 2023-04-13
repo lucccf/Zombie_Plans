@@ -588,6 +588,14 @@ public class Main_ctrl : MonoBehaviour
                     }
                     fa.commited = newCommited;
                     Flow_path.facilities[cnt] = fa;
+                    int k = (int)(Rand.rand() % Flow_path.cons);
+                    while (Flow_path.conditions[k] != 0)
+                    {
+                        k = (int)(Rand.rand() % Flow_path.cons);
+                    }
+                    fa.cond = k;
+                    Flow_path.conditions[k] = 1;
+
                     break;
                 case Object_ctrl.class_name.Tinymap:
                     Tiny_map ti = new Tiny_map();

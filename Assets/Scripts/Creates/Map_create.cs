@@ -179,12 +179,26 @@ public class Map_create : MonoBehaviour
 
     public static long Bud_cnt = 0;
 
+    static int[] chos;
+
     public static void Facility_create()
     {
         XmlDocument ItemxmlDoc = new XmlDocument();
         ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
         XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
 
+        chos = new int[mill_info.Count];
+        for(int i = 0; i < 3; i++)
+        {
+            int k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            while (chos[k] != 0)
+            {
+                k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            }
+            chos[k] = 1;
+        }
+
+        int ix = 0;
         foreach (XmlNode p in mill_info)
         {
             Dictionary<int, int> tmp = new Dictionary<int, int>(); //修復設施所需要材料id和数量
@@ -198,8 +212,49 @@ public class Map_create : MonoBehaviour
 
             //Debug.Log(Bud_cnt);
 
-            Building_single_create(name, new Fixpoint(floor_hei*3, 1), new Fixpoint(floor_hei*4, 1), pos, "building", Bud_cnt++, tmp);
+            if (chos[ix] == 1)
+            {
+                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp);
+            }
+            ix++;
+        }
+    }
 
+    public static void Facility_create2()
+    {
+        XmlDocument ItemxmlDoc = new XmlDocument();
+        ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
+        XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
+
+        for (int i = 0; i < 2; i++)
+        {
+            int k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            while (chos[k] != 0)
+            {
+                k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            }
+            chos[k] = 1;
+        }
+
+        int ix = 0;
+        foreach (XmlNode p in mill_info)
+        {
+            Dictionary<int, int> tmp = new Dictionary<int, int>(); //修復設施所需要材料id和数量
+            int mat_id = int.Parse(p.SelectSingleNode("matrial_id").InnerText);
+            int mat_cnt = int.Parse(p.SelectSingleNode("matrial_number").InnerText);
+            tmp[mat_id] = mat_cnt;
+            int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
+            int mill_pos = int.Parse(p.SelectSingleNode("mill_pos").InnerText);
+            string name = p.SelectSingleNode("mill_name").InnerText;
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
+
+            //Debug.Log(Bud_cnt);
+
+            if (chos[ix] == 1)
+            {
+                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp);
+            }
+            ix++;
         }
     }
 
