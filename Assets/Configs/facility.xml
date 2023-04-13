@@ -22,7 +22,7 @@
             <id>3</id>
             <mill_pos>70</mill_pos>
             <mill_name>二号位</mill_name>
-            <matrial_id>8</matrial_id>
+            <matrial_id>7</matrial_id>
             <matrial_number>10</matrial_number>
             <buff></buff>
 
@@ -32,7 +32,7 @@
             <id>3</id>
             <mill_pos>200</mill_pos>
             <mill_name>三号位</mill_name>
-            <matrial_id>9</matrial_id>
+            <matrial_id>8</matrial_id>
             <matrial_number>10</matrial_number>
             <buff></buff>
         </mill_info>
@@ -41,7 +41,7 @@
             <id>7</id>
             <mill_pos>14</mill_pos>
             <mill_name>四号位</mill_name>
-            <matrial_id>10</matrial_id>
+            <matrial_id>9</matrial_id>
             <matrial_number>10</matrial_number>
             <buff></buff>
         </mill_info>
@@ -49,7 +49,7 @@
             <id>7</id>
             <mill_pos>237</mill_pos>
             <mill_name>五号位</mill_name>
-            <matrial_id>7</matrial_id>
+            <matrial_id>8</matrial_id>
             <matrial_number>10</matrial_number>
             <buff></buff>
         </mill_info>
@@ -66,7 +66,7 @@
             <id>9</id>   
             <mill_pos>188</mill_pos>
             <mill_name>七号位</mill_name>
-            <matrial_id>8</matrial_id>
+            <matrial_id>10</matrial_id>
             <matrial_number>10</matrial_number>
             <buff></buff>
         </mill_info>
