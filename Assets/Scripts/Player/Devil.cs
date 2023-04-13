@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class Devil : Knight
@@ -39,6 +40,7 @@ public class Devil : Knight
             int hited = DevilGetHited();
             if (hited != 0)
             {
+                DevilAttackTimes = 0;
                 ChangeStatus(StatusType.Hit);
             }
         }
@@ -58,7 +60,7 @@ public class Devil : Knight
                 break;
             case StatusType.Attack:
                 AnimaStatus = 3;
-                DevilAttack(false);
+                DevilAttack();
                 break;
             case StatusType.CannonMagic:
                 AnimaStatus = 4;
@@ -143,7 +145,6 @@ public class Devil : Knight
                 if (f.pos.x < Nearx) AnimaToward = 1;
                 else AnimaToward = -1;
                 ChangeStatus(StatusType.Attack);
-                DevilAttack(true);
                 return;
             }
             else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
@@ -181,9 +182,46 @@ public class Devil : Knight
         }
     }
 
-    private void DevilAttack(bool first)
-    {
 
+    private static Fixpoint DevilAttack1HitTime = new Fixpoint(3, 1);
+    private static Fixpoint DevilAttack2HitTime = new Fixpoint(6, 1);
+    private static Fixpoint DevilAttack3HitTime = new Fixpoint(9, 1);
+    private static Fixpoint DevilAttackQuitTime = new Fixpoint(1, 0);
+    private static Fixpoint DevilAttack1Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack2Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack3Damage = new Fixpoint(4, 0);
+    private int DevilAttackTimes = 0;
+
+    private void DevilCreateAttack(Fixpoint HPDamage, int ToughnessDamage)
+    {
+        Fix_vector2 AttackPos = f.pos.Clone();
+        if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
+        else AttackPos.x -= new Fixpoint(1, 0);
+        CreateAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), HPDamage, ToughnessDamage, AnimaToward);
+    }
+    private void DevilAttack()
+    {
+        if(StatusTime <= DevilAttack1HitTime)
+        {
+            return;
+        }
+        else if(StatusTime <= DevilAttack2HitTime && DevilAttackTimes == 0)
+        {
+            ++DevilAttackTimes;
+            DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
+        } else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
+        {
+            ++DevilAttackTimes;
+            DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
+        } else if(StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
+        {
+            ++DevilAttackTimes;
+            DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
+        } else
+        {
+            DevilAttackTimes = 0;
+            ChangeStatus(StatusType.Normal);
+        }
     }
 
     private void CannonMagic()
