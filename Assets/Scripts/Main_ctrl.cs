@@ -539,6 +539,16 @@ public class Main_ctrl : MonoBehaviour
                         obj.transform.localScale = new Vector3(3, 3, 1);
                     }
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
+                    if(info.name == "MagicCannon")
+                    {
+                        Attack2 a2 = obj.GetComponent<Attack2>();
+                        a2.SetDestroyTime(new Fixpoint(1,0));
+                    }
+
+                    if (info.type == "wave")
+                    {
+                        obj.transform.localScale = new Vector3(3, 3, 1);
+                    }
                     /*
                     if(info.name == "LightBall")
                     {

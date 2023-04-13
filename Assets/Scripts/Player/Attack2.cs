@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using UnityEngine;
 
 public class Attack2 : Attack
@@ -16,6 +17,11 @@ public class Attack2 : Attack
         animator = GetComponent<Animator>();
     }
     
+    public void SetDestroyTime(Fixpoint x)
+    {
+        DestroyTime = MaxAliveTime - x;
+    }
+
     public override void Updatex()
     {
         AliveTime += Dt.dt;

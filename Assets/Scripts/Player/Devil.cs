@@ -8,10 +8,14 @@ public class Devil : Knight
     private Animator animator;
     private float DevilAnimaSpeed = 0f;
     private int DevilAnimaAttack = 0;
+
+    private Fixpoint BombCD = new Fixpoint(0,0);
+    private Fixpoint MagicCannonCD = new Fixpoint(0, 0);
+    private Fixpoint SuckerPunchCd = new Fixpoint(0, 0);
     void Start()
     {
         CharacterType = 1;
-        SetStatus(1000, 10);//血量，基础攻击力
+        SetStatus(10000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         status.max_toughness = 200;
         status.toughness = 200;
@@ -30,6 +34,12 @@ public class Devil : Knight
     public override void Updatex()
     {
         StatusTime += Dt.dt;
+        BombCD -= Dt.dt;
+        MagicCannonCD -= Dt.dt;
+        SuckerPunchCd -= Dt.dt;
+        if (BombCD < new Fixpoint(0, 0)) BombCD = new Fixpoint(0, 0);
+        if (MagicCannonCD < new Fixpoint(0, 0)) MagicCannonCD = new Fixpoint(0, 0);
+        if (SuckerPunchCd < new Fixpoint(0, 0)) SuckerPunchCd = new Fixpoint(0, 0);
         status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
         if (status.death == true && AnimaStatus != 8)
         {
@@ -42,6 +52,7 @@ public class Devil : Knight
             {
                 DevilAttackTimes = 0;
                 DevilCannonMagicShooted = false;
+                DevilBonmTimes = 0;
                 ChangeStatus(StatusType.Hit);
             }
         }
@@ -142,30 +153,54 @@ public class Devil : Knight
             if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
 
             if (Dis < new Fixpoint(14, 1)) //攻击
-            {
+            {   
                 if (f.pos.x < Nearx) AnimaToward = 1;
                 else AnimaToward = -1;
-                ChangeStatus(StatusType.Attack);
-                return;
-            }
-            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
-            {
-                ChangeStatus(StatusType.CannonMagic);
-                return;
-            }
-            else //靠近
-            {
-                if (f.pos.x < Nearx)
+                if (BombCD == new Fixpoint(0,0))
                 {
-                    AnimaToward = 1;
-                    Moves(AnimaToward, status.WalkSpeed);
+                    BombCD = new Fixpoint(5, 0);
+                    ChangeStatus(StatusType.Bomb);
                 }
                 else
                 {
-                    AnimaToward = -1;
+                    ChangeStatus(StatusType.Attack);
+                }
+                return;
+            }
+            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(9, 0))//距离判定
+            {
+                if (f.pos.x < Nearx) AnimaToward = 1;
+                else AnimaToward = -1;
+                if (SuckerPunchCd == new Fixpoint(0, 0))
+                {
+                    SuckerPunchCd = new Fixpoint(5, 0);
+                    ChangeStatus(StatusType.SuckerPunch);
+                } else
+                {
                     Moves(AnimaToward, status.WalkSpeed);
                 }
+                return;
             }
+            else if(Dis > new Fixpoint(9,0) && Dis < new Fixpoint(15,0))
+            {
+                if (f.pos.x < Nearx) AnimaToward = 1;
+                else AnimaToward = -1;
+                if (MagicCannonCD == new Fixpoint(0, 0))
+                {
+                    MagicCannonCD = new Fixpoint(3, 0);
+                    ChangeStatus(StatusType.CannonMagic);
+                } else
+                {
+                    Moves(AnimaToward, status.WalkSpeed);
+                }
+                return;
+            } else
+            {
+                if (f.pos.x < Nearx) AnimaToward = 1;
+                else AnimaToward = -1;
+                Moves(AnimaToward, status.WalkSpeed);
+            }
+            return;
         }
         else //否则寻路
         {
@@ -215,7 +250,7 @@ public class Devil : Knight
         }
     }
 
-    private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(5, 1);
+    private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(7, 1);
     private static Fixpoint DevilCannonMagicQuitTime = new Fixpoint(1, 0);
     private static Fixpoint DevilCannonMagicAttack = new Fixpoint(50, 0);
     private bool DevilCannonMagicShooted = false;
@@ -234,9 +269,31 @@ public class Devil : Knight
         }
     }
 
+    private static Fixpoint DevilBombHitTime = new Fixpoint(66, 2);
+    private static Fixpoint DevilBombHitBetween = new Fixpoint(3, 1);
+    private static Fixpoint DevilBombQuitTime = new Fixpoint(166, 2);
+    private static Fixpoint DevilBombAttack = new Fixpoint(5, 1);
+    private int DevilBonmTimes = 0;
     private void Bomb()
     {
-
+        if(StatusTime > DevilBombHitTime + new Fixpoint(DevilBonmTimes,0) * DevilBombHitBetween)
+        {
+            if(DevilBonmTimes == 0)
+            {
+                GameObject x = (GameObject)Resources.Load("Prefabs/bomb");
+                GameObject y = Instantiate(x, new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 1.8f, 0), Quaternion.identity);
+                y.GetComponent<Bomb>().toward = AnimaToward;
+            }
+            ++DevilBonmTimes;
+            Fix_vector2 pos = f.pos.Clone();
+            pos.y += new Fixpoint(18,1);
+            CreateAttack(pos, new Fixpoint(45, 1), new Fixpoint(7, 0), status.Damage() * DevilBombAttack, 60, AnimaToward);
+        }
+        if(StatusTime > DevilBombQuitTime)
+        {
+            DevilBonmTimes = 0;
+            ChangeStatus(StatusType.Normal);
+        }
     }
 
     private void CallMagic()
@@ -244,19 +301,107 @@ public class Devil : Knight
 
     }
 
-    private void DevilHited()
-    {
-
-    }
-
-    private void SuckerPunch()
-    {
-
-    }
-
     private int DevilGetHited()
     {
-        return 0;
+        bool hited = GetHited(ref AnimaToward);
+        return DevilCheckHitStatus(hited);
+    }
+
+    private int DevilCheckHitStatus(bool this_hited)
+    {
+        if (status.GetToughness() >= 100)//韧性值
+        {
+            KnightAnimaHited = 0;
+            return 0;
+        }
+        else if (status.GetToughness() >= 70)
+        {
+            KnightAnimaHited = 1;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
+            return 1;
+        }
+        else if(status.GetToughness() >= 40)
+        {
+            KnightAnimaHited = 2;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
+            return 1;
+        } else if(status.GetToughness() >= 0)
+        {
+            KnightAnimaHited = 3;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+                StatusTime = new Fixpoint(0, 0);
+            return 1;
+        }
+        else if (status.GetToughness() > -1000)
+        {
+            KnightAnimaHited = 4;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+            {
+                StatusTime = new Fixpoint(0, 0);
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//受击击飞的，y轴的上升速度
+            }
+            return 2;
+        }
+        else
+        {
+            KnightAnimaHited = 4;
+            KnightAnimaHited = 2;
+            RealStatus = StatusType.Hit;
+            if (this_hited == true)
+            {
+                StatusTime = new Fixpoint(0, 0);
+                if (AnimaToward > 0)
+                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(38, 1));//空中被击飞的x,y轴的上升速度
+                else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(38, 1));
+            }
+            return 2;
+        }
+    }
+
+    private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(15, 0);
+    private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(35, 2);
+    private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(1, 0);
+    private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(20, 0);
+    private bool DevilSuckerPunckCreatedAttack = false;
+    private void SuckerPunch()
+    {
+        if(StatusTime > DevilSuckerPunckBeginTime)
+        {
+            Moves(AnimaToward,DevilSuckerPunckSpeed);
+            if (DevilSuckerPunckCreatedAttack == false)
+            {
+                DevilSuckerPunckCreatedAttack = true;
+                CreateAttackWithCharacter(f.pos, new Fix_vector2(0, 0), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * DevilSuckerPunchAttack, 120, AnimaToward);
+            }
+        }
+        if(StatusTime > DevilSuckerPunckQuitTime)
+        {
+            DevilSuckerPunckCreatedAttack = false;
+            ChangeStatus(StatusType.Normal);
+        }
+    }
+     
+    private void DevilHited()
+    {
+        int hit = DevilGetHited();
+        if (hit == 0)
+        {
+            ChangeStatus(StatusType.Normal);
+        }
+        else if (hit == 2)
+        {
+            status.toughness = -100;
+            if (f.onground && StatusTime > new Fixpoint(3, 1))
+            {
+                ChangeStatus(StatusType.Ground);
+            }
+        }
     }
 
 }
