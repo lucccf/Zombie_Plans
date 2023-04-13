@@ -124,6 +124,7 @@ public class Main_ctrl : MonoBehaviour
             this.RightType = y;
         }
     }
+
     public struct TranslateMethod
     {
         public TranslateMethod(Fixpoint pos, node.TravelType action)
@@ -657,17 +658,11 @@ public class Main_ctrl : MonoBehaviour
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
             ++count;
-
-            if (count % 1000 == 0)
-            {
-                Debug.Log(count / 1000 + " " + cp);
-            }
             
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                cp = cp * 233 + (uint)f.Opts[i].Userid + (uint)f.Opts[i].Opt;
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }

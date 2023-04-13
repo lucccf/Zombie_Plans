@@ -289,7 +289,6 @@ public class Map_create : MonoBehaviour
         }
     }
 
-
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
         Obj_info home_info = new Obj_info();
@@ -331,7 +330,6 @@ public class Map_create : MonoBehaviour
         BK_create(Rooms, "home_pos", "BK_home");
         BKitem_create(Rooms, "home_pos", "bg_common");
         BKother_create("bg_outerlayer");
-        BKwood_create();
     }
 
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
@@ -399,6 +397,15 @@ public class Map_create : MonoBehaviour
                 {
                     q_pi = (int)(Rand.rand() % 2 + 1);
                     Load_BL(id, pos, 10000, "rocks", q_pi, 18, 5, 2, true, 4);
+                    q_pi = (int)(Rand.rand() % 3 + 1);
+                    Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, true);
+                }
+                else
+                {
+                    q_pi = (int)(Rand.rand() % 3 + 0);
+                    Load_BL(id, pos, 10000, "flower", q_pi, 17, 1, 3, true);
+                    q_pi = (int)(Rand.rand() % 3 + 1);
+                    Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, true);
                 }
             }
         }
