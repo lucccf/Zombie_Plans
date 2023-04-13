@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class Main_ctrl : MonoBehaviour
@@ -536,9 +535,10 @@ public class Main_ctrl : MonoBehaviour
                     } else if(info.type == "wave")
                     {
                         a.type = 1;
+                        obj.transform.localScale = new Vector3(3, 3, 1);
                     }
                     a.transform.localScale = new Vector3(info.wid.to_float(), info.hei.to_float(), 0f);
-                    
+                    /*
                     if(info.name == "LightBall")
                     {
                         obj.transform.localScale = new Vector3(3, 3, 1);
@@ -547,7 +547,7 @@ public class Main_ctrl : MonoBehaviour
                     {
                         obj.transform.localScale = new Vector3(3, 3, 1);
                     }
-
+                    */
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();

@@ -1,12 +1,20 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 3712579577
 Hashes:
   AssetFileHash:
     serializedVersion: 2
     Hash: 8a6505bb589106cac9040ad6096a421a
+=======
+CRC: 2128272362
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4df2d8c46c2e0528ba4a6d78306fbde1
+>>>>>>> 6f83199ac480d23d3a290585da1287c1d3d2e861
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0b9981f1d2bd3bb492c35741dbb22607
+    Hash: cb2a6ffcf74c0bf9bd9dc08e2ef2926e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -47,6 +55,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: aee607920057d704fb5ac714f0990cc9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1c8cab923766b264dbfd891511002c8b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6f790d93ce6f1894592f1a0e33048e5c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d713e1748eec6dd47b59ee6c2bbfe28f, type: 3}
 - Class: 114
@@ -101,10 +111,12 @@ Assets:
 - Assets/Resources/Prefabs/number/77.png
 - Assets/Resources/Prefabs/number/8.png
 - Assets/Resources/Prefabs/Mage.prefab
+- Assets/Resources/Prefabs/MagicCannon.prefab
 - Assets/Resources/Prefabs/number/66.png
 - Assets/Resources/Prefabs/number/00.png
 - Assets/Resources/Prefabs/HurtNumber.prefab
 - Assets/Resources/Prefabs/number/11.png
+- Assets/Resources/Prefabs/Devil.prefab
 - Assets/Resources/Prefabs/yellow.prefab
 - Assets/Resources/Prefabs/number/44.png
 - Assets/Resources/Prefabs/player.prefab
@@ -115,6 +127,7 @@ Assets:
 - Assets/Resources/Prefabs/number/88.png
 - Assets/Resources/Prefabs/number/55.png
 - Assets/Resources/Prefabs/wall_a.prefab
+- Assets/Resources/Prefabs/Map_item/Devil_m.prefab
 - Assets/Resources/Prefabs/Monster1.prefab
 - Assets/Resources/Prefabs/wall_b.prefab
 - Assets/Resources/Prefabs/number/99.png

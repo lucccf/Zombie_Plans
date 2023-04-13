@@ -230,6 +230,12 @@ public class Player : BasicCharacter
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
+
+    public bool CheckDeath()
+    {
+        return status.death;
+    }
+
     private bool checkid()
     {
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;

@@ -17,7 +17,8 @@ public class Monster_create : MonoBehaviour
             Obj_info p = new Obj_info();
             if (pos_monster[i].x < new Fixpoint(130, 0))
             {
-                p.name = "Mage";
+                //p.name = "Mage";
+                p.name = "Devil";
             }
             else
             {
@@ -41,7 +42,8 @@ public class Monster_create : MonoBehaviour
         for (int i = 0; i < pos_zombies.Count; i++)
         {
             Obj_info p = new Obj_info();
-            p.name = "Monster1";
+            //p.name = "Monster1";
+            p.name = "Devil";
             p.hei = size_zombies[i].y.Clone();
             p.wid = size_zombies[i].x.Clone();
             p.pos = pos_zombies[i];

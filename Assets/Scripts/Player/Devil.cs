@@ -41,6 +41,7 @@ public class Devil : Knight
             if (hited != 0)
             {
                 DevilAttackTimes = 0;
+                DevilCannonMagicShooted = false;
                 ChangeStatus(StatusType.Hit);
             }
         }
@@ -149,17 +150,7 @@ public class Devil : Knight
             }
             else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
             {
-                Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
-                Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
-                Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
-                if (f.pos.x < Left)
-                {
-                    AnimaToward = 1;
-                }
-                else if (f.pos.x > Right)
-                {
-                    AnimaToward = -1;
-                }
+                ChangeStatus(StatusType.CannonMagic);
                 return;
             }
             else //靠近
@@ -224,9 +215,23 @@ public class Devil : Knight
         }
     }
 
+    private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(5, 1);
+    private static Fixpoint DevilCannonMagicQuitTime = new Fixpoint(1, 0);
+    private static Fixpoint DevilCannonMagicAttack = new Fixpoint(50, 0);
+    private bool DevilCannonMagicShooted = false;
     private void CannonMagic()
     {
-
+        if(StatusTime > DevilCannonMagicShootTime && DevilCannonMagicShooted == false)
+        {
+            DevilCannonMagicShooted = true;
+            Main_ctrl.NewAttack2("MagicCannon", f.pos, new Fixpoint(2, 0), new Fixpoint(2, 0), status.Damage() * DevilCannonMagicAttack, 120, id, AnimaToward, CharacterType);
+        }
+        if(StatusTime > DevilCannonMagicQuitTime)
+        {
+            DevilCannonMagicShooted = false;
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
     }
 
     private void Bomb()
