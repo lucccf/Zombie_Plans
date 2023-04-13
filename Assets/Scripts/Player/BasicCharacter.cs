@@ -14,6 +14,7 @@ public class BasicCharacter : MonoBehaviour
     protected Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
 
     protected int AnimaStatus = 0;
+    public float AnimaToward = 0;
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : BasicCharacter
 {
     private Animator animator;
-    public float AnimaToward = 1f;
+    //public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private float AnimaHited = 0f;

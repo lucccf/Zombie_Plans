@@ -26,11 +26,21 @@ public class Attack : MonoBehaviour
         {
             //Debug.Log("x:" + with_pos.x.to_float());
             //Debug.Log("y:" + with_pos.y.to_float());
-            Player p =(Player)(Main_ctrl.All_objs[attakcer_id].modules[Object_ctrl.class_name.Player]);
-            if (p.AnimaToward > 0) f.pos.x = p.f.pos.x + with_pos.x;
-            else f.pos.x = p.f.pos.x - with_pos.x;
-            f.pos.y = p.f.pos.y + with_pos.y;
-            transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float());
+            if (attacker_type == 1)
+            {
+                BasicCharacter p = (BasicCharacter)(Main_ctrl.All_objs[attakcer_id].modules[Object_ctrl.class_name.Moster]);
+                if (p.AnimaToward > 0) f.pos.x = p.f.pos.x + with_pos.x;
+                else f.pos.x = p.f.pos.x - with_pos.x;
+                f.pos.y = p.f.pos.y + with_pos.y;
+                transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float());
+            } else
+            {
+                BasicCharacter p = (BasicCharacter)(Main_ctrl.All_objs[attakcer_id].modules[Object_ctrl.class_name.Player]);
+                if (p.AnimaToward > 0) f.pos.x = p.f.pos.x + with_pos.x;
+                else f.pos.x = p.f.pos.x - with_pos.x;
+                f.pos.y = p.f.pos.y + with_pos.y;
+                transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float());
+            }
         }
         if(AliveTime > new Fixpoint(3,1))
         {
