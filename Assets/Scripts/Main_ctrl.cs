@@ -139,7 +139,7 @@ public class Main_ctrl : MonoBehaviour
     {
         int x = (posx + new Fixpoint(5, 1)).to_int();
         int y = PostionToY(posy);
-        int l = 1, r = MapNode[y].Count - 1;
+        int l = 0, r = MapNode[y].Count - 1;
         while(l!=r)
         {
             int mid = (l + r) / 2;
