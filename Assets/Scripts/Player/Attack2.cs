@@ -8,9 +8,9 @@ public class Attack2 : Attack
     private Animator animator;
     private bool AnimaDestroy = false;
 
-    private static Fixpoint MaxAliveTime = new Fixpoint(10, 0);
-    private static Fixpoint DestroyTime = new Fixpoint(95, 1);
-    private static Fixpoint FlySpeed = new Fixpoint(15, 0);
+    private Fixpoint MaxAliveTime = new Fixpoint(10, 0);
+    private Fixpoint DestroyTime = new Fixpoint(95, 1);
+    private Fixpoint FlySpeed = new Fixpoint(15, 0);
 
     void Start()
     {
@@ -20,6 +20,14 @@ public class Attack2 : Attack
     public void SetDestroyTime(Fixpoint x)
     {
         DestroyTime = MaxAliveTime - x;
+    }
+    public void SetAliveTime(Fixpoint x)
+    {
+        MaxAliveTime = x;
+    }
+    public void SetSpeed(Fixpoint x)
+    {
+        FlySpeed = x;
     }
 
     public override void Updatex()
