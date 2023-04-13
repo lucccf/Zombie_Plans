@@ -58,10 +58,4 @@ public class Flow_path : MonoBehaviour
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
