@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class Main_ctrl : MonoBehaviour
@@ -31,6 +32,8 @@ public class Main_ctrl : MonoBehaviour
     long frame_id = 0;
 
     public static long user_id = -1;
+    public static long main_id = -1;
+    public static int wolf_cnt = 1;
 
     public static GameObject camara;
     public static GameObject Tiny_map;
@@ -69,6 +72,22 @@ public class Main_ctrl : MonoBehaviour
         }
 
         Play_create();
+        Wolf_create();
+        main_id = Ser_to_cli[user_id];
+        Debug.Log(Monster_create.cnt1);
+    }
+
+    static void Wolf_create()
+    {
+        for(int i = 0; i < wolf_cnt; i++)
+        {
+            int k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            while (Player_ctrl.plays[k].identity == Player.Identity.Wolf)
+            {
+                k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            }
+            Player_ctrl.plays[k].identity = Player.Identity.Wolf;
+        }
     }
 
     public struct node
@@ -620,17 +639,27 @@ public class Main_ctrl : MonoBehaviour
     public static int count = 0;
 
     // Update is called once per frame
+
+    static uint cp = 0;
+
     void Update()
     {
         while(Frames.Count > 0)
         {
-            ++count;
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
+            ++count;
+
+            if (count % 1000 == 0)
+            {
+                Debug.Log(count / 1000 + " " + cp);
+            }
+            
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
+                cp = cp * 233 + (uint)f.Opts[i].Userid + (uint)f.Opts[i].Opt;
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
@@ -667,7 +696,7 @@ public class Main_ctrl : MonoBehaviour
                 CreateObj(q);
             }
         }
-
+        play = All_objs[main_id].gameObject;
         if (play != null)
         {
             camara.transform.position = play.transform.position;

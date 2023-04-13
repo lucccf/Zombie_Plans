@@ -11,7 +11,7 @@ public class Knight : Monster
     void Start()
     {
         CharacterType = 1;
-        SetStatus(1000, 10);//血量，基础攻击力
+        SetStatus(400, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
     }
 
@@ -114,7 +114,7 @@ public class Knight : Monster
             if (this_hited == true)
             {
                 StatusTime = new Fixpoint(0, 0);
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//受击击飞的，y轴的上升速度
+                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(81, 2));//受击击飞的，y轴的上升速度
             } 
             return 2;
         } else
@@ -125,8 +125,8 @@ public class Knight : Monster
             {
                 StatusTime = new Fixpoint(0, 0);
                 if(AnimaToward > 0)
-                r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(5, 0));//空中被击飞的x,y轴的上升速度
-                else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(5, 0));
+                r.velocity = new Fix_vector2(new Fixpoint(-18, 1), new Fixpoint(38, 1));//空中被击飞的x,y轴的上升速度
+                else r.velocity = new Fix_vector2(new Fixpoint(18, 1), new Fixpoint(38, 1));
             }
             return 2;
         }
@@ -225,7 +225,7 @@ public class Knight : Monster
                 nearx = i.f.pos.x;
             }
         }
-        if (Min > new Fixpoint(20, 0)) return -1;//寻路距离
+        if (Min > new Fixpoint(10, 0)) return -1;//寻路距离
         else return Main_ctrl.CalPos(Minx, Miny);
     }
 
@@ -336,7 +336,7 @@ public class Knight : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 40, AnimaToward);
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward);
     }
     private void Attack(bool first)
     {
@@ -349,7 +349,7 @@ public class Knight : Monster
         {
             if (StatusTime > Attack1DuringTime)
             {
-                if (Near <= new Fixpoint(15, 1)) AttackToNext();
+                if (Near <= new Fixpoint(15, 1)) AttackToNext();//距离判定
                 else RemoveAttack();
             }
             if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack1Damage,ref KnightCreatedAttack);
@@ -496,7 +496,7 @@ public class Knight : Monster
         }
     }
 
-    private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
+    private static Fixpoint OnGroundTime = new Fixpoint(11, 1);//倒地时间
     protected void Ground()
     {
         r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
@@ -521,7 +521,7 @@ public class Knight : Monster
     {
         KnightAnimaHited = 0;
         KnightAnimaAttack = 0;
-        if(StatusTime > new Fixpoint(3,0))//死亡到消失的时间
+        if(StatusTime > new Fixpoint(2,0))//死亡到消失的时间
         {
             Main_ctrl.Desobj(id);
         }

@@ -169,7 +169,7 @@ public class Player : BasicCharacter
         if (ECD < new Fixpoint(0, 0)) ECD = new Fixpoint(0, 0);
         GetTrigger();
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //25的位置是每秒恢复韧性值
+        status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //是每秒恢复韧性值
         if (status.death == true) ChangeStatus(13);
         switch (AnimaStatus)
         {
@@ -230,7 +230,7 @@ public class Player : BasicCharacter
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
-   private bool checkid()
+    private bool checkid()
     {
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
         else return false;

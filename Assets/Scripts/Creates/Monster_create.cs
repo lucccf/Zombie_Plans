@@ -8,6 +8,7 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> size_monster = new List<Fix_vector2>();
     public static List<Fix_vector2> pos_zombies = new List<Fix_vector2>();
     public static List<Fix_vector2> size_zombies = new List<Fix_vector2>();
+    public static float cnt1 = 0;
 
     public static void Mon_create1()  //生成资源怪
     {
@@ -25,6 +26,7 @@ public class Monster_create : MonoBehaviour
             p.hei = size_monster[i].y.Clone();
             p.wid = size_monster[i].x.Clone();
             p.pos = pos_monster[i];
+            cnt1 += p.pos.x.to_int() + p.pos.y.to_int();
             p.col_type = Fix_col2d.col_status.Collider;
             p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
             p.classnames.Add(Object_ctrl.class_name.Moster);
