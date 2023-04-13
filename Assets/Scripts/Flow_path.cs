@@ -46,6 +46,7 @@ public class Flow_path : MonoBehaviour
                 {
                     cnt_flag = 2;
                     countdown = new Fixpoint(180, 0);
+                    Map_create.Facility_create2();
                 }
                 break;
             case 2:
