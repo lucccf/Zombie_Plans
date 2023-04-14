@@ -26,6 +26,15 @@ public class Flow_path : MonoBehaviour
 
     public static long Now_fac = 0;
 
+    public static GameObject play_panel;
+    public static GameObject death_panel;
+
+    public static void init()
+    {
+        play_panel = GameObject.Find("PlayerPanel");
+        death_panel = GameObject.Find("Death");
+    }
+
     public static void Updatex()
     {
         switch (cnt_flag)
@@ -81,6 +90,8 @@ public class Flow_path : MonoBehaviour
                 break;
             case 1:
                 //切换到死亡UI，并随机选择一名玩家作为主视角
+                play_panel.SetActive(false);
+                death_panel.SetActive(true);
                 main_flag = 2;
                 break;
             case 2:
@@ -94,6 +105,8 @@ public class Flow_path : MonoBehaviour
         Checkwolfvic();
 
         Checkpeopvic();
+
+        Checkdoublefail();
     }
 
     private static void Checkwolfvic()
@@ -122,5 +135,10 @@ public class Flow_path : MonoBehaviour
     private static void Checkpeopvic()
     {
         //如果有一名玩家成功逃出，则好人胜利，根据不同的胜利方式获得不同的评分
+    }
+
+    private static void Checkdoublefail()
+    {
+        //如果狼人死了且好人没有成功逃出，则算作平局
     }
 }

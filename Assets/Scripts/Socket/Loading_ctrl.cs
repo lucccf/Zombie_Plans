@@ -15,7 +15,7 @@ public class Loading_ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cnt.text = roomcnt + "/2";
+        Cnt.text = roomcnt + "/1";
         while (Frames.Count > 0)
         {
             Frame f;
@@ -34,7 +34,7 @@ public class Loading_ctrl : MonoBehaviour
                 }
             }
 
-            if (roomcnt >= 2)
+            if (roomcnt >= 1)
             {
                 SceneManager.LoadScene("Battle");
             }
