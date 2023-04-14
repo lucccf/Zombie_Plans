@@ -22,9 +22,19 @@ AnimationClip:
     - time: 0
       value: {fileID: 21300000, guid: 36f202913dd08584fba3ef36f6fa5d98, type: 3}
     - time: 0.06666667
-      value: {fileID: 21300000, guid: bd8b3238b3289c5459897484ae8d8264, type: 3}
+      value: {fileID: 21300000, guid: 2116ff1293cbc5f4a839232a73d52888, type: 3}
+    - time: 0.1
+      value: {fileID: 21300000, guid: b5aa20e2840d3bc4d80c93d60fb93cae, type: 3}
+    - time: 0.18333334
+      value: {fileID: 21300000, guid: 98c71bf60ac127f459ca17f8179847ba, type: 3}
+    - time: 0.2
+      value: {fileID: 21300000, guid: cd8e6a46008d778419c6fccb3dbaf3d9, type: 3}
+    - time: 0.21666667
+      value: {fileID: 21300000, guid: 507257fdf619dd743beac3054206f742, type: 3}
     - time: 0.23333333
-      value: {fileID: 21300000, guid: e2846799b48240e4aa41e05585c000e9, type: 3}
+      value: {fileID: 21300000, guid: 3a9f47859032f664c9f505a052f1b0da, type: 3}
+    - time: 0.25
+      value: {fileID: 21300000, guid: a21e8fed85413d84da6202cc5c4f78f2, type: 3}
     - time: 0.31666666
       value: {fileID: 21300000, guid: 36f202913dd08584fba3ef36f6fa5d98, type: 3}
     - time: 0.45
@@ -49,8 +59,13 @@ AnimationClip:
       isPPtrCurve: 1
     pptrCurveMapping:
     - {fileID: 21300000, guid: 36f202913dd08584fba3ef36f6fa5d98, type: 3}
-    - {fileID: 21300000, guid: bd8b3238b3289c5459897484ae8d8264, type: 3}
-    - {fileID: 21300000, guid: e2846799b48240e4aa41e05585c000e9, type: 3}
+    - {fileID: 21300000, guid: 2116ff1293cbc5f4a839232a73d52888, type: 3}
+    - {fileID: 21300000, guid: b5aa20e2840d3bc4d80c93d60fb93cae, type: 3}
+    - {fileID: 21300000, guid: 98c71bf60ac127f459ca17f8179847ba, type: 3}
+    - {fileID: 21300000, guid: cd8e6a46008d778419c6fccb3dbaf3d9, type: 3}
+    - {fileID: 21300000, guid: 507257fdf619dd743beac3054206f742, type: 3}
+    - {fileID: 21300000, guid: 3a9f47859032f664c9f505a052f1b0da, type: 3}
+    - {fileID: 21300000, guid: a21e8fed85413d84da6202cc5c4f78f2, type: 3}
     - {fileID: 21300000, guid: 36f202913dd08584fba3ef36f6fa5d98, type: 3}
     - {fileID: 21300000, guid: 36f202913dd08584fba3ef36f6fa5d98, type: 3}
   m_AnimationClipSettings:

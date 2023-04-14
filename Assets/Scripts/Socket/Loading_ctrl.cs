@@ -15,7 +15,7 @@ public class Loading_ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cnt.text = roomcnt + "/2";
+        Cnt.text = roomcnt + "/1";
         while (Frames.Count > 0)
         {
             Frame f;

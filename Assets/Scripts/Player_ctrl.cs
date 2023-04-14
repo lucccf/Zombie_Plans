@@ -18,8 +18,8 @@ public class Player_ctrl : MonoBehaviour
     public static void Init_bag()
     {
         BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
-        QCD = GameObject.Find("Canvas/QCD").GetComponentInChildren<Text>();
-        ECD = GameObject.Find("Canvas/ECD").GetComponentInChildren<Text>();
+        QCD = GameObject.Find("QCD").GetComponentInChildren<Text>();
+        ECD = GameObject.Find("ECD").GetComponentInChildren<Text>();
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
         //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
         //MakeSuccessUI.SetActive(false);

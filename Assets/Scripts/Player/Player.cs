@@ -23,10 +23,14 @@ public class Player : BasicCharacter
     private void Start()
     {
         animator = GetComponent<Animator>();
+<<<<<<< HEAD
         SetStatus(100000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
+=======
+        SetStatus(100, 10);//血量。基础攻击力
+>>>>>>> 1558d6c94dbdc4796d59d8ad34f04ddbd00189ac
     }
 
     HashSet<PlayerOpt> list;
@@ -669,6 +673,7 @@ public class Player : BasicCharacter
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
+                Debug.Log(Main_ctrl.All_objs[a.opsite.id]);
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
                 if (trigger.triggertype == "building")
                 {
@@ -960,13 +965,13 @@ public class Player : BasicCharacter
         if(GroundTimes == 0)
         {
             ++GroundTimes;
-            r.velocity.y = new Fixpoint(3, 0);//向上弹的速度
+            r.velocity.y = new Fixpoint(22, 1);//向上弹的速度
             if (r.velocity.x < new Fixpoint(0,0))
             {
-                r.velocity.x = new Fixpoint(-3, 0);//x轴的速度
+                r.velocity.x = new Fixpoint(-1, 01);//x轴的速度
             } else if (r.velocity.x > new Fixpoint(0,0))
             {
-                r.velocity.x = new Fixpoint(3, 0);//x轴的速度
+                r.velocity.x = new Fixpoint(1, 1);//x轴的速度
             }
             ChangeStatus(15);
             return;
