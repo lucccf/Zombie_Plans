@@ -33,6 +33,7 @@ public class Flow_path : MonoBehaviour
     {
         play_panel = GameObject.Find("PlayerPanel");
         death_panel = GameObject.Find("Death");
+        death_panel.SetActive(false);
     }
 
     public static void Updatex()
@@ -92,6 +93,22 @@ public class Flow_path : MonoBehaviour
                 //切换到死亡UI，并随机选择一名玩家作为主视角
                 play_panel.SetActive(false);
                 death_panel.SetActive(true);
+                int cnt1 = 0;
+                foreach(var x in Player_ctrl.plays)
+                {
+                    if (!x.CheckDeath())
+                    {
+                        cnt1++;
+                    }
+                }
+                if (cnt1 > 0)
+                {
+                    Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+                    while (Player_ctrl.plays[(int)Main_ctrl.main_id].CheckDeath())
+                    {
+                        Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+                    }
+                }
                 main_flag = 2;
                 break;
             case 2:
@@ -120,7 +137,7 @@ public class Flow_path : MonoBehaviour
             }
         }
 
-        if (false)
+        if (true)
         {
             //如果家的血量没了
             vic_wolf = false;
