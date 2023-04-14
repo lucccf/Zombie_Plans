@@ -20,6 +20,9 @@ public class Devil : Knight
         status.max_toughness = 200;
         status.toughness = 200;
         status.WalkSpeed = new Fixpoint(3, 0);
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0) , new Fixpoint(1 , 0),new Fixpoint(2,0) };
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0) ,new Fixpoint ( 5 , 1 ) , new Fixpoint(5, 1) , new Fixpoint(5,1) };
+        ToughnessStatus = new int[4] { 100 , 60 , 30 , 0 };//阶段
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class Devil : Knight
         }
         if (RealStatus != StatusType.Death && RealStatus != StatusType.Ground && RealStatus != StatusType.CallMagic && RealStatus != StatusType.Hit)
         {
-            int hited = DevilGetHited();
+            int hited = BasicCharacterGetHited();
             if (hited != 0)
             {
                 DevilAttackTimes = 0;
@@ -88,7 +91,7 @@ public class Devil : Knight
                 break;
             case StatusType.Hit:
                 AnimaStatus = 7;
-                DevilHited();
+                Hited();
                 break;
             case StatusType.Ground:
                 AnimaStatus = 8;
@@ -305,69 +308,6 @@ public class Devil : Knight
 
     }
 
-    private int DevilGetHited()
-    {
-        bool hited = GetHited(ref AnimaToward);
-        return DevilCheckHitStatus(hited);
-    }
-
-    private int DevilCheckHitStatus(bool this_hited)
-    {
-        if (status.GetToughness() >= 100)//韧性值
-        {
-            KnightAnimaHited = 0;
-            return 0;
-        }
-        else if (status.GetToughness() >= 70)
-        {
-            KnightAnimaHited = 1;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if(status.GetToughness() >= 40)
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        } else if(status.GetToughness() >= 0)
-        {
-            KnightAnimaHited = 3;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if (status.GetToughness() > -1000)
-        {
-            KnightAnimaHited = 4;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//受击击飞的，y轴的上升速度
-            }
-            return 2;
-        }
-        else
-        {
-            KnightAnimaHited = 4;
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(38, 1));//空中被击飞的x,y轴的上升速度
-                else r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(38, 1));
-            }
-            return 2;
-        }
-    }
-
     private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(15, 0);
     private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(35, 2);
     private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(1, 0);
@@ -390,22 +330,4 @@ public class Devil : Knight
             ChangeStatus(StatusType.Normal);
         }
     }
-     
-    private void DevilHited()
-    {
-        int hit = DevilGetHited();
-        if (hit == 0)
-        {
-            ChangeStatus(StatusType.Normal);
-        }
-        else if (hit == 2)
-        {
-            status.toughness = -100;
-            if (f.onground && StatusTime > new Fixpoint(3, 1))
-            {
-                ChangeStatus(StatusType.Ground);
-            }
-        }
-    }
-
 }

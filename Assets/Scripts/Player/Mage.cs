@@ -10,6 +10,9 @@ public class Mage : Knight
         CharacterType = 1;
         SetStatus(250, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
+        HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(5, 1) };
+        ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
     }
     void Update()
     {
@@ -29,7 +32,7 @@ public class Mage : Knight
         }
         if (AnimaStatus != 6 && AnimaStatus != 7 && AnimaStatus != 8 && AnimaStatus != 9 && AnimaStatus != 11)
         {
-            int hited = MageGetHited();
+            int hited = BasicCharacterGetHited();
             if (hited != 0)
             {
                 ChangeStatus(StatusType.Hit);
@@ -94,61 +97,13 @@ public class Mage : Knight
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
+    /*
     private int MageGetHited()
     {
         bool x = GetHited(ref AnimaToward);
         return CheckToughStatus(x);
     }
-
-    private int CheckToughStatus(bool this_hited)
-    {
-
-        if (status.GetToughness() >= 60)
-        {
-            KnightAnimaHited = 0;
-            return 0;
-        }
-        else if (status.GetToughness() < 60 && status.GetToughness() >= 30)
-        {
-            KnightAnimaHited = 1;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if (status.GetToughness() < 30 && status.GetToughness() >= 0)
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if (status.toughness > -1000)
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));
-            }
-            return 2;
-        }
-        else
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-1, 0), new Fixpoint(46, 1));//击飞的速度
-                else r.velocity = new Fix_vector2(new Fixpoint(1, 0), new Fixpoint(46, 1));
-            }
-            return 2;
-        }
-    }
+    */
 
     private void Normal()
     {
@@ -405,22 +360,6 @@ public class Mage : Knight
         if(StatusTime > AppearTime)
         {
             ChangeStatus(StatusType.Normal);
-        }
-    }
-    private void Hited()
-    {
-        int hit = MageGetHited();
-        if (hit == 0)
-        {
-            ChangeStatus(StatusType.Normal);
-        }
-        else if (hit == 2)
-        {
-            status.toughness = -100;
-            if (f.onground && StatusTime > new Fixpoint(3, 1))
-            {
-                ChangeStatus(StatusType.Ground);
-            }
         }
     }
 

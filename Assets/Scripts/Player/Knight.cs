@@ -13,6 +13,9 @@ public class Knight : Monster
         CharacterType = 1;
         SetStatus(400, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
+        HitTime = new Fixpoint[2] {new Fixpoint(0, 0), new Fixpoint(2, 0) };
+        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(5, 1) };
+        ToughnessStatus = new int[2] { 20, 0 };//阶段
     }
 
     // Update is called once per frame
@@ -27,22 +30,25 @@ public class Knight : Monster
 
     public override void Updatex()
     {
-        StatusTime += Dt.dt;
+        if(status.GetToughness() != 100)
+        {
+            Debug.Log(status.GetToughness());
+        }
         status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
         if(status.death == true && AnimaStatus != 8)
         {
             ChangeStatus(StatusType.Death);
         }
-        if(AnimaStatus != 3 && AnimaStatus != 5 && AnimaStatus !=8 && AnimaStatus != 6)
+        if(RealStatus != StatusType.Hit && RealStatus != StatusType.Ground && RealStatus != StatusType.Death && RealStatus != StatusType.Defence)
         {
-            int hited = KnightGetHited();
+            int hited = BasicCharacterGetHited();
             if (hited != 0)
             {
-                ChangeStatus(StatusType.Hit);
                 KnightAnimaAttack = 0;
                 SkillAttackTimes = 0;
             }
         }
+        StatusTime += Dt.dt;
         switch (RealStatus)
         {
             case StatusType.Normal:
@@ -92,52 +98,6 @@ public class Knight : Monster
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
-    private int CheckToughStatus(bool this_hited)
-    {
-
-        if (status.GetToughness() >= 20)//韧性值
-        {
-            KnightAnimaHited = 0;
-            return 0;
-        }
-        else if (status.GetToughness() >= 0)
-        {
-            KnightAnimaHited = 1;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-                StatusTime = new Fixpoint(0, 0);
-            return 1;
-        } else if(status.toughness > -1000)
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(81, 2));//受击击飞的，y轴的上升速度
-            } 
-            return 2;
-        } else
-        {
-            KnightAnimaHited = 2;
-            RealStatus = StatusType.Hit;
-            if (this_hited == true)
-            {
-                StatusTime = new Fixpoint(0, 0);
-                if(AnimaToward > 0)
-                r.velocity = new Fix_vector2(new Fixpoint(-18, 1), new Fixpoint(38, 1));//空中被击飞的x,y轴的上升速度
-                else r.velocity = new Fix_vector2(new Fixpoint(18, 1), new Fixpoint(38, 1));
-            }
-            return 2;
-        }
-    }
-
-    private int KnightGetHited()
-    {
-        bool x = GetHited(ref AnimaToward);
-        return CheckToughStatus(x);
-    }
-
 
     private int DefenceGetHited()
     {
@@ -191,7 +151,13 @@ public class Knight : Monster
 
             Preform(status.last_damage);
         }
-        return CheckToughStatus(this_hited);
+        if (this_hited)
+        {
+            return CheckToughnessStatus();
+        } else
+        {
+            return 0;
+        }
     }
 
     protected int KnightGetNear(ref Fixpoint nearx)
@@ -416,25 +382,7 @@ public class Knight : Monster
             }
         }
     }
-
-    private void Hited()
-    {
-        int hit = KnightGetHited();
-        if(hit == 0)
-        {
-            ChangeStatus(StatusType.Normal);
-        }
-        else if(hit == 2)
-        {
-            status.toughness = -100;
-            if(f.onground && StatusTime > new Fixpoint(3,1))
-            {
-                ChangeStatus(StatusType.Ground);
-            }
-        }
-    }
-
-    private static Fixpoint DefenceTime = new Fixpoint(5, 1);//防御时间
+    private static Fixpoint DefenceTime = new Fixpoint(5, 0);//防御时间
     private static Fixpoint DefenceRate = new Fixpoint(5, 1);//承受伤害倍率
     private void Defence()
     {
@@ -444,7 +392,6 @@ public class Knight : Monster
         {
             ChangeStatus(StatusType.Hit);
             status.defence_rate = new Fixpoint(1, 0);
-            Debug.Log(status.toughness);
             return;
         }
         if (StatusTime > DefenceTime)
@@ -468,7 +415,7 @@ public class Knight : Monster
         //    return;
         //}
         if(StatusTime < SkillBeginToHitTime) 
-        { 
+        {
             Fixpoint Pos = GetNear();
             if (f.pos.x < Pos) AnimaToward = 1;
             else AnimaToward = -1;
@@ -495,20 +442,6 @@ public class Knight : Monster
             ChangeStatus(StatusType.Normal);
         }
     }
-
-    private static Fixpoint OnGroundTime = new Fixpoint(11, 1);//倒地时间
-    protected void Ground()
-    {
-        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
-        RemoveHited();
-        KnightAnimaHited = 0;
-        if (StatusTime > OnGroundTime)
-        {
-            status.toughness = status.max_toughness;
-            ChangeStatus(StatusType.Normal);
-        }
-    }
-
     protected void Fall()
     {
         if(f.onground)
@@ -608,11 +541,6 @@ public class Knight : Monster
 
     protected void LittleJump(int type)
     {
-        //int hited = KnightGetHited();
-        //if (hited != 0)
-        //{
-        //    return;
-        //}
         if (type == 1)
         {
             AnimaToward = 1;

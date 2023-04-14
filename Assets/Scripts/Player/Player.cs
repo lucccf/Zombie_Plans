@@ -8,7 +8,6 @@ public class Player : BasicCharacter
     //public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
-    private float AnimaHited = 0f;
     private PlayerBag bag = new PlayerBag();
     private Fixpoint QCD = new Fixpoint(0, 0);
     private Fixpoint ECD = new Fixpoint(0, 0);
@@ -21,10 +20,13 @@ public class Player : BasicCharacter
 
     public Identity identity = Identity.Populace;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(100000, 10);//血量。基础攻击力
+        SetStatus(100000, 10);//血量。基础攻击力       
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };//击退速度，第一个为占位
+        ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
     }
 
     HashSet<PlayerOpt> list;
@@ -160,9 +162,9 @@ public class Player : BasicCharacter
                 break;
         }
     }
+
     public override void Updatex()
     {
-        //Debug.Log(Main_ctrl.CalPos(f.pos.x, f.pos.y));
         QCD = QCD - Dt.dt;
         if (QCD < new Fixpoint(0, 0)) QCD = new Fixpoint(0, 0);
         ECD = ECD - Dt.dt;
@@ -170,61 +172,78 @@ public class Player : BasicCharacter
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //是每秒恢复韧性值
-        if (status.death == true) ChangeStatus(13);
-        switch (AnimaStatus)
+        if (status.death == true) ChangeStatus(StatusType.Death);
+        switch (RealStatus)
         {
-            case 0:
+            case StatusType.Normal:
+                AnimaStatus = 0;
                 Normal();
                 break;
-            case 1:
+            case StatusType.Jump:
+                AnimaStatus = 1;
                 Jump();
                 break;
-            case 2:
+            case StatusType.Roll:
+                AnimaStatus = 2;
                 //翻滚
                 Roll();
                 break;
-            case 3:
+            case StatusType.Attack:
+                AnimaStatus = 3;
                 Attack();
                 break;
-            case 4:
+            case StatusType.Hit:
+                AnimaStatus = 4;
                 //受击
                 Hited();
                 break;
-            case 5:
+            //case StatusType.CallMagic:
+            //    AnimaStatus = 5;
                 //击飞
-                HitedFly();
-                break;
-            case 6://下落
+                //HitedFly();
+            //    break;
+            case StatusType.Fall://下落
+                AnimaStatus = 6;
                 Fall();
                 break;
-            case 7:
+            case StatusType.Kick:
+                AnimaStatus = 7;
                 Kick();
                 break;
-            case 8:
+            case StatusType.HeavyAttack:
+                AnimaStatus = 8;
                 HeavyAttack();
                 break;
-            case 9:
+            case StatusType.Upattack:
+                AnimaStatus = 9;
                 UpAttack(false);
                 break;
-            case 10:
+            case StatusType.Fire1:
+                AnimaStatus = 10;
                 Fire1();
                 break;
-            case 11:
+            case StatusType.Fire2:
+                AnimaStatus = 11;
                 Fire2();
                 break;
-            case 12:
+            case StatusType.Recover:
+                AnimaStatus = 12;
                 RecoverHp(false);
                 break;
-            case 13:
+            case StatusType.Death:
+                AnimaStatus = 13;
                 Death();
                 break;
-            case 14:
+            case StatusType.Ground:
+                AnimaStatus = 14;
                 Ground();
                 break;
-            case 15:
-                Fly2();
-                break;
-            case 16:
+           // case StatusType.Appear:
+           //     AnimaStatus = 15;
+            //    Fly2();
+            //    break;
+            case StatusType.Stay:
+                AnimaStatus = 16;
                 Stay();
                 break;
         }
@@ -245,11 +264,11 @@ public class Player : BasicCharacter
     private void Normal()
     {
         //站立，走路，跑步
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             AnimaSpeed = 0f;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (Press[KeyCode.A])
@@ -289,14 +308,14 @@ public class Player : BasicCharacter
 
         if (!f.onground)
         {
-            ChangeStatus(6);
+            ChangeStatus(StatusType.Fall);
             return;
 
         }
 
         else if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
         {
-            ChangeStatus(9);
+            ChangeStatus(StatusType.Upattack);
             UpAttack(true);
             return;
         }
@@ -305,13 +324,12 @@ public class Player : BasicCharacter
         {
             if (Press[KeyCode.LeftShift])
             {
-                ChangeStatus(8);
+                ChangeStatus(StatusType.HeavyAttack);
                 return;
             }
             else
             {
-                StatusTime = new Fixpoint(0, 0);
-                AnimaStatus = 3;
+                ChangeStatus(StatusType.Attack);
                 Attack();
                 return;
             }
@@ -319,18 +337,18 @@ public class Player : BasicCharacter
 
         else if (Press[KeyCode.L])
         {
-            ChangeStatus(2);
+            ChangeStatus(StatusType.Roll);
             return;
         }
         else if (Press[KeyCode.K])
         {
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(845, 2));//跳跃起始速度
-            ChangeStatus(1);
+            ChangeStatus(StatusType.Jump);
             return;
         }
         else if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11,1))
         {
-            ChangeStatus(12);
+            ChangeStatus(StatusType.Recover);
             RecoverHp(true);
             return;
         }
@@ -338,13 +356,13 @@ public class Player : BasicCharacter
         else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
             QCD = new Fixpoint(10, 0);//Q的CD
-            ChangeStatus(10);
+            ChangeStatus(StatusType.Fire1);
             return;
         }
         else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
             ECD = new Fixpoint(10, 0);//E的CD
-            ChangeStatus(11);
+            ChangeStatus(StatusType.Fire2);
             return;
         }
     }
@@ -353,15 +371,15 @@ public class Player : BasicCharacter
     void Jump()
     {
         //跳跃
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (StatusTime > new Fixpoint(2, 1) && f.onground)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
         if (Press[KeyCode.A])
         {
@@ -375,12 +393,12 @@ public class Player : BasicCharacter
         }
         if (StatusTime > new Fixpoint(2, 1) && !f.onground)//跳的持续时间
         {
-            ChangeStatus(6);
+            ChangeStatus(StatusType.Fall);
         }
 
         if (Press[KeyCode.J] == true)
         {
-            ChangeStatus(7);
+            ChangeStatus(StatusType.Kick);
         }
 
         return;
@@ -390,7 +408,7 @@ public class Player : BasicCharacter
         RemoveHited();
         if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
         if (AnimaToward == 1.0f)
@@ -412,8 +430,7 @@ public class Player : BasicCharacter
     private void RemoveAttack()
     {
         AnimaAttack = 0f;
-        StatusTime = new Fixpoint(0, 0);
-        AnimaStatus = 0;
+        ChangeStatus(StatusType.Normal);
         return;
     }
 
@@ -449,11 +466,11 @@ public class Player : BasicCharacter
     private static Fixpoint Attack5Damage = new Fixpoint(6, 0);
     private void Attack()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             AnimaAttack = 0f;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (AnimaAttack <= 0.5f) //刚进入，进入一段攻击状态
@@ -568,11 +585,11 @@ public class Player : BasicCharacter
 
     private void Fall()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             AnimaAttack = 0f;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (Press[KeyCode.A] == true)
@@ -587,14 +604,15 @@ public class Player : BasicCharacter
         }
         if (f.onground)
         {
+            status.toughness = status.max_toughness;
             JumpNumber = 0;
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
 
         if (Press[KeyCode.J] == true)
         {
-            ChangeStatus(7);
+            ChangeStatus(StatusType.Kick);
             return;
         }
 
@@ -602,7 +620,7 @@ public class Player : BasicCharacter
         {
             ++JumpNumber;
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(16, 0));//二段跳的起始速度
-            ChangeStatus(1);
+            ChangeStatus(StatusType.Jump);
             return;
         }
     }
@@ -665,109 +683,6 @@ public class Player : BasicCharacter
             }
         }
     }
-    private int CheckToughnessStatus(bool this_hited)
-    {
-        if (status.GetToughness() >= 75)
-        {
-            AnimaHited = 0;
-            return 0;
-        }
-        else if (status.GetToughness() < 75 && status.GetToughness() >= 50)//韧性值阶段
-        {
-            AnimaHited = 1;
-            AnimaStatus = 4;
-            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if (status.GetToughness() < 50 && status.GetToughness() >= 25)
-        {
-            AnimaHited = 2;
-            AnimaStatus = 4;
-            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if (status.GetToughness() < 25 && status.GetToughness() >= 0)
-        {
-            AnimaHited = 3;
-            AnimaStatus = 4;
-            if (this_hited == true) StatusTime = new Fixpoint(0, 0);
-            return 1;
-        }
-        else if(status.GetToughness() > -1000)
-        {
-            AnimaHited = 4;
-            AnimaStatus = 5;
-            if (this_hited == true)
-            {
-                r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(5, 0));//击飞1，没有x只有y
-                StatusTime = new Fixpoint(0, 0);
-            }
-            return 2;
-        } else
-        {
-            AnimaHited = 4;
-            AnimaStatus = 5;
-            if (this_hited == true)
-            {
-                if (AnimaToward > 0)
-                    r.velocity = new Fix_vector2(new Fixpoint(-10, 0), new Fixpoint(46, 1)); //击飞2，有x只有y
-                else
-                    r.velocity = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(46, 1));
-                StatusTime = new Fixpoint(0, 0);
-            }
-            return 2;
-        }
-    }
-
-    private int PlayerGetHited()
-    {
-        bool x = GetHited(ref AnimaToward);
-        return CheckToughnessStatus(x);
-    }
-
-    private void Hited()
-    {
-        int hited = PlayerGetHited();
-        if (hited == 0)
-        {
-            ChangeStatus(0);
-            return;
-        }
-        if (StatusTime < new Fixpoint(3, 1))//受击后退的时间
-        {
-            if (AnimaToward > 0)
-            {
-                f.pos.x = f.pos.x - Dt.dt * new Fixpoint(5, 1);//击退位移的速度
-            }
-            else
-            {
-                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(5, 1);//击退位移的速度
-            }
-        }
-
-    }
-
-    private void HitedFly()
-    {
-        AnimaHited = 0f;
-        PlayerGetHited();
-        if (f.onground)
-        {
-            ChangeStatus(14);
-            AnimaHited = 0;
-            return;
-        }
-        /*
-        if (AnimaToward > 0)
-        {
-            f.pos.x -= (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
-        }
-        else
-        {
-            f.pos.x += (new Fixpoint(6, 0) - new Fixpoint(4, 0) * StatusTime) * Dt.dt;
-        }
-        */
-    }
 
     private static Fixpoint KickBeginToHit = new Fixpoint(1, 1);//空中飞踢
     private static Fixpoint KickDuring = new Fixpoint(5, 0);
@@ -778,11 +693,11 @@ public class Player : BasicCharacter
     private bool is_kicked = false;
     private void Kick()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             is_kicked = false;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if(StatusTime > KickBeginToHit && is_kicked == false)
@@ -808,11 +723,11 @@ public class Player : BasicCharacter
             is_kicked = false;
             if(f.onground)
             {
-                ChangeStatus(0);
+                ChangeStatus(StatusType.Normal);
                 return;
             } else
             {
-                ChangeStatus(6);
+                ChangeStatus(StatusType.Fall);
                 return;
             }
         }
@@ -827,11 +742,11 @@ public class Player : BasicCharacter
     private static Fixpoint HeavyAttackDamage = new Fixpoint(6,0);
     private void HeavyAttack()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             HeavyAttackHasHited = false;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
 
@@ -853,8 +768,7 @@ public class Player : BasicCharacter
         if(!f.onground || StatusTime > HeavyAttackDuring)
         {
             HeavyAttackHasHited = false;
-            AnimaStatus = 0;
-            StatusTime = new Fixpoint(0, 0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
     }
@@ -873,11 +787,11 @@ public class Player : BasicCharacter
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));//升龙拳向上的速度
         }
 
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             UpAttackHasHited = false;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
 
@@ -903,14 +817,14 @@ public class Player : BasicCharacter
         if(f.onground && StatusTime > new Fixpoint(5,1))//最短进入下蹲状态的时间
         {
             UpAttackHasHited = false;
-            ChangeStatus(16);
+            ChangeStatus(StatusType.Stay);
             return;
         }
 
         if(StatusTime > UpAttackDuring)
         {
             UpAttackHasHited = false;
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             return;
         }
     }
@@ -933,10 +847,10 @@ public class Player : BasicCharacter
     private void Fire1()
     {
 
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             CreatedLighting = false;
             FireTime = 0;
             return;
@@ -964,7 +878,7 @@ public class Player : BasicCharacter
         }
         else if (StatusTime > Fire1DuringTime)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             CreatedLighting = false;
             FireTime = 0;
         }
@@ -980,11 +894,11 @@ public class Player : BasicCharacter
     private static Fixpoint Fire2Attack3 = new Fixpoint(2, 0);
     private void Fire2()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
             HasFired1 = 0;
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
 
@@ -1006,17 +920,17 @@ public class Player : BasicCharacter
         else if (StatusTime > Fire2DuringTime)
         {
             HasFired1 = 0;
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
 
     private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); //喝药的时间
     private void RecoverHp(bool first)
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (first == true) {
@@ -1025,7 +939,7 @@ public class Player : BasicCharacter
         }
         if(StatusTime > RecoverHpDuringTime)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
             status.RecoverHp(100);//恢复的血量
         }
     }
@@ -1037,6 +951,7 @@ public class Player : BasicCharacter
         AnimaSpeed = 0;
     }
     private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
+   /*
     protected void Ground()
     {
         RemoveHited();
@@ -1068,6 +983,7 @@ public class Player : BasicCharacter
     }
 
     private int GroundTimes = 0;
+   */
     private void Fly2()
     {
         if(StatusTime < new Fixpoint(5,2))
@@ -1077,21 +993,21 @@ public class Player : BasicCharacter
         RemoveHited();
         if(f.onground)
         {
-            ChangeStatus(14);
+            ChangeStatus(StatusType.Ground);
         }
     }
     private static Fixpoint StayTime = new Fixpoint(5, 1);//下蹲的持续时间
     private void Stay()
     {
-        int hit = PlayerGetHited();
+        int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
-            ChangeStatus(4);
+            ChangeStatus(StatusType.Hit);
             return;
         }
         if (StatusTime > StayTime)
         {
-            ChangeStatus(0);
+            ChangeStatus(StatusType.Normal);
         }
     }
     private void Update()
@@ -1104,7 +1020,7 @@ public class Player : BasicCharacter
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);
-        animator.SetFloat("hited", AnimaHited);
+        animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
     }
 }

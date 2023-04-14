@@ -15,10 +15,13 @@ public class BasicCharacter : MonoBehaviour
 
     protected int AnimaStatus = 0;
     public float AnimaToward = 0;
+    protected int AnimaHited = 0;
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 
     protected int CharacterType = 0;
+
+    protected int[] ToughnessStatus;
     protected enum StatusType
     {
         Normal,
@@ -36,10 +39,17 @@ public class BasicCharacter : MonoBehaviour
         Skill,
         Search,
         Fire,
+        Fire1,
+        Fire2,
         Bomb,
         CallMagic,
         CannonMagic,
-        SuckerPunch
+        SuckerPunch,
+        Roll,
+        Kick,
+        Upattack,
+        HeavyAttack,
+        Stay
     }
 
     void Start()
@@ -53,6 +63,11 @@ public class BasicCharacter : MonoBehaviour
         
     }
 
+    protected void ClearNumber()
+    {
+
+    }
+
     protected void SetStatus(int hp,int attack)
     {
         status = new PlayerStatus(hp, attack);
@@ -63,11 +78,14 @@ public class BasicCharacter : MonoBehaviour
 
     }
 
+    
+    /*
     protected void ChangeStatus(int animastatus)
     {
         AnimaStatus = animastatus;
         StatusTime = new Fixpoint(0, 0);
     }
+    */
     protected void ChangeStatus(StatusType realstatus)
     {
         RealStatus = realstatus;
@@ -111,7 +129,7 @@ public class BasicCharacter : MonoBehaviour
         }
     }
 
-    private void Preform(int damage)
+    protected void Preform(int damage)
     {
         GameObject beat = (GameObject)AB.getobj("beat");
         beat.transform.localScale = new Vector3(3f, 3f, 1f);
@@ -121,7 +139,7 @@ public class BasicCharacter : MonoBehaviour
         num2.GetComponent<BeatNumber>().ChangeNumber(damage);
     }
 
-    protected bool GetHited(ref float Toward)
+    protected bool GetHited()
     {
 
         GetColider();
@@ -141,18 +159,17 @@ public class BasicCharacter : MonoBehaviour
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
             if (attack.attacker_type == CharacterType) continue;
             
-            Toward = -attack.toward;
+            AnimaToward = -attack.toward;
             this_hited = true;
 
 
+            if(!f.onground)
+            {
+                status.toughness = 0;
+            }
 
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
-
-            if(!f.onground)
-            {
-                ToughnessDamage = 1100;
-            }
 
             status.GetAttacked(HpDamage, ToughnessDamage);
 
@@ -168,10 +185,85 @@ public class BasicCharacter : MonoBehaviour
         }
         return this_hited;
     }
+
+    protected int CheckToughnessStatus()
+    {
+        if (status.GetToughness() < 0)
+        {
+            AnimaHited = ToughnessStatus.Length;
+            if (AnimaToward > 0)
+            {
+                r.velocity = new Fix_vector2(new Fixpoint(-5, 0), new Fixpoint(5, 0));
+            } else
+            {
+                r.velocity = new Fix_vector2(new Fixpoint(5, 0), new Fixpoint(5, 0));
+            }
+            ChangeStatus(StatusType.Hit);
+            return 2;
+        }
+        for(int i = ToughnessStatus.Length - 1 ; i >= 0 ; --i)
+        {
+            if(status.GetToughness() < ToughnessStatus[i])
+            {
+                AnimaHited = i + 1;
+                ChangeStatus(StatusType.Hit);
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    protected int BasicCharacterGetHited()
+    {
+        bool hited = GetHited();
+        if(hited == true)
+        {
+            return CheckToughnessStatus();
+        }
+        return 0;
+    }
+
+    protected Fixpoint[] HitTime;
+    protected Fixpoint[] HitSpeed;
+    protected void Hited()
+    {
+        int HitType = BasicCharacterGetHited();
+        if(HitType == 0)
+        {
+            if(AnimaHited == ToughnessStatus.Length)
+            {
+                if (f.onground && StatusTime > new Fixpoint(1,1))
+                {
+                    AnimaHited = 0;
+                    ChangeStatus(StatusType.Ground);
+                    r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+                }
+                return;
+            }
+            if(StatusTime > HitTime[AnimaHited])
+            {
+                AnimaHited = 0;
+                ChangeStatus(StatusType.Normal);
+                return;
+            }
+        }
+    }
+    protected Fixpoint GroundTime = new Fixpoint(1, 0);
+    protected void Ground()
+    {
+        RemoveHited();
+        if(StatusTime > GroundTime)
+        {
+            status.toughness = status.max_toughness;
+            ChangeStatus(StatusType.Normal);
+            AnimaHited = 0;
+            return;
+        }
+    }
+
     protected void RemoveHited()
     {
         GetColider();
-
         if (AttackQueue.Count > 0)
         {
             AttackQueue.Dequeue();

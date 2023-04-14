@@ -17,12 +17,23 @@ public class Monster_create : MonoBehaviour
             Obj_info p = new Obj_info();
             if (pos_monster[i].x < new Fixpoint(130, 0))
             {
-                //p.name = "Mage";
-                p.name = "Devil";
+                if (Rand.rand() % 2 == 0)
+                {
+                    p.name = "Mage";
+                }
+                else { 
+                    p.name = "Devil";
+                }
             }
             else
             {
-                p.name = "knight";
+                if (Rand.rand() % 2 == 0)
+                {
+                    p.name = "knight";
+                } else
+                {
+                    p.name = "Monster1";
+                }
             }
             p.hei = size_monster[i].y.Clone();
             p.wid = size_monster[i].x.Clone();
