@@ -23,14 +23,10 @@ public class Player : BasicCharacter
     private void Start()
     {
         animator = GetComponent<Animator>();
-<<<<<<< HEAD
         SetStatus(100000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
-=======
-        SetStatus(100, 10);//血量。基础攻击力
->>>>>>> 1558d6c94dbdc4796d59d8ad34f04ddbd00189ac
     }
 
     HashSet<PlayerOpt> list;
