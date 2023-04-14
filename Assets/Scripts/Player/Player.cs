@@ -1045,13 +1045,13 @@ public class Player : BasicCharacter
         if(GroundTimes == 0)
         {
             ++GroundTimes;
-            r.velocity.y = new Fixpoint(3, 0);//向上弹的速度
+            r.velocity.y = new Fixpoint(22, 1);//向上弹的速度
             if (r.velocity.x < new Fixpoint(0,0))
             {
-                r.velocity.x = new Fixpoint(-3, 0);//x轴的速度
+                r.velocity.x = new Fixpoint(-1, 01);//x轴的速度
             } else if (r.velocity.x > new Fixpoint(0,0))
             {
-                r.velocity.x = new Fixpoint(3, 0);//x轴的速度
+                r.velocity.x = new Fixpoint(1, 1);//x轴的速度
             }
             ChangeStatus(15);
             return;
