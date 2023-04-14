@@ -297,23 +297,6 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
         }
-        /*
-        for (int i = 1; i < nodes.Count; ++i)
-        {
-            for (int j = 0; j < nodes[i].Count; ++j)
-            {
-                GameObject g =Instantiate((GameObject)Resources.Load("Prefabs/HurtNumber"),new Vector3(1f * (nodes[i][j].left + nodes[i][j].right) / 2,
-                    nodes[i][j].idx * -9 + 4, -1f),Quaternion.identity);
-                g.GetComponent<BeatNumber>().ChangeNumber(nodes[i][j].id);
-                Debug.Log("Node" + nodes[i][j].id + " " + nodes[i][j].idx + " " + nodes[i][j].left + " " + nodes[i][j].right + " " +
-                    nodes[i][j].LeftType + " " + nodes[i][j].RightType);
-                for(int k = 0; k < nodes[i][j].to.Count;++k)
-                {
-                    //Debug.Log(nodes[i][j].action[k] + " " + nodes[i][j].pos[k].to_float() + " " + nodes[i][j].to[k]);
-                }
-            }
-        }
-        */
         List<node> a = new List<node>();
         a.Add(new node());
         for (int i = 1; i < nodes.Count; ++i)
@@ -479,11 +462,14 @@ public class Main_ctrl : MonoBehaviour
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         Creobj(p);
     }
+
+
     public static GameObject CreateObj(Obj_info info)
     {
         //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
         GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
-
+        cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
+        Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
         SpriteRenderer spriteRenderer= obj.GetComponent<SpriteRenderer>();
         spriteRenderer.size = new Vector2(info.wid.to_float(), info.hei.to_float());
