@@ -8,12 +8,12 @@ public class GetClicked : MonoBehaviour
     // Start is called before the first frame update
     public GameObject particle;
     public GameObject particle_instance;
-    public GameObject parents;
+    public GameObject EffectCamera;
     public float destroyDelay = 10f;
     Camera mainCamera;
     void Start()
     {
-        mainCamera = Camera.main;
+        mainCamera = GameObject.Find("EffectCamera").GetComponent<Camera>();
         particle = (GameObject)AB.getobj("particle");
     }
 
@@ -30,8 +30,9 @@ public class GetClicked : MonoBehaviour
 
             // 打印世界坐标
             Debug.Log("鼠标点击位置的世界坐标为：" + worldPos);
-            particle_instance = Instantiate(particle, parents.transform);
-            particle_instance.transform.position = new UnityEngine.Vector3(worldPos.x,worldPos.y,20);
+            particle_instance = Instantiate(particle, EffectCamera.transform);
+            particle_instance.transform.position = worldPos;
+            particle_instance.transform.localScale = new UnityEngine.Vector3(1, 1, 0);
             Destroy(particle_instance, destroyDelay);
         }
     }
