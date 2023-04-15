@@ -311,7 +311,7 @@ public class Devil : Knight
     private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(5, 1);
     private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(17, 2);
     private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(59, 2);
-    private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(5, 0);
+    private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(15, 0);
     private bool DevilSuckerPunckCreatedAttack = false;
     private void SuckerPunch()
     {
