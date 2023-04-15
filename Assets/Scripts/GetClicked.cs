@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class GetClicked : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject particle;
+    public GameObject particle_instance;
+    public GameObject parents;
+    public float destroyDelay = 10f;
+    Camera mainCamera;
     void Start()
     {
-        
+        mainCamera = Camera.main;
+        particle = (GameObject)AB.getobj("particle");
     }
 
     // Update is called once per frame
@@ -16,12 +22,18 @@ public class GetClicked : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) // 左键点击
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); // 从屏幕坐标生成一条射线
-            if (Physics.Raycast(ray, out RaycastHit hit)) // 判断射线是否碰撞到物体
-            {
-                Vector3 worldPos = hit.point; // 获取射线碰撞点的世界坐标
-                Debug.Log("点击位置的世界坐标为：" + worldPos);
-            }
+            UnityEngine.Vector3 mousePos = Input.mousePosition;
+
+
+            // 将屏幕坐标转换为世界坐标
+            UnityEngine.Vector3 worldPos = mainCamera.ScreenToWorldPoint(new UnityEngine.Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane));
+
+            // 打印世界坐标
+            Debug.Log("鼠标点击位置的世界坐标为：" + worldPos);
+            particle_instance = Instantiate(particle, parents.transform);
+            particle_instance.transform.position = new UnityEngine.Vector3(worldPos.x,worldPos.y,20);
+            Destroy(particle_instance, destroyDelay);
         }
     }
 }
+
