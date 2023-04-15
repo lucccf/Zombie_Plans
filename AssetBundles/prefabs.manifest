@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1046495186
+CRC: 3564036179
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 2812b3c9ee73d8f477f30da8869cfc81
+    Hash: 21b30d391fb09d5a13664ee7d310e4f4
   TypeTreeHash:
     serializedVersion: 2
     Hash: c1a06d6b17053f1c55fe94c49718675e
@@ -95,6 +95,7 @@ Assets:
 - Assets/Prefabs/protal.prefab
 - Assets/Prefabs/number/0.png
 - Assets/Prefabs/number/5.png
+- Assets/Prefabs/skull.prefab
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
@@ -104,6 +105,7 @@ Assets:
 - Assets/Prefabs/number/33.png
 - Assets/Prefabs/number/22.png
 - Assets/Prefabs/Lighting.prefab
+- Assets/Prefabs/FireBall.prefab
 - Assets/Prefabs/number/4.png
 - Assets/Prefabs/number/1.png
 - Assets/Prefabs/number/77.png
