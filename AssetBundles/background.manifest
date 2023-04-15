@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2976424131
+CRC: 2848982142
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b2d05fb0dee8c4e653021a33db4dc096
+    Hash: 09dda8e4ceb0d27663d2022658646ec0
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4a8b5a38571d4f2d9b28b913371ebb2c
@@ -27,44 +27,45 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_4.prefab
-- Assets/Resources/Prefabs/Map_item/wall_b_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_2.prefab
-- Assets/Resources/Prefabs/Map_item/protal_m.prefab
-- Assets/Resources/Prefabs/background/Tiny_wall_a.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_6.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_4.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/grass/grass_3.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_epic/bg_epic_3.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_common/bg_common_1.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/flower/flower_2.prefab
-- Assets/Resources/Prefabs/Map_item/knight_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_common/bg_common_3.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_epic/bg_epic_2.prefab
-- Assets/Resources/Prefabs/Map_item/facility_m.prefab
-- Assets/Resources/Prefabs/Map_item/Mage_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_3.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_1.prefab
-- Assets/Resources/Prefabs/background/BK_monster.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/grass/grass_1.prefab
-- Assets/Resources/Prefabs/Map_item/home_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/grass/grass_2.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_1.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_2.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_common/bg_common_2.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_5.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_common/bg_common_4.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/stalactite/stalactite_3.prefab
-- Assets/Resources/Prefabs/Map_item/player_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/flower/flower_3.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/flower/flower_1.prefab
-- Assets/Resources/Prefabs/Map_item/Monster1_m.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_epic/bg_epic_1.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_2.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/grass/grass_4.prefab
-- Assets/Resources/Prefabs/background/BK_castle.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/rock/rocks_1.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/item/grass/grass_5.prefab
-- Assets/Resources/Prefabs/background/BK_home.prefab
-- Assets/Resources/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_3.prefab
+- Assets/Prefabs/outSprite/Sprite/item/stalactite/stalactite_4.prefab
+- Assets/Prefabs/Map_item/wall_b_m.prefab
+- Assets/Prefabs/outSprite/Sprite/item/stalactite/stalactite_2.prefab
+- Assets/Prefabs/Map_item/protal_m.prefab
+- Assets/Prefabs/background/Tiny_wall_a.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_6.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_4.prefab
+- Assets/Prefabs/outSprite/Sprite/item/grass/grass_3.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_epic/bg_epic_3.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_common/bg_common_1.prefab
+- Assets/Prefabs/outSprite/Sprite/item/flower/flower_2.prefab
+- Assets/Prefabs/Map_item/knight_m.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_common/bg_common_3.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_epic/bg_epic_2.prefab
+- Assets/Prefabs/Map_item/facility_m.prefab
+- Assets/Prefabs/Map_item/Mage_m.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_3.prefab
+- Assets/Prefabs/outSprite/Sprite/item/stalactite/stalactite_1.prefab
+- Assets/Prefabs/background/BK_monster.prefab
+- Assets/Prefabs/outSprite/Sprite/item/grass/grass_1.prefab
+- Assets/Prefabs/Map_item/home_m.prefab
+- Assets/Prefabs/outSprite/Sprite/item/grass/grass_2.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_1.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_2.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_common/bg_common_2.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_5.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_common/bg_common_4.prefab
+- Assets/Prefabs/outSprite/Sprite/item/stalactite/stalactite_3.prefab
+- Assets/Prefabs/Map_item/player_m.prefab
+- Assets/Prefabs/outSprite/Sprite/item/flower/flower_3.prefab
+- Assets/Prefabs/outSprite/Sprite/item/flower/flower_1.prefab
+- Assets/Prefabs/Map_item/Monster1_m.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_epic/bg_epic_1.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_2.prefab
+- Assets/Prefabs/outSprite/Sprite/item/grass/grass_4.prefab
+- Assets/Prefabs/background/BK_castle.prefab
+- Assets/Prefabs/outSprite/Sprite/item/rock/rocks_1.prefab
+- Assets/Prefabs/outSprite/Sprite/item/grass/grass_5.prefab
+- Assets/Prefabs/background/BK_home.prefab
+- Assets/Prefabs/outSprite/Sprite/bg_outerlayer/bg_outerlayer_3.prefab
+- Assets/Prefabs/wall_b.prefab
 Dependencies: []

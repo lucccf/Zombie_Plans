@@ -13,6 +13,7 @@ public class AB : MonoBehaviour
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/prefabs"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/item"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/background"));
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/ui"));
         //AssetBundleRequest request = bundle.LoadAssetAsync(assetName);
     }
 
@@ -57,7 +58,6 @@ public class AB : MonoBehaviour
             foreach (var y in x.allAssets)
             {
                 objs[y.name] = y;
-                //Debug.Log(y.name);
             }
         }
         foreach (var x in bundle_req)

@@ -1,0 +1,47 @@
+ManifestFileVersion: 0
+CRC: 2814432340
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7e7a5b23142b0a267a6c629e23f47b35
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 3e6e74c923336dff0ff11ea6142b485c
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0571e0f141cfcb54f8ced3945ecec18f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 431569c7d2b98b741a203aa3f42073af, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a32c636997327a042be6b71d41914651, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefabs/ProtalButton.prefab
+- Assets/Prefabs/TinyFacButton.prefab
+- Assets/Prefabs/TinyProtalButton.prefab
+Dependencies: []

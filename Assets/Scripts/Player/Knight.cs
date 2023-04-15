@@ -427,7 +427,7 @@ public class Knight : Monster
                 Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
                 if (AnimaToward < 0) pos.x -= 3f;
                 else pos.x += 3f;
-                Instantiate(Resources.Load("Prefabs/knightskill"),pos,Quaternion.identity);
+                Instantiate((GameObject)AB.getobj("knightskill"),pos,Quaternion.identity);
             }
             ++SkillAttackTimes;
             Fix_vector2 tmp_pos = f.pos.Clone();

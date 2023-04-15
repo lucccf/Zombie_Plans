@@ -663,7 +663,7 @@ public class Player : BasicCharacter
                 }
                 else if (trigger.triggername == "protal") {
                     GameObject parent = GameObject.Find("PlayerPanel");
-                    GameObject protalbutton = (GameObject)Resources.Load("Prefabs/ProtalButton");
+                    GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
                 }
             }

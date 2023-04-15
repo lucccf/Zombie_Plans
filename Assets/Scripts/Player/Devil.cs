@@ -287,7 +287,7 @@ public class Devil : Knight
         {
             if(DevilBonmTimes == 0)
             {
-                GameObject x = (GameObject)Resources.Load("Prefabs/bomb");
+                GameObject x = (GameObject)AB.getobj("bomb");
                 GameObject y = Instantiate(x, new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 1.8f, 0), Quaternion.identity);
                 y.GetComponent<Bomb>().toward = AnimaToward;
             }

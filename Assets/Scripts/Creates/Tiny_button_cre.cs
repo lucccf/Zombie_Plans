@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Tiny_button_cre : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class Tiny_button_cre : MonoBehaviour
     {
         GameObject playerPanel = GameObject.Find("PlayerPanel");
         GameObject parent = playerPanel.transform.Find("AllFacility/TinyMap").gameObject;
-        GameObject tinybutton = (GameObject)Resources.Load("Prefabs/TinyFacButton");
+        GameObject tinybutton = (GameObject)AB.getobj("TinyFacButton");
         GameObject Building = Instantiate(tinybutton, parent.transform);
         Building.GetComponent<Tinyfacilitybutton>().facilityid = cnt;
         Building.transform.localPosition = new Vector3(info.pos.x.to_float() *4 + parent_x + offset_x, info.pos.y.to_float() *5 + parent_y + offset_y, 0);
@@ -24,7 +22,7 @@ public class Tiny_button_cre : MonoBehaviour
     {
         GameObject playerPanel = GameObject.Find("PlayerPanel");
         GameObject parent = playerPanel.transform.Find("AllProtal/TinyMap").gameObject;
-        GameObject tinybutton = (GameObject)Resources.Load("Prefabs/TinyProtalButton");
+        GameObject tinybutton = (GameObject)AB.getobj("TinyProtalButton");
         GameObject Building = Instantiate(tinybutton, parent.transform);
         Building.GetComponent<TinyProtalButton>().tinyprotalid = cnt;
         Building.transform.localPosition = new Vector3(info.pos.x.to_float() * 4 -600 + 100, info.pos.y.to_float() * 5 + 320 -50, 0);

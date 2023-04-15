@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1573646225
+CRC: 2014339454
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 5721bc4592b15027d0e526264281195e
+    Hash: 688c4985b081385f5ffa3e7e6aa71ee7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0f37517c343bd519f0bd436c2cda0df8
+    Hash: c1a06d6b17053f1c55fe94c49718675e
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -62,6 +62,10 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fd697cb83a54ad8458c8eefe66591465, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 2de8e02b5fd572a4ebfd6fb3bc7a3c12, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5601085bab4522a4c9e08490d6b7940c, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: e9b0fe5ce6451814e96a17fd537a6708, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
@@ -83,44 +87,46 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/Prefabs/crystal.prefab
-- Assets/Resources/Prefabs/knight.prefab
-- Assets/Resources/Prefabs/LightBall.prefab
-- Assets/Resources/Prefabs/number/9.png
-- Assets/Resources/Prefabs/number/2.png
-- Assets/Resources/Prefabs/number/0.png
-- Assets/Resources/Prefabs/number/5.png
-- Assets/Resources/Prefabs/number/6.png
-- Assets/Resources/Prefabs/number/3.png
-- Assets/Resources/Prefabs/facility.prefab
-- Assets/Resources/Prefabs/home.prefab
-- Assets/Resources/Prefabs/Attack.prefab
-- Assets/Resources/Prefabs/number/33.png
-- Assets/Resources/Prefabs/number/22.png
-- Assets/Resources/Prefabs/Lighting.prefab
-- Assets/Resources/Prefabs/number/4.png
-- Assets/Resources/Prefabs/number/1.png
-- Assets/Resources/Prefabs/number/77.png
-- Assets/Resources/Prefabs/number/8.png
-- Assets/Resources/Prefabs/Mage.prefab
-- Assets/Resources/Prefabs/MagicCannon.prefab
-- Assets/Resources/Prefabs/number/66.png
-- Assets/Resources/Prefabs/number/00.png
-- Assets/Resources/Prefabs/HurtNumber.prefab
-- Assets/Resources/Prefabs/number/11.png
-- Assets/Resources/Prefabs/Devil.prefab
-- Assets/Resources/Prefabs/yellow.prefab
-- Assets/Resources/Prefabs/number/44.png
-- Assets/Resources/Prefabs/player.prefab
-- Assets/Resources/Prefabs/beat.prefab
-- Assets/Resources/Prefabs/number/7.png
-- Assets/Resources/Prefabs/Building.prefab
-- Assets/Resources/Prefabs/ItemSample.prefab
-- Assets/Resources/Prefabs/number/88.png
-- Assets/Resources/Prefabs/number/55.png
-- Assets/Resources/Prefabs/wall_a.prefab
-- Assets/Resources/Prefabs/Map_item/Devil_m.prefab
-- Assets/Resources/Prefabs/Monster1.prefab
-- Assets/Resources/Prefabs/wall_b.prefab
-- Assets/Resources/Prefabs/number/99.png
+- Assets/Prefabs/crystal.prefab
+- Assets/Prefabs/knight.prefab
+- Assets/Prefabs/LightBall.prefab
+- Assets/Prefabs/number/9.png
+- Assets/Prefabs/number/2.png
+- Assets/Prefabs/protal.prefab
+- Assets/Prefabs/number/0.png
+- Assets/Prefabs/number/5.png
+- Assets/Prefabs/knightskill.prefab
+- Assets/Prefabs/number/6.png
+- Assets/Prefabs/number/3.png
+- Assets/Prefabs/facility.prefab
+- Assets/Prefabs/home.prefab
+- Assets/Prefabs/Attack.prefab
+- Assets/Prefabs/number/33.png
+- Assets/Prefabs/number/22.png
+- Assets/Prefabs/Lighting.prefab
+- Assets/Prefabs/number/4.png
+- Assets/Prefabs/number/1.png
+- Assets/Prefabs/number/77.png
+- Assets/Prefabs/number/8.png
+- Assets/Prefabs/Mage.prefab
+- Assets/Prefabs/MagicCannon.prefab
+- Assets/Prefabs/number/66.png
+- Assets/Prefabs/bomb.prefab
+- Assets/Prefabs/number/00.png
+- Assets/Prefabs/HurtNumber.prefab
+- Assets/Prefabs/number/11.png
+- Assets/Prefabs/Devil.prefab
+- Assets/Prefabs/yellow.prefab
+- Assets/Prefabs/number/44.png
+- Assets/Prefabs/player.prefab
+- Assets/Prefabs/beat.prefab
+- Assets/Prefabs/number/7.png
+- Assets/Prefabs/Building.prefab
+- Assets/Prefabs/ItemSample.prefab
+- Assets/Prefabs/number/88.png
+- Assets/Prefabs/number/55.png
+- Assets/Prefabs/wall_a.prefab
+- Assets/Prefabs/Map_item/Devil_m.prefab
+- Assets/Prefabs/Monster1.prefab
+- Assets/Prefabs/number/99.png
 Dependencies: []
