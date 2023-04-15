@@ -24,8 +24,8 @@ public class Player : BasicCharacter
     {
         animator = GetComponent<Animator>();
         SetStatus(100000, 10);//血量。基础攻击力       
-        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };//击退时间，第一个为占位，其余为1段，2段，3段
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };//击退速度，第一个为占位
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
     }
 
@@ -705,7 +705,7 @@ public class Player : BasicCharacter
         {
             is_kicked = true;
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 120, AnimaToward);
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 90, AnimaToward);
         }
 
         if (Press[KeyCode.A])
@@ -812,7 +812,7 @@ public class Player : BasicCharacter
         {
             UpAttackHasHited = true;
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 120, AnimaToward);
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward);
         }
 
         if(f.onground && StatusTime > new Fixpoint(5,1))//最短进入下蹲状态的时间

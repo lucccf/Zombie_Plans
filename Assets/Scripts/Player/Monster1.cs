@@ -16,8 +16,8 @@ public class Monster1 : Monster
         SetStatus(250, 10);
         animator = GetComponent<Animator>();
         CharacterType = 1;
-        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };//击退时间，第一个为占位，其余为1段，2段，3段
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };//击退速度，第一个为占位
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
     }
 
@@ -153,12 +153,12 @@ public class Monster1 : Monster
     }
 
     private bool CreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(49, 2);//攻击的持续时间
+    private Fixpoint Attack1DuringTime = new Fixpoint(1, 0);//攻击的持续时间
     private Fixpoint Attack2DuringTime = new Fixpoint(33, 2);
     private Fixpoint Attack3DuringTime = new Fixpoint(33, 2);
     private Fixpoint Attack4DuringTime = new Fixpoint(58, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(25, 2);//攻击的判定时间
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(83, 2);//攻击的判定时间
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(8, 2);
     private Fixpoint Attack3BeginToHitTime = new Fixpoint(8, 2);
     private Fixpoint Attack4BeginToHitTime = new Fixpoint(17, 2);

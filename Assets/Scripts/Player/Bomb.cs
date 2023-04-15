@@ -17,7 +17,7 @@ public class Bomb : MonoBehaviour
     void Update()
     {
         ailvetime += Time.deltaTime;
-        if(ailvetime > 1f)
+        if(ailvetime > 0.58f)
         {
             Destroy(gameObject);
         }

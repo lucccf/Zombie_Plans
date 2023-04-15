@@ -10,8 +10,8 @@ public class Mage : Knight
         CharacterType = 1;
         SetStatus(250, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
-        HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(1, 0), new Fixpoint(2, 0) };
-        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(5, 1) };
+        HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(2, 1) };
         ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
     }
     void Update()
@@ -227,17 +227,17 @@ public class Mage : Knight
     }
 
     private bool MageCreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(74, 2);//攻击的持续时间
+    private Fixpoint Attack1DuringTime = new Fixpoint(1, 0);//攻击的持续时间
     private Fixpoint Attack2DuringTime = new Fixpoint(29, 2);
     private Fixpoint Attack3DuringTime = new Fixpoint(84, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(59, 2);//攻击的判定时间
+    private Fixpoint Attack1BeginToHitTime = new Fixpoint(83, 2);//攻击的判定时间
     private Fixpoint Attack2BeginToHitTime = new Fixpoint(1, 1);
     private Fixpoint Attack3BeginToHitTime = new Fixpoint(41, 2);
 
-    private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
-    private Fixpoint Attack2Damage = new Fixpoint(4, 0);
-    private Fixpoint Attack3Damage = new Fixpoint(4, 0);
+    private Fixpoint Attack1Damage = new Fixpoint(3, 0);//伤害倍率
+    private Fixpoint Attack2Damage = new Fixpoint(3, 0);
+    private Fixpoint Attack3Damage = new Fixpoint(3, 0);
 
     protected override void AttackToNext()
     {

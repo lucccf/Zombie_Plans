@@ -20,9 +20,9 @@ public class Devil : Knight
         status.max_toughness = 200;
         status.toughness = 200;
         status.WalkSpeed = new Fixpoint(3, 0);
-        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(1, 0) , new Fixpoint(1 , 0),new Fixpoint(2,0) };
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0) ,new Fixpoint ( 5 , 1 ) , new Fixpoint(5, 1) , new Fixpoint(5,1) };
-        ToughnessStatus = new int[4] { 100 , 60 , 30 , 0 };//阶段
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2) , new Fixpoint(29, 2),new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0) ,new Fixpoint ( 5 , 1 ) , new Fixpoint(5, 1) , new Fixpoint(2,1) };//击退速度，第一个为占位
+        ToughnessStatus = new int[4] { 75 , 50 , 25 , 0 };//阶段
     }
 
     // Update is called once per frame
@@ -235,19 +235,19 @@ public class Devil : Knight
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x + new Fixpoint(5,1), f.pos.y), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack1Damage, 30, id, AnimaToward, CharacterType);
+                DevilAttack1Damage, 40, id, AnimaToward, CharacterType);
             //DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
         } else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x ,f.pos.y + new Fixpoint(5,1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack2Damage, 30, id, AnimaToward, CharacterType);
+                DevilAttack2Damage, 40, id, AnimaToward, CharacterType);
             //DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
         } else if(StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y - new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack3Damage, 30, id, AnimaToward, CharacterType);
+                DevilAttack3Damage, 40, id, AnimaToward, CharacterType);
             //DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
         } else
         {
@@ -256,9 +256,9 @@ public class Devil : Knight
         }
     }
 
-    private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(7, 1);
-    private static Fixpoint DevilCannonMagicQuitTime = new Fixpoint(1, 0);
-    private static Fixpoint DevilCannonMagicAttack = new Fixpoint(50, 0);
+    private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(4, 1);
+    private static Fixpoint DevilCannonMagicQuitTime = new Fixpoint(66, 2);
+    private static Fixpoint DevilCannonMagicAttack = new Fixpoint(5, 1);
     private bool DevilCannonMagicShooted = false;
     private void CannonMagic()
     {
@@ -276,8 +276,8 @@ public class Devil : Knight
         }
     }
 
-    private static Fixpoint DevilBombHitTime = new Fixpoint(66, 2);
-    private static Fixpoint DevilBombHitBetween = new Fixpoint(3, 1);
+    private static Fixpoint DevilBombHitTime = new Fixpoint(4, 1);
+    private static Fixpoint DevilBombHitBetween = new Fixpoint(4, 1);
     private static Fixpoint DevilBombQuitTime = new Fixpoint(166, 2);
     private static Fixpoint DevilBombAttack = new Fixpoint(5, 1);
     private int DevilBonmTimes = 0;
@@ -308,10 +308,10 @@ public class Devil : Knight
 
     }
 
-    private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(15, 0);
-    private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(35, 2);
-    private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(1, 0);
-    private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(20, 0);
+    private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(5, 1);
+    private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(17, 2);
+    private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(59, 2);
+    private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(5, 0);
     private bool DevilSuckerPunckCreatedAttack = false;
     private void SuckerPunch()
     {
@@ -321,7 +321,7 @@ public class Devil : Knight
             if (DevilSuckerPunckCreatedAttack == false)
             {
                 DevilSuckerPunckCreatedAttack = true;
-                CreateAttackWithCharacter(f.pos, new Fix_vector2(0, 0), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * DevilSuckerPunchAttack, 120, AnimaToward);
+                CreateAttackWithCharacter(f.pos, new Fix_vector2(0, 0), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * DevilSuckerPunchAttack, 105, AnimaToward);
             }
         }
         if(StatusTime > DevilSuckerPunckQuitTime)

@@ -13,8 +13,8 @@ public class Knight : Monster
         CharacterType = 1;
         SetStatus(400, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
-        HitTime = new Fixpoint[2] {new Fixpoint(0, 0), new Fixpoint(2, 0) };
-        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(5, 1) };
+        HitTime = new Fixpoint[2] {new Fixpoint(0, 0), new Fixpoint(8, 1) };
+        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
     }
 
