@@ -1287,7 +1287,7 @@ TextureImporter:
         height: 124
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 23, y: 21, z: 25, w: 22}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -1308,7 +1308,7 @@ TextureImporter:
         height: 124
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 17, y: 16, z: 17, w: 16}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -2415,8 +2415,8 @@ TextureImporter:
       name: UI_93
       rect:
         serializedVersion: 2
-        x: 2283
-        y: 593
+        x: 2281
+        y: 595
         width: 262
         height: 90
       alignment: 0
