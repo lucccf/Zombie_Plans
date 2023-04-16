@@ -1,19 +1,23 @@
 ManifestFileVersion: 0
-CRC: 2814432340
+CRC: 3204294941
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 7e7a5b23142b0a267a6c629e23f47b35
+    Hash: b85a6de40a8c63822f7a6ae46be43bbb
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 3e6e74c923336dff0ff11ea6142b485c
+    Hash: 39a7f28a551b003aa25f451e7ffab1cb
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 43
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
@@ -33,6 +37,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 128
   Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
 - Class: 222
@@ -41,6 +49,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Prefabs/particle.prefab
 - Assets/Prefabs/ProtalButton.prefab
 - Assets/Prefabs/TinyFacButton.prefab
 - Assets/Prefabs/TinyProtalButton.prefab
