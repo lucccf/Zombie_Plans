@@ -19,7 +19,7 @@ public class Mage : Knight
         animator.SetFloat("speed", KnightAnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetInteger("attack", KnightAnimaAttack);
-        animator.SetInteger("hited", KnightAnimaHited);
+        animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
     }
     public override void Updatex()
