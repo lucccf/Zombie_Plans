@@ -24,7 +24,6 @@ public class Join_room : MonoBehaviour
 
     void startgame()
     {
-        Debug.Log("111");
         int x = 10;
         try
         {
@@ -36,7 +35,7 @@ public class Join_room : MonoBehaviour
         }
         if (x > 0 && x < 9)
         {
-            Debug.Log("111");
+            Loading_ctrl.room_num = x;
             PlayerOptData y = new PlayerOptData();
             y.Opt = PlayerOpt.JoinRoom;
             y.Userid = (int)Main_ctrl.user_id;
