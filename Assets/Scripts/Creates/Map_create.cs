@@ -233,7 +233,7 @@ public class Map_create : MonoBehaviour
             {
                 k = (int)(Rand.rand() % (ulong)mill_info.Count);
             }
-            chos[k] = 1;
+            chos[k] = 2;
         }
 
         int ix = 0;
@@ -250,7 +250,7 @@ public class Map_create : MonoBehaviour
 
             //Debug.Log(Bud_cnt);
 
-            if (chos[ix] == 1)
+            if (chos[ix] == 2)
             {
                 Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp);
             }
