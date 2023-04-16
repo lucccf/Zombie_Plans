@@ -651,6 +651,7 @@ public class Main_ctrl : MonoBehaviour
         {
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
+            Debug.Log(f);
             ++count;
             
             frame_index = f.Index;

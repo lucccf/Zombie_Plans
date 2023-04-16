@@ -76,7 +76,7 @@ public class Clisocket : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         ipAddress = IPAddress.Parse("10.0.150.31");
-        remoteEP = new IPEndPoint(ipAddress, 8089);
+        remoteEP = new IPEndPoint(ipAddress, 8099);
 
         // 创建一个 TCP 套接字并连接到远程主机
         clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -192,7 +192,8 @@ public class Clisocket : MonoBehaviour
                         {
                             Loading_ctrl.Frames.Enqueue(opts);
                         }
-                        else {
+                        else
+                        {
                             //Debug.Log(opts);
                             Main_ctrl.Frames.Enqueue(opts);
                         }
