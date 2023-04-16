@@ -17,8 +17,8 @@ public class Devil : Knight
         CharacterType = 1;
         SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
-        status.max_toughness = 100;
-        status.toughness = 100;
+        //status.max_toughness = 200;
+        //status.toughness = 200;
         status.WalkSpeed = new Fixpoint(3, 0);
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2) , new Fixpoint(29, 2),new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0) ,new Fixpoint ( 5 , 1 ) , new Fixpoint(5, 1) , new Fixpoint(2,1) };//击退速度，第一个为占位
@@ -29,7 +29,7 @@ public class Devil : Knight
     void Update()
     {
         animator.SetFloat("toward", AnimaToward);
-        animator.SetInteger("attack", DevilAnimaAttack);
+        animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
         animator.SetFloat("speed", DevilAnimaSpeed);
     }
