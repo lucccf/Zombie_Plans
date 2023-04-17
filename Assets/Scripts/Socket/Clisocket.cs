@@ -36,8 +36,7 @@ public class Clisocket : MonoBehaviour
     static byte[] buffer = new byte[1024];
     static byte[] sendbuffer = new byte[1024];
     static Socket clientSocket;
-    static Dog timer;
-    static Cat rectimer;
+
     public struct op
     {
         public KeyCode key;
@@ -58,8 +57,6 @@ public class Clisocket : MonoBehaviour
         StartSocket();
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
-        timer = new Dog();
-        rectimer = new Cat();
     }
 
     public static void Headercreate(int len, BODYTYPE type)
@@ -146,7 +143,6 @@ public class Clisocket : MonoBehaviour
 
     private static void ReceiveCallback(IAsyncResult ar)
     {
-        Cat.elapsedTime = 0.0f;
         //Header respHeader = new Header();
         try
         {
@@ -154,10 +150,6 @@ public class Clisocket : MonoBehaviour
             
             if (bytesReceive > 0)
             {
-                if (Dog.ka) {
-                    Debug.Log("offset:" + offset);
-                    Debug.Log("Cat.ka" + Cat.ka);
-                }
                 offset += bytesReceive;
 
                 // 处理包体
@@ -186,7 +178,6 @@ public class Clisocket : MonoBehaviour
 
                     if (bodyType == BODYTYPE.Frame)
                     {
-                        Dog.elapsedTime = 0.0f;
                         Frame opts = Frame.Parser.ParseFrom(body);
                         if (opts.Index == -1)
                         {

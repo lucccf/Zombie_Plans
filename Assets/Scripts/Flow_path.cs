@@ -28,12 +28,14 @@ public class Flow_path : MonoBehaviour
 
     public static GameObject play_panel;
     public static GameObject death_panel;
-
+    public static GameObject chat_panel;
     public static void init()
     {
         play_panel = GameObject.Find("PlayerPanel");
         death_panel = GameObject.Find("Death");
+        chat_panel = GameObject.Find("ChatUI");
         death_panel.SetActive(false);
+        chat_panel.SetActive(false);
     }
 
     public static void Updatex()
