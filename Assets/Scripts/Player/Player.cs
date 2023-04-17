@@ -661,7 +661,7 @@ public class Player : BasicCharacter
                     }
                     Main_ctrl.Desobj(a.opsite.id);
                 }
-                else if (trigger.triggername == "protal") {
+                else if (trigger.triggername == "protal" && checkid() == true) {
                     GameObject parent = GameObject.Find("PlayerPanel");
                     GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
