@@ -31,7 +31,16 @@ public class Monster_create : MonoBehaviour
             switch (pos_monster[i].type)
             {
                 case 1:
+                    p.name = "Monster1";
+                    break;
+                case 2:
                     p.name = "Mage";
+                    break;
+                case 3:
+                    p.name = "knight";
+                    break;
+                case 4:
+                    p.name = "Devil";
                     break;
             }
             /*

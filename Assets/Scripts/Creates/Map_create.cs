@@ -342,15 +342,33 @@ public class Map_create : MonoBehaviour
             {
                 int pos = int.Parse(x.InnerText);
                 Fix_vector2 xx = new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0));
-                Fix_vector2 yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                Fix_vector2 yy;
                 if (xml_name == "normal_pos")
                 {
+                    yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
                     Monster_create.pos_monster.Add(new Mon_pos(1, xx));
                     Monster_create.size_monster.Add(yy);
                 }
+
+                if (xml_name == "mill_pos")
+                {
+                    int k = (int)(Rand.rand() % 2 + 2);
+                    if (k == 2)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                    }
+                    else
+                    {
+                        yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                    }
+                    Monster_create.pos_zombies.Add(new Mon_pos(2, xx));
+                    Monster_create.size_zombies.Add(yy);
+                }
                 if (xml_name == "battle_pos")
                 {
-                    Monster_create.pos_zombies.Add(new Mon_pos(1, xx));
+                    int k = (int)(Rand.rand() % 2 + 1);
+                    yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                    Monster_create.pos_zombies.Add(new Mon_pos(2, xx));
                     Monster_create.size_zombies.Add(yy);
                 }
             }
@@ -448,3 +466,13 @@ public class Map_create : MonoBehaviour
         }
     }
 }
+
+
+/*
+ * mage
+ * 146 235
+ * knight
+ * 165 295
+ * Devil
+ * 155 295
+ */
