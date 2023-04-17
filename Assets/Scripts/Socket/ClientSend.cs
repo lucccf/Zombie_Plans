@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ClientSend : MonoBehaviour
 {
+    public static bool Send = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,15 +15,18 @@ public class ClientSend : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (PlayerOpt p in Clisocket.keys.Keys)
+        if (Send)
         {
-            if (Clisocket.MyGetKey(Clisocket.keys[p]))
+            foreach (PlayerOpt p in Clisocket.keys.Keys)
             {
-                PlayerOptData x = new PlayerOptData();
-                x.Opt = p;
-                x.Userid = (int)Main_ctrl.user_id;
+                if (Clisocket.MyGetKey(Clisocket.keys[p]))
+                {
+                    PlayerOptData x = new PlayerOptData();
+                    x.Opt = p;
+                    x.Userid = (int)Main_ctrl.user_id;
 
-                Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
+                    Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
+                }
             }
         }
     }

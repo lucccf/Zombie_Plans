@@ -15,7 +15,7 @@ public class WorkTable : MonoBehaviour
     public Text ItemDescription;
     public Item[] MakedItemList;
 
-    public GameObject TmpMakedItemButton;
+    private GameObject TmpMakedItemButton;
 
     //private Dictionary<int, Item> OriginItem = new Dictionary<int, Item>();
     private bool OpenNemu = false;
@@ -28,10 +28,12 @@ public class WorkTable : MonoBehaviour
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
         for(int i = 0; i < MakedItemList.Length; ++i)
         {
+            TmpMakedItemButton = (GameObject)Resources.Load("Prefabs/UI/Button");
             TmpMakedItemButton.GetComponent<Image>().sprite = MakedItemList[i].image;
-            TmpMakedItemButton.GetComponentInChildren<Text>().text = MakedItemList[i].name;
-            GameObject NewItem = Instantiate(TmpMakedItemButton, transform.position, transform.rotation);
-            NewItem.transform.parent = ItemListParent.transform;
+            //TmpMakedItemButton.GetComponentInChildren<Text>().text = MakedItemList[i].name;
+            //GameObject NewItem = Instantiate(TmpMakedItemButton, transform.position, transform.rotation);
+            GameObject NewItem = Instantiate(TmpMakedItemButton, ItemListParent.transform);
+            //NewItem.transform.parent = ItemListParent.transform;
             int j = i;
             NewItem.GetComponent<Button>().onClick.AddListener(
                 delegate ()
@@ -50,7 +52,7 @@ public class WorkTable : MonoBehaviour
         }
     }
 
-    public GameObject TmpNeedItem;
+    private GameObject TmpNeedItem;
     void ItemOnClick(int x)
     {
         NowChecking = x;
@@ -61,10 +63,12 @@ public class WorkTable : MonoBehaviour
         }
         for(int i = 0; i < MakedItemList[x].MakeNeeds.Length; ++i)
         {
-            TmpNeedItem.GetComponent<Image>().sprite = Main_ctrl.GetItemById(MakedItemList[x].MakeNeeds[i]).image;
+            TmpNeedItem = (GameObject)Resources.Load("Prefabs/UI/NeeItemPrefabs");
+            TmpNeedItem.GetComponentInChildren<Image>().sprite = Main_ctrl.GetItemById(MakedItemList[x].MakeNeeds[i]).image;
             TmpNeedItem.GetComponentInChildren<Text>().text = MakedItemList[x].NeedsNumber[i].ToString();
-            GameObject NewItem = Instantiate(TmpNeedItem, transform.position, transform.rotation);
-            NewItem.transform.parent = NeedItemParent.transform;
+            //GameObject NewItem = Instantiate(TmpNeedItem, transform.position, transform.rotation);
+            Instantiate(TmpNeedItem, NeedItemParent.transform);
+            //NewItem.transform.parent = NeedItemParent.transform;
         }
     }
     void MakeButonOnClick()

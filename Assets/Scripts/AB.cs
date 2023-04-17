@@ -64,6 +64,7 @@ public class AB : MonoBehaviour
         {
             x.assetBundle.Unload(false);
         }
+        Debug.Log("Load_OK");
     }
 
     public static object getobj(string name)

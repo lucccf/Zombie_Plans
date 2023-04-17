@@ -28,7 +28,7 @@ public class BuildingButton : MonoBehaviour
             homeuiclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
             homeuiclosebutton = playerpanel.transform.Find("AllFacility/Background/CloseButton").gameObject;
             homeuiclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
-            worktableclosebutton = WorkTable.transform.Find("BackGround/CloseButton").gameObject;
+            worktableclosebutton = WorkTable.transform.Find("Background/background/CloseButton").gameObject;
             worktableclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
         else

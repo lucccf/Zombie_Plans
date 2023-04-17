@@ -467,8 +467,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -651,6 +651,7 @@ public class Main_ctrl : MonoBehaviour
         {
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
+            Debug.Log(f);
             ++count;
             
             frame_index = f.Index;
@@ -697,7 +698,7 @@ public class Main_ctrl : MonoBehaviour
         if (play != null)
         {
             camara.transform.position = play.transform.position;
-            camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y, -10);
+            camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y + 2.8f, -10);
             Tiny_map.transform.position = play.transform.position;
             Tiny_map.transform.position = new Vector3(Tiny_map.transform.position.x / 3 + Tiny_map_cre.pos_x, Tiny_map.transform.position.y / 3 + Tiny_map_cre.pos_y + 1, -10);
         }
