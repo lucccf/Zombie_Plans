@@ -9,17 +9,38 @@ using UnityEngine.UI;
 public class Join_room : MonoBehaviour
 {
     public Button but;
+    public Button but2;
     public Text txt;
+
+    public GameObject board1;
+    public GameObject board2;
     // Start is called before the first frame update
     void Start()
     {
         but.onClick.AddListener(startgame);
+        but2.onClick.AddListener(endgame);
     }
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    void endgame()
+    {
+        PlayerOptData y = new PlayerOptData();
+        y.Opt = PlayerOpt.ExitRoom;
+        y.Userid = (int)Main_ctrl.user_id;
+
+        Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
+
+        Loading_ctrl.roomcnt = 0;
+        Main_ctrl.players.Clear();
+        Debug.Log("exit");
+
+        board1.SetActive(false);
+        board2.SetActive(true);
     }
 
     void startgame()
@@ -43,7 +64,10 @@ public class Join_room : MonoBehaviour
 
             Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
 
-            SceneManager.LoadScene("Loading");
+            board2.SetActive(false);
+            board1.SetActive(true);
+
+            //SceneManager.LoadScene("Loading");
         }
     }
 }

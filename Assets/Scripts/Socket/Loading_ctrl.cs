@@ -16,7 +16,7 @@ public class Loading_ctrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Cnt.text = roomcnt + "/" + room_num;
+        Cnt.text = "正在匹配" + roomcnt + "/" + room_num;
         while (Frames.Count > 0)
         {
             Frame f;
@@ -24,14 +24,15 @@ public class Loading_ctrl : MonoBehaviour
             Debug.Log(f);
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                if (f.Opts[0].Opt == PlayerOpt.JoinRoom)
+                Debug.Log(f.Opts[i]);
+                if (f.Opts[i].Opt == PlayerOpt.JoinRoom)
                 {
-                    Main_ctrl.players.Add(f.Opts[0].Userid);
+                    Main_ctrl.players.Add(f.Opts[i].Userid);
                     roomcnt++;
                 }
-                else if (f.Opts[0].Opt == PlayerOpt.ExitRoom)
+                else if (f.Opts[i].Opt == PlayerOpt.ExitRoom)
                 {
-                    Main_ctrl.players.Remove(f.Opts[0].Userid);
+                    Main_ctrl.players.Remove(f.Opts[i].Userid);
                     roomcnt--;
                 }
             }
