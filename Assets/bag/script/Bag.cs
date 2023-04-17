@@ -54,8 +54,8 @@ public class Bag : MonoBehaviour
         else
         {
             TmpBagItem.GetComponent<Image>().sprite = OriginItem[id].image;
-            GameObject NewItem = Instantiate(TmpBagItem.gameObject, transform.position, transform.rotation);
-            NewItem.transform.parent = ItemParent.transform;
+            GameObject NewItem = Instantiate(TmpBagItem.gameObject, ItemParent.transform);
+            //NewItem.transform.parent = ItemParent.transform;
             NewItem.GetComponent<Button>().onClick.AddListener(
                 delegate ()
                 {
