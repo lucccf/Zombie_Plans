@@ -15,6 +15,7 @@ public class Attack : MonoBehaviour
     public Fix_vector2 with_pos;
     public int type;
     public int attacker_type;
+    public int hited_fly_type;
 
     protected Fixpoint AliveTime = new Fixpoint(0, 0); 
 

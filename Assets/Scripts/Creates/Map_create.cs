@@ -169,6 +169,9 @@ public class Map_create : MonoBehaviour
         home_info.wid = new Fixpoint(hf_thick*5, 0);
         home_info.col_type = Fix_col2d.col_status.Trigger;
         home_info.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-5 * 6 + 1) * wall_hei * 2, 1));
+
+        Player_ctrl.HomePos = home_info.pos.Clone();
+
         home_info.type = "building";
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         home_info.classnames.Add(Object_ctrl.class_name.Home);

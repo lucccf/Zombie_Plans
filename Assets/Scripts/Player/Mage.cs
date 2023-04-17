@@ -307,7 +307,7 @@ public class Mage : Knight
         if(StatusTime > FireBeginToHitTime && Fired == false)
         {
             Fired = true;
-            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType);
+            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
         }
         if(StatusTime > FireDuringTime)
         {
