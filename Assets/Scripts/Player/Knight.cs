@@ -124,7 +124,7 @@ public class Knight : Monster
                 Attack2 attack2 = (Attack2)attack;
                 if (attack2.toward * AnimaToward < 0)
                 {
-                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType);
+                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type);
                     Main_ctrl.Desobj(attack2.id);
                 } else
                 {
@@ -160,6 +160,7 @@ public class Knight : Monster
         }
     }
 
+    protected Fixpoint FindDistance = new Fixpoint(10, 0);
     protected int KnightGetNear(ref Fixpoint nearx)
     {
         Fixpoint Min = new Fixpoint(10000000, 0);
@@ -191,7 +192,7 @@ public class Knight : Monster
                 nearx = i.f.pos.x;
             }
         }
-        if (Min > new Fixpoint(10, 0)) return -1;//寻路距离
+        if (Min > FindDistance) return -1;//寻路距离
         else return Main_ctrl.CalPos(Minx, Miny);
     }
 
@@ -302,7 +303,7 @@ public class Knight : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward);
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward,3);//最后一个参数是击飞类型
     }
     private void Attack(bool first)
     {
@@ -434,7 +435,7 @@ public class Knight : Monster
             if (AnimaToward > 0) tmp_pos.x += new Fixpoint(3, 0);
             else tmp_pos.x -= new Fixpoint(3, 0);
             tmp_pos.y += new Fixpoint(25, 1);
-            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward);
+            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward,2);//最后一个参数是击飞类型
         }
         if(StatusTime > SkillDruingTime)
         {
@@ -460,8 +461,8 @@ public class Knight : Monster
         }
     }
 
-    private int last_pos = -1;
-    protected void Search()
+    protected int last_pos = -1;
+    protected virtual void Search()
     {
         int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
         if(x == -1)

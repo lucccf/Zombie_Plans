@@ -409,7 +409,7 @@ public class Main_ctrl : MonoBehaviour
     }
 
     public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id ,float toward,bool with,int attacker_type)
+        long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -424,6 +424,7 @@ public class Main_ctrl : MonoBehaviour
         p.with_pos = with_pos;
         p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
+        p.hit_fly_type = hit_fly_type;
         if(with == true)
         {
             p.type = "1";
@@ -431,7 +432,7 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
     public static void NewAttack2(string name,Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id, float toward,int attacker_type)
+        long attacker_id, float toward,int attacker_type,int hit_fly_type)
     {
         Obj_info p = new Obj_info();
         p.name = name;
@@ -439,6 +440,7 @@ public class Main_ctrl : MonoBehaviour
         p.wid = width.Clone();
         p.pos = pos.Clone();
         p.HpDamage = Hpdamage.Clone();
+        p.hit_fly_type = hit_fly_type;
         p.ToughnessDamage = Toughnessdamage;
         p.attacker_id = attacker_id;
         p.col_type = Fix_col2d.col_status.Attack2;
@@ -467,8 +469,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -517,6 +519,7 @@ public class Main_ctrl : MonoBehaviour
                     a.attakcer_id = info.attacker_id;
                     a.toward = info.toward;
                     a.attacker_type = info.attacker_type;
+                    a.hited_fly_type = info.hit_fly_type;
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
@@ -721,6 +724,7 @@ public class Obj_info
     public int attacker_type;
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
+    public int hit_fly_type;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
