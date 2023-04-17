@@ -109,8 +109,8 @@ public class Flow_path : MonoBehaviour
                     {
                         Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
                     }
+                    Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
                 }
-                Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
                 Debug.Log(Main_ctrl.main_id);
                 Debug.Log(Main_ctrl.All_objs[Main_ctrl.main_id].gameObject);
                 main_flag = 2;
