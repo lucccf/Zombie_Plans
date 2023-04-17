@@ -13,6 +13,7 @@ public class Player_ctrl : MonoBehaviour
     public static Bag BagUI;
     public static Text QCD;
     public static Text ECD;
+    public static Fix_vector2 HomePos;
     //public static GameObject MakeSuccessUI;
    // public static GameObject MakeFailedUI;
     public static void Init_bag()

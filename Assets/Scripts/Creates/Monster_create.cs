@@ -46,12 +46,15 @@ public class Monster_create : MonoBehaviour
             /*
             if (pos_monster[i].x < new Fixpoint(130, 0))
             {
-                if (Rand.rand() % 2 == 0)
+                if (Rand.rand() % 3 == 0)
                 {
                     p.name = "Mage";
                 }
-                else { 
+                else if(Rand.rand()%2 == 0){ 
                     p.name = "Devil";
+                } else
+                {
+                    p.name = "Terrorist";
                 }
             }
             else

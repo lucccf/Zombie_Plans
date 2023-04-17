@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 487198307
+CRC: 3421847910
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 297426ff48ca9e837dd4d56eb1caca87
+    Hash: 82467450efaed4110249363b86bb507c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c1a06d6b17053f1c55fe94c49718675e
+    Hash: 68e92f6b930dedaf5285ca7d5c0da3f8
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,9 +28,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -71,6 +71,10 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1788a6378d18a8946812ccbb85a12767, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -104,6 +108,7 @@ Assets:
 - Assets/Resources/Prefabs/Attack.prefab
 - Assets/Resources/Prefabs/number/33.png
 - Assets/Resources/Prefabs/number/22.png
+- Assets/Resources/Prefabs/Bomb2.prefab
 - Assets/Resources/Prefabs/Lighting.prefab
 - Assets/Resources/Prefabs/FireBall.prefab
 - Assets/Resources/Prefabs/number/4.png
@@ -125,6 +130,7 @@ Assets:
 - Assets/Resources/Prefabs/number/7.png
 - Assets/Resources/Prefabs/Building.prefab
 - Assets/Resources/Prefabs/ItemSample.prefab
+- Assets/Resources/Prefabs/Terrorist.prefab
 - Assets/Resources/Prefabs/number/88.png
 - Assets/Resources/Prefabs/number/55.png
 - Assets/Resources/Prefabs/wall_a.prefab
