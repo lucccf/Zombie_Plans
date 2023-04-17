@@ -43,6 +43,9 @@ public class Monster_create : MonoBehaviour
                 case 4:
                     p.name = "Devil";
                     break;
+                case 5:
+                    p.name = "Terrorist";
+                    break;
             }
             /*
             if (pos_monster[i].x < new Fixpoint(130, 0))

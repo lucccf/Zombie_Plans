@@ -400,8 +400,16 @@ public class Map_create : MonoBehaviour
 
                 if (xml_name == "boss_pos")
                 {
-                    yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
-                    Monster_create.pos_monster.Add(new Mon_pos(4, xx));
+                    int k = (int)(Rand.rand() % 2 + 4);
+                    if (k == 2)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
+                    }
+                    else
+                    {
+                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    }
+                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
                     Monster_create.size_monster.Add(yy);
                 }
 
@@ -516,4 +524,6 @@ public class Map_create : MonoBehaviour
  * 165 295
  * Devil
  * 155 295
+ * Terrorist
+ * 148 303
  */
