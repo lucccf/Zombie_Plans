@@ -334,6 +334,35 @@ public class Map_create : MonoBehaviour
         BK_create(Rooms, "home_pos", "BK_home");
         BKitem_create(Rooms, "home_pos", "bg_common");
         BKother_create("bg_outerlayer");
+        Bkother_create();
+    }
+
+    static void Bkother_create()
+    {
+        for (int f = 1; f <= floor_cnt; f++)
+        {
+            for (int j = 1; j <= room_cnt; j++)
+            {
+                if (!ok_list[f][j])
+                {
+                    int id = f;
+                    int pos = j;
+                    Fix_vector2 xx = new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0));
+                    Fix_vector2 yy;
+                    int k = (int)(Rand.rand() % 2 + 2);
+                    if (k == 2)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                    }
+                    else
+                    {
+                        yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                    }
+                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.size_monster.Add(yy);
+                }
+            }
+        }
     }
 
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
@@ -345,15 +374,50 @@ public class Map_create : MonoBehaviour
             {
                 int pos = int.Parse(x.InnerText);
                 Fix_vector2 xx = new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0));
-                Fix_vector2 yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                Fix_vector2 yy;
                 if (xml_name == "normal_pos")
                 {
+                    yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                    int px = (int)(Rand.rand() % (ulong)floor_wid) - floor_wid / 2;
                     Monster_create.pos_monster.Add(new Mon_pos(1, xx));
                     Monster_create.size_monster.Add(yy);
                 }
+
+                if (xml_name == "mill_pos" || xml_name == "battle_pos")
+                {
+                    int k = (int)(Rand.rand() % 2 + 2);
+                    if (k == 2)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                    }
+                    else
+                    {
+                        yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                    }
+                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.size_monster.Add(yy);
+                }
+
+                if (xml_name == "boss_pos")
+                {
+                    int k = (int)(Rand.rand() % 2 + 4);
+                    if (k == 2)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
+                    }
+                    else
+                    {
+                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    }
+                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.size_monster.Add(yy);
+                }
+
                 if (xml_name == "battle_pos")
                 {
-                    Monster_create.pos_zombies.Add(new Mon_pos(1, xx));
+                    int k = (int)(Rand.rand() % 2 + 1);
+                    yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                    Monster_create.pos_zombies.Add(new Mon_pos(2, xx));
                     Monster_create.size_zombies.Add(yy);
                 }
             }
@@ -451,3 +515,15 @@ public class Map_create : MonoBehaviour
         }
     }
 }
+
+
+/*
+ * mage
+ * 146 235
+ * knight
+ * 165 295
+ * Devil
+ * 155 295
+ * Terrorist
+ * 148 303
+ */
