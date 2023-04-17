@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main_ctrl : MonoBehaviour
 {
@@ -39,6 +40,8 @@ public class Main_ctrl : MonoBehaviour
     public static GameObject play;
 
     public static long frame_index = 0;
+
+    public static bool Exit = false;
 
     public enum objtype
     {
@@ -655,7 +658,8 @@ public class Main_ctrl : MonoBehaviour
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
             ++count;
-            
+            Debug.Log(f);
+
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)
@@ -694,6 +698,17 @@ public class Main_ctrl : MonoBehaviour
             {
                 Obj_info q = Cre_objs.Dequeue();
                 CreateObj(q);
+            }
+            if (Exit)
+            {
+                PlayerOptData y = new PlayerOptData();
+                y.Opt = PlayerOpt.ExitRoom;
+                y.Userid = (int)user_id;
+                Debug.Log("xxxxxx");
+                Debug.Log(f);
+
+                SceneManager.LoadScene("Start");
+                GameObject.Destroy(gameObject);
             }
         }
         play = All_objs[main_id].gameObject;

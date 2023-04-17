@@ -10,15 +10,16 @@ public class HealthSlider : MonoBehaviour
     public Transform target;
     public BasicCharacter character;
     private Vector3 offset = new Vector3(0f, 1f, 0f);
+    Vector3 screenPos;
     void Start()
     {
 
+        screenPos = Camera.main.WorldToScreenPoint(target.position + offset);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(target.position + offset);
         healthSlider.transform.position = screenPos;
         healthSlider.value = character.CheckHealth();
         if(healthSlider.value <= 0f)
