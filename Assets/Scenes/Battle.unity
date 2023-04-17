@@ -1120,7 +1120,7 @@ MonoBehaviour:
   AllFacilityButton: {fileID: 629801516}
   WorkTableButton: {fileID: 629801515}
   AllFacilityUI: {fileID: 208129171}
-  WorkTableUI: {fileID: 0}
+  WorkTableUI: {fileID: 856457711}
 --- !u!1 &643690164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2063,6 +2063,12 @@ PrefabInstance:
 --- !u!224 &856457710 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6135168007288608988, guid: a122475fb2a4aee418260c8e7be33a1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 856457709}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &856457711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6038595416713250677, guid: a122475fb2a4aee418260c8e7be33a1f,
     type: 3}
   m_PrefabInstance: {fileID: 856457709}
   m_PrefabAsset: {fileID: 0}
