@@ -341,15 +341,17 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes(xml_name))
             {
                 int pos = int.Parse(x.InnerText);
+                Fix_vector2 xx = new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0));
+                Fix_vector2 yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
                 if (xml_name == "normal_pos")
                 {
-                    Monster_create.pos_monster.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid , 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
-                    Monster_create.size_monster.Add(new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2)));
+                    Monster_create.pos_monster.Add(new Mon_pos(1, xx));
+                    Monster_create.size_monster.Add(yy);
                 }
                 if (xml_name == "battle_pos")
                 {
-                    Monster_create.pos_zombies.Add(new Fix_vector2(new Fixpoint(pos * 10 - 5, 1) * new Fixpoint(floor_wid, 0), new Fixpoint(-id * 10 + 5, 1) * new Fixpoint(floor_hei, 0)));
-                    Monster_create.size_zombies.Add(new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2)));
+                    Monster_create.pos_zombies.Add(new Mon_pos(1, xx));
+                    Monster_create.size_zombies.Add(yy);
                 }
             }
         }
@@ -443,22 +445,6 @@ public class Map_create : MonoBehaviour
                 y1 = -(id - 0.5f) * floor_hei + sh + floor_hei / 2f - 1 - y2;
             }
             obj.transform.position = new Vector3(x1, y1, hei);
-        }
-    }
-
-    static void BKwood_create()
-    {
-        for(int f = 1; f <= floor_cnt; f++)
-        {
-            for(int j = 1; j < room_cnt; j++)
-            {
-                int id = f;
-                int pos = j;
-                int q_pi = (int)(Rand.rand() % 3 + 1);
-                Load_BL(id, pos, 10000, "flower", q_pi, 17, 1, 3, true);
-                q_pi = (int)(Rand.rand() % 3 + 1);
-                Load_BL(id, pos, 10000, "grass", q_pi, 17, 1, 5, true);
-            }
         }
     }
 }
