@@ -2,11 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public class Mon_pos
+{
+    public int type;
+    public Fix_vector2 pos;
+
+    public Mon_pos(int type, Fix_vector2 pos)
+    {
+        this.type = type;
+        this.pos = pos;
+    }
+}
+
 public class Monster_create : MonoBehaviour
 {
-    public static List<Fix_vector2> pos_monster = new List<Fix_vector2>();
+    public static List<Mon_pos> pos_monster = new List<Mon_pos>();
     public static List<Fix_vector2> size_monster = new List<Fix_vector2>();
-    public static List<Fix_vector2> pos_zombies = new List<Fix_vector2>();
+    public static List<Mon_pos> pos_zombies = new List<Mon_pos>();
     public static List<Fix_vector2> size_zombies = new List<Fix_vector2>();
     public static float cnt1 = 0;
 
@@ -15,6 +28,13 @@ public class Monster_create : MonoBehaviour
         for(int i = 0; i < pos_monster.Count; i++)
         {
             Obj_info p = new Obj_info();
+            switch (pos_monster[i].type)
+            {
+                case 1:
+                    p.name = "Mage";
+                    break;
+            }
+            /*
             if (pos_monster[i].x < new Fixpoint(130, 0))
             {
                 if (Rand.rand() % 3 == 0)
@@ -38,9 +58,10 @@ public class Monster_create : MonoBehaviour
                     p.name = "Monster1";
                 }
             }
+            */
             p.hei = size_monster[i].y.Clone();
             p.wid = size_monster[i].x.Clone();
-            p.pos = pos_monster[i];
+            p.pos = pos_monster[i].pos;
             cnt1 += p.pos.x.to_int() + p.pos.y.to_int();
             p.col_type = Fix_col2d.col_status.Collider;
             p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
@@ -60,7 +81,7 @@ public class Monster_create : MonoBehaviour
             p.name = "Devil";
             p.hei = size_zombies[i].y.Clone();
             p.wid = size_zombies[i].x.Clone();
-            p.pos = pos_zombies[i];
+            p.pos = pos_zombies[i].pos;
             p.col_type = Fix_col2d.col_status.Collider;
             p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
             p.classnames.Add(Object_ctrl.class_name.Moster);

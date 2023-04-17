@@ -277,7 +277,7 @@ public class Devil : Knight
     }
 
     private static Fixpoint DevilBombHitTime = new Fixpoint(4, 1);
-    private static Fixpoint DevilBombHitBetween = new Fixpoint(4, 1);
+    private static Fixpoint DevilBombHitBetween = new Fixpoint(2, 0);
     private static Fixpoint DevilBombQuitTime = new Fixpoint(166, 2);
     private static Fixpoint DevilBombAttack = new Fixpoint(5, 1);
     private int DevilBonmTimes = 0;

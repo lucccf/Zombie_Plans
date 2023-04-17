@@ -101,6 +101,7 @@ public class Flow_path : MonoBehaviour
                         cnt1++;
                     }
                 }
+                Debug.Log(Main_ctrl.main_id);
                 if (cnt1 > 0)
                 {
                     Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
@@ -109,6 +110,9 @@ public class Flow_path : MonoBehaviour
                         Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
                     }
                 }
+                Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
+                Debug.Log(Main_ctrl.main_id);
+                Debug.Log(Main_ctrl.All_objs[Main_ctrl.main_id].gameObject);
                 main_flag = 2;
                 break;
             case 2:

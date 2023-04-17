@@ -701,7 +701,7 @@ public class Main_ctrl : MonoBehaviour
         if (play != null)
         {
             camara.transform.position = play.transform.position;
-            camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y, -10);
+            camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y + 1.0f, -10);
             Tiny_map.transform.position = play.transform.position;
             Tiny_map.transform.position = new Vector3(Tiny_map.transform.position.x / 3 + Tiny_map_cre.pos_x, Tiny_map.transform.position.y / 3 + Tiny_map_cre.pos_y + 1, -10);
         }
