@@ -298,8 +298,8 @@ public class Mage : Knight
         }
     }
 
-    private static Fixpoint FireBeginToHitTime = new Fixpoint(5, 1);
-    private static Fixpoint FireDuringTime = new Fixpoint(1, 0);
+    private static Fixpoint FireBeginToHitTime = new Fixpoint(27, 2);
+    private static Fixpoint FireDuringTime = new Fixpoint(66, 2);
     private static Fixpoint FireAttack = new Fixpoint(2, 0);
     private bool Fired = false;
     private void Fire()
