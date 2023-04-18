@@ -501,7 +501,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 177650459977228185}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7434660964114565666, guid: 0a0ca4096e744274882d027d49a7955f,
+          type: 3}
+        m_MethodName: deadstart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2588755153433415171
 MonoBehaviour:
   m_ObjectHideFlags: 0

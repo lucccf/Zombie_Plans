@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class Dead_panel : MonoBehaviour
 {
+    private static GameObject dr1, def1, de1, vic1;
     public GameObject dr, def, de, vic;
     // Start is called before the first frame update
     void Start()
     {
         dr.SetActive(false);
+        dr1 = dr;
         def.SetActive(false);
+        def1 = def;
         de.SetActive(false);
+        de1 = de;
         vic.SetActive(false);
+        vic1 = vic;
     }
 
-    public void draw()
+    public void deadstart()
     {
-        dr.SetActive(true);
+        Flow_path.Dead_start();
     }
 
-    public void defeated()
+    public static void draw()
     {
-        def.SetActive(true);
+        dr1.SetActive(true);
     }
 
-    public void dead()
+    public static void defeated()
     {
-        de.SetActive(true);
+        def1.SetActive(true);
     }
 
-    public void victory()
+    public static void dead()
     {
-        vic.SetActive(true);
+        de1.SetActive(true);
+    }
+
+    public static void victory()
+    {
+        vic1.SetActive(true);
     }
 }
