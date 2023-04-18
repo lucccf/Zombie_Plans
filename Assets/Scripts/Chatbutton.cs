@@ -21,10 +21,12 @@ public class Chatbutton : MonoBehaviour
     void CloseUI() {
         if (chatUI.activeSelf) {
             chatUI.SetActive(false);
+            ClientSend.Send = true;
         }
     }
     void ShowChatUI() {
         bool showUI = !chatUI.activeSelf;
+        ClientSend.Send = chatUI.activeSelf;
         chatUI.SetActive(showUI);
     }
 }
