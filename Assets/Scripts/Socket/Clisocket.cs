@@ -20,6 +20,7 @@ public enum BODYTYPE
 
     //新加
     PlayerOptData,
+    PlayerMessage,
     /* server之间通信协议 */
     ServerInfo = 100
 

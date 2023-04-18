@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Net;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,10 @@ public class ChatUI : MonoBehaviour
     }
 
     void CommitMessage() {
-
+        PlayerMessage x = new PlayerMessage();
+        x.Userid = (int)Main_ctrl.user_id;
+        x.Content = textpanel.GetComponent<Text>().text;
+        Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
     }
 
     // Update is called once per frame

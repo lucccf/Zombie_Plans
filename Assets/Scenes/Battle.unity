@@ -4172,9 +4172,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 316a0629365877d4bba104fff33493cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commitbutton: {fileID: 1787667404}
+  textpanel: {fileID: 1787667405}
 --- !u!1 &1787667403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2234664167718947784, guid: 605b116ad20c1b8488fb861bd32c3518,
+    type: 3}
+  m_PrefabInstance: {fileID: 1787667399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1787667404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2234664168733101522, guid: 605b116ad20c1b8488fb861bd32c3518,
+    type: 3}
+  m_PrefabInstance: {fileID: 1787667399}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1787667405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2234664169001290503, guid: 605b116ad20c1b8488fb861bd32c3518,
     type: 3}
   m_PrefabInstance: {fileID: 1787667399}
   m_PrefabAsset: {fileID: 0}
