@@ -35,7 +35,9 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             Debug.Log("VVVRight" + id);
             Player player = Player_ctrl.plays[0];
-            player.ThrowItem(id);
+            //发帧
+
+            player.ThrowItem(id);  //收到以后
             // 处理鼠标右键点击
         }
     }
