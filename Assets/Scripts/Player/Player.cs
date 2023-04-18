@@ -279,14 +279,16 @@ public class Player : BasicCharacter
         }
         bag.BagGetItem(id, -1, Player_ctrl.BagUI);
         Fix_vector2 ItemPos = f.pos.Clone();
+        Fix_vector2 ItemSpeed = new Fix_vector2(new Fixpoint(5, 0), new Fixpoint(7, 0));
         if (AnimaToward > 0)
         {
-            ItemPos.x += new Fixpoint(3, 0);
+            ItemPos.x += new Fixpoint(1, 0);
         } else
         {
-            ItemPos.x -= new Fixpoint(3, 0);
+            ItemPos.x -= new Fixpoint(1, 0);
+            ItemSpeed.x = new Fixpoint(0, 0) - ItemSpeed.x;
         }
-        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1);
+        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1,ItemSpeed);
     }
 
     private void Normal()
