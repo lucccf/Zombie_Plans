@@ -28,8 +28,6 @@ public class GetClicked : MonoBehaviour
             // 将屏幕坐标转换为世界坐标
             UnityEngine.Vector3 worldPos = mainCamera.ScreenToWorldPoint(new UnityEngine.Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane));
 
-            // 打印世界坐标
-            Debug.Log("鼠标点击位置的世界坐标为：" + worldPos);
             particle_instance = Instantiate(particle, EffectCamera.transform);
             particle_instance.transform.position = worldPos;
             particle_instance.transform.localScale = new UnityEngine.Vector3(1, 1, 0);
