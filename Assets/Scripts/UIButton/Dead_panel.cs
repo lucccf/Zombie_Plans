@@ -7,8 +7,12 @@ public class Dead_panel : MonoBehaviour
     private static GameObject dr1, def1, de1, vic1;
     public GameObject dr, def, de, vic;
     // Start is called before the first frame update
+
+    static bool flag = false;
+
     void Start()
     {
+        flag = false;
         dr.SetActive(false);
         dr1 = dr;
         def.SetActive(false);
@@ -26,11 +30,15 @@ public class Dead_panel : MonoBehaviour
 
     public static void draw()
     {
+        if (flag) return;
+        flag = true;
         dr1.SetActive(true);
     }
 
     public static void defeated()
     {
+        if (flag) return;
+        flag = true;
         def1.SetActive(true);
     }
 
@@ -41,6 +49,8 @@ public class Dead_panel : MonoBehaviour
 
     public static void victory()
     {
+        if (flag) return;
+        flag = true;
         vic1.SetActive(true);
     }
 }
