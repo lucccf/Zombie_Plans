@@ -93,28 +93,7 @@ public class Flow_path : MonoBehaviour
                 break;
             case 1:
                 //切换到死亡UI，并随机选择一名玩家作为主视角
-                play_panel.SetActive(false);
-                death_panel.SetActive(true);
-                int cnt1 = 0;
-                foreach(var x in Player_ctrl.plays)
-                {
-                    if (!x.CheckDeath())
-                    {
-                        cnt1++;
-                    }
-                }
-                Debug.Log(Main_ctrl.main_id);
-                if (cnt1 > 0)
-                {
-                    Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
-                    while (Player_ctrl.plays[(int)Main_ctrl.main_id].CheckDeath())
-                    {
-                        Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
-                    }
-                    Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
-                }
-                Debug.Log(Main_ctrl.main_id);
-                Debug.Log(Main_ctrl.All_objs[Main_ctrl.main_id].gameObject);
+                Dead_panel.dead();
                 main_flag = 2;
                 break;
             case 2:
@@ -130,6 +109,73 @@ public class Flow_path : MonoBehaviour
         Checkpeopvic();
 
         Checkdoublefail();
+    }
+
+    public static void Dead_start()
+    {
+        play_panel.SetActive(false);
+        death_panel.SetActive(true);
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            while (Player_ctrl.plays[(int)Main_ctrl.main_id].CheckDeath())
+            {
+                Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
+        }
+    }
+    
+    public static void next()
+    {
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            int p = Player_ctrl.plays.IndexOf((Player)Main_ctrl.All_objs[Main_ctrl.main_id].modules[Object_ctrl.class_name.Player]);
+            p = (p + 1) % Player_ctrl.plays.Count;
+            while (Player_ctrl.plays[p].CheckDeath())
+            {
+                p = (p + 1) % Player_ctrl.plays.Count;
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[p].id;
+        }
+    }
+
+    public static void pre()
+    {
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            int p = Player_ctrl.plays.IndexOf((Player)Main_ctrl.All_objs[Main_ctrl.main_id].modules[Object_ctrl.class_name.Player]);
+            p = (p + Player_ctrl.plays.Count - 1) % Player_ctrl.plays.Count;
+            while (Player_ctrl.plays[p].CheckDeath())
+            {
+                p = (p + Player_ctrl.plays.Count - 1) % Player_ctrl.plays.Count;
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[p].id;
+        }
     }
 
     private static void Checkwolfvic()

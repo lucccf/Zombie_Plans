@@ -2282,6 +2282,28 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704182767}
     m_Modifications:
+    - target: {fileID: 6820600336875877983, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: cc57246f86d1f1a4d900da3bdfd82e0a,
+        type: 3}
+    - target: {fileID: 6820600336875877983, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600336887011432, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: cc57246f86d1f1a4d900da3bdfd82e0a,
+        type: 3}
+    - target: {fileID: 6820600336887011432, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6820600337277634618, guid: 09fa80a81df82e84a9b92e2d45eb1726,
         type: 3}
       propertyPath: m_Name
@@ -2290,7 +2312,7 @@ PrefabInstance:
     - target: {fileID: 6820600337277634618, guid: 09fa80a81df82e84a9b92e2d45eb1726,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6820600337277634619, guid: 09fa80a81df82e84a9b92e2d45eb1726,
         type: 3}
@@ -2395,6 +2417,68 @@ PrefabInstance:
     - target: {fileID: 6820600337277634619, guid: 09fa80a81df82e84a9b92e2d45eb1726,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338573695678, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: cc57246f86d1f1a4d900da3bdfd82e0a,
+        type: 3}
+    - target: {fileID: 6820600338573695678, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703422, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703422, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703422, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703422, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u8BBE\u65BD1\u53F7"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 21eeeb7ee195ad041ade3ef942739677,
+        type: 3}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820600338829703423, guid: 09fa80a81df82e84a9b92e2d45eb1726,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
