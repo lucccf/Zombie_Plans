@@ -456,7 +456,7 @@ public class Main_ctrl : MonoBehaviour
 
         Creobj(p);
     }
-    public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size)
+    public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size,Fix_vector2 speed)
     {
         Obj_info p = new Obj_info();
         p.name = "ItemSample";
@@ -467,6 +467,7 @@ public class Main_ctrl : MonoBehaviour
         p.type = itemname;
         p.ToughnessDamage = num;
         p.toward = size;
+        p.with_pos = speed;
         p.col_type = Fix_col2d.col_status.Trigger2;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Trigger);
@@ -565,10 +566,15 @@ public class Main_ctrl : MonoBehaviour
                         Item x = (Item)AB.getobj(info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
+                        ItemOnGround gg = obj.GetComponent<ItemOnGround>();
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
-                        obj.GetComponent<ItemOnGround>().item = x;
+                        gg.item = x;
                         obj.transform.localScale = new Vector3(info.toward, info.toward, 1f);
-                        obj.GetComponent<ItemOnGround>().r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
+                        gg.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
+                        gg.f = f;
+                        gg.r.velocity = info.with_pos;
+                        t.r = gg.r;
+                        t.f = gg.f;
                         t.itemid = x.id;
                         
                     }
@@ -699,6 +705,12 @@ public class Main_ctrl : MonoBehaviour
                 {
                     Attack p = (Attack)All_objs[i].modules[Object_ctrl.class_name.Attack];
                     p.Updatex();
+                }
+                if (All_objs[i].modules.ContainsKey(Object_ctrl.class_name.Trigger))
+                {
+                    Trigger t = (Trigger)All_objs[i].modules[Object_ctrl.class_name.Trigger];
+                    t.Updatex();
+
                 }
             }
             Rigid_ctrl.rig_update();
