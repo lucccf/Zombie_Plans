@@ -50,7 +50,7 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
-    void Start()
+    private void init()
     {
         All_objs = new Dictionary<long, Object_ctrl>();
         Ser_to_cli = new Dictionary<long, long>();
@@ -58,6 +58,16 @@ public class Main_ctrl : MonoBehaviour
         holes = new List<List<int>>();
         walls = new List<List<int>>();
         Exit = false;
+        Rigid_ctrl.rigs = new List<Fix_rig2d>();
+        Collider_ctrl.cols = new List<Fix_col2d>();
+        Player_ctrl.plays = new List<Player>();
+        Map_ctrl.Map_items = new Dictionary<long, GameObject>();
+        Flow_path.init();
+    }
+
+    void Start()
+    {
+        init();
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tiny_map = GameObject.Find("Tiny_map");
@@ -79,7 +89,6 @@ public class Main_ctrl : MonoBehaviour
         players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
-        Flow_path.init();
     }
 
     static void Wolf_create()
@@ -734,6 +743,7 @@ public class Main_ctrl : MonoBehaviour
                 y.Userid = (int)user_id;
 
                 Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
+                Exit = false;
             }
         }
         play = All_objs[main_id].gameObject;
