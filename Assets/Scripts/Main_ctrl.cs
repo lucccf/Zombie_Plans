@@ -1,4 +1,5 @@
-﻿using Net;
+﻿using JetBrains.Annotations;
+using Net;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -666,6 +667,11 @@ public class Main_ctrl : MonoBehaviour
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
+            for (int i = 0; i < f.Msgs.Count; i++)
+            {
+                Player p = (Player)(All_objs[Ser_to_cli[f.Msgs[i].Userid]].modules[Object_ctrl.class_name.Player]);
+                p.DealMsgs(f.Msgs[i]);
+            }
             foreach (long i in All_objs.Keys)
             {
                 if (All_objs[i].modules.ContainsKey(Object_ctrl.class_name.Player))
@@ -703,8 +709,8 @@ public class Main_ctrl : MonoBehaviour
                 PlayerOptData y = new PlayerOptData();
                 y.Opt = PlayerOpt.ExitRoom;
                 y.Userid = (int)user_id;
-                Debug.Log("xxxxxx");
-                Debug.Log(f);
+
+                Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
 
                 SceneManager.LoadScene("Start");
             }
