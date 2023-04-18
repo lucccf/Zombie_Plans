@@ -6,6 +6,7 @@ public class ItemOnGround : MonoBehaviour
 {
     // Start is called before the first frame update
     public Item item;
+    public Fix_rig2d r;
     void Start()
     {
 

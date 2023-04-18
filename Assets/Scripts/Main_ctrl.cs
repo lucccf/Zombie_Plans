@@ -465,6 +465,8 @@ public class Main_ctrl : MonoBehaviour
         p.type = itemname;
         p.ToughnessDamage = num;
         p.toward = size;
+        p.col_type = Fix_col2d.col_status.Trigger2;
+        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         Creobj(p);
     }
@@ -557,12 +559,14 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
+                        
                         Item x = (Item)AB.getobj(info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
                         obj.GetComponent<ItemOnGround>().item = x;
                         obj.transform.localScale = new Vector3(info.toward, info.toward, 1f);
+                        obj.GetComponent<ItemOnGround>().r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                         t.itemid = x.id;
                         
                     }
