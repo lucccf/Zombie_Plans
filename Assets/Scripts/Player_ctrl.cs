@@ -26,9 +26,10 @@ public class Player_ctrl : MonoBehaviour
         //MakeSuccessUI.SetActive(false);
         //MakeFailedUI.SetActive(false);
         item = Resources.LoadAll<Item>("Prefabs/items/");
+        ItemList.Clear();
         for (int i = 0; i < item.Length; ++i)
         {
-            Player_ctrl.ItemList.Add(item[i].id, item[i]);
+            ItemList.Add(item[i].id, item[i]);
         }
     }
 

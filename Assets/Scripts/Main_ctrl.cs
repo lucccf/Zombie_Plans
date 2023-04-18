@@ -26,11 +26,8 @@ public class Main_ctrl : MonoBehaviour
     public static int hole_len;
     private static List<List<node>> MapNode;
 
-    float t;
-    float dt = 0.033f;
     static long cnt = 0;
 
-    long frame_id = 0;
 
     public static long user_id = -1;
     public static long main_id = -1;
@@ -55,7 +52,12 @@ public class Main_ctrl : MonoBehaviour
 
     void Start()
     {
-
+        All_objs = new Dictionary<long, Object_ctrl>();
+        Ser_to_cli = new Dictionary<long, long>();
+        ItemList = new Dictionary<int, Item>();
+        holes = new List<List<int>>();
+        walls = new List<List<int>>();
+        Exit = false;
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tiny_map = GameObject.Find("Tiny_map");
@@ -74,10 +76,10 @@ public class Main_ctrl : MonoBehaviour
         }
 
         Play_create();
+        players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
         Flow_path.init();
-        Debug.Log(Monster_create.cnt1);
     }
 
     static void Wolf_create()
@@ -668,6 +670,11 @@ public class Main_ctrl : MonoBehaviour
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
+                if (f.Opts[i].Opt == PlayerOpt.ExitRoom)
+                {
+                    if (f.Opts[i].Userid == user_id) SceneManager.LoadScene("Start");
+                    continue;
+                }
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
@@ -715,8 +722,6 @@ public class Main_ctrl : MonoBehaviour
                 y.Userid = (int)user_id;
 
                 Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
-
-                SceneManager.LoadScene("Start");
             }
         }
         play = All_objs[main_id].gameObject;

@@ -36,6 +36,12 @@ public class Flow_path : MonoBehaviour
         chat_panel = GameObject.Find("ChatUI");
         death_panel.SetActive(false);
         chat_panel.SetActive(false);
+        countdown = new Fixpoint(300, 0);
+        cnt_flag = 0;
+        zombie_cnt = 0;
+        Now_fac = 0;
+        main_flag = 0;
+        conditions = new int[cons];
     }
 
     public static void Updatex()
