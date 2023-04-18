@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 public class BubbleMove : MonoBehaviour
 {
     public Transform target;
-    private Vector3 offset = new Vector3(0f, 1f, 0f);
+    private Vector3 offset = new Vector3(0f, 2f, 0f);
     Vector3 screenPos;
     // Start is called before the first frame update
     void Start()
