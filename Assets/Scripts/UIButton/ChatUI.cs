@@ -8,6 +8,10 @@ public class ChatUI : MonoBehaviour
     // Start is called before the first frame update
     public GameObject commitbutton;
     public GameObject textpanel;
+    public Button ctbutton;
+    public static float t = 0;
+    public static bool commitbuttonable = true;
+
     void Start()
     {
         commitbutton.GetComponent<Button>().onClick.AddListener(CommitMessage);
@@ -20,11 +24,13 @@ public class ChatUI : MonoBehaviour
         Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
         gameObject.SetActive(false);
         ClientSend.Send = true;
+        commitbuttonable = false;
+        t = Time.time;
+        Debug.Log("Enable Changed"+ commitbuttonable);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

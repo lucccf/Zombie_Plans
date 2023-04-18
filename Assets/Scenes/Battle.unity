@@ -2818,6 +2818,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChatUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3538221242594906363, guid: 4a6f1a9257cf6e04e8817b2eb0ef1849,
+        type: 3}
+      propertyPath: ctbutton
+      value: 
+      objectReference: {fileID: 2025479374}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a6f1a9257cf6e04e8817b2eb0ef1849, type: 3}
 --- !u!224 &1288977159 stripped
@@ -4735,6 +4740,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5866ae380a73904d8a0561600ea8899, type: 3}
+--- !u!114 &2025479374 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8316511697493627821, guid: c5866ae380a73904d8a0561600ea8899,
+    type: 3}
+  m_PrefabInstance: {fileID: 2025479373}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103739729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2029139476
 GameObject:
   m_ObjectHideFlags: 0

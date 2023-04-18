@@ -16,7 +16,10 @@ public class Chatbutton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (ChatUI.t + 5f < Time.time)
+        {
+            ChatUI.commitbuttonable = true;
+        }
     }
     void CloseUI() {
         if (chatUI.activeSelf) {
@@ -25,8 +28,10 @@ public class Chatbutton : MonoBehaviour
         }
     }
     void ShowChatUI() {
-        bool showUI = !chatUI.activeSelf;
-        ClientSend.Send = chatUI.activeSelf;
-        chatUI.SetActive(showUI);
+        if (ChatUI.commitbuttonable == true) {
+            bool showUI = !chatUI.activeSelf;
+            ClientSend.Send = chatUI.activeSelf;
+            chatUI.SetActive(showUI);
+        }
     }
 }
