@@ -203,17 +203,60 @@ public class Flow_path : MonoBehaviour
 
         if (vic_wolf)
         {
+            if (((Player)Main_ctrl.All_objs[Main_ctrl.Ser_to_cli[Main_ctrl.user_id]].modules[Object_ctrl.class_name.Player]).identity == Player.Identity.Wolf)
+            {
+                Dead_panel.victory();
+            }
+            else
+            {
+                Dead_panel.defeated();
+            }
             //好人切换到好人失败场景，坏人切换到坏人胜利场景，进行对应的加分和扣分操作
         }
     }
 
     private static void Checkpeopvic()
     {
+        if (cnt_flag < 4)
+        {
+            return;
+        }
+        bool flag_po = false;
+        for(int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (!Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Populace)
+            {
+                flag_po = true;
+            }
+        }
+        if (flag_po)
+        {
+            if (((Player)Main_ctrl.All_objs[Main_ctrl.Ser_to_cli[Main_ctrl.user_id]].modules[Object_ctrl.class_name.Player]).identity == Player.Identity.Wolf)
+            {
+                Dead_panel.defeated();
+            }
+            else
+            {
+                Dead_panel.victory();
+            }
+        }
         //如果有一名玩家成功逃出，则好人胜利，根据不同的胜利方式获得不同的评分
     }
 
     private static void Checkdoublefail()
     {
+        bool flag_all = false;
+        for (int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (!Player_ctrl.plays[i].CheckDeath())
+            {
+                flag_all = true;
+            }
+        }
+        if (!flag_all)
+        {
+            Dead_panel.draw();
+        }
         //如果狼人死了且好人没有成功逃出，则算作平局
     }
 }
