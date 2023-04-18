@@ -130,13 +130,17 @@ public class Player : BasicCharacter
                     {
                         
                         bool value = bag.BagGetItem(m.Key, -1,Player_ctrl.BagUI);
-                        if (!fa.commited.ContainsKey(m.Key))
-                        {
-                            fa.commited[m.Key] = 1;
+                        if (value) {
+                            if (!fa.commited.ContainsKey(m.Key))
+                            {
+                                fa.commited[m.Key] = 1;
+                            }
+                            else
+                            {
+                                fa.commited[m.Key] += 1;
+                            }
                         }
-                        else {
-                            fa.commited[m.Key] += 1;
-                        }
+                        GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
                     }
