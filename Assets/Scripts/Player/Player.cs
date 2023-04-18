@@ -1,6 +1,7 @@
 ﻿using Net;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : BasicCharacter
 {
@@ -11,6 +12,10 @@ public class Player : BasicCharacter
     private PlayerBag bag = new PlayerBag();
     private Fixpoint QCD = new Fixpoint(0, 0);
     private Fixpoint ECD = new Fixpoint(0, 0);
+
+    public string words = string.Empty;
+    public bool words_ok = false;
+
     public enum Identity
     {
         Populace,
@@ -42,6 +47,12 @@ public class Player : BasicCharacter
         [KeyCode.LeftShift] = false,
         [KeyCode.Space] = false
     };
+
+    public void DealMsgs(PlayerMessage msg)
+    {
+        words = msg.Content;
+        words_ok = true;
+    }
 
     public void DealInputs(PlayerOptData inputs)
     {

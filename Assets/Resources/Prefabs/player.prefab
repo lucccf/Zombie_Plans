@@ -1,17 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1660346822976655239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 599575813609814933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1880616851316755746
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,6 +12,7 @@ GameObject:
   - component: {fileID: 1880616851316755744}
   - component: {fileID: 1880616851316755745}
   - component: {fileID: 5554646637350912914}
+  - component: {fileID: 8563102221698559907}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -129,7 +118,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   AnimaToward: 1
+  words: 
+  words_ok: 0
   identity: 0
+--- !u!114 &8563102221698559907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880616851316755746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  txt: {fileID: 4587325687731373911}
+  player: {fileID: 5554646637350912914}
+  bub: {fileID: 599575813609814933}
 --- !u!1 &3209599193999019857
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChatBubble
       objectReference: {fileID: 0}
+    - target: {fileID: 432937802103883704, guid: 30127e7612390c94288a012e9e495730,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3601034503354432378, guid: 30127e7612390c94288a012e9e495730,
         type: 3}
       propertyPath: m_Text
@@ -680,3 +691,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1031330524018080813}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4587325687731373911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3601034503354432378, guid: 30127e7612390c94288a012e9e495730,
+    type: 3}
+  m_PrefabInstance: {fileID: 1031330524018080813}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
