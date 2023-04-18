@@ -18,6 +18,7 @@ public class ChatUI : MonoBehaviour
         x.Userid = (int)Main_ctrl.user_id;
         x.Content = textpanel.GetComponent<Text>().text;   
         Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
