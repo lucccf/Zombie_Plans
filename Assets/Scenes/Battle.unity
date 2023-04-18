@@ -428,8 +428,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bf6fd204d576a41ab2b7e34d530b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatUI: {fileID: 0}
-  closebutton: {fileID: 0}
+  chatUI: {fileID: 1288977161}
+  closebutton: {fileID: 1288977160}
 --- !u!1 &160976566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +2823,18 @@ PrefabInstance:
 --- !u!224 &1288977159 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3321781040974668792, guid: 4a6f1a9257cf6e04e8817b2eb0ef1849,
+    type: 3}
+  m_PrefabInstance: {fileID: 1288977158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1288977160 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3321781040702479166, guid: 4a6f1a9257cf6e04e8817b2eb0ef1849,
+    type: 3}
+  m_PrefabInstance: {fileID: 1288977158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1288977161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3321781040974668793, guid: 4a6f1a9257cf6e04e8817b2eb0ef1849,
     type: 3}
   m_PrefabInstance: {fileID: 1288977158}
   m_PrefabAsset: {fileID: 0}
