@@ -709,8 +709,8 @@ public class Main_ctrl : MonoBehaviour
                 PlayerOptData y = new PlayerOptData();
                 y.Opt = PlayerOpt.ExitRoom;
                 y.Userid = (int)user_id;
-                Debug.Log("xxxxxx");
-                Debug.Log(f);
+
+                Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
 
                 SceneManager.LoadScene("Start");
             }
