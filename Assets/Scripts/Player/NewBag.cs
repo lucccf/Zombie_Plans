@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class NewBag : MonoBehaviour
 {
     public GameObject CloseButton;
     public GameObject ItemParent;
-
+    public int MouseButton;
     private bool OpenBag = false;
     //private Dictionary<int, Item> OriginItem = new Dictionary<int, Item>();
     private Dictionary<int, GameObject> ItemManager = new Dictionary<int, GameObject>();
@@ -46,7 +47,7 @@ public class NewBag : MonoBehaviour
         {
             TmpBagItem.GetComponent<Image>().sprite = Main_ctrl.GetItemById(id).image; //OriginItem[id].image;
             GameObject NewItem = Instantiate(TmpBagItem.gameObject, ItemParent.transform);
-
+            NewItem.GetComponent<MyButton>().id = id;
             ItemManager.Add(id, NewItem);
             ItemNumber[id] += number;
             NewItem.GetComponentInChildren<Text>().text = number.ToString();
@@ -58,4 +59,6 @@ public class NewBag : MonoBehaviour
         OpenBag = !OpenBag;
         ItemParent.SetActive(OpenBag);
     }
+
+
 }
