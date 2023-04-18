@@ -590,6 +590,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bag
       objectReference: {fileID: 0}
+    - target: {fileID: 1130628217457056593, guid: 18905779496a8084ea5de896aad700c2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1130628217457056598, guid: 18905779496a8084ea5de896aad700c2,
         type: 3}
       propertyPath: m_RootOrder
@@ -2026,6 +2031,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WorkTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135168007288608989, guid: a122475fb2a4aee418260c8e7be33a1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187609299619636146, guid: a122475fb2a4aee418260c8e7be33a1f,
         type: 3}
@@ -5075,6 +5085,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 643690165}
     m_Modifications:
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1621888507345015294, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6382487500756726389, guid: 488aaa64051709e459d52dae57afb8ba,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5185,7 +5230,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BagButton
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7540049525003999498, guid: 488aaa64051709e459d52dae57afb8ba,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6382487500756726388, guid: 488aaa64051709e459d52dae57afb8ba, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 488aaa64051709e459d52dae57afb8ba, type: 3}
 --- !u!1001 &8792288390964765467
 PrefabInstance:

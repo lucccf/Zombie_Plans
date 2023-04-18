@@ -46,7 +46,7 @@ public class PlayerBag
             }
         }
     }
-    public bool BagGetItem(int id, int num ,Bag bagui)
+    public bool BagGetItem(int id, int num ,NewBag bagui)
     {
         if (!BagItem.ContainsKey(id))
         {

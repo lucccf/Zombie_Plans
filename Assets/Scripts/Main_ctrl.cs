@@ -54,7 +54,6 @@ public class Main_ctrl : MonoBehaviour
 
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
 
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
@@ -708,7 +707,6 @@ public class Main_ctrl : MonoBehaviour
                 Debug.Log(f);
 
                 SceneManager.LoadScene("Start");
-                GameObject.Destroy(gameObject);
             }
         }
         play = All_objs[main_id].gameObject;
