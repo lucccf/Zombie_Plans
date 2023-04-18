@@ -149,7 +149,9 @@ public class Player : BasicCharacter
                 {
                     if (bag.BagCheckItemNums(Makeitem.MakeNeeds[i], Makeitem.NeedsNumber[i]) == false) flag2 = false;
                 }
-                if(flag2 == true)
+                GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
+                if (flag2 == true)
                 {
                     bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
                     
@@ -157,7 +159,7 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    //Player_ctrl.MakeSuccessUI.SetActive(true);
+                    tmp.GetComponent<MakeSuccess>().Type = true;
                 }
                 else
                 {
