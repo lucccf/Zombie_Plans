@@ -18,6 +18,7 @@ public class Fix_col2d
     {
         Wall,
         Trigger,
+        Trigger2,
         Collider,
         Attack,
         Attack2,
