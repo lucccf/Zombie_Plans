@@ -173,7 +173,6 @@ public class Player : BasicCharacter
                 break;
         }
     }
-
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -270,6 +269,24 @@ public class Player : BasicCharacter
     {
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
         else return false;
+    }
+
+    public void ThrowItem(int id)
+    {
+        if(bag.BagCheckItemNums(id,1) == false)
+        {
+            return;
+        }
+        bag.BagGetItem(id, -1, Player_ctrl.BagUI);
+        Fix_vector2 ItemPos = f.pos.Clone();
+        if (AnimaToward > 0)
+        {
+            ItemPos.x += new Fixpoint(3, 0);
+        } else
+        {
+            ItemPos.x -= new Fixpoint(3, 0);
+        }
+        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1);
     }
 
     private void Normal()
@@ -947,10 +964,10 @@ public class Player : BasicCharacter
             return;
         }
         if (first == true) {
-            Player_ctrl.BagUI.GetItem(11, -1);
-            bag.BagGetItem(11, -1);
+            //Player_ctrl.BagUI.GetItem(11, -1);
+            bag.BagGetItem(11, -1, Player_ctrl.BagUI);
         }
-        if(StatusTime > RecoverHpDuringTime)
+        if (StatusTime > RecoverHpDuringTime)
         {
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(100);//恢复的血量

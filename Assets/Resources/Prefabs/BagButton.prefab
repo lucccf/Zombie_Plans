@@ -134,6 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 6382487500756726394}
   ItemParent: {fileID: 9185261057936517705}
+  MouseButton: 0
   TmpBagItem: {fileID: 5494758573318108926, guid: b25619024f6156c4bb9b88213dfff4b9,
     type: 3}
 --- !u!1 &9185261057936517705

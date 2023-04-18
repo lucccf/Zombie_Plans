@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 2201734025342412397}
   - component: {fileID: 5702743514869868054}
   - component: {fileID: 5830918322852631302}
+  - component: {fileID: 2698965000620076546}
   m_Layer: 5
   m_Name: BagItem
   m_TagString: Untagged
@@ -272,3 +273,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2698965000620076546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5494758573318108926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d0334399409654ebbc795e69053d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
