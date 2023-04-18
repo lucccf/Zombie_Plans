@@ -28,6 +28,7 @@ public class Monster_create : MonoBehaviour
         for(int i = 0; i < pos_monster.Count; i++)
         {
             Obj_info p = new Obj_info();
+            Debug.Log(pos_monster[i].type);
             switch (pos_monster[i].type)
             {
                 case 1:
