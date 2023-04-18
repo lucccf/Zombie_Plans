@@ -15,7 +15,11 @@ public class WorkTable : MonoBehaviour
     public Text ItemDescription;
     public Item[] MakedItemList;
 
+    public Image Selected;
+    public Image UnSelected;
+
     private GameObject TmpMakedItemButton;
+    private Dictionary<int, GameObject> ListItem = new Dictionary<int, GameObject>();
 
     //private Dictionary<int, Item> OriginItem = new Dictionary<int, Item>();
     private bool OpenNemu = false;
@@ -23,17 +27,14 @@ public class WorkTable : MonoBehaviour
 
     void Start()
     {
-        
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
         for(int i = 0; i < MakedItemList.Length; ++i)
         {
             TmpMakedItemButton = (GameObject)Resources.Load("Prefabs/UI/Button");
             TmpMakedItemButton.GetComponent<Image>().sprite = MakedItemList[i].image;
-            //TmpMakedItemButton.GetComponentInChildren<Text>().text = MakedItemList[i].name;
-            //GameObject NewItem = Instantiate(TmpMakedItemButton, transform.position, transform.rotation);
             GameObject NewItem = Instantiate(TmpMakedItemButton, ItemListParent.transform);
-            //NewItem.transform.parent = ItemListParent.transform;
+            ListItem.Add(i, NewItem);
             int j = i;
             NewItem.GetComponent<Button>().onClick.AddListener(
                 delegate ()
@@ -55,7 +56,16 @@ public class WorkTable : MonoBehaviour
     private GameObject TmpNeedItem;
     void ItemOnClick(int x)
     {
+        if(NowChecking != -1)
+        {
+            Image[] q= ListItem[NowChecking].GetComponentsInChildren<Image>();
+            q[1].sprite = UnSelected.sprite;
+            q[1].color = UnSelected.color;
+        }
         NowChecking = x;
+        Image[] p = ListItem[NowChecking].GetComponentsInChildren<Image>();
+        p[1].sprite = Selected.sprite;
+        p[1].color = Selected.color;
         ItemDescription.text = MakedItemList[x].description;
         for(int i = 0; i< NeedItemParent.transform.childCount;++i)
         {

@@ -570,6 +570,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efe0b2124c2fdc24db322366bf9e49ad, type: 2}
   - {fileID: 11400000, guid: 9ea8b5ee75a93e241a8916f089a52986, type: 2}
   - {fileID: 11400000, guid: 2f804fb94359649498a2864c12b237bf, type: 2}
+  Selected: {fileID: 8725747546441561658, guid: c5122c64de903634ca79efe492cca809,
+    type: 3}
+  UnSelected: {fileID: 4216899518972537890, guid: 466eb4422e10c384a83f9e66b14a774a,
+    type: 3}
+  SelectedColor: {r: 0.8113208, g: 0.69268423, b: 0.69268423, a: 0}
+  UnSelectedColor: {r: 0.024990559, g: 0, b: 1, a: 0}
 --- !u!1 &6135168007814199028
 GameObject:
   m_ObjectHideFlags: 0
