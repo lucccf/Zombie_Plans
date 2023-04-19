@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2488583475
+CRC: 4272613567
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8528f4d573e126ad45256ed351f3fba7
+    Hash: da838b06781978a6a3244f815b685659
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 432d0ab8d6222eaa1e8a22eed26e7642
+    Hash: 21c9476ef20056ae186fbe3e14033cd5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -85,6 +85,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1fedbf0428168744f8787d3875b3db17, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -108,6 +110,7 @@ Assets:
 - Assets/Resources/Prefabs/crystal.prefab
 - Assets/Resources/Prefabs/knight.prefab
 - Assets/Resources/Prefabs/LightBall.prefab
+- Assets/Resources/Prefabs/home1.prefab
 - Assets/Resources/Prefabs/number/9.png
 - Assets/Resources/Prefabs/number/2.png
 - Assets/Resources/Prefabs/protal.prefab

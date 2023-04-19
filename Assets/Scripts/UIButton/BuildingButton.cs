@@ -31,7 +31,7 @@ public class BuildingButton : MonoBehaviour
             worktableclosebutton = WorkTable.transform.Find("Background/background/CloseButton").gameObject;
             worktableclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
-        else
+        if(gameObject.name == "facility(Clone)")
         {
             tmp = playerpanel.transform.Find("Facility").gameObject;
             //标题
