@@ -11,12 +11,8 @@ GameObject:
   - component: {fileID: 5046087499321705248}
   - component: {fileID: 198059168995235928}
   - component: {fileID: 199469222070960104}
-<<<<<<< HEAD
-  m_Layer: 0
-=======
   - component: {fileID: 1370529335028496602}
   m_Layer: 8
->>>>>>> 041e4b4037ebf4ef8167cc1a76bd26bdc06aa94a
   m_Name: debuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4811,7 +4807,7 @@ GameObject:
   - component: {fileID: 4869053239249366}
   - component: {fileID: 198685873983410054}
   - component: {fileID: 199198647445853416}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FX_Direction_Arrows_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9591,7 +9587,7 @@ GameObject:
   - component: {fileID: 4270449348132814}
   - component: {fileID: 198960858844517718}
   - component: {fileID: 199909601712067074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FX_Direction_Arrows_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
