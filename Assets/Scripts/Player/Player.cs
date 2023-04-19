@@ -138,9 +138,23 @@ public class Player : BasicCharacter
                                 fa.commited[m.Key] += 1;
                             }
                         }
+
+                        if (value)
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 3;
+                        }
+                        else 
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 0;
+                        }
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
+                        
                     }
                 }
                 Debug.Log(flag);
@@ -162,7 +176,7 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    tmp.GetComponent<MakeSuccess>().Type = true;
+                    tmp.GetComponent<MakeSuccess>().Type = 1;
                 }
                 else
                 {
