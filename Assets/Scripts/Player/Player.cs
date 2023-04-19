@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Player : BasicCharacter
 {
-    private Animator animator;
-    //public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
     private PlayerBag bag = new PlayerBag();
@@ -28,7 +26,7 @@ public class Player : BasicCharacter
     private void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(100000, 10);//血量。基础攻击力       
+        SetStatus(100, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
@@ -980,6 +978,7 @@ public class Player : BasicCharacter
         {
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(100);//恢复的血量
+            Preform(-100);
         }
     }
 
@@ -988,52 +987,6 @@ public class Player : BasicCharacter
         AnimaAttack = 0;
         AnimaHited = 0;
         AnimaSpeed = 0;
-    }
-    private static Fixpoint OnGroundTime = new Fixpoint(12, 1);//倒地时间
-   /*
-    protected void Ground()
-    {
-        RemoveHited();
-        //r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
-        //Debug.Log(GroundTimes);
-        if(GroundTimes == 0)
-        {
-            ++GroundTimes;
-            r.velocity.y = new Fixpoint(22, 1);//向上弹的速度
-            if (r.velocity.x < new Fixpoint(0,0))
-            {
-                r.velocity.x = new Fixpoint(-1, 01);//x轴的速度
-            } else if (r.velocity.x > new Fixpoint(0,0))
-            {
-                r.velocity.x = new Fixpoint(1, 1);//x轴的速度
-            }
-            ChangeStatus(15);
-            return;
-        }
-        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
-        //RemoveHited();
-        AnimaHited = 0;
-        if (StatusTime > OnGroundTime)
-        {
-            GroundTimes = 0;
-            status.toughness = 100;
-            ChangeStatus(0);
-        }
-    }
-
-    private int GroundTimes = 0;
-   */
-    private void Fly2()
-    {
-        if(StatusTime < new Fixpoint(5,2))
-        {
-            animator.Rebind();
-        }
-        RemoveHited();
-        if(f.onground)
-        {
-            ChangeStatus(StatusType.Ground);
-        }
     }
     private static Fixpoint StayTime = new Fixpoint(5, 1);//下蹲的持续时间
     private void Stay()

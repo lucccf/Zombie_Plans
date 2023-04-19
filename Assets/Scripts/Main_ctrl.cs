@@ -486,8 +486,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();

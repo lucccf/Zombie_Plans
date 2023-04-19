@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Mage : Knight
 {
-    private Animator animator;
     void Start()
     {
         CharacterType = 1;
