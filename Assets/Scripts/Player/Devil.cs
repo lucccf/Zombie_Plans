@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Devil : Knight
 {
-    private Animator animator;
     private float DevilAnimaSpeed = 0f;
-    private int DevilAnimaAttack = 0;
 
     private Fixpoint BombCD = new Fixpoint(0,0);
     private Fixpoint MagicCannonCD = new Fixpoint(0, 0);

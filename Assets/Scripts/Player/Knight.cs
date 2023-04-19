@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Knight : Monster
 {
-    private Animator animator;
     protected float KnightAnimaSpeed = 0f;
     protected int KnightAnimaAttack = 0;
     protected int KnightAnimaHited = 0;
