@@ -19,7 +19,7 @@ public class BuildingButton : MonoBehaviour
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
         playerpanel = GameObject.Find("PlayerPanel");
-        if (gameObject.name == "home(Clone)")
+        if (gameObject.name == "home1(Clone)")
         {
             WorkTable = GameObject.Find("WorkTable");
             tmp = playerpanel.transform.Find("HomeUI").gameObject;
