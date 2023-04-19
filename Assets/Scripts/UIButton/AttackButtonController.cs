@@ -18,7 +18,7 @@ public class AttackButtonController : MonoBehaviour
 
     private void Start()
     {
-
+        buttonCount = Player_ctrl.plays.Count;
         // 找到控制Button的组件
         Button controlButtonComponent = controlButton.GetComponent<Button>();
 
@@ -27,13 +27,13 @@ public class AttackButtonController : MonoBehaviour
     }
 
     // 根据参数创建Button
-    public void CreateButtons(int count)
+    public void CreateButtons()
     {
         // 先清空所有已经存在的Button
         ClearButtons();
 
         // 创建Button
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < buttonCount; i++)
         {
             // 创建Button对象
             GameObject buttonObject = Instantiate(buttonPrefab, buttonParent.transform);
@@ -69,7 +69,7 @@ public class AttackButtonController : MonoBehaviour
         if (showUI)
         {
             // 创建Button
-            CreateButtons(buttonCount);
+            CreateButtons();
         }
         else
         {
