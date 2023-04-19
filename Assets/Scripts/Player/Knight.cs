@@ -7,17 +7,59 @@ public class Knight : Monster
     protected float KnightAnimaSpeed = 0f;
     protected int KnightAnimaAttack = 0;
     protected int KnightAnimaHited = 0;
+
+    protected Fixpoint FindPosUp;
+    protected Fixpoint FindPosDown;
+    protected Fixpoint FindPosLeft;
+    protected Fixpoint FindPosRight;
+
+    protected Fixpoint CatchPosUp;
+    protected Fixpoint CatchPosDown;
+    protected Fixpoint CatchPosLeft;
+    protected Fixpoint CatchPosRight;
+
+    public long LockId = -1;
+    protected Fix_vector2 LockPos;
+    protected int HomeLocation = -1;
+    protected Fix_vector2 HomePos;
+
+    private GameObject red = null;
+    private GameObject blue = null;
+
+    public bool Check;
+
     void Start()
     {
         CharacterType = 1;
         SetStatus(400, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
-        HitTime = new Fixpoint[2] {new Fixpoint(0, 0), new Fixpoint(8, 1) };
+        HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
+
+        FindPosUp = new Fixpoint(10, 0);
+        FindPosDown = new Fixpoint(-3, 0);
+        FindPosLeft = new Fixpoint(-20, 0);
+        FindPosRight = new Fixpoint(20, 0);
+
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);
+        CatchPosDown = f.pos.y.Clone() - new Fixpoint(20, 0);
+        CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
+        CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
+
+        HomePos = f.pos.Clone();
+        HomeLocation = Main_ctrl.CalPos(f.pos.x.Clone(), f.pos.y.Clone());
+        if (HomeLocation == -1)
+        {
+            Debug.LogError("Find Home Error");
+        }
+
+        Debug.Log(id + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
     }
 
     // Update is called once per frame
+    private GameObject Follow = null;
     void Update()
     {
         animator.SetFloat("speed", KnightAnimaSpeed);
@@ -25,11 +67,94 @@ public class Knight : Monster
         animator.SetInteger("attack", KnightAnimaAttack);
         animator.SetInteger("hited", KnightAnimaHited);
         animator.SetInteger("status", AnimaStatus);
+        if (Follow != null)
+        {
+            Follow.transform.position = new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0);
+        }
+        if (Follow == null && LockId != -1 && Check == true)
+        {
+            Follow = Instantiate((GameObject)Resources.Load("Prefabs/yellow"), new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0f), Quaternion.identity);
+            Follow.transform.position = new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), -1);
+        }
+        if (Follow != null && LockId == -1 || Check == false)
+        {
+            Destroy(Follow);
+            Follow = null;
+        }
+        if(Check == true && red == null && blue == null)
+        {
+            red = Instantiate((GameObject)Resources.Load("Prefabs/red"), transform);
+            blue = Instantiate((GameObject)Resources.Load("Prefabs/blue"), new Vector3(HomePos.x.to_float(), HomePos.y.to_float(), 0f), Quaternion.identity);
+            red.transform.localScale = new Vector3((FindPosRight.to_float() - FindPosLeft.to_float())/3, (FindPosUp.to_float() - FindPosDown.to_float())/3, 1);
+            red.transform.Translate((FindPosRight.to_float() + FindPosLeft.to_float())/2,(FindPosUp.to_float() + FindPosDown.to_float())/2,0);
+            blue.transform.localScale = new Vector3(CatchPosRight.to_float() - CatchPosLeft.to_float(), CatchPosUp.to_float() - CatchPosDown.to_float(), 1);
+            blue.transform.Translate((CatchPosRight.to_float() + CatchPosLeft.to_float()) / 2 - HomePos.x.to_float(), (CatchPosUp.to_float() + CatchPosDown.to_float()) / 2 - HomePos.y.to_float(), 0);
+        } else if (Check == false && red != null && blue != null)
+        {
+            Destroy(red);
+            Destroy(blue);
+            red = null;
+            blue = null;
+        }
+    }
+
+    protected bool InFindSpace(Fix_vector2 pos)
+    {
+        Fixpoint dx = pos.x - f.pos.x; 
+        Fixpoint dy = pos.y - f.pos.y;
+        if (InCatahSpace(pos) == true && dx > FindPosLeft && dx < FindPosRight && dy > FindPosDown && dy < FindPosUp)
+        {
+            return true;
+        }
+        else return false;
+    } 
+
+    protected bool InCatahSpace(Fix_vector2 pos)
+    {
+        if (pos.x > CatchPosLeft && pos.x < CatchPosRight && pos.y > CatchPosDown && pos.y < CatchPosUp)
+        {
+            return true;
+        }
+        else return false;
+    }
+    protected void FindLock()
+    {
+        for (int i = 0;i < Player_ctrl.plays.Count; ++i)
+        {
+            if (InFindSpace(Player_ctrl.plays[i].f.pos) == true)
+            {
+                LockId = i;
+                LockPos = Player_ctrl.plays[i].f.pos;
+                break;
+            }
+        }
+    }
+
+    protected void CheckCatchQuit()
+    {
+        if (LockId == -1) return;
+        if(InCatahSpace(LockPos) == false)
+        {
+            LockId = -1;
+            LockPos = new Fix_vector2(0, 0);
+            return;
+        }
     }
 
     public override void Updatex()
     {
-        if(status.GetToughness() != 100)
+
+        if(LockId != -1)
+        {
+            LockPos = Player_ctrl.plays[(int)LockId].f.pos;
+        }
+        else
+        {
+            FindLock();
+        }
+        CheckCatchQuit();
+        
+        if (status.GetToughness() != 100)
         {
             Debug.Log(status.GetToughness());
         }
@@ -210,64 +335,83 @@ public class Knight : Monster
         {
             Moves(AnimaToward, status.WalkSpeed);
         }
-        Fixpoint Nearx = new Fixpoint(0, 0);
-        int Pos = KnightGetNear(ref Nearx);
-        if (Pos == -1) // 如果距离太远，巡逻
-        {
-            Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
-            Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15,1);
-            Fixpoint Right = new Fixpoint(area.right, 0)- new Fixpoint(15,1);
-            if(f.pos.x < Left)
-            {
-                AnimaToward = 1;
-            } else if (f.pos.x > Right)
-            {
-                AnimaToward = -1;
-            }
-            Moves(AnimaToward, status.WalkSpeed);
-            return;
-        } else if (Location == Pos) //如果在同一区域
-        {
-            Fixpoint Dis = f.pos.x - Nearx;
-            if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
+        
+        //Fixpoint Nearx = new Fixpoint(0, 0);
+        //int Pos = KnightGetNear(ref Nearx);
 
-            if (Dis < new Fixpoint(14, 1)) //攻击
+        if (LockId == -1) // 如果没有锁定玩家
+        {
+            if (Main_ctrl.CalPos(f.pos.x, f.pos.y) != HomeLocation)//如果不在家的区域
             {
-                if (f.pos.x < Nearx) AnimaToward = 1;
-                else AnimaToward = -1;
-                ChangeStatus(StatusType.Attack);
-                Attack(true);
+                SearchX(HomeLocation);
                 return;
             }
-            else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
+            else //如果在家的区域，巡逻
             {
-                if (Rand.rand() % 2 == 0)
-                {
-                    ChangeStatus(StatusType.Defence);//随机防御
-                }
-                else
-                {
-                    ChangeStatus(StatusType.Skill);//随机技能
-                }
-                return;
-            }
-            else //靠近
-            {
-                if (f.pos.x < Nearx)
+                Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+                Fixpoint Left =  new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
+                Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
+                if (Left < CatchPosLeft) Left = CatchPosLeft;
+                if (Right > CatchPosRight) Right = CatchPosRight;
+                if (f.pos.x < Left)
                 {
                     AnimaToward = 1;
-                    Moves(AnimaToward, status.WalkSpeed);
                 }
-                else
+                else if (f.pos.x > Right)
                 {
                     AnimaToward = -1;
-                    Moves(AnimaToward, status.WalkSpeed);
                 }
+                Moves(AnimaToward, status.WalkSpeed);
+                return;
             }
         }
-        else //否则寻路
+        else
         {
-            ChangeStatus(StatusType.Search);
+            int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
+            Fixpoint Nearx = LockPos.x;
+            if (Location == Pos) //如果在同一区域
+            {
+                Fixpoint Dis = f.pos.x - Nearx;
+                if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
+
+                if (Dis < new Fixpoint(14, 1)) //攻击
+                {
+                    if (f.pos.x < Nearx) AnimaToward = 1;
+                    else AnimaToward = -1;
+                    ChangeStatus(StatusType.Attack);
+                    Attack(true);
+                    return;
+                }
+                else if (Dis > new Fixpoint(3, 0) && Dis < new Fixpoint(5, 0))//距离判定
+                {
+                    if (Rand.rand() % 2 == 0)
+                    {
+                        ChangeStatus(StatusType.Defence);//随机防御
+                    }
+                    else
+                    {
+                        ChangeStatus(StatusType.Skill);//随机技能
+                    }
+                    return;
+                }
+                else //靠近
+                {
+                    if (f.pos.x < Nearx)
+                    {
+                        AnimaToward = 1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    else
+                    {
+                        AnimaToward = -1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                }
+            }
+            else //否则寻路
+            {
+                SearchX(Pos);
+            }
         }
     }
 
@@ -306,7 +450,8 @@ public class Knight : Monster
     }
     private void Attack(bool first)
     {
-        Fixpoint Near = GetNearDistance();
+        //Fixpoint Near = GetNearDistance();
+        Fixpoint Near = LockPos.x;
         if (first == true)
         {
             AttackToNext();
@@ -416,7 +561,8 @@ public class Knight : Monster
         //}
         if(StatusTime < SkillBeginToHitTime) 
         {
-            Fixpoint Pos = GetNear();
+            //Fixpoint Pos = GetNear();
+            Fixpoint Pos= LockPos.x;
             if (f.pos.x < Pos) AnimaToward = 1;
             else AnimaToward = -1;
         }
@@ -561,6 +707,80 @@ public class Knight : Monster
             } else
             {
                 f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+        }
+    }
+
+    protected void SearchX(int To)
+    {
+        if (To == -1) return;
+        int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if (x == -1)
+        {
+            if (AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            }
+            else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+
+        if(x == To)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+
+        Main_ctrl.TranslateMethod method = Main_ctrl.Guide(x, To);
+        if (method.able == false)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        if (f.pos.x < method.pos - new Fixpoint(1, 1))
+        {
+            AnimaToward = 1;
+            f.pos.x += status.WalkSpeed * Dt.dt;
+        }
+        else if (f.pos.x > method.pos + new Fixpoint(1, 1))
+        {
+            AnimaToward = -1;
+            f.pos.x -= status.WalkSpeed * Dt.dt;
+        }
+        else
+        {
+            switch (method.action)
+            {
+                case Main_ctrl.node.TravelType.LittleJumpLeft:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.LittleJumpRight:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(1);
+                    break;
+                case Main_ctrl.node.TravelType.Fall:
+                    if (AnimaToward > 0)
+                    {
+                        f.pos.x += status.WalkSpeed * Dt.dt;
+                    }
+                    else
+                    {
+                        f.pos.x -= status.WalkSpeed * Dt.dt;
+                    }
+                    break;
+                case Main_ctrl.node.TravelType.JumpLeft:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.JumpRight:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(1);
+                    break;
             }
         }
     }
