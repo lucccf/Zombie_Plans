@@ -26,7 +26,7 @@ public class Player : BasicCharacter
     private void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(1000, 10);//血量。基础攻击力       
+        SetStatus(10000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
@@ -138,9 +138,23 @@ public class Player : BasicCharacter
                                 fa.commited[m.Key] += 1;
                             }
                         }
+
+                        if (value)
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 3;
+                        }
+                        else 
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 0;
+                        }
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
+                        
                     }
                 }
                 Debug.Log(flag);
@@ -162,7 +176,7 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    tmp.GetComponent<MakeSuccess>().Type = true;
+                    tmp.GetComponent<MakeSuccess>().Type = 1;
                 }
                 else
                 {
@@ -174,6 +188,16 @@ public class Player : BasicCharacter
                 {
                     Fix_vector2 pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
                     f.pos = pos.Clone();
+                }
+                break;
+            case PlayerOpt.MarkUser:
+                if (Player_ctrl.checkattack((int)id, inputs.Itemid))
+                {
+                    Player_ctrl.Attack[((int)id, inputs.Itemid)] = 0;
+                }
+                else
+                {
+                    Player_ctrl.Attack[((int)id, inputs.Itemid)] = 1;
                 }
                 break;
         }

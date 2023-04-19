@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,22 @@ public class Player_ctrl : MonoBehaviour
     public static Text QCD;
     public static Text ECD;
     public static Fix_vector2 HomePos;
-    //public static GameObject MakeSuccessUI;
-   // public static GameObject MakeFailedUI;
+
+    public static Dictionary<(int, int), int> Attack = new Dictionary<(int, int), int>();
+
+
+    public static bool checkattack(int sf_id, int op_id)
+    {
+        if (Attack.ContainsKey((sf_id, op_id)))
+        {
+            if (Attack[(sf_id, op_id)] != 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void Init_bag()
     {
         BagUI = GameObject.Find("Canvas/PlayerPanel/BagButton").GetComponent<NewBag>();
@@ -27,6 +42,7 @@ public class Player_ctrl : MonoBehaviour
         //MakeFailedUI.SetActive(false);
         item = Resources.LoadAll<Item>("Prefabs/items/");
         ItemList.Clear();
+        Attack = new Dictionary<(int, int), int>();
         for (int i = 0; i < item.Length; ++i)
         {
             ItemList.Add(item[i].id, item[i]);

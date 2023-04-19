@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class debuff : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public Transform target;
-    private Vector3 offset = new Vector3(0f, 0f, 0f);
-    Vector3 screenPos;
+    public ParticleSystem debuffparticle;
+    public float t;
     void Start()
     {
-        
+        debuffparticle = gameObject.GetComponent<ParticleSystem>();
+
+        debuffparticle.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-        screenPos = Camera.main.WorldToScreenPoint(target.position + offset);
-        gameObject.transform.position = screenPos;
+        if (false)
+        {
+            debuffparticle.Play();
+            t = Time.time;
+        }
+        if (t + 5f < Time.time) 
+        {
+            debuffparticle.Stop();
+        }
     }
 }

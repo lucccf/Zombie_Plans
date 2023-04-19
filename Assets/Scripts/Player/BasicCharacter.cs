@@ -167,7 +167,15 @@ public class BasicCharacter : MonoBehaviour
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attacker_type == CharacterType) continue;
+            if (attack.attacker_type == CharacterType && attack.attacker_type != 0) continue;
+            if (attack.attakcer_id == id)
+            {
+                continue;
+            }
+            if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id) && attack.attacker_type == CharacterType)
+            {
+                continue;
+            }
             
             AnimaToward = -attack.toward;
             this_hited = true;
