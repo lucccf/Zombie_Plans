@@ -1,27 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 3212632279
-=======
-<<<<<<< HEAD
-CRC: 2865815666
+CRC: 3098318370
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a70cdcb8a8bc689c666fce7d8fdd1f28
+    Hash: c623a5f7b2696d62501a07572765b08f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d9bdba7189d6b3989e6f6b283dbfb891
-=======
-CRC: 2424495261
->>>>>>> f10f62e3e710b2916f3e5776fa1e24837f9acc43
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: fe2218c3bc329cba746a1072050b31b4
-  TypeTreeHash:
-    serializedVersion: 2
-    Hash: 2817f0531c767951e5afd7cb744a078b
->>>>>>> 1abfa84dbd84d448c2a8d2a078c8ec693600efc1
+    Hash: 51e17cf8cce738d8071319ca5065426d
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -31,6 +16,8 @@ ClassTypes:
 - Class: 21
   Script: {instanceID: 0}
 - Class: 28
+  Script: {instanceID: 0}
+- Class: 43
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
@@ -43,16 +30,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-<<<<<<< HEAD
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
-=======
->>>>>>> 1abfa84dbd84d448c2a8d2a078c8ec693600efc1
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -67,6 +49,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: aee607920057d704fb5ac714f0990cc9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1c8cab923766b264dbfd891511002c8b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6f790d93ce6f1894592f1a0e33048e5c, type: 3}
 - Class: 114
@@ -102,6 +86,10 @@ ClassTypes:
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
   Script: {instanceID: 0}
 - Class: 212
   Script: {instanceID: 0}
