@@ -528,7 +528,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 30,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
@@ -548,7 +548,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 30,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -567,7 +567,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 30, AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -586,7 +586,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 30, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -602,7 +602,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 30, AnimaToward,3);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
             }
         }
 
@@ -988,7 +988,7 @@ public class Player : BasicCharacter
         AnimaHited = 0;
         AnimaSpeed = 0;
     }
-    private static Fixpoint StayTime = new Fixpoint(5, 1);//下蹲的持续时间
+    private static Fixpoint StayTime = new Fixpoint(2, 1);//下蹲的持续时间
     private void Stay()
     {
         int hit = BasicCharacterGetHited();
