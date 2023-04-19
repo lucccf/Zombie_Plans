@@ -307,7 +307,6 @@ public class Map_create : MonoBehaviour
     {
         Obj_info home_info = new Obj_info();
         home_info.name = "facility";
-        home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
         home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
         home_info.hei = hei;
         home_info.wid = wid;
@@ -316,10 +315,22 @@ public class Map_create : MonoBehaviour
         home_info.type = type;
         home_info.attacker_id = id;
         home_info.materials = material;
+        home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         home_info.classnames.Add(Object_ctrl.class_name.Facility);
         GameObject home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
+
+        home_info = new Obj_info();
+        home_info.name = "facility1";
+        //home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
+        home_info.hei = hei;
+        home_info.wid = wid;
+        home_info.col_type = Fix_col2d.col_status.Collider;
+        home_info.pos = pos;
+        home = Main_ctrl.CreateObj(home_info);
+        home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
+
     }
 
     public static void Background_create() {
