@@ -47,7 +47,7 @@ public class AttackButtonController : MonoBehaviour
             {
                 buttonText.text = "User " + (i + 1);
             }
-            buttonObject.transform.position = new Vector3(120 * i + 240, 750, 0);
+            buttonObject.transform.localPosition = new Vector3(120 * i + 120, 0, 0);
         }
     }
 
@@ -65,7 +65,7 @@ public class AttackButtonController : MonoBehaviour
     {
         bool showUI = !buttonParent.activeSelf;
         buttonParent.SetActive(showUI);
-
+        Debug.Log("Button changed");
         if (showUI)
         {
             // 创建Button
