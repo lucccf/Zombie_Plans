@@ -23,11 +23,11 @@ public class BasicCharacter : MonoBehaviour
     protected int CharacterType = 0;
 
     protected int[] ToughnessStatus;
-    protected Fix_vector2[] HitFlySpeed = new Fix_vector2[4] { new Fix_vector2(new Fixpoint(0,0),new Fixpoint(9,0)),
+    protected Fix_vector2[] HitFlySpeed = new Fix_vector2[4] { new Fix_vector2(new Fixpoint(0,0),new Fixpoint(9,0)),//击飞0,x轴y轴速度
             new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 1)), //击飞1,x轴y轴速度
-            new Fix_vector2(new Fixpoint(187, 2), new Fixpoint(38, 1)), //2
-            new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(66, 1)) };//3
-    protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(3, 0));
+            new Fix_vector2(new Fixpoint(187, 2), new Fixpoint(38, 1)), //2,x轴y轴速度
+            new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(66, 1)) };//3,x轴y轴速度
+    protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(3, 0), new Fixpoint(11, 1));//倒地的x速度和y速度
     protected enum StatusType
     {
         Normal,

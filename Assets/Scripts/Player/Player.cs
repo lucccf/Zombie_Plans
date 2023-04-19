@@ -138,9 +138,23 @@ public class Player : BasicCharacter
                                 fa.commited[m.Key] += 1;
                             }
                         }
+
+                        if (value)
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 3;
+                        }
+                        else 
+                        {
+                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 0;
+                        }
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
+                        
                     }
                 }
                 Debug.Log(flag);
@@ -162,7 +176,7 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    tmp.GetComponent<MakeSuccess>().Type = true;
+                    tmp.GetComponent<MakeSuccess>().Type = 1;
                 }
                 else
                 {
@@ -538,7 +552,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 30,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
@@ -558,7 +572,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 30,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -577,7 +591,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 30, AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -596,7 +610,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 30, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -612,7 +626,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 30, AnimaToward,3);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
             }
         }
 
@@ -998,7 +1012,7 @@ public class Player : BasicCharacter
         AnimaHited = 0;
         AnimaSpeed = 0;
     }
-    private static Fixpoint StayTime = new Fixpoint(5, 1);//下蹲的持续时间
+    private static Fixpoint StayTime = new Fixpoint(2, 1);//下蹲的持续时间
     private void Stay()
     {
         int hit = BasicCharacterGetHited();
