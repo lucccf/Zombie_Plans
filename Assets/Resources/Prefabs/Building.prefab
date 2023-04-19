@@ -133,8 +133,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingid: 0
-  homeuiclosebutton: {fileID: 7592712901144715602}
-  allfacuiclosebutton: {fileID: 0}
 --- !u!1 &7592712901201046123
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +198,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 21eeeb7ee195ad041ade3ef942739677, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
