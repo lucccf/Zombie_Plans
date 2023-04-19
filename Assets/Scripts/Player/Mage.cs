@@ -8,7 +8,7 @@ public class Mage : Knight
     void Start()
     {
         CharacterType = 1;
-        SetStatus(250, 10);//血量，基础攻击力
+        SetStatus(500, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(2, 1) };
@@ -25,7 +25,7 @@ public class Mage : Knight
     public override void Updatex()
     {
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
+        status.RecoverToughness(Dt.dt * new Fixpoint(15, 0));//自然恢复韧性值
         if (status.death == true && RealStatus != StatusType.Death)
         {
             ChangeStatus(StatusType.Death);
