@@ -137,6 +137,9 @@ namespace Net {
     [pbr::OriginalName("Move_Player")] MovePlayer = 25,
     [pbr::OriginalName("Join_Room")] JoinRoom = 26,
     [pbr::OriginalName("Exit_Room")] ExitRoom = 27,
+    [pbr::OriginalName("Mark_User")] MarkUser = 28,
+    [pbr::OriginalName("UnMark_User")] UnMarkUser = 29,
+    [pbr::OriginalName("Throw_item")] Throwitem = 30,
     }
 
   #endregion
