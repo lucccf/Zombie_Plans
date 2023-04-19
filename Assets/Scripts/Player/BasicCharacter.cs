@@ -172,7 +172,7 @@ public class BasicCharacter : MonoBehaviour
             {
                 continue;
             }
-            if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id))
+            if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id) && attack.attacker_type == CharacterType)
             {
                 continue;
             }
