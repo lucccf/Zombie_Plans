@@ -9,15 +9,21 @@ public class debuff : MonoBehaviour
     void Start()
     {
         debuffparticle = gameObject.GetComponent<ParticleSystem>();
-        t = Time.time;
+
         debuffparticle.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
-/*        if (Input.GetKeyDown(KeyCode.Space)) {
-            debuffparticle.Play(); 
-        }*/
+        if (false)
+        {
+            debuffparticle.Play();
+            t = Time.time;
+        }
+        if (t + 5f < Time.time) 
+        {
+            debuffparticle.Stop();
+        }
     }
 }
