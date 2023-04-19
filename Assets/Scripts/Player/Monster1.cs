@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Monster1 : Monster
 {
-
-    private Animator animator;
-    //public float AnimaToward = 1f;
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
 

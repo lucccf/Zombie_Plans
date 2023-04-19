@@ -34,7 +34,7 @@ public class Main_ctrl : MonoBehaviour
     public static int wolf_cnt = 1;
 
     public static GameObject camara;
-    public static GameObject Tiny_map;
+    public static GameObject Tinymap;
     public static GameObject play;
 
     public static long frame_index = 0;
@@ -70,7 +70,7 @@ public class Main_ctrl : MonoBehaviour
         init();
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
-        Tiny_map = GameObject.Find("Tiny_map");
+        Tinymap = GameObject.Find("Tiny_map");
         Map_create.Wall_create();
         Map_create.Item_create();
         Map_create.Facility_create();
@@ -486,8 +486,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -751,8 +751,8 @@ public class Main_ctrl : MonoBehaviour
         {
             camara.transform.position = play.transform.position;
             camara.transform.position = new Vector3(camara.transform.position.x, camara.transform.position.y + 1.0f, -10);
-            Tiny_map.transform.position = play.transform.position;
-            Tiny_map.transform.position = new Vector3(Tiny_map.transform.position.x / 3 + Tiny_map_cre.pos_x, Tiny_map.transform.position.y / 3 + Tiny_map_cre.pos_y + 1, -10);
+            Tinymap.transform.position = play.transform.position;
+            Tinymap.transform.position = new Vector3(Tinymap.transform.position.x / 3 + Tiny_map_cre.pos_x, Tinymap.transform.position.y / 3 + Tiny_map_cre.pos_y + 1, -10);
         }
     }
 }

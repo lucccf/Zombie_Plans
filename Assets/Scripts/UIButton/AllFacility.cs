@@ -45,6 +45,8 @@ public class AllFacility : MonoBehaviour
             Item x = Main_ctrl.GetItemById(mat.Key);
             matimage.GetComponent<Image>().sprite = x.image;
             mattext.GetComponent<Text>().text = "还需数量：" + (mat.Value - fa.commited[mat.Key]);
+            facprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)mat.Value);
+            progresstext.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / mat.Value).ToString() + "%";
         }
     }
 }

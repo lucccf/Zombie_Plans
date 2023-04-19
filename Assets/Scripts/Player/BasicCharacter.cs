@@ -13,6 +13,7 @@ public class BasicCharacter : MonoBehaviour
     protected Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     protected Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
 
+    protected Animator animator;
     protected int AnimaStatus = 0;
     public float AnimaToward = 0;
     protected int AnimaHited = 0;
@@ -26,7 +27,7 @@ public class BasicCharacter : MonoBehaviour
             new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 1)), //击飞1,x轴y轴速度
             new Fix_vector2(new Fixpoint(187, 2), new Fixpoint(38, 1)), //2
             new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(66, 1)) };//3
-
+    protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(10, 0), new Fixpoint(3, 0));
     protected enum StatusType
     {
         Normal,
@@ -136,9 +137,12 @@ public class BasicCharacter : MonoBehaviour
 
     protected void Preform(int damage)
     {
-        GameObject beat = (GameObject)AB.getobj("beat");
-        beat.transform.localScale = new Vector3(3f, 3f, 1f);
-        Instantiate(beat, transform.position, transform.rotation);
+        if (damage > 0)
+        {
+            GameObject beat = (GameObject)AB.getobj("beat");
+            beat.transform.localScale = new Vector3(3f, 3f, 1f);
+            Instantiate(beat, transform.position, transform.rotation);
+        }
         GameObject num = (GameObject)AB.getobj("HurtNumber");
         GameObject num2 = Instantiate(num, transform.position + new Vector3(0f, 1f, 0f), Quaternion.identity);
         num2.GetComponent<BeatNumber>().ChangeNumber(damage);
@@ -196,6 +200,7 @@ public class BasicCharacter : MonoBehaviour
     {
         if (status.GetToughness() < 0)
         {
+            status.toughness = -500;
             AnimaHited = ToughnessStatus.Length;
             Fix_vector2 speed = HitFlySpeed[hit_fly_type].Clone();
             if(AnimaToward > 0)
@@ -239,9 +244,26 @@ public class BasicCharacter : MonoBehaviour
             {
                 if (f.onground && StatusTime > new Fixpoint(1,1))
                 {
-                    AnimaHited = 0;
-                    ChangeStatus(StatusType.Ground);
-                    r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+                    if (status.toughness < -1000)
+                    {
+                        //Debug.Log("Ground2");
+                        AnimaHited = 0;
+                        ChangeStatus(StatusType.Ground);
+                        r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
+                    } else
+                    {
+                        //Debug.Log("Ground1");
+                        animator.Rebind();
+                        status.toughness = -2000;
+                        ChangeStatus(StatusType.Hit);
+                        Fix_vector2 speed = Rebound.Clone();
+                        if (AnimaToward > 0)
+                        {
+                            speed.x = new Fixpoint(0, 0) - speed.x;
+                            r.velocity = speed;
+                        }
+                        r.velocity = speed;
+                    }
                 }
                 return;
             }
