@@ -18,7 +18,6 @@ public class AttackButtonController : MonoBehaviour
 
     private void Start()
     {
-        buttonCount = Player_ctrl.plays.Count;
         // 找到控制Button的组件
         Button controlButtonComponent = controlButton.GetComponent<Button>();
 
@@ -29,9 +28,9 @@ public class AttackButtonController : MonoBehaviour
     // 根据参数创建Button
     public void CreateButtons()
     {
+        buttonCount = Player_ctrl.plays.Count;
         // 先清空所有已经存在的Button
         ClearButtons();
-
         // 创建Button
         for (int i = 0; i < buttonCount; i++)
         {
@@ -41,12 +40,11 @@ public class AttackButtonController : MonoBehaviour
             // 设置Button的名称
             buttonObject.name = "User " + (i + 1);
 
-            // 设置Button的文本
-            Text buttonText = buttonObject.GetComponentInChildren<Text>();
-            if (buttonText != null)
-            {
-                buttonText.text = "User " + (i + 1);
-            }
+            Attack_change att = buttonObject.GetComponent<Attack_change>();
+            att.sf_id = Main_ctrl.Ser_to_cli[Main_ctrl.user_id];
+            att.pl_id = i;
+            att.op_id = (int)Player_ctrl.plays[i].id;
+
             buttonObject.transform.localPosition = new Vector3(120 * i + 120, 0, 0);
         }
     }

@@ -176,6 +176,16 @@ public class Player : BasicCharacter
                     f.pos = pos.Clone();
                 }
                 break;
+            case PlayerOpt.MarkUser:
+                if (Player_ctrl.checkattack((int)id, inputs.Itemid))
+                {
+                    Player_ctrl.Attack[((int)id, inputs.Itemid)] = 0;
+                }
+                else
+                {
+                    Player_ctrl.Attack[((int)id, inputs.Itemid)] = 1;
+                }
+                break;
         }
     }
     public override void Updatex()
