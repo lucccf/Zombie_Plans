@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2488583475
+CRC: 2547106115
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8528f4d573e126ad45256ed351f3fba7
+    Hash: 60d7fcb798a7f7149cee27707bef1c7f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 432d0ab8d6222eaa1e8a22eed26e7642
+    Hash: 1480195ee4c2b49a3b5410c82b2dfb5b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -53,6 +53,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 6f790d93ce6f1894592f1a0e33048e5c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1fedbf0428168744f8787d3875b3db17, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: d713e1748eec6dd47b59ee6c2bbfe28f, type: 3}
 - Class: 114
@@ -108,6 +110,7 @@ Assets:
 - Assets/Resources/Prefabs/crystal.prefab
 - Assets/Resources/Prefabs/knight.prefab
 - Assets/Resources/Prefabs/LightBall.prefab
+- Assets/Resources/Prefabs/home1.prefab
 - Assets/Resources/Prefabs/number/9.png
 - Assets/Resources/Prefabs/number/2.png
 - Assets/Resources/Prefabs/protal.prefab
@@ -121,6 +124,7 @@ Assets:
 - Assets/Resources/Prefabs/home.prefab
 - Assets/Resources/Prefabs/Attack.prefab
 - Assets/Resources/Prefabs/number/33.png
+- Assets/Resources/Prefabs/facility1.prefab
 - Assets/Resources/Prefabs/number/22.png
 - Assets/Resources/Prefabs/Bomb2.prefab
 - Assets/Resources/Prefabs/Lighting.prefab

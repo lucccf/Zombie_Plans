@@ -19,7 +19,7 @@ public class BuildingButton : MonoBehaviour
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
         playerpanel = GameObject.Find("PlayerPanel");
-        if (gameObject.name == "home(Clone)")
+        if (gameObject.name == "home1(Clone)")
         {
             WorkTable = GameObject.Find("WorkTable");
             tmp = playerpanel.transform.Find("HomeUI").gameObject;
@@ -31,7 +31,7 @@ public class BuildingButton : MonoBehaviour
             worktableclosebutton = WorkTable.transform.Find("Background/background/CloseButton").gameObject;
             worktableclosebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
-        else
+        if(gameObject.name == "facility(Clone)")
         {
             tmp = playerpanel.transform.Find("Facility").gameObject;
             //标题

@@ -10,14 +10,14 @@ public class MakeSuccess : MonoBehaviour
     private float MaxAilveTime = 2;
     private float AilveTime = 0;
     Image image;
-    public bool Type = false;
+    public int Type = 0;
     private Text text;
     void Start()
     {
         image = GetComponent<Image>();
         text = gameObject.GetComponentInChildren<Text>();
         transform.Translate(100, 0, 1);
-        if(Type == false)
+        if(Type == 0)
         {
             Color color = image.color;
             color.r = 1;
@@ -25,6 +25,15 @@ public class MakeSuccess : MonoBehaviour
             color.b = 0.2f;
             image.color = color;
             text.text = "材料不足";
+        }
+        if (Type == 3)
+        {
+            Color color = image.color;
+            color.r = 0.2f;
+            color.g = 1;
+            color.b = 0.2f;
+            image.color = color;
+            text.text = "成功提交";
         }
     }
 
