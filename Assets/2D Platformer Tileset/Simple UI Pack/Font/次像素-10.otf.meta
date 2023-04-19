@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: addd3f38117db934f9e26bc43c46fccf
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ark Pixel 10px monospaced zh_cn
+  fontNames:
+  - Ark Pixel 10px monospaced zh_cn
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

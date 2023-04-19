@@ -10,7 +10,7 @@ public class Player_ctrl : MonoBehaviour
     public static Dictionary<int, Item> ItemList = new Dictionary<int, Item>();
     static Item[] item;
 
-    public static Bag BagUI;
+    public static NewBag BagUI;
     public static Text QCD;
     public static Text ECD;
     public static Fix_vector2 HomePos;
@@ -18,7 +18,7 @@ public class Player_ctrl : MonoBehaviour
    // public static GameObject MakeFailedUI;
     public static void Init_bag()
     {
-        BagUI = GameObject.Find("Canvas/Bag").GetComponent<Bag>();
+        BagUI = GameObject.Find("Canvas/PlayerPanel/BagButton").GetComponent<NewBag>();
         QCD = GameObject.Find("QCD").GetComponentInChildren<Text>();
         ECD = GameObject.Find("ECD").GetComponentInChildren<Text>();
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
@@ -26,9 +26,10 @@ public class Player_ctrl : MonoBehaviour
         //MakeSuccessUI.SetActive(false);
         //MakeFailedUI.SetActive(false);
         item = Resources.LoadAll<Item>("Prefabs/items/");
+        ItemList.Clear();
         for (int i = 0; i < item.Length; ++i)
         {
-            Player_ctrl.ItemList.Add(item[i].id, item[i]);
+            ItemList.Add(item[i].id, item[i]);
         }
     }
 

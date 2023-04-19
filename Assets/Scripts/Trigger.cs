@@ -9,6 +9,8 @@ public class Trigger : MonoBehaviour
     public string triggername;
     public int itemid;
     public int itemnum;
+    public Fix_col2d f;
+    public Fix_rig2d r;
     void Start()
     {
         
@@ -18,5 +20,16 @@ public class Trigger : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void Updatex()
+    {
+        if(triggername == "ItemSample")
+        {
+            if(f.onground)
+            {
+                r.velocity = new Fix_vector2(0, 0);
+            }
+        }
     }
 }

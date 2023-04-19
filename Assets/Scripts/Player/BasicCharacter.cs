@@ -277,7 +277,7 @@ public class BasicCharacter : MonoBehaviour
 
     protected void DeathFall(string name,int num,float size)
     {
-        Main_ctrl.NewItem(f.pos.Clone(), name, num, size);
+        Main_ctrl.NewItem(f.pos.Clone(), name, num, size,new Fix_vector2(0,0));
     }
 
     public float CheckHealth()

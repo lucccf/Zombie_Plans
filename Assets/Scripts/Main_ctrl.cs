@@ -1,8 +1,10 @@
-﻿using Net;
+﻿using JetBrains.Annotations;
+using Net;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main_ctrl : MonoBehaviour
 {
@@ -24,11 +26,8 @@ public class Main_ctrl : MonoBehaviour
     public static int hole_len;
     private static List<List<node>> MapNode;
 
-    float t;
-    float dt = 0.033f;
     static long cnt = 0;
 
-    long frame_id = 0;
 
     public static long user_id = -1;
     public static long main_id = -1;
@@ -40,6 +39,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static long frame_index = 0;
 
+    public static bool Exit = false;
+
     public enum objtype
     {
         Character,
@@ -49,10 +50,24 @@ public class Main_ctrl : MonoBehaviour
         //...
     }
 
+    private void init()
+    {
+        All_objs = new Dictionary<long, Object_ctrl>();
+        Ser_to_cli = new Dictionary<long, long>();
+        ItemList = new Dictionary<int, Item>();
+        holes = new List<List<int>>();
+        walls = new List<List<int>>();
+        Exit = false;
+        Rigid_ctrl.rigs = new List<Fix_rig2d>();
+        Collider_ctrl.cols = new List<Fix_col2d>();
+        Player_ctrl.plays = new List<Player>();
+        Map_ctrl.Map_items = new Dictionary<long, GameObject>();
+        Flow_path.init();
+    }
+
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-
+        init();
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tiny_map = GameObject.Find("Tiny_map");
@@ -71,10 +86,9 @@ public class Main_ctrl : MonoBehaviour
         }
 
         Play_create();
+        players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
-        Flow_path.init();
-        Debug.Log(Monster_create.cnt1);
     }
 
     static void Wolf_create()
@@ -451,7 +465,7 @@ public class Main_ctrl : MonoBehaviour
 
         Creobj(p);
     }
-    public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size)
+    public static void NewItem(Fix_vector2 pos ,string itemname,int num,float size,Fix_vector2 speed)
     {
         Obj_info p = new Obj_info();
         p.name = "ItemSample";
@@ -462,6 +476,9 @@ public class Main_ctrl : MonoBehaviour
         p.type = itemname;
         p.ToughnessDamage = num;
         p.toward = size;
+        p.with_pos = speed;
+        p.col_type = Fix_col2d.col_status.Trigger2;
+        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         Creobj(p);
     }
@@ -469,8 +486,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
+        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -554,12 +571,19 @@ public class Main_ctrl : MonoBehaviour
                     t.triggername = info.name;
                     if(info.name == "ItemSample")
                     {
+                        
                         Item x = (Item)AB.getobj(info.type);
                         //Debug.Log("Resouces:" + x.id);
                         t.itemnum = info.ToughnessDamage;
+                        ItemOnGround gg = obj.GetComponent<ItemOnGround>();
                         obj.GetComponent<SpriteRenderer>().sprite = x.image;
-                        obj.GetComponent<ItemOnGround>().item = x;
+                        gg.item = x;
                         obj.transform.localScale = new Vector3(info.toward, info.toward, 1f);
+                        gg.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
+                        gg.f = f;
+                        gg.r.velocity = info.with_pos;
+                        t.r = gg.r;
+                        t.f = gg.f;
                         t.itemid = x.id;
                         
                     }
@@ -654,15 +678,25 @@ public class Main_ctrl : MonoBehaviour
         {
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
-            Debug.Log(f);
             ++count;
-            
+            Debug.Log(f);
+
             frame_index = f.Index;
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
+                if (f.Opts[i].Opt == PlayerOpt.ExitRoom)
+                {
+                    if (f.Opts[i].Userid == user_id) SceneManager.LoadScene("Start");
+                    continue;
+                }
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
+            }
+            for (int i = 0; i < f.Msgs.Count; i++)
+            {
+                Player p = (Player)(All_objs[Ser_to_cli[f.Msgs[i].Userid]].modules[Object_ctrl.class_name.Player]);
+                p.DealMsgs(f.Msgs[i]);
             }
             foreach (long i in All_objs.Keys)
             {
@@ -681,6 +715,12 @@ public class Main_ctrl : MonoBehaviour
                     Attack p = (Attack)All_objs[i].modules[Object_ctrl.class_name.Attack];
                     p.Updatex();
                 }
+                if (All_objs[i].modules.ContainsKey(Object_ctrl.class_name.Trigger))
+                {
+                    Trigger t = (Trigger)All_objs[i].modules[Object_ctrl.class_name.Trigger];
+                    t.Updatex();
+
+                }
             }
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
@@ -695,6 +735,15 @@ public class Main_ctrl : MonoBehaviour
             {
                 Obj_info q = Cre_objs.Dequeue();
                 CreateObj(q);
+            }
+            if (Exit)
+            {
+                PlayerOptData y = new PlayerOptData();
+                y.Opt = PlayerOpt.ExitRoom;
+                y.Userid = (int)user_id;
+
+                Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
+                Exit = false;
             }
         }
         play = All_objs[main_id].gameObject;

@@ -1,6 +1,7 @@
 ﻿using Net;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : BasicCharacter
 {
@@ -11,6 +12,10 @@ public class Player : BasicCharacter
     private PlayerBag bag = new PlayerBag();
     private Fixpoint QCD = new Fixpoint(0, 0);
     private Fixpoint ECD = new Fixpoint(0, 0);
+
+    public string words = string.Empty;
+    public bool words_ok = false;
+
     public enum Identity
     {
         Populace,
@@ -23,7 +28,7 @@ public class Player : BasicCharacter
     private void Start()
     {
         animator = GetComponent<Animator>();
-        SetStatus(1000, 10);//血量。基础攻击力       
+        SetStatus(100000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
@@ -42,6 +47,12 @@ public class Player : BasicCharacter
         [KeyCode.LeftShift] = false,
         [KeyCode.Space] = false
     };
+
+    public void DealMsgs(PlayerMessage msg)
+    {
+        words = msg.Content;
+        words_ok = true;
+    }
 
     public void DealInputs(PlayerOptData inputs)
     {
@@ -115,18 +126,23 @@ public class Player : BasicCharacter
                 }
                 if (flag)
                 {
-                    
                     foreach (var m in fa.materials)
                     {
-                        bag.BagGetItem(m.Key, -m.Value,Player_ctrl.BagUI);
-                        if (!fa.commited.ContainsKey(m.Key))
-                        {
-                            fa.commited[m.Key] = m.Value;
+                        
+                        bool value = bag.BagGetItem(m.Key, -1,Player_ctrl.BagUI);
+                        if (value) {
+                            if (!fa.commited.ContainsKey(m.Key))
+                            {
+                                fa.commited[m.Key] = 1;
+                            }
+                            else
+                            {
+                                fa.commited[m.Key] += 1;
+                            }
                         }
-                        else {
-                            fa.commited[m.Key] += m.Value;
-                        }
-                        GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<ProgressBar>().endprogress = (fa.commited[m.Key] / fa.materials[m.Key]);
+                        GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
+                        GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
+                        GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
                     }
                 }
                 Debug.Log(flag);
@@ -138,7 +154,9 @@ public class Player : BasicCharacter
                 {
                     if (bag.BagCheckItemNums(Makeitem.MakeNeeds[i], Makeitem.NeedsNumber[i]) == false) flag2 = false;
                 }
-                if(flag2 == true)
+                GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
+                if (flag2 == true)
                 {
                     bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
                     
@@ -146,7 +164,7 @@ public class Player : BasicCharacter
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    //Player_ctrl.MakeSuccessUI.SetActive(true);
+                    tmp.GetComponent<MakeSuccess>().Type = true;
                 }
                 else
                 {
@@ -162,7 +180,6 @@ public class Player : BasicCharacter
                 break;
         }
     }
-
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -259,6 +276,26 @@ public class Player : BasicCharacter
     {
         if (id == Main_ctrl.Ser_to_cli[Main_ctrl.user_id]) return true;
         else return false;
+    }
+
+    public void ThrowItem(int id)
+    {
+        if(bag.BagCheckItemNums(id,1) == false)
+        {
+            return;
+        }
+        bag.BagGetItem(id, -1, Player_ctrl.BagUI);
+        Fix_vector2 ItemPos = f.pos.Clone();
+        Fix_vector2 ItemSpeed = new Fix_vector2(new Fixpoint(5, 0), new Fixpoint(7, 0));
+        if (AnimaToward > 0)
+        {
+            ItemPos.x += new Fixpoint(1, 0);
+        } else
+        {
+            ItemPos.x -= new Fixpoint(1, 0);
+            ItemSpeed.x = new Fixpoint(0, 0) - ItemSpeed.x;
+        }
+        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1,ItemSpeed);
     }
 
     private void Normal()
@@ -936,10 +973,10 @@ public class Player : BasicCharacter
             return;
         }
         if (first == true) {
-            Player_ctrl.BagUI.GetItem(11, -1);
-            bag.BagGetItem(11, -1);
+            //Player_ctrl.BagUI.GetItem(11, -1);
+            bag.BagGetItem(11, -1, Player_ctrl.BagUI);
         }
-        if(StatusTime > RecoverHpDuringTime)
+        if (StatusTime > RecoverHpDuringTime)
         {
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(100);//恢复的血量

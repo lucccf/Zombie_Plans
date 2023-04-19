@@ -67,7 +67,6 @@ public class Join_room : MonoBehaviour
             board2.SetActive(false);
             board1.SetActive(true);
 
-            //SceneManager.LoadScene("Loading");
         }
     }
 }

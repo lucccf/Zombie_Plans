@@ -21,10 +21,8 @@ public class Loading_ctrl : MonoBehaviour
         {
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
-            Debug.Log(f);
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                Debug.Log(f.Opts[i]);
                 if (f.Opts[i].Opt == PlayerOpt.JoinRoom)
                 {
                     Main_ctrl.players.Add(f.Opts[i].Userid);
@@ -39,6 +37,7 @@ public class Loading_ctrl : MonoBehaviour
 
             if (roomcnt >= room_num)
             {
+                roomcnt = 0;
                 SceneManager.LoadScene("Battle");
             }
         }

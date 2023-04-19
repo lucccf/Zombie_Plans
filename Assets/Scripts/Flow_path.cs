@@ -28,12 +28,20 @@ public class Flow_path : MonoBehaviour
 
     public static GameObject play_panel;
     public static GameObject death_panel;
-
+    public static GameObject chat_panel;
     public static void init()
     {
         play_panel = GameObject.Find("PlayerPanel");
         death_panel = GameObject.Find("Death");
+        chat_panel = GameObject.Find("ChatUI");
         death_panel.SetActive(false);
+        chat_panel.SetActive(false);
+        countdown = new Fixpoint(300, 0);
+        cnt_flag = 0;
+        zombie_cnt = 0;
+        Now_fac = 0;
+        main_flag = 0;
+        conditions = new int[cons];
     }
 
     public static void Updatex()
@@ -91,28 +99,7 @@ public class Flow_path : MonoBehaviour
                 break;
             case 1:
                 //切换到死亡UI，并随机选择一名玩家作为主视角
-                play_panel.SetActive(false);
-                death_panel.SetActive(true);
-                int cnt1 = 0;
-                foreach(var x in Player_ctrl.plays)
-                {
-                    if (!x.CheckDeath())
-                    {
-                        cnt1++;
-                    }
-                }
-                Debug.Log(Main_ctrl.main_id);
-                if (cnt1 > 0)
-                {
-                    Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
-                    while (Player_ctrl.plays[(int)Main_ctrl.main_id].CheckDeath())
-                    {
-                        Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
-                    }
-                }
-                Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
-                Debug.Log(Main_ctrl.main_id);
-                Debug.Log(Main_ctrl.All_objs[Main_ctrl.main_id].gameObject);
+                Dead_panel.dead();
                 main_flag = 2;
                 break;
             case 2:
@@ -128,6 +115,73 @@ public class Flow_path : MonoBehaviour
         Checkpeopvic();
 
         Checkdoublefail();
+    }
+
+    public static void Dead_start()
+    {
+        play_panel.SetActive(false);
+        death_panel.SetActive(true);
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            while (Player_ctrl.plays[(int)Main_ctrl.main_id].CheckDeath())
+            {
+                Main_ctrl.main_id = (long)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[(int)Main_ctrl.main_id].id;
+        }
+    }
+    
+    public static void next()
+    {
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            int p = Player_ctrl.plays.IndexOf((Player)Main_ctrl.All_objs[Main_ctrl.main_id].modules[Object_ctrl.class_name.Player]);
+            p = (p + 1) % Player_ctrl.plays.Count;
+            while (Player_ctrl.plays[p].CheckDeath())
+            {
+                p = (p + 1) % Player_ctrl.plays.Count;
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[p].id;
+        }
+    }
+
+    public static void pre()
+    {
+        int cnt1 = 0;
+        foreach (var x in Player_ctrl.plays)
+        {
+            if (!x.CheckDeath())
+            {
+                cnt1++;
+            }
+        }
+        if (cnt1 > 0)
+        {
+            int p = Player_ctrl.plays.IndexOf((Player)Main_ctrl.All_objs[Main_ctrl.main_id].modules[Object_ctrl.class_name.Player]);
+            p = (p + Player_ctrl.plays.Count - 1) % Player_ctrl.plays.Count;
+            while (Player_ctrl.plays[p].CheckDeath())
+            {
+                p = (p + Player_ctrl.plays.Count - 1) % Player_ctrl.plays.Count;
+            }
+            Main_ctrl.main_id = Player_ctrl.plays[p].id;
+        }
     }
 
     private static void Checkwolfvic()
@@ -149,17 +203,60 @@ public class Flow_path : MonoBehaviour
 
         if (vic_wolf)
         {
+            if (((Player)Main_ctrl.All_objs[Main_ctrl.Ser_to_cli[Main_ctrl.user_id]].modules[Object_ctrl.class_name.Player]).identity == Player.Identity.Wolf)
+            {
+                Dead_panel.victory();
+            }
+            else
+            {
+                Dead_panel.defeated();
+            }
             //好人切换到好人失败场景，坏人切换到坏人胜利场景，进行对应的加分和扣分操作
         }
     }
 
     private static void Checkpeopvic()
     {
+        if (cnt_flag < 4)
+        {
+            return;
+        }
+        bool flag_po = false;
+        for(int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (!Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Populace)
+            {
+                flag_po = true;
+            }
+        }
+        if (flag_po)
+        {
+            if (((Player)Main_ctrl.All_objs[Main_ctrl.Ser_to_cli[Main_ctrl.user_id]].modules[Object_ctrl.class_name.Player]).identity == Player.Identity.Wolf)
+            {
+                Dead_panel.defeated();
+            }
+            else
+            {
+                Dead_panel.victory();
+            }
+        }
         //如果有一名玩家成功逃出，则好人胜利，根据不同的胜利方式获得不同的评分
     }
 
     private static void Checkdoublefail()
     {
+        bool flag_all = false;
+        for (int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (!Player_ctrl.plays[i].CheckDeath())
+            {
+                flag_all = true;
+            }
+        }
+        if (!flag_all)
+        {
+            Dead_panel.draw();
+        }
         //如果狼人死了且好人没有成功逃出，则算作平局
     }
 }
