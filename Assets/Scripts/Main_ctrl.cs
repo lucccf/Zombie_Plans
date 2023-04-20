@@ -682,9 +682,16 @@ public class Main_ctrl : MonoBehaviour
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
             ++count;
-            Debug.Log(f);
 
             frame_index = f.Index;
+            float xx = 0;
+            foreach(var yy in All_objs)
+            {
+                Vector3 zz = yy.Value.gameObject.transform.position;
+                xx += zz.x;
+                xx += zz.y;
+            }
+            Debug.Log(frame_index + " : " + xx);
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
