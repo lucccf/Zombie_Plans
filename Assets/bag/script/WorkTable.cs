@@ -31,7 +31,7 @@ public class WorkTable : MonoBehaviour
         MakeButton.GetComponent<Button>().onClick.AddListener(MakeButonOnClick);
         for(int i = 0; i < MakedItemList.Length; ++i)
         {
-            TmpMakedItemButton = (GameObject)Resources.Load("Prefabs/UI/Button");
+            TmpMakedItemButton = (GameObject)AB.getobj("Button");
             TmpMakedItemButton.GetComponent<Image>().sprite = MakedItemList[i].image;
             GameObject NewItem = Instantiate(TmpMakedItemButton, ItemListParent.transform);
             ListItem.Add(i, NewItem);
@@ -73,7 +73,7 @@ public class WorkTable : MonoBehaviour
         }
         for(int i = 0; i < MakedItemList[x].MakeNeeds.Length; ++i)
         {
-            TmpNeedItem = (GameObject)Resources.Load("Prefabs/UI/NeeItemPrefabs");
+            TmpNeedItem = (GameObject)AB.getobj("NeeItemPrefabs");
             TmpNeedItem.GetComponentInChildren<Image>().sprite = Main_ctrl.GetItemById(MakedItemList[x].MakeNeeds[i]).image;
             TmpNeedItem.GetComponentInChildren<Text>().text = MakedItemList[x].NeedsNumber[i].ToString();
             //GameObject NewItem = Instantiate(TmpNeedItem, transform.position, transform.rotation);

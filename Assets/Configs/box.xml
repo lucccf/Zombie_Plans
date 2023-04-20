@@ -1,0 +1,56 @@
+<box>
+	<map_info>
+		<floor_cnt>10</floor_cnt>
+		<room_cnt>9</room_cnt>
+		<floor_hei>9</floor_hei>
+		<floor_wid>28</floor_wid>
+		<floor_half_thick>1</floor_half_thick>
+	</map_info>
+
+	<box_floor>
+		<box_info>
+			<id>1</id>
+			<box_pos>42</box_pos>
+			<box_pos>218</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>2</id>
+			<box_pos>3</box_pos>
+		</box_info>
+
+		<box_info>
+			<id>3</id>
+			<box_pos>185</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>4</id>
+			<box_pos>65</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>7</id>
+			<box_pos>58</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>8</id>
+			<box_pos>248</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>9</id>
+			<box_pos>14</box_pos>
+			<box_pos>163</box_pos>
+		</box_info>
+		
+		<box_info>
+			<id>10</id>
+			<box_pos>50</box_pos>
+			<box_pos>218</box_pos>
+		</box_info>
+		
+	</box_floor>
+
+</box>

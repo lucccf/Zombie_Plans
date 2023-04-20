@@ -11,24 +11,10 @@ public class AB : MonoBehaviour
 
     public static void LoadALL()
     {
-        /*
-        bundle_req.Add(AssetBundle.LoadFromFileAsync("AssetBundles/prefabs"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync("AssetBundles/item"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync("AssetBundles/background"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync("AssetBundles/ui"));
-        */
-
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/prefabs"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/item"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/background"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/ui"));
-        /*
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/prefabs"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/item"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/background"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/ui"));
-        //AssetBundleRequest request = bundle.LoadAssetAsync(assetName);
-        */
     }
 
     public static bool LoadAllbundles()

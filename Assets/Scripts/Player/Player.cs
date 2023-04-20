@@ -142,13 +142,13 @@ public class Player : BasicCharacter
 
                         if (value)
                         {
-                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 3;
                         }
                         else 
                         {
-                            GameObject facui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 0;
                         }
@@ -176,7 +176,7 @@ public class Player : BasicCharacter
                     {
                         if(QCD < new Fixpoint(100,0))
                         {
-                            GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject ui = (GameObject)AB.getobj("提示UI");
                             GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                             tmp.GetComponent<MakeSuccess>().Type = 4;
                             break;
@@ -188,7 +188,7 @@ public class Player : BasicCharacter
                     {
                         if (ECD < new Fixpoint(100, 0))
                         {
-                            GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject ui = (GameObject)AB.getobj("提示UI");
                             GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                             tmp.GetComponent<MakeSuccess>().Type = 4;
                             break;
@@ -204,7 +204,7 @@ public class Player : BasicCharacter
                     }
                     if (checkid() == true)
                     {
-                        GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                        GameObject ui = (GameObject)AB.getobj("提示UI");
                         GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                         tmp.GetComponent<MakeSuccess>().Type = 1;
                     } 
