@@ -70,7 +70,7 @@
             <hole_pos>28</hole_pos>
             <hole_pos>110</hole_pos>
             <hole_pos>137</hole_pos>
-            <hole_pos>224</hole_pos>
+            <hole_pos>249</hole_pos>
         </hole_info>
         <hole_info>
             <id>4</id>
@@ -87,6 +87,7 @@
             <hole_pos>114</hole_pos>
             <hole_pos>138</hole_pos>
             <hole_pos>177</hole_pos>
+			<hole_pos>249</hole_pos>
         </hole_info>
         <hole_info>
             <id>6</id>
