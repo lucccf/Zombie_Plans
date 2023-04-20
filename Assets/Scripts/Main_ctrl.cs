@@ -361,6 +361,9 @@ public class Main_ctrl : MonoBehaviour
             }
         }
         MapNode = nodes;
+
+        Debug.Log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
+
     }
 
     public static Item GetItemById(int id)

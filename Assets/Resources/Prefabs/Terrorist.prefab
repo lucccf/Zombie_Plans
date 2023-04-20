@@ -332,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   AnimaToward: 0
+  LockId: -1
 --- !u!1 &7175253289754946494
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class Monster1 : Monster
     private Player player = null;
     void Start()
     {
-        SetStatus(250, 10);
+        SetStatus(500, 10);
         animator = GetComponent<Animator>();
         CharacterType = 1 + type2;
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
@@ -21,7 +21,7 @@ public class Monster1 : Monster
     public override void Updatex()
     {
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(25,0));
+        status.RecoverToughness(Dt.dt * new Fixpoint(20,0));//韧性值恢复
         if(AnimaStatus != 6)CheckDeath();
         switch(RealStatus)
         {
@@ -177,7 +177,7 @@ public class Monster1 : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward,1);//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward,3);//最后一个参数是击飞类型
 
     }
     private void RemoveAttack()

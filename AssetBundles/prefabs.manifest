@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 4272613567
+CRC: 2547106115
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: da838b06781978a6a3244f815b685659
+    Hash: 60d7fcb798a7f7149cee27707bef1c7f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 21c9476ef20056ae186fbe3e14033cd5
+    Hash: 1480195ee4c2b49a3b5410c82b2dfb5b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -54,6 +54,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 6f790d93ce6f1894592f1a0e33048e5c, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 1fedbf0428168744f8787d3875b3db17, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: d713e1748eec6dd47b59ee6c2bbfe28f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ac21057441b128b4ebac76d348b6e9c8, type: 3}
@@ -85,8 +87,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 1fedbf0428168744f8787d3875b3db17, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -124,6 +124,7 @@ Assets:
 - Assets/Resources/Prefabs/home.prefab
 - Assets/Resources/Prefabs/Attack.prefab
 - Assets/Resources/Prefabs/number/33.png
+- Assets/Resources/Prefabs/facility1.prefab
 - Assets/Resources/Prefabs/number/22.png
 - Assets/Resources/Prefabs/Bomb2.prefab
 - Assets/Resources/Prefabs/Lighting.prefab
