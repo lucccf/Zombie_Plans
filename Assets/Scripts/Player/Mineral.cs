@@ -23,7 +23,7 @@ public class Mineral : Monster
         BasicCharacterGetHited();
         if(status.death == true)
         {
-            DeathFall("Mineral", 10, 1f);
+            DeathFall("Mineral", 500, 1f);
             Main_ctrl.Desobj(id);
         }
     }

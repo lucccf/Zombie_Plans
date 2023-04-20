@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: YellowMaterial
   m_EditorClassIdentifier: 
   itemname: YellowMaterial
-  description: Used for synthesizing large materials
+  description: "\u9AD8\u7EA7\u6750\u6599\uFF0C\u7528\u4E8E\u5408\u6210\u4FEE\u590D\u8BBE\u65BD\u7684\u5927\u6750\u6599"
   image: {fileID: 21300000, guid: b044954588d49ae40960b7320c571c8e, type: 3}
   id: 6
   MakeNeeds: 01000000
