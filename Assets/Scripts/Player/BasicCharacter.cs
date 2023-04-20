@@ -60,7 +60,7 @@ public class BasicCharacter : MonoBehaviour
         Stay
     }
 
-    void Start()
+    public virtual void Startx()
     {
 
     }

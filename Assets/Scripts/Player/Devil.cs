@@ -10,7 +10,8 @@ public class Devil : Knight
     private Fixpoint BombCD = new Fixpoint(0,0);
     private Fixpoint MagicCannonCD = new Fixpoint(0, 0);
     private Fixpoint SuckerPunchCd = new Fixpoint(0, 0);
-    void Start()
+
+    public override void Startx()
     {
         CharacterType = 1 + type2;
         SetStatus(1000, 10);//血量，基础攻击力

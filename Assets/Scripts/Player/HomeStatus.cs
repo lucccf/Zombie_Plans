@@ -5,7 +5,7 @@ using UnityEngine;
 public class HomeStatus : Monster
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Startx()
     {
         CharacterType = 4;
         status.max_toughness = 1000000;

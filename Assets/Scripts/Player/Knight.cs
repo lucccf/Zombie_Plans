@@ -8,7 +8,7 @@ public class Knight : Monster
     protected int KnightAnimaAttack = 0;
     protected int KnightAnimaHited = 0;
 
-    void Start()
+    public override void Startx()
     {
         CharacterType = 1 + type2;
         SetStatus(400, 10);//血量，基础攻击力

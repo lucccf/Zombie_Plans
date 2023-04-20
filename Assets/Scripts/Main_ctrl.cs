@@ -76,7 +76,6 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Facility_create();
         Map_create.Protal_create();
         Map_create.Background_create();
-        Monster_create.Mon_create1();
         Player_ctrl.Init_bag();
         CalRoad();
         Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
@@ -89,6 +88,7 @@ public class Main_ctrl : MonoBehaviour
         players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
+        Monster_create.Mon_create1();
     }
 
     static void Wolf_create()
@@ -362,7 +362,6 @@ public class Main_ctrl : MonoBehaviour
         }
         MapNode = nodes;
 
-        Debug.Log("YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY");
 
     }
 
@@ -515,6 +514,7 @@ public class Main_ctrl : MonoBehaviour
                     p.f = f;
                     p.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     Player_ctrl.plays.Add(p);
+                    p.Startx();
                     break;
                 case Object_ctrl.class_name.Fix_rig2d:
                     Fix_rig2d r = new Fix_rig2d(cnt, new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(-15, 0)));
@@ -529,6 +529,7 @@ public class Main_ctrl : MonoBehaviour
                     m.type2 = info.cre_type;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
+                    m.Startx();
                     break;
                 case Object_ctrl.class_name.Attack:
                     Attack a = obj.GetComponent<Attack>();
@@ -691,7 +692,7 @@ public class Main_ctrl : MonoBehaviour
                 xx = xx * 233 % 998244353;
             }
         }
-        Debug.Log(index + " : " + x + " : " + xx);
+        //Debug.Log(index + " : " + x + " : " + xx);
     }
 
     void Update()

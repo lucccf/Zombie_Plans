@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mage : Knight
 {
-    void Start()
+    public override void Startx()
     {
         CharacterType = 1 + type2;
         SetStatus(500, 10);//血量，基础攻击力

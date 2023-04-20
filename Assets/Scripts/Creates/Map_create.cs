@@ -11,7 +11,7 @@ public class Map_create : MonoBehaviour
     static int floor_wid;
     static int floor_cnt;
 
-    static List<List<float>> col_list = new List<List<float>>();
+    static List<List<Fixpoint>> col_list = new List<List<Fixpoint>>();
     static List<List<bool>> ok_list = new List<List<bool>>();
 
     public static void Wall_create()
@@ -37,7 +37,7 @@ public class Map_create : MonoBehaviour
         {
             holes.Add(new List<int>());
             walls.Add(new List<int>());
-            col_list.Add(new List<float>());
+            col_list.Add(new List<Fixpoint>());
             ok_list.Add(new List<bool>());
         }
         for(int i = 1; i <= floor_cnt; i++)
@@ -55,7 +55,7 @@ public class Map_create : MonoBehaviour
             {
                 int pos = int.Parse(x.InnerText);
                 walls[id].Add(pos);
-                col_list[id].Add(pos);
+                col_list[id].Add(new Fixpoint(pos, 0));
                 Obj_info info = new Obj_info();
                 info.name = "wall_b";
                 info.classnames.Add(Object_ctrl.class_name.Tinymap);
@@ -74,8 +74,8 @@ public class Map_create : MonoBehaviour
             foreach (XmlNode x in p.SelectNodes("hole_pos"))
             {
                 int pos = int.Parse(x.InnerText);
-                col_list[id].Add(pos + 1.5f);
-                col_list[id + 1].Add(pos + 1.5f);
+                col_list[id].Add(new Fixpoint(pos * 10 + 15, 1));
+                col_list[id + 1].Add(new Fixpoint(pos * 10 + 15, 1));
                 holes[id].Add(pos);
             }
         }
@@ -379,13 +379,32 @@ public class Map_create : MonoBehaviour
                     {
                         yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
                     }
-                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.pos_monster.Add(new Mon_pos(k, getXX(xx, id)));
                     Monster_create.size_monster.Add(yy);
                 }
             }
         }
     }
 
+    static Fix_vector2 getXX(Fix_vector2 xx, int id)
+    {
+        Fix_vector2 xx1= xx + new Fix_vector2(new Fixpoint((long)(Rand.rand() % (ulong)(floor_wid - 3)) - (floor_wid - 3) / 2, 0), new Fixpoint(0));
+        for (int ii = 0; ii < 10; ii++)
+        {
+            xx1 = xx + new Fix_vector2(new Fixpoint((long)(Rand.rand() % (ulong)(floor_wid - 3)) - (floor_wid - 3) / 2, 0), new Fixpoint(0));
+            bool flag = true;
+            foreach (var l in col_list[id])
+            {
+                if ((xx1.x < l + new Fixpoint(2, 0) && xx1.x > l - new Fixpoint(2, 0)) || xx1.x < new Fixpoint(0, 0) || xx1.x > new Fixpoint(250, 0))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) break;
+        }
+        return xx1;
+    }
     static void BK_create(XmlNodeList Rooms, string xml_name, string pre_name)
     {
         foreach (XmlNode p in Rooms)
@@ -398,10 +417,13 @@ public class Map_create : MonoBehaviour
                 Fix_vector2 yy;
                 if (xml_name == "normal_pos")
                 {
-                    yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
-                    int px = (int)(Rand.rand() % (ulong)floor_wid) - floor_wid / 2;
-                    Monster_create.pos_monster.Add(new Mon_pos(1, xx));
-                    Monster_create.size_monster.Add(yy);
+                    for (int ii = 0; ii < 2; ii++)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                        int px = (int)(Rand.rand() % (ulong)floor_wid) - floor_wid / 2;
+                        Monster_create.pos_monster.Add(new Mon_pos(1, getXX(xx, id)));
+                        Monster_create.size_monster.Add(yy);
+                    }
                 }
 
                 if (xml_name == "mill_pos" || xml_name == "battle_pos")
@@ -415,7 +437,7 @@ public class Map_create : MonoBehaviour
                     {
                         yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
                     }
-                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.pos_monster.Add(new Mon_pos(k, getXX(xx, id)));
                     Monster_create.size_monster.Add(yy);
                 }
 
@@ -430,7 +452,7 @@ public class Map_create : MonoBehaviour
                     {
                         yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
                     }
-                    Monster_create.pos_monster.Add(new Mon_pos(k, xx));
+                    Monster_create.pos_monster.Add(new Mon_pos(k, getXX(xx, id)));
                     Monster_create.size_monster.Add(yy);
                 }
 
@@ -438,7 +460,7 @@ public class Map_create : MonoBehaviour
                 {
                     int k = (int)(Rand.rand() % 2 + 1);
                     yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
-                    Monster_create.pos_zombies.Add(new Mon_pos(2, xx));
+                    Monster_create.pos_zombies.Add(new Mon_pos(2, getXX(xx, id)));
                     Monster_create.size_zombies.Add(yy);
                 }
             }
@@ -502,17 +524,21 @@ public class Map_create : MonoBehaviour
         }
     }
 
-    static void Load_BL(int id, int pos, float y, string name, int q_pi, int hei, int fst, int id_cnt, bool to_ground, float x = 10f)
+    static void Load_BL(int id, int pos, int y, string name, int q_pi, int hei, int fst, int id_cnt, bool to_ground, int x = 10)
     {
         for (int i = 0; i < q_pi; i++)
         {
-            float sl = (int)(Rand.rand() % 101 - 50) / x;
-            float sh = (int)(Rand.rand() % 101 - 50) / y;
-            float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
+            Fixpoint sl = new Fixpoint((long)(Rand.rand() % 101 - 50), 0) / new Fixpoint(x, 0);
+            //float sl = (int)(Rand.rand() % 101 - 50) / x;
+            Fixpoint sh = new Fixpoint((long)(Rand.rand() % 101 - 50), 0) / new Fixpoint(y, 0);
+            //float sh = (int)(Rand.rand() % 101 - 50) / y;
+            Fixpoint x1 = new Fixpoint((pos * 10 + 5) * floor_wid, 1) + sl + new Fixpoint((-q_pi * 5 + 5 + i * 10) * floor_wid, 1) / new Fixpoint(q_pi, 0);
+            //float x1 = (pos - 0.5f) * floor_wid + sl + (-q_pi / 2 + i + 0.5f) * (floor_wid / q_pi);
+
             bool flag = true;
             foreach (var l in col_list[id])
             {
-                if ((x1 < l + 2 && x1 > l - 2) || x1 < 0 || x1 > 250)
+                if ((x1 < l + new Fixpoint(2, 0) && x1 > l - new Fixpoint(2, 0)) || x1 < new Fixpoint(0, 0) || x1 > new Fixpoint(250, 0))
                 {
                     flag = false;
                     break;
@@ -526,13 +552,13 @@ public class Map_create : MonoBehaviour
             float y1;
             if (to_ground)
             {
-                y1 = -(id - 0.5f) * floor_hei + sh - floor_hei / 2f + 1 + y2;
+                y1 = -(id - 0.5f) * floor_hei + sh.to_float() - floor_hei / 2f + 1 + y2;
             }
             else
             {
-                y1 = -(id - 0.5f) * floor_hei + sh + floor_hei / 2f - 1 - y2;
+                y1 = -(id - 0.5f) * floor_hei + sh.to_float() + floor_hei / 2f - 1 - y2;
             }
-            obj.transform.position = new Vector3(x1, y1, hei);
+            obj.transform.position = new Vector3(x1.to_float(), y1, hei);
         }
     }
 }

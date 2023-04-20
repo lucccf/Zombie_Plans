@@ -8,7 +8,7 @@ public class Monster1 : Monster
     private float AnimaAttack = 0f;
 
     private Player player = null;
-    void Start()
+    public override void Startx()
     {
         SetStatus(500, 10);
         animator = GetComponent<Animator>();

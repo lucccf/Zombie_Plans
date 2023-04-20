@@ -23,7 +23,7 @@ public class Player : BasicCharacter
 
     public Identity identity = Identity.Populace;
 
-    private void Start()
+    public override void Startx()
     {
         animator = GetComponent<Animator>();
         SetStatus(10000, 10);//血量。基础攻击力       
