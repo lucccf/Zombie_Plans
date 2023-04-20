@@ -529,6 +529,10 @@ public class Main_ctrl : MonoBehaviour
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     m.Startx();
+                    if (m.type2 == 1)
+                    {
+                        m.ToHome();
+                    }
                     break;
                 case Object_ctrl.class_name.Attack:
                     Attack a = obj.GetComponent<Attack>();

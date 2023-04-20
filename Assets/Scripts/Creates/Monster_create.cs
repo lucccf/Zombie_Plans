@@ -19,8 +19,10 @@ public class Monster_create : MonoBehaviour
 {
     public static List<Mon_pos> pos_monster = new List<Mon_pos>();
     public static List<Fix_vector2> size_monster = new List<Fix_vector2>();
-    public static List<Mon_pos> pos_zombies = new List<Mon_pos>();
-    public static List<Fix_vector2> size_zombies = new List<Fix_vector2>();
+    public static List<Mon_pos> pos_zombies1 = new List<Mon_pos>();
+    public static List<Fix_vector2> size_zombies1 = new List<Fix_vector2>();
+    public static List<Mon_pos> pos_zombies2 = new List<Mon_pos>();
+    public static List<Fix_vector2> size_zombies2 = new List<Fix_vector2>();
     public static float cnt1 = 0;
 
     public static void Mon_create1()  //生成资源怪
@@ -66,9 +68,17 @@ public class Monster_create : MonoBehaviour
 
     public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
-        for (int i = 0; i < pos_zombies.Count; i++)
+        for (int i = 0; i < pos_zombies1.Count; i++)
         {
-            create(pos_zombies[i], size_zombies[i], 1);
+            create(pos_zombies1[i], size_zombies1[i], 1);
+        }
+    }
+
+    public static void Zom_create2()  //生成僵尸，后期替换模型和ai
+    {
+        for (int i = 0; i < pos_zombies2.Count; i++)
+        {
+            create(pos_zombies2[i], size_zombies2[i], 1);
         }
     }
 }

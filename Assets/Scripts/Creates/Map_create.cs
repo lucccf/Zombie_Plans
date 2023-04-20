@@ -420,7 +420,6 @@ public class Map_create : MonoBehaviour
                     for (int ii = 0; ii < 2; ii++)
                     {
                         yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
-                        int px = (int)(Rand.rand() % (ulong)floor_wid) - floor_wid / 2;
                         Monster_create.pos_monster.Add(new Mon_pos(1, getXX(xx, id)));
                         Monster_create.size_monster.Add(yy);
                     }
@@ -458,10 +457,36 @@ public class Map_create : MonoBehaviour
 
                 if (xml_name == "battle_pos")
                 {
-                    int k = (int)(Rand.rand() % 2 + 1);
-                    yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
-                    Monster_create.pos_zombies.Add(new Mon_pos(2, getXX(xx, id)));
-                    Monster_create.size_zombies.Add(yy);
+                    yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
+                    Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
+                    Monster_create.size_zombies1.Add(yy);
+                    yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
+                    Monster_create.size_zombies1.Add(yy);
+                    for(int ii = 0; ii < 3; ii++)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                        Monster_create.pos_zombies1.Add(new Mon_pos(1, getXX(xx, id)));
+                        Monster_create.size_zombies1.Add(yy);
+                    }
+                    for (int ii = 0; ii < 2; ii++)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
+                        Monster_create.pos_zombies2.Add(new Mon_pos(2, getXX(xx, id)));
+                        Monster_create.size_zombies2.Add(yy);
+                    }
+                    for (int ii = 0; ii < 2; ii++)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                        Monster_create.pos_zombies2.Add(new Mon_pos(3, getXX(xx, id)));
+                        Monster_create.size_zombies2.Add(yy);
+                    }
+                    for (int ii = 0; ii < 3; ii++)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                        Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
+                        Monster_create.size_zombies2.Add(yy);
+                    }
                 }
             }
         }

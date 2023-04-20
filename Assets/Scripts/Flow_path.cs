@@ -74,7 +74,7 @@ public class Flow_path : MonoBehaviour
                     cnt_flag = 3;
                     countdown = new Fixpoint(180, 0);
                     //召唤第二波僵尸
-                    Monster_create.Zom_create1();
+                    Monster_create.Zom_create2();
                 }
                 break;
             case 3:
