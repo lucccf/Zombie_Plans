@@ -27,79 +27,49 @@ public class Monster_create : MonoBehaviour
     {
         for(int i = 0; i < pos_monster.Count; i++)
         {
-            Obj_info p = new Obj_info();
-            Debug.Log(pos_monster[i].type);
-            switch (pos_monster[i].type)
-            {
-                case 1:
-                    p.name = "Monster1";
-                    break;
-                case 2:
-                    p.name = "Mage";
-                    break;
-                case 3:
-                    p.name = "knight";
-                    break;
-                case 4:
-                    p.name = "Devil";
-                    break;
-                case 5:
-                    p.name = "Terrorist";
-                    break;
-            }
-            /*
-            if (pos_monster[i].x < new Fixpoint(130, 0))
-            {
-                if (Rand.rand() % 3 == 0)
-                {
-                    p.name = "Mage";
-                }
-                else if(Rand.rand()%2 == 0){ 
-                    p.name = "Devil";
-                } else
-                {
-                    p.name = "Terrorist";
-                }
-            }
-            else
-            {
-                if (Rand.rand() % 2 == 0)
-                {
-                    p.name = "knight";
-                } else
-                {
-                    p.name = "Monster1";
-                }
-            }
-            */
-            p.hei = size_monster[i].y.Clone();
-            p.wid = size_monster[i].x.Clone();
-            p.pos = pos_monster[i].pos;
-            cnt1 += p.pos.x.to_int() + p.pos.y.to_int();
-            p.col_type = Fix_col2d.col_status.Collider;
-            p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-            p.classnames.Add(Object_ctrl.class_name.Moster);
-            p.classnames.Add(Object_ctrl.class_name.Tinymap);
-            //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
-            Main_ctrl.CreateObj(p);
+            create(pos_monster[i], size_monster[i], 0);
         }
+    }
+
+    private static void create(Mon_pos p1, Fix_vector2 p2, int type2)
+    {
+        Obj_info p = new Obj_info();
+        Debug.Log(p1.type);
+        switch (p1.type)
+        {
+            case 1:
+                p.name = "Monster1";
+                break;
+            case 2:
+                p.name = "Mage";
+                break;
+            case 3:
+                p.name = "knight";
+                break;
+            case 4:
+                p.name = "Devil";
+                break;
+            case 5:
+                p.name = "Terrorist";
+                break;
+        }
+        p.cre_type = type2;
+        p.hei = p2.y.Clone();
+        p.wid = p2.x.Clone();
+        p.pos = p1.pos;
+        p.col_type = Fix_col2d.col_status.Collider;
+        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+        p.classnames.Add(Object_ctrl.class_name.Moster);
+        p.classnames.Add(Object_ctrl.class_name.Tinymap);
+        //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
+        Main_ctrl.CreateObj(p);
     }
 
     public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
         for (int i = 0; i < pos_zombies.Count; i++)
         {
-            Obj_info p = new Obj_info();
-            //p.name = "Monster1";
-            p.name = "Devil";
-            p.hei = size_zombies[i].y.Clone();
-            p.wid = size_zombies[i].x.Clone();
-            p.pos = pos_zombies[i].pos;
-            p.col_type = Fix_col2d.col_status.Collider;
-            p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-            p.classnames.Add(Object_ctrl.class_name.Moster);
-            Main_ctrl.CreateObj(p);
-            Flow_path.zombie_cnt++;
+            create(pos_zombies[i], size_zombies[i], 1);
         }
     }
 }

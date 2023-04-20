@@ -729,7 +729,6 @@ public class Player : BasicCharacter
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
-                Debug.Log(Main_ctrl.All_objs[a.opsite.id]);
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
                 if (trigger.triggertype == "building")
                 {

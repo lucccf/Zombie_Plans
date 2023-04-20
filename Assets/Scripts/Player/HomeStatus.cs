@@ -7,7 +7,7 @@ public class HomeStatus : Monster
     // Start is called before the first frame update
     void Start()
     {
-        CharacterType = -1;
+        CharacterType = 4;
         status.max_toughness = 1000000;
         status.toughness = 1000000;
         SetStatus(500, 10);

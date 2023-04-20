@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 
 public class GetClicked : MonoBehaviour
@@ -22,15 +21,15 @@ public class GetClicked : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) // 左键点击
         {
-            UnityEngine.Vector3 mousePos = Input.mousePosition;
+            Vector3 mousePos = Input.mousePosition;
 
 
             // 将屏幕坐标转换为世界坐标
-            UnityEngine.Vector3 worldPos = mainCamera.ScreenToWorldPoint(new UnityEngine.Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane));
+            Vector3 worldPos = mainCamera.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, mainCamera.nearClipPlane));
 
             particle_instance = Instantiate(particle, EffectCamera.transform);
             particle_instance.transform.position = worldPos;
-            particle_instance.transform.localScale = new UnityEngine.Vector3(1, 1, 0);
+            particle_instance.transform.localScale = new Vector3(1, 1, 0);
             Destroy(particle_instance, destroyDelay);
         }
     }

@@ -6,7 +6,7 @@ public class Mage : Knight
 {
     void Start()
     {
-        CharacterType = 1;
+        CharacterType = 1 + type2;
         SetStatus(500, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };

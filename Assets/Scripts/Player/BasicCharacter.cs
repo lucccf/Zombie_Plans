@@ -10,6 +10,8 @@ public class BasicCharacter : MonoBehaviour
     public Fix_rig2d r;
     public long id;
 
+    public int type2 = 0;
+
     protected Queue<Fix_col2d_act> AttackQueue = new Queue<Fix_col2d_act>();
     protected Queue<Fix_col2d_act> TriggerQueue = new Queue<Fix_col2d_act>();
 
@@ -168,6 +170,9 @@ public class BasicCharacter : MonoBehaviour
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
             if (attack.attacker_type == CharacterType && attack.attacker_type != 0) continue;
+            if (attack.attacker_type == 1 && CharacterType == 2) continue;
+            if (attack.attacker_type == 2 && CharacterType == 1) continue;
+            if (attack.attacker_type != 2 && CharacterType == 4) continue;
             if (attack.attakcer_id == id)
             {
                 continue;

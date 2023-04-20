@@ -7,7 +7,7 @@ public class Terrorist : Knight
     private int y;
     void Start()
     {
-        CharacterType = 1;
+        CharacterType = 2;
         SetStatus(100, 10);//血量，基础攻击力
         status.max_toughness = 100000000;
         status.toughness = 100000000;

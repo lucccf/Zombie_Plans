@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using Net;
+﻿using Net;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -526,6 +525,7 @@ public class Main_ctrl : MonoBehaviour
                     //Debug.Log(m);
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
+                    m.type2 = info.cre_type;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     break;
@@ -682,9 +682,16 @@ public class Main_ctrl : MonoBehaviour
             Frame f;
             if (!Frames.TryDequeue(out f)) break;
             ++count;
-            Debug.Log(f);
 
             frame_index = f.Index;
+            float xx = 0;
+            foreach(var yy in All_objs)
+            {
+                Vector3 zz = yy.Value.gameObject.transform.position;
+                xx += zz.x;
+                xx += zz.y;
+            }
+            Debug.Log(frame_index + " : " + xx);
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
@@ -777,6 +784,7 @@ public class Obj_info
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
     public int hit_fly_type;
+    public int cre_type; 
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
