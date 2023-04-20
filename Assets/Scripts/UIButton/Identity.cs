@@ -6,6 +6,8 @@ public class Identity : MonoBehaviour
     // Start is called before the first frame update
     public Text txt;
 
+    public static string name1 = " ";
+
     // Update is called once per frame
     void Update()
     {

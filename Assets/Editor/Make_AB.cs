@@ -7,7 +7,7 @@ public class Make_AB : EditorWindow
     [MenuItem("Tools/Batch Build AssetBundles")]
     static void Init()
     {
-        string assetBundleDirectory = Application.dataPath + "/../AssetBundles";
+        string assetBundleDirectory = Application.dataPath + "/AssetBundles";
         if (!Directory.Exists(assetBundleDirectory))
         {
             Directory.CreateDirectory(assetBundleDirectory);
