@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AB : MonoBehaviour
 {
@@ -10,11 +11,10 @@ public class AB : MonoBehaviour
 
     public static void LoadALL()
     {
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/prefabs"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/item"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/background"));
-        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/../AssetBundles/ui"));
-        //AssetBundleRequest request = bundle.LoadAssetAsync(assetName);
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/prefabs"));
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/item"));
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/background"));
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/ui"));
     }
 
     public static bool LoadAllbundles()
@@ -65,6 +65,7 @@ public class AB : MonoBehaviour
             x.assetBundle.Unload(false);
         }
         Debug.Log("Load_OK");
+        test1.p = 1;
     }
 
     public static object getobj(string name)

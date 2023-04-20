@@ -66,16 +66,26 @@ public class Main_ctrl : MonoBehaviour
 
     void Start()
     {
+        Identity.name1 = "001";
         init();
+        Identity.name1 = "002";
         Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
+        Identity.name1 = "002.1";
         Tinymap = GameObject.Find("Tiny_map");
+        Identity.name1 = "002.2";
         Map_create.Wall_create();
+        Identity.name1 = "003";
         Map_create.Item_create();
+        Identity.name1 = "004";
         Map_create.Facility_create();
+        Identity.name1 = "005";
         Map_create.Protal_create();
+        Identity.name1 = "006";
         Map_create.Background_create();
+        Identity.name1 = "007";
         Player_ctrl.Init_bag();
+        Identity.name1 = "008";
         CalRoad();
         Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
         for (int i = 0; i < Items.Length; ++i)
@@ -83,11 +93,15 @@ public class Main_ctrl : MonoBehaviour
             ItemList.Add(Items[i].id, Items[i]);
         }
 
+        Identity.name1 = "009";
         Play_create();
+        Identity.name1 = "010";
         players.Clear();
         Wolf_create();
+        Identity.name1 = "011";
         main_id = Ser_to_cli[user_id];
         Monster_create.Mon_create1();
+        Identity.name1 = "012";
     }
 
     static void Wolf_create()

@@ -45,7 +45,7 @@ public class WolfBox : MonoBehaviour
     {
         BoxItem = item;
         //GameObject ItemButton = Instantiate((GameObject)AB.getobj("UI/BagItem"));
-        GameObject ItemButton = Instantiate((GameObject)Resources.Load("Prefabs/UI/BagItem"));
+        GameObject ItemButton = Instantiate((GameObject)AB.getobj("BagItem"));
         foreach (int i in BoxItem.Keys)
         {
             BoxItemObject.Add(i, Instantiate(ItemButton, ItemParent.transform));

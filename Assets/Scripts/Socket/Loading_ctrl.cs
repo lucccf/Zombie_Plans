@@ -38,6 +38,17 @@ public class Loading_ctrl : MonoBehaviour
             if (roomcnt >= room_num)
             {
                 roomcnt = 0;
+                while(Main_ctrl.Frames.TryPeek(out f))
+                {
+                    if (f.Index != 1)
+                    {
+                        Main_ctrl.Frames.TryDequeue(out f);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
                 SceneManager.LoadScene("Battle");
             }
         }

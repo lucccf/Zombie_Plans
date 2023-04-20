@@ -89,7 +89,7 @@ public class Monster : BasicCharacter
         }
         if (Follow == null && LockId != -1 && Check == true)
         {
-            Follow = Instantiate((GameObject)Resources.Load("Prefabs/yellow"), new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0f), Quaternion.identity);
+            Follow = Instantiate((GameObject)AB.getobj("yellow"), new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0f), Quaternion.identity);
             Follow.transform.position = new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), -1);
         }
         if (Follow != null && LockId == -1 || Check == false)
@@ -99,8 +99,8 @@ public class Monster : BasicCharacter
         }
         if (Check == true && red == null && blue == null)
         {
-            red = Instantiate((GameObject)Resources.Load("Prefabs/red"), transform);
-            blue = Instantiate((GameObject)Resources.Load("Prefabs/blue"), new Vector3(HomePos.x.to_float(), HomePos.y.to_float(), 0f), Quaternion.identity);
+            red = Instantiate((GameObject)AB.getobj("red"), transform);
+            blue = Instantiate((GameObject)AB.getobj("blue"), new Vector3(HomePos.x.to_float(), HomePos.y.to_float(), 0f), Quaternion.identity);
             red.transform.localScale = new Vector3((FindPosRight.to_float() - FindPosLeft.to_float()) / 3, (FindPosUp.to_float() - FindPosDown.to_float()) / 3, 1);
             red.transform.Translate((FindPosRight.to_float() + FindPosLeft.to_float()) / 2, (FindPosUp.to_float() + FindPosDown.to_float()) / 2, 0);
             blue.transform.localScale = new Vector3(CatchPosRight.to_float() - CatchPosLeft.to_float(), CatchPosUp.to_float() - CatchPosDown.to_float(), 1);
