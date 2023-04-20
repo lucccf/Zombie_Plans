@@ -11,63 +11,44 @@
 		<box_info>
 			<id>1</id>
 			<box_pos>42</box_pos>
-			<box_pos>110</box_pos>
-			<box_pos>120</box_pos>
-			<box_pos>132</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>162</box_pos>
+			<box_pos>218</box_pos>
 		</box_info>
+		
 		<box_info>
 			<id>2</id>
-			<box_pos>87</box_pos>
-			<box_pos>110</box_pos>
-			<box_pos>120</box_pos>
-			<box_pos>132</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>162</box_pos>
+			<box_pos>3</box_pos>
 		</box_info>
+
+		<box_info>
+			<id>3</id>
+			<box_pos>185</box_pos>
+		</box_info>
+		
 		<box_info>
 			<id>4</id>
-			<box_pos>87</box_pos>
-			<box_pos>110</box_pos>
-			<box_pos>120</box_pos>
-			<box_pos>132</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>162</box_pos>
+			<box_pos>65</box_pos>
 		</box_info>
+		
 		<box_info>
 			<id>7</id>
-			<box_pos>92</box_pos>
-			<box_pos>108</box_pos>
-			<box_pos>143</box_pos>
-			<box_pos>149</box_pos>
+			<box_pos>58</box_pos>
 		</box_info>
+		
 		<box_info>
 			<id>8</id>
-			<box_pos>92</box_pos>
-			<box_pos>100</box_pos>
-			<box_pos>123</box_pos>
-			<box_pos>135</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>160</box_pos>
+			<box_pos>248</box_pos>
 		</box_info>
+		
 		<box_info>
 			<id>9</id>
-			<box_pos>87</box_pos>
-			<box_pos>110</box_pos>
-			<box_pos>120</box_pos>
-			<box_pos>132</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>162</box_pos>
+			<box_pos>14</box_pos>
+			<box_pos>163</box_pos>
 		</box_info>
+		
 		<box_info>
 			<id>10</id>
-			<box_pos>87</box_pos>
-			<box_pos>110</box_pos>
-			<box_pos>120</box_pos>
-			<box_pos>132</box_pos>
-			<box_pos>153</box_pos>
-			<box_pos>162</box_pos>
+			<box_pos>50</box_pos>
+			<box_pos>218</box_pos>
 		</box_info>
 		
 	</box_floor>

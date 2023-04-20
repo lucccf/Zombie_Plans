@@ -83,7 +83,7 @@
         <hole_info>
             <id>5</id>
             <hole_pos>0</hole_pos>
-            <hole_pos>96</hole_pos>
+            <hole_pos>100</hole_pos>
             <hole_pos>114</hole_pos>
             <hole_pos>138</hole_pos>
             <hole_pos>177</hole_pos>
@@ -94,7 +94,7 @@
             <hole_pos>25</hole_pos>
             <hole_pos>84</hole_pos>
             <hole_pos>165</hole_pos>
-            <hole_pos>221</hole_pos>
+            <hole_pos>196</hole_pos>
         </hole_info>
         <hole_info>
             <id>7</id>
@@ -108,7 +108,7 @@
             <id>8</id>
             <hole_pos>25</hole_pos>
             <hole_pos>90</hole_pos>
-            <hole_pos>173</hole_pos>
+            <hole_pos>178</hole_pos>
             <hole_pos>224</hole_pos>
         </hole_info>
         <hole_info>
