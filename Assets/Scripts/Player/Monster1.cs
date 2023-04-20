@@ -78,6 +78,7 @@ public class Monster1 : Monster
     private void Normal()
     {
         NormalUpdate();
+        AnimaSpeed = 5f;
         int hited = BasicCharacterGetHited();
         if (hited != 0) return;
 
@@ -99,14 +100,7 @@ public class Monster1 : Monster
                 Fixpoint Dis = f.pos.x - Nearx;
                 if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
 
-                if (Dis > new Fixpoint(15, 0)) // 巡逻
-                {
-                    if (StatusTime > new Fixpoint(2, 0)) StatusTime -= new Fixpoint(2, 0);
-                    if (StatusTime > new Fixpoint(1, 0)) Moves(1);
-                    else Moves(-1);
-                    return;
-                }
-                else if (Dis < new Fixpoint(14, 1)) //攻击
+                if (Dis < new Fixpoint(14, 1)) //攻击
                 {
                     if (f.pos.x < Nearx) AnimaToward = 1;
                     else AnimaToward = -1;
