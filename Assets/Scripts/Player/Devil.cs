@@ -12,7 +12,7 @@ public class Devil : Knight
     private Fixpoint SuckerPunchCd = new Fixpoint(0, 0);
     void Start()
     {
-        CharacterType = 1;
+        CharacterType = 1 + type2;
         SetStatus(1000, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         //status.max_toughness = 200;

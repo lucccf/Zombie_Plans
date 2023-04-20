@@ -9,7 +9,7 @@ public class Knight : Monster
     protected int KnightAnimaHited = 0;
     void Start()
     {
-        CharacterType = 1;
+        CharacterType = 1 + type2;
         SetStatus(400, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[2] {new Fixpoint(0, 0), new Fixpoint(8, 1) };
@@ -456,6 +456,10 @@ public class Knight : Monster
         KnightAnimaAttack = 0;
         if(StatusTime > new Fixpoint(2,0))//死亡到消失的时间
         {
+            if (type2 == 1)
+            {
+                Flow_path.zombie_cnt--;
+            } 
             Main_ctrl.Desobj(id);
         }
     }

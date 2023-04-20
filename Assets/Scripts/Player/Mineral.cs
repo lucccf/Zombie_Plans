@@ -15,7 +15,7 @@ public class Mineral : Monster
     {
         HitTime = new Fixpoint[3] { new Fixpoint(100, 0), new Fixpoint(100, 0), new Fixpoint(200, 0) };
         HitSpeed = new Fixpoint[3] { new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };
-        ToughnessStatus = new int[3] { 50, 25, 0 };
+        ToughnessStatus = new int[3] {50, 25, 0};
     }
 
     public override void Updatex()

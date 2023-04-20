@@ -523,6 +523,7 @@ public class Main_ctrl : MonoBehaviour
                     //Debug.Log(m);
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
+                    m.type2 = info.cre_type;
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     break;
@@ -774,6 +775,7 @@ public class Obj_info
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
     public int hit_fly_type;
+    public int cre_type; 
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
