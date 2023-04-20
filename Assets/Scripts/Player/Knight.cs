@@ -16,7 +16,6 @@ public class Knight : Monster
         HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
-
         SetFindStatus();
         //ToHome();
 

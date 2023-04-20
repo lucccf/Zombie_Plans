@@ -34,7 +34,6 @@ public class Monster_create : MonoBehaviour
     private static void create(Mon_pos p1, Fix_vector2 p2, int type2)
     {
         Obj_info p = new Obj_info();
-        Debug.Log(p1.type);
         switch (p1.type)
         {
             case 1:
