@@ -691,7 +691,7 @@ public class Main_ctrl : MonoBehaviour
                 xx += zz.x;
                 xx += zz.y;
             }
-            Debug.Log(frame_index + " : " + xx);
+            Debug.Log(frame_index + " :1:: " + xx);
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
@@ -703,6 +703,11 @@ public class Main_ctrl : MonoBehaviour
                 Player p = (Player)(All_objs[Ser_to_cli[f.Opts[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealInputs(f.Opts[i]);
             }
+
+
+            Debug.Log(frame_index + " :2:: " + xx);
+
+
             for (int i = 0; i < f.Msgs.Count; i++)
             {
                 Player p = (Player)(All_objs[Ser_to_cli[f.Msgs[i].Userid]].modules[Object_ctrl.class_name.Player]);
@@ -729,13 +734,15 @@ public class Main_ctrl : MonoBehaviour
                 {
                     Trigger t = (Trigger)All_objs[i].modules[Object_ctrl.class_name.Trigger];
                     t.Updatex();
-
                 }
             }
+
+            Debug.Log(frame_index + " :3:: " + xx);
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
             Flow_path.Updatex();
             Map_ctrl.Updatex();
+            Debug.Log(frame_index + " :4:: " + xx);
             while (Des_objs.Count > 0)
             {
                 long id_des = Des_objs.Dequeue();
@@ -746,6 +753,7 @@ public class Main_ctrl : MonoBehaviour
                 Obj_info q = Cre_objs.Dequeue();
                 CreateObj(q);
             }
+            Debug.Log(frame_index + " :5:: " + xx);
             if (Exit)
             {
                 PlayerOptData y = new PlayerOptData();
