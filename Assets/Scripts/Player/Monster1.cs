@@ -16,6 +16,9 @@ public class Monster1 : Monster
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
+
+        SetFindStatus();
+        //ToHome();
     }
 
     public override void Updatex()
@@ -49,6 +52,18 @@ public class Monster1 : Monster
                 AnimaStatus = 6;
                 Death();
                 break;
+            case StatusType.LittleJump:
+                AnimaStatus = 114;
+                LittleJump(0);
+                break;
+            case StatusType.Jump:
+                AnimaStatus = 514;
+                Jump(0);
+                break;
+            case StatusType.Fall:
+                AnimaStatus = 1919;
+                Fall();
+                break;
         }
     }
     private void CheckDeath()
@@ -62,42 +77,64 @@ public class Monster1 : Monster
     }
     private void Normal()
     {
+        NormalUpdate();
         int hited = BasicCharacterGetHited();
         if (hited != 0) return;
 
-        Fixpoint Pos = GetNear();
-        Fixpoint Dis = GetNearDistance(Pos);
-        if (Dis > new Fixpoint(15, 0)) // 巡逻
+        if(!f.onground)
         {
-            if (StatusTime > new Fixpoint(2, 0)) StatusTime -= new Fixpoint(2, 0);
-            if (StatusTime > new Fixpoint(1, 0)) Moves(1);
-            else Moves(-1);
+            ChangeStatus(StatusType.Fall);
             return;
         }
-        else if (Dis < new Fixpoint(14, 1)) //攻击
+
+
+        int Location = 0;
+        if (NormalFind(ref Location) == true)
         {
-            if (f.pos.x < Pos) AnimaToward = 1;
-            else AnimaToward = -1;
-            ChangeStatus(StatusType.Attack);
-            Attack(true);
-            return;
-        }
-        else if (Dis > new Fixpoint(5, 0) && Dis < new Fixpoint(7, 0)) //翻滚
-        {
-            ChangeStatus(StatusType.Roll);
-            if (f.pos.x < Pos) AnimaToward = 1;
-            else AnimaToward = -1;
-            return;
-        }
-        else //靠近
-        {
-            if (f.pos.x  < Pos)
+            int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
+            Fixpoint Nearx = LockPos.x;
+
+            if (Location == Pos) //如果在同一区域
             {
-                Moves(1);
-            }
-            else
+                Fixpoint Dis = f.pos.x - Nearx;
+                if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
+
+                if (Dis > new Fixpoint(15, 0)) // 巡逻
+                {
+                    if (StatusTime > new Fixpoint(2, 0)) StatusTime -= new Fixpoint(2, 0);
+                    if (StatusTime > new Fixpoint(1, 0)) Moves(1);
+                    else Moves(-1);
+                    return;
+                }
+                else if (Dis < new Fixpoint(14, 1)) //攻击
+                {
+                    if (f.pos.x < Nearx) AnimaToward = 1;
+                    else AnimaToward = -1;
+                    ChangeStatus(StatusType.Attack);
+                    Attack(true);
+                    return;
+                }
+                else if (Dis > new Fixpoint(5, 0) && Dis < new Fixpoint(7, 0)) //翻滚
+                {
+                    ChangeStatus(StatusType.Roll);
+                    if (f.pos.x < Nearx) AnimaToward = 1;
+                    else AnimaToward = -1;
+                    return;
+                }
+                else //靠近
+                {
+                    if (f.pos.x < Nearx)
+                    {
+                        Moves(1);
+                    }
+                    else
+                    {
+                        Moves(-1);
+                    }
+                }
+            } else
             {
-                Moves(-1);
+                SearchX(Pos);
             }
         }
     }
@@ -260,6 +297,12 @@ public class Monster1 : Monster
     // Update is called once per frame
     void Update()
     {
+        SetBlueAndRed();
+        if (ToHomeFlag == true)
+        {
+            ToHome();
+        }
+
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
         animator.SetFloat("attack", AnimaAttack);

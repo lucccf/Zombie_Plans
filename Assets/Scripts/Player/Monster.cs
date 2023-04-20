@@ -4,7 +4,28 @@ using UnityEngine;
 
 public class Monster : BasicCharacter
 {
-    // Start is called before the first frame update
+    protected Fixpoint FindPosUp;
+    protected Fixpoint FindPosDown;
+    protected Fixpoint FindPosLeft;
+    protected Fixpoint FindPosRight;
+
+    protected Fixpoint CatchPosUp;
+    protected Fixpoint CatchPosDown;
+    protected Fixpoint CatchPosLeft;
+    protected Fixpoint CatchPosRight;
+
+    public long LockId = -1;
+    protected Fix_vector2 LockPos;
+    protected int HomeLocation = -1;
+    protected Fix_vector2 HomePos;
+
+    protected GameObject red = null;
+    protected GameObject blue = null;
+    protected GameObject Follow = null;
+
+    public bool Check;
+    public bool ToHomeFlag;
+    protected bool HasToHome = false;
     void Start()
     {
         
@@ -14,6 +35,318 @@ public class Monster : BasicCharacter
     void Update()
     {
         
+    }
+
+    protected void NormalUpdate()
+    {
+        if (LockId != -1)
+        {
+            LockPos = Player_ctrl.plays[(int)LockId].f.pos;
+        }
+        else
+        {
+            FindLock();
+        }
+        CheckCatchQuit();
+    }
+
+    protected void SetFindStatus()
+    {
+        FindPosUp = new Fixpoint(10, 0);
+        FindPosDown = new Fixpoint(-3, 0);
+        FindPosLeft = new Fixpoint(-20, 0);
+        FindPosRight = new Fixpoint(20, 0);
+
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);
+        CatchPosDown = f.pos.y.Clone() - new Fixpoint(20, 0);
+        CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
+        CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
+
+        HomePos = f.pos.Clone();
+        HomeLocation = Main_ctrl.CalPos(f.pos.x.Clone(), f.pos.y.Clone());
+        if (HomeLocation == -1)
+        {
+            Debug.LogError("Find Home Error" + f.pos.x.to_float() + " " + f.pos.y.to_float());
+        }
+    }
+    public void ToHome()
+    {
+        if (HasToHome == true) return;
+        HasToHome = true;
+        HomePos = Player_ctrl.HomePos.Clone();
+        HomeLocation = Main_ctrl.CalPos(Player_ctrl.HomePos.x, Player_ctrl.HomePos.y);
+        CatchPosUp = HomePos.x.Clone() + FindPosUp;
+        CatchPosDown = HomePos.x.Clone() + FindPosDown;
+        CatchPosLeft = HomePos.x.Clone() + FindPosLeft;
+        CatchPosRight = HomePos.x.Clone() + FindPosRight;
+    }
+
+    protected void SetBlueAndRed()
+    {
+        if (Follow != null)
+        {
+            Follow.transform.position = new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0);
+        }
+        if (Follow == null && LockId != -1 && Check == true)
+        {
+            Follow = Instantiate((GameObject)Resources.Load("Prefabs/yellow"), new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), 0f), Quaternion.identity);
+            Follow.transform.position = new Vector3(LockPos.x.to_float(), LockPos.y.to_float(), -1);
+        }
+        if (Follow != null && LockId == -1 || Check == false)
+        {
+            Destroy(Follow);
+            Follow = null;
+        }
+        if (Check == true && red == null && blue == null)
+        {
+            red = Instantiate((GameObject)Resources.Load("Prefabs/red"), transform);
+            blue = Instantiate((GameObject)Resources.Load("Prefabs/blue"), new Vector3(HomePos.x.to_float(), HomePos.y.to_float(), 0f), Quaternion.identity);
+            red.transform.localScale = new Vector3((FindPosRight.to_float() - FindPosLeft.to_float()) / 3, (FindPosUp.to_float() - FindPosDown.to_float()) / 3, 1);
+            red.transform.Translate((FindPosRight.to_float() + FindPosLeft.to_float()) / 2, (FindPosUp.to_float() + FindPosDown.to_float()) / 2, 0);
+            blue.transform.localScale = new Vector3(CatchPosRight.to_float() - CatchPosLeft.to_float(), CatchPosUp.to_float() - CatchPosDown.to_float(), 1);
+            blue.transform.Translate((CatchPosRight.to_float() + CatchPosLeft.to_float()) / 2 - HomePos.x.to_float(), (CatchPosUp.to_float() + CatchPosDown.to_float()) / 2 - HomePos.y.to_float(), 0);
+        }
+        else if (Check == false && red != null && blue != null)
+        {
+            Destroy(red);
+            Destroy(blue);
+            red = null;
+            blue = null;
+        }
+    }
+
+
+    protected bool NormalFind(ref int Location)
+    {
+        Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if (Location == -1)
+        {
+            Moves(AnimaToward, status.WalkSpeed);
+            return false;
+        }
+
+        if (LockId == -1) // 如果没有锁定玩家
+        {
+            if (Main_ctrl.CalPos(f.pos.x, f.pos.y) != HomeLocation)//如果不在家的区域
+            {
+                SearchX(HomeLocation);
+                return false;
+            }
+            else //如果在家的区域，巡逻
+            {
+                Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+                Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
+                Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
+                if (Left < CatchPosLeft) Left = CatchPosLeft;
+                if (Right > CatchPosRight) Right = CatchPosRight;
+                if (f.pos.x < Left)
+                {
+                    AnimaToward = 1;
+                }
+                else if (f.pos.x > Right)
+                {
+                    AnimaToward = -1;
+                }
+                Moves(AnimaToward, status.WalkSpeed);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    protected void Fall()
+    {
+        if (f.onground)
+        {
+            ChangeStatus(StatusType.Normal);
+        }
+    }
+
+    protected bool InFindSpace(Fix_vector2 pos)
+    {
+        Fixpoint dx = pos.x - f.pos.x;
+        Fixpoint dy = pos.y - f.pos.y;
+        bool InCatch = true;
+        if (HasToHome == false)
+        {
+            InCatch = InCatahSpace(pos);
+        }
+        if (InCatch && dx > FindPosLeft && dx < FindPosRight && dy > FindPosDown && dy < FindPosUp)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    protected bool InCatahSpace(Fix_vector2 pos)
+    {
+        if (HasToHome)
+        {
+            return InFindSpace(pos);
+        }
+        if (pos.x > CatchPosLeft && pos.x < CatchPosRight && pos.y > CatchPosDown && pos.y < CatchPosUp)
+        {
+            return true;
+        }
+        else return false;
+    }
+    protected void FindLock()
+    {
+        for (int i = 0; i < Player_ctrl.plays.Count; ++i)
+        {
+            if (InFindSpace(Player_ctrl.plays[i].f.pos) == true)
+            {
+                LockId = i;
+                LockPos = Player_ctrl.plays[i].f.pos;
+                break;
+            }
+        }
+    }
+
+    protected void CheckCatchQuit()
+    {
+        if (LockId == -1) return;
+        if (InCatahSpace(LockPos) == false)
+        {
+            LockId = -1;
+            LockPos = new Fix_vector2(0, 0);
+            return;
+        }
+    }
+
+    protected void Jump(int type)
+    {
+        if (type == 1)
+        {
+            AnimaToward = 1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(20, 0));
+        }
+        else if (type == -1)
+        {
+            AnimaToward = -1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(20, 0));
+        }
+        else
+        {
+            if (f.onground)
+            {
+                ChangeStatus(StatusType.Normal);
+            }
+            if (StatusTime > new Fixpoint(1, 0))
+            {
+                if (AnimaToward > 0)
+                {
+                    f.pos.x += status.WalkSpeed * Dt.dt;
+                }
+                else
+                {
+                    f.pos.x -= status.WalkSpeed * Dt.dt;
+                }
+            }
+        }
+    }
+
+    protected void LittleJump(int type)
+    {
+        if (type == 1)
+        {
+            AnimaToward = 1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 0));
+        }
+        else if (type == -1)
+        {
+            AnimaToward = -1;
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 0));
+        }
+        else
+        {
+            if (f.onground)
+            {
+                ChangeStatus(StatusType.Normal);
+            }
+            if (AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            }
+            else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+        }
+    }
+
+    protected void SearchX(int To)
+    {
+        if (To == -1) return;
+        int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if (x == -1)
+        {
+            if (AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            }
+            else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+
+        if (x == To)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+
+        Main_ctrl.TranslateMethod method = Main_ctrl.Guide(x, To);
+        if (method.able == false)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        if (f.pos.x < method.pos - new Fixpoint(1, 1))
+        {
+            AnimaToward = 1;
+            f.pos.x += status.WalkSpeed * Dt.dt;
+        }
+        else if (f.pos.x > method.pos + new Fixpoint(1, 1))
+        {
+            AnimaToward = -1;
+            f.pos.x -= status.WalkSpeed * Dt.dt;
+        }
+        else
+        {
+            switch (method.action)
+            {
+                case Main_ctrl.node.TravelType.LittleJumpLeft:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.LittleJumpRight:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(1);
+                    break;
+                case Main_ctrl.node.TravelType.Fall:
+                    if (AnimaToward > 0)
+                    {
+                        f.pos.x += status.WalkSpeed * Dt.dt;
+                    }
+                    else
+                    {
+                        f.pos.x -= status.WalkSpeed * Dt.dt;
+                    }
+                    break;
+                case Main_ctrl.node.TravelType.JumpLeft:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.JumpRight:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(1);
+                    break;
+            }
+        }
     }
 
     protected Fixpoint GetNear()
@@ -61,4 +394,126 @@ public class Monster : BasicCharacter
             return x - f.pos.x;
         }
     }
+
+    protected Fixpoint FindDistance = new Fixpoint(10, 0);
+    protected int KnightGetNear(ref Fixpoint nearx)
+    {
+        Fixpoint Min = new Fixpoint(10000000, 0);
+        Fixpoint Minx = new Fixpoint(100, 0);
+        Fixpoint Miny = new Fixpoint(100, 0);
+        foreach (Player i in Player_ctrl.plays)
+        {
+            Fixpoint Dis = new Fixpoint(0, 0);
+            if (i.f.pos.x < f.pos.x)
+            {
+                Dis += f.pos.x - i.f.pos.x;
+            }
+            else
+            {
+                Dis += i.f.pos.x - f.pos.x;
+            }
+            if (i.f.pos.y < f.pos.y)
+            {
+                Dis += f.pos.y - i.f.pos.y;
+            }
+            else
+            {
+                Dis += i.f.pos.y - f.pos.y;
+            }
+            if (Dis < Min)
+            {
+                Min = Dis;
+                Minx = i.f.pos.x;
+                Miny = i.f.pos.y;
+                nearx = i.f.pos.x;
+            }
+        }
+        if (Min > FindDistance) return -1;//寻路距离
+        else return Main_ctrl.CalPos(Minx, Miny);
+    }
+
+
+    protected int last_pos = -1;
+    protected virtual void Search()
+    {
+        int x = Main_ctrl.CalPos(f.pos.x, f.pos.y);
+        if (x == -1)
+        {
+            if (AnimaToward > 0)
+            {
+                f.pos.x += status.WalkSpeed * Dt.dt;
+            }
+            else
+            {
+                f.pos.x -= status.WalkSpeed * Dt.dt;
+            }
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        last_pos = x;
+
+        Fixpoint nearx = new Fixpoint(0, 0);
+        int y = KnightGetNear(ref nearx);
+
+        if (y == -1)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        if (x == y)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        Main_ctrl.TranslateMethod method = Main_ctrl.Guide(x, y);
+        if (method.able == false)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
+        if (f.pos.x < method.pos - new Fixpoint(1, 1))
+        {
+            AnimaToward = 1;
+            f.pos.x += status.WalkSpeed * Dt.dt;
+        }
+        else if (f.pos.x > method.pos + new Fixpoint(1, 1))
+        {
+            AnimaToward = -1;
+            f.pos.x -= status.WalkSpeed * Dt.dt;
+        }
+        else
+        {
+            switch (method.action)
+            {
+                case Main_ctrl.node.TravelType.LittleJumpLeft:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.LittleJumpRight:
+                    ChangeStatus(StatusType.LittleJump);
+                    LittleJump(1);
+                    break;
+                case Main_ctrl.node.TravelType.Fall:
+                    if (AnimaToward > 0)
+                    {
+                        f.pos.x += status.WalkSpeed * Dt.dt;
+                    }
+                    else
+                    {
+                        f.pos.x -= status.WalkSpeed * Dt.dt;
+                    }
+                    break;
+                case Main_ctrl.node.TravelType.JumpLeft:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(-1);
+                    break;
+                case Main_ctrl.node.TravelType.JumpRight:
+                    ChangeStatus(StatusType.Jump);
+                    Jump(1);
+                    break;
+            }
+        }
+
+    }
+
 }

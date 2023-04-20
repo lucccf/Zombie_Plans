@@ -3,7 +3,6 @@
 public class Terrorist : Knight
 {
     // Start is called before the first frame update
-    private Animator animator;
     private int y;
     void Start()
     {

@@ -12,6 +12,9 @@ public class Mage : Knight
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(2, 1) };
         ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
+
+        SetFindStatus();
+        //ToHome();
     }
     void Update()
     {
@@ -20,9 +23,16 @@ public class Mage : Knight
         animator.SetInteger("attack", KnightAnimaAttack);
         animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
+
+        SetBlueAndRed();
+        if (ToHomeFlag == true)
+        {
+            ToHome();
+        }
     }
     public override void Updatex()
     {
+        NormalUpdate();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(15, 0));//自然恢复韧性值
         if (status.death == true && RealStatus != StatusType.Death)
@@ -114,114 +124,100 @@ public class Mage : Knight
             return;
         }
 
-        int Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
-        if (Location == -1)
+        int Location = 0;
+        if (NormalFind(ref Location) == true)
         {
-            Moves(AnimaToward, status.WalkSpeed);
-        }
-        Fixpoint Nearx = new Fixpoint(0, 0);
-        int Pos = KnightGetNear(ref Nearx);
-        if (Pos == -1) // 如果距离太远，巡逻
-        {
-            Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
-            Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
-            Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
-            if (f.pos.x < Left)
+            int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
+            Fixpoint Nearx = LockPos.x;
+            
+            if (Location == Pos) //如果在同一区域
             {
-                AnimaToward = 1;
+                Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
+                Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
+                Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
+                Fixpoint Dis = f.pos.x - Nearx;
+                if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
+                if (Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))//使用技能的概率
+                {
+                    if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0))
+                    {
+                        ChangeStatus(StatusType.Recover);
+                    }
+                    else
+                    {
+                        ChangeStatus(StatusType.Disappear);
+                    }
+                    return;
+                }
+                if (Dis < new Fixpoint(14, 1)) //攻击
+                {
+                    if (f.pos.x < Nearx) AnimaToward = 1;
+                    else AnimaToward = -1;
+                    StatusTime = new Fixpoint(0, 0);
+                    ChangeStatus(StatusType.Attack);
+                    Attack(true);
+                    return;
+                }
+                else if (Dis < new Fixpoint(3, 0)) //靠近攻击
+                {
+                    if (f.pos.x < Nearx)
+                    {
+                        AnimaToward = 1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    else
+                    {
+                        AnimaToward = -1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    return;
+                }
+                else if (Dis < new Fixpoint(9, 0) && f.pos.x > Left && f.pos.x < Right) //远离射击
+                {
+                    if (f.pos.x > Nearx)
+                    {
+                        AnimaToward = 1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    else
+                    {
+                        AnimaToward = -1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    return;
+                }
+                else if (Dis < new Fixpoint(15, 0) || f.pos.x < Left || f.pos.x > Right) //射击
+                {
+                    if (f.pos.x < Nearx)
+                    {
+                        AnimaToward = 1;
+                    }
+                    else
+                    {
+                        AnimaToward = -1;
+                    }
+                    ChangeStatus(StatusType.Fire);
+                    return;
+                }
+                else //靠近
+                {
+                    if (f.pos.x < Nearx)
+                    {
+                        AnimaToward = 1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    else
+                    {
+                        AnimaToward = -1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                    }
+                    return;
+                }
             }
-            else if (f.pos.x > Right)
+            else //否则寻路
             {
-                AnimaToward = -1;
+                SearchX(HomeLocation);
             }
-            Moves(AnimaToward, status.WalkSpeed);
-            return;
-        }
-        else if (Location == Pos) //如果在同一区域
-        {
-            Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
-            Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
-            Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
-            Fixpoint Dis = f.pos.x - Nearx;
-            if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
-            if(Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))//使用技能的概率
-            {
-                if(Rand.rand()%2 == 1 || Dis > new Fixpoint(10,0))
-                {
-                    ChangeStatus(StatusType.Recover);
-                } else
-                {
-                    ChangeStatus(StatusType.Disappear);
-                }
-                return;
-            }
-            if (Dis < new Fixpoint(14, 1)) //攻击
-            {
-                if (f.pos.x < Nearx) AnimaToward = 1;
-                else AnimaToward = -1;
-                StatusTime = new Fixpoint(0, 0);
-                ChangeStatus(StatusType.Attack);
-                Attack(true);
-                return;
-            }
-            else if (Dis < new Fixpoint(3,0)) //靠近攻击
-            {
-                if (f.pos.x < Nearx)
-                {
-                    AnimaToward = 1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                else
-                {
-                    AnimaToward = -1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                return;
-            } else if(Dis < new Fixpoint(9,0) && f.pos.x > Left && f.pos.x < Right ) //远离射击
-            {
-                if (f.pos.x > Nearx)
-                {
-                    AnimaToward = 1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                else
-                {
-                    AnimaToward = -1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                return;
-            }
-            else if (Dis < new Fixpoint(15, 0) || f.pos.x < Left || f.pos.x > Right) //射击
-            {
-                if (f.pos.x < Nearx)
-                {
-                    AnimaToward = 1;
-                }
-                else
-                {
-                    AnimaToward = -1;
-                }
-                ChangeStatus(StatusType.Fire);
-                return;
-            }
-            else //靠近
-            {
-                if (f.pos.x < Nearx)
-                {
-                    AnimaToward = 1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                else
-                {
-                    AnimaToward = -1;
-                    Moves(AnimaToward, status.WalkSpeed);
-                }
-                return;
-            }
-        }
-        else //否则寻路
-        {
-            ChangeStatus(StatusType.Search);
         }
     }
 
