@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.PlayerSettings;
 
 public class Main_ctrl : MonoBehaviour
 {
@@ -675,6 +676,24 @@ public class Main_ctrl : MonoBehaviour
 
     static uint cp = 0;
 
+    void Debug_1(int index, int x)
+    {
+        long xx = 0;
+        foreach (var yy in All_objs.Values)
+        {
+            Fix_vector2 p = ((Fix_col2d)yy.modules[Object_ctrl.class_name.Fix_col2d]).pos;
+            xx += (int)(p.x.to_float() * 100 + p.y.to_float() * 100);
+            xx = xx * 233 % 998244353;
+            if (yy.modules.ContainsKey(Object_ctrl.class_name.Fix_rig2d))
+            {
+                Fix_vector2 q = ((Fix_rig2d)yy.modules[Object_ctrl.class_name.Fix_rig2d]).velocity;
+                xx += (int)(q.x.to_float() * 100 + q.y.to_float() * 100);
+                xx = xx * 233 % 998244353;
+            }
+        }
+        Debug.Log(index + " : " + x + " : " + xx);
+    }
+
     void Update()
     {
         while(Frames.Count > 0)
@@ -684,14 +703,7 @@ public class Main_ctrl : MonoBehaviour
             ++count;
 
             frame_index = f.Index;
-            float xx = 0;
-            foreach(var yy in All_objs)
-            {
-                Vector3 zz = yy.Value.gameObject.transform.position;
-                xx += zz.x;
-                xx += zz.y;
-            }
-            Debug.Log(frame_index + " :1:: " + xx);
+            Debug_1((int)frame_index, 1);
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
@@ -704,8 +716,8 @@ public class Main_ctrl : MonoBehaviour
                 p.DealInputs(f.Opts[i]);
             }
 
+            Debug_1((int)frame_index, 2);
 
-            Debug.Log(frame_index + " :2:: " + xx);
 
 
             for (int i = 0; i < f.Msgs.Count; i++)
@@ -713,6 +725,7 @@ public class Main_ctrl : MonoBehaviour
                 Player p = (Player)(All_objs[Ser_to_cli[f.Msgs[i].Userid]].modules[Object_ctrl.class_name.Player]);
                 p.DealMsgs(f.Msgs[i]);
             }
+
             foreach (long i in All_objs.Keys)
             {
                 if (All_objs[i].modules.ContainsKey(Object_ctrl.class_name.Player))
@@ -737,12 +750,15 @@ public class Main_ctrl : MonoBehaviour
                 }
             }
 
-            Debug.Log(frame_index + " :3:: " + xx);
+            Debug_1((int)frame_index, 3);
+
             Rigid_ctrl.rig_update();
             Collider_ctrl.Update_collison();
             Flow_path.Updatex();
             Map_ctrl.Updatex();
-            Debug.Log(frame_index + " :4:: " + xx);
+
+            Debug_1((int)frame_index, 4);
+
             while (Des_objs.Count > 0)
             {
                 long id_des = Des_objs.Dequeue();
@@ -753,7 +769,9 @@ public class Main_ctrl : MonoBehaviour
                 Obj_info q = Cre_objs.Dequeue();
                 CreateObj(q);
             }
-            Debug.Log(frame_index + " :5:: " + xx);
+
+            Debug_1((int)frame_index, 5);
+
             if (Exit)
             {
                 PlayerOptData y = new PlayerOptData();

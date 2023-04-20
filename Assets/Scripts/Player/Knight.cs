@@ -54,8 +54,6 @@ public class Knight : Monster
             Debug.LogError("Find Home Error");
         }
 
-        Debug.Log(id + "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-
     }
 
     // Update is called once per frame
