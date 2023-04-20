@@ -1328,16 +1328,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1704182767}
     m_Modifications:
-    - target: {fileID: 2729744347993995187, guid: 0b2846972c77fd249aef9febd679b1ff,
-        type: 3}
-      propertyPath: worktable
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2729744347993995187, guid: 0b2846972c77fd249aef9febd679b1ff,
-        type: 3}
-      propertyPath: NeedItemParent
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3436554806282817396, guid: 0b2846972c77fd249aef9febd679b1ff,
         type: 3}
       propertyPath: m_Name
