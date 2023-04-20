@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Medicine
   m_EditorClassIdentifier: 
   itemname: Medicine
-  description: Recover HP
+  description: "\u6062\u590D\u8840\u91CF"
   image: {fileID: 21300000, guid: 840eac4fba53eb14c9584728f260bc20, type: 3}
   id: 11
-  MakeNeeds: 
-  NeedsNumber: 
+  MakeNeeds: 02000000
+  NeedsNumber: 05000000

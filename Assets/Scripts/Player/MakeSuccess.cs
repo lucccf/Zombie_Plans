@@ -35,6 +35,15 @@ public class MakeSuccess : MonoBehaviour
             image.color = color;
             text.text = "成功提交";
         }
+        if(Type == 4)
+        {
+            Color color = image.color;
+            color.r = 1;
+            color.g = 0.2f;
+            color.b = 0.2f;
+            image.color = color;
+            text.text = "已经拥有";
+        }
     }
 
     void Update()

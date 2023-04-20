@@ -290,7 +290,7 @@ public class Monster1 : Monster
             {
                 Flow_path.zombie_cnt--;
             }
-            DeathFall("Medicine",3,1f);
+            DeathFall("Herb",30,1f);
             Main_ctrl.Desobj(id);
         }
     }

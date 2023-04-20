@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Herb
   m_EditorClassIdentifier: 
   itemname: Herb
-  description: Material used for synthesizing blood medicine
+  description: "\u6750\u6599\uFF0C\u7528\u4E8E\u5408\u6210\u8840\u836F"
   image: {fileID: 21300000, guid: 045265ab5886c26429cb849657abf59a, type: 3}
   id: 2
   MakeNeeds: 

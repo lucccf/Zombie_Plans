@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mineral
   m_EditorClassIdentifier: 
   itemname: Mineral
-  description: Basic materials for synthesizing skills
+  description: "\u57FA\u672C\u6750\u6599\uFF0C\u7528\u4E8E\u5408\u6210\u6280\u80FD"
   image: {fileID: 21300000, guid: 47bb5a6c9fb1b9a4b9e76c1a84c7a8a8, type: 3}
   id: 1
   MakeNeeds: 

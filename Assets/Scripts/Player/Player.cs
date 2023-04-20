@@ -7,9 +7,9 @@ public class Player : BasicCharacter
 {
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
-    public PlayerBag bag = new PlayerBag();
-    private Fixpoint QCD = new Fixpoint(0, 0);
-    private Fixpoint ECD = new Fixpoint(0, 0);
+    public PlayerBag bag;
+    private Fixpoint QCD = new Fixpoint(100000000, 0);
+    private Fixpoint ECD = new Fixpoint(100000000, 0);
 
     public string words = string.Empty;
     public bool words_ok = false;
@@ -30,6 +30,7 @@ public class Player : BasicCharacter
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
+        bag = new PlayerBag(id);
     }
 
     HashSet<PlayerOpt> list;
@@ -166,17 +167,47 @@ public class Player : BasicCharacter
                 {
                     if (bag.BagCheckItemNums(Makeitem.MakeNeeds[i], Makeitem.NeedsNumber[i]) == false) flag2 = false;
                 }
-                GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
-                GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                 if (flag2 == true)
                 {
-                    bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
-                    
+                    if (Makeitem.id != 114 && Makeitem.id != 514)
+                    {
+                        bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
+                    } else if(Makeitem.id == 114)
+                    {
+                        if(QCD < new Fixpoint(100,0))
+                        {
+                            GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
+                            tmp.GetComponent<MakeSuccess>().Type = 4;
+                            break;
+                        } else
+                        {
+                            QCD = new Fixpoint(0, 0);
+                        }
+                    } else
+                    {
+                        if (ECD < new Fixpoint(100, 0))
+                        {
+                            GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                            GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
+                            tmp.GetComponent<MakeSuccess>().Type = 4;
+                            break;
+                        } else
+                        {
+                            ECD = new Fixpoint(0, 0);
+                        }
+
+                    }
                     for (int i = 0; i < Makeitem.MakeNeeds.Length; ++i)
                     {
                         bag.BagGetItem(Makeitem.MakeNeeds[i], -Makeitem.NeedsNumber[i], Player_ctrl.BagUI);
                     }
-                    tmp.GetComponent<MakeSuccess>().Type = 1;
+                    if (checkid() == true)
+                    {
+                        GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                        GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
+                        tmp.GetComponent<MakeSuccess>().Type = 1;
+                    } 
                 }
                 else
                 {
@@ -711,14 +742,7 @@ public class Player : BasicCharacter
                 }
                 else if (trigger.triggername == "ItemSample")
                 {
-                    if (checkid() == true)
-                    {
-                        bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
-                    }
-                    else
-                    {
-                        bag.BagGetItem(trigger.itemid, trigger.itemnum);
-                    }
+                    bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
                     Main_ctrl.Desobj(a.opsite.id);
                 }
                 else if (trigger.triggername == "protal" && checkid() == true) {
@@ -1029,8 +1053,10 @@ public class Player : BasicCharacter
     {
         if(checkid() == true)
         {
-            Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
-            Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
+            if (QCD > new Fixpoint(100, 0)) Player_ctrl.QCD.text = "Unable";
+            else Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+            if (ECD > new Fixpoint(100, 0)) Player_ctrl.ECD.text = "Unable";
+            else Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
         }
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);

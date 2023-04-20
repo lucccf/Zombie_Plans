@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GreenMaterial
   m_EditorClassIdentifier: 
   itemname: GreenMaterial
-  description: Used for synthesizing large materials
+  description: "\u9AD8\u7EA7\u6750\u6599\uFF0C\u7528\u4E8E\u5408\u6210\u4FEE\u590D\u8BBE\u65BD\u7684\u5927\u6750\u6599"
   image: {fileID: 21300000, guid: e6c3b974e797ac746b9d075ca8baa725, type: 3}
   id: 5
   MakeNeeds: 01000000
