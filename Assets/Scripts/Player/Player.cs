@@ -7,7 +7,7 @@ public class Player : BasicCharacter
 {
     private float AnimaSpeed = 0f;
     private float AnimaAttack = 0f;
-    private PlayerBag bag = new PlayerBag();
+    public PlayerBag bag = new PlayerBag();
     private Fixpoint QCD = new Fixpoint(0, 0);
     private Fixpoint ECD = new Fixpoint(0, 0);
 

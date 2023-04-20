@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2547106115
+CRC: 1941774991
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 60d7fcb798a7f7149cee27707bef1c7f
+    Hash: 5b2d353860826379b52c5d08a04771ba
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1480195ee4c2b49a3b5410c82b2dfb5b
+    Hash: f98e6b30b373975404196f83ee7ae3f1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -30,11 +30,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -49,6 +49,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: aee607920057d704fb5ac714f0990cc9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1c8cab923766b264dbfd891511002c8b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: b4d0334399409654ebbc795e69053d96, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
 - Class: 114
@@ -112,7 +114,9 @@ Assets:
 - Assets/Resources/Prefabs/LightBall.prefab
 - Assets/Resources/Prefabs/home1.prefab
 - Assets/Resources/Prefabs/number/9.png
+- Assets/Resources/Prefabs/UI/Button.prefab
 - Assets/Resources/Prefabs/number/2.png
+- Assets/Resources/Prefabs/UI/BagItem.prefab
 - Assets/Resources/Prefabs/protal.prefab
 - Assets/Resources/Prefabs/number/0.png
 - Assets/Resources/Prefabs/number/5.png

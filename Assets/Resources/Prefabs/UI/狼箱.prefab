@@ -692,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3436554806282817397}
-  - component: {fileID: 2729744347993995187}
+  - component: {fileID: 6201125743723449951}
   m_Layer: 5
   m_Name: "\u72FC\u7BB1"
   m_TagString: Untagged
@@ -722,7 +722,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 821.34656, y: 516.4982}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2729744347993995187
+--- !u!114 &6201125743723449951
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -731,28 +731,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3436554806282817396}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d53562e437cb664385e90f16b193ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: 08d5b243722e18148b50eca785d0ea90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  worktable: {fileID: 0}
+  ItemParent: {fileID: 2314860816371410994}
+  GetButton: {fileID: 3399749402872841698}
   CloseButton: {fileID: 4537043793364715693}
-  MakeButton: {fileID: 3399749402872841698}
-  ItemListParent: {fileID: 2314860816371410994}
-  NeedItemParent: {fileID: 0}
-  ItemDescription: {fileID: 1044891368565599326}
-  MakedItemList:
-  - {fileID: 11400000, guid: bb7d1d51a51782646b4c7f1814d2c13c, type: 2}
-  - {fileID: 11400000, guid: dbbd068dd200a274cb7dac0b8df98490, type: 2}
-  - {fileID: 11400000, guid: bd26ab6f4425a384fbdd2adfaca3523b, type: 2}
-  - {fileID: 11400000, guid: 061a98fd538a31e469d12caf3e622118, type: 2}
-  - {fileID: 11400000, guid: 9400ec0f318b3cb4c9309ea3d6ff724d, type: 2}
-  - {fileID: 11400000, guid: 99edd18732893ae4a8185efa0c0fa86c, type: 2}
-  - {fileID: 11400000, guid: efe0b2124c2fdc24db322366bf9e49ad, type: 2}
-  - {fileID: 11400000, guid: 9ea8b5ee75a93e241a8916f089a52986, type: 2}
-  - {fileID: 11400000, guid: 2f804fb94359649498a2864c12b237bf, type: 2}
-  Selected: {fileID: 8725747546441561658, guid: c5122c64de903634ca79efe492cca809,
+  Description: {fileID: 1044891368565599326}
+  SelectedImage: {fileID: 8725747546441561658, guid: c5122c64de903634ca79efe492cca809,
     type: 3}
-  UnSelected: {fileID: 4216899518972537890, guid: 466eb4422e10c384a83f9e66b14a774a,
+  UnSelectedImage: {fileID: 4216899518972537890, guid: 466eb4422e10c384a83f9e66b14a774a,
     type: 3}
 --- !u!1 &4119217726401007357
 GameObject:
