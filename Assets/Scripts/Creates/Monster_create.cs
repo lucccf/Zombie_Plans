@@ -25,6 +25,16 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> size_zombies2 = new List<Fix_vector2>();
     public static float cnt1 = 0;
 
+    public static void init()
+    {
+        pos_monster = new List<Mon_pos>();
+        size_monster = new List<Fix_vector2>();
+        pos_zombies1 = new List<Mon_pos>();
+        size_zombies1 = new List<Fix_vector2>();
+        pos_zombies2 = new List<Mon_pos>();
+        size_zombies2 = new List<Fix_vector2>();
+    }
+
     public static void Mon_create1()  //生成资源怪
     {
         for(int i = 0; i < pos_monster.Count; i++)
