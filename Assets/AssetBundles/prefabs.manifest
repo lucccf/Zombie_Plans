@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 864083444
+CRC: 2313939454
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 43f1b16cff7044aa4880f4ce50955229
+    Hash: 752795e7831ebd3a0991259ff66f0b44
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2cca4fa3ec133a20adef9e4b687b071b
+    Hash: 66d4124d75d7b4395acda860786544ae
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,9 +34,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
@@ -164,4 +164,5 @@ Assets:
 - Assets/Prefabs/Map_item/Devil_m.prefab
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
-Dependencies: []
+Dependencies:
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music

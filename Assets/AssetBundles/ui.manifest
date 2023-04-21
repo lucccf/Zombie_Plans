@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1336346515
+CRC: 430478755
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c86c9ffa3b08b1b4946be79f904b79a9
+    Hash: 32e980062895de14bfe8abb1da85c07f
   TypeTreeHash:
     serializedVersion: 2
     Hash: 94fb1a68069f498c755d4ed656474677
@@ -119,12 +119,14 @@ SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/Prefabs/particle.prefab
 - Assets/Prefabs/UI_scene/Login_scene.prefab
+- Assets/Map/All_map.renderTexture
 - Assets/Prefabs/UI_scene/Start_scene.prefab
 - Assets/Prefabs/ProtalButton.prefab
 - Assets/Prefabs/UI_scene/Battle_scene.prefab
 - Assets/Prefabs/TinyFacButton.prefab
+- Assets/Map/Tiny_map.renderTexture
 - Assets/Prefabs/TinyProtalButton.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
