@@ -4,3 +4,5 @@ obj/
 Assembly-CSharp.csproj
 Assembly-CSharp-Editor.csproj
 Temp/
+Zombie_Plans.sln
+*.meta

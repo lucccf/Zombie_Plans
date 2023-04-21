@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2088678382
+CRC: 943201028
 Hashes:
   AssetFileHash:
     serializedVersion: 2
@@ -19,17 +19,17 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/Prefabs/items/BlueBigMaterial.asset
-- Assets/Resources/Prefabs/items/YellowBigMaterial.asset
-- Assets/Resources/Prefabs/items/Herb.asset
-- Assets/Resources/Prefabs/items/Medicine.asset
-- Assets/Resources/Prefabs/items/RedMaterial.asset
-- Assets/Resources/Prefabs/items/Mineral.asset
-- Assets/Resources/Prefabs/items/Lightball.asset
-- Assets/Resources/Prefabs/items/Light.asset
-- Assets/Resources/Prefabs/items/BlueMaterial.asset
-- Assets/Resources/Prefabs/items/GreenMaterial.asset
-- Assets/Resources/Prefabs/items/YellowMaterial.asset
-- Assets/Resources/Prefabs/items/RedBigMaterial.asset
-- Assets/Resources/Prefabs/items/GreenBigMaterial.asset
+- Assets/Prefabs/items/BlueBigMaterial.asset
+- Assets/Prefabs/items/YellowBigMaterial.asset
+- Assets/Prefabs/items/Herb.asset
+- Assets/Prefabs/items/Medicine.asset
+- Assets/Prefabs/items/RedMaterial.asset
+- Assets/Prefabs/items/Mineral.asset
+- Assets/Prefabs/items/Lightball.asset
+- Assets/Prefabs/items/Light.asset
+- Assets/Prefabs/items/BlueMaterial.asset
+- Assets/Prefabs/items/GreenMaterial.asset
+- Assets/Prefabs/items/YellowMaterial.asset
+- Assets/Prefabs/items/RedBigMaterial.asset
+- Assets/Prefabs/items/GreenBigMaterial.asset
 Dependencies: []

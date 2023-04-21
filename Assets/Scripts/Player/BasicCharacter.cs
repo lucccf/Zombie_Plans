@@ -19,6 +19,8 @@ public class BasicCharacter : MonoBehaviour
     protected int AnimaStatus = 0;
     public float AnimaToward = 0;
     protected int AnimaHited = 0;
+    protected AudioSource audiosource;
+    
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 
