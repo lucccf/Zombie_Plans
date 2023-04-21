@@ -57,10 +57,12 @@
 		<surely>
 			<id>11</id>
 			<num>2</num>
-			<boss_num>5</boss_num>
 		</surely>
 		<random>
 		</random>
+		<room>
+			<num>5</num>
+		</room>
 	</monster>
 	
 </monster_item>
