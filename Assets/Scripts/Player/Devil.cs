@@ -14,7 +14,7 @@ public class Devil : Knight
     public override void Startx()
     {
         CharacterType = 1 + type2;
-        SetStatus(1000, 10);//血量，基础攻击力
+        SetStatus(1240, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         //status.max_toughness = 200;
         //status.toughness = 200;

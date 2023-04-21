@@ -28,7 +28,7 @@ public class Player : BasicCharacter
         animator = GetComponent<Animator>();
         SetStatus(1000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
         bag = new PlayerBag(id);
     }
@@ -588,7 +588,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
@@ -608,7 +608,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -627,7 +627,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -646,7 +646,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -662,7 +662,7 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
             }
         }
 
@@ -778,7 +778,7 @@ public class Player : BasicCharacter
     private static Fixpoint KickShiftx = new Fixpoint(1, 0);//飞踢攻击框
     private static Fixpoint KickShifty = new Fixpoint(-1, 0);
 
-    private static Fixpoint KickDamage = new Fixpoint(6, 0);
+    private static Fixpoint KickDamage = new Fixpoint(5, 0);
     private bool is_kicked = false;
     private void Kick()
     {
@@ -793,7 +793,7 @@ public class Player : BasicCharacter
         {
             is_kicked = true;
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 90, AnimaToward,3);//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 105, AnimaToward,3);//最后一个参数是击飞类型
         }
 
         if (Press[KeyCode.A])

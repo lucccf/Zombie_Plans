@@ -7,7 +7,7 @@ public class Mage : Knight
     public override void Startx()
     {
         CharacterType = 1 + type2;
-        SetStatus(500, 10);//血量，基础攻击力
+        SetStatus(370, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(2, 1) };
@@ -172,7 +172,7 @@ public class Mage : Knight
                     }
                     return;
                 }
-                else if (Dis < new Fixpoint(9, 0) && f.pos.x > Left && f.pos.x < Right) //远离射击
+                else if (Dis < new Fixpoint(6, 0) && f.pos.x > Left && f.pos.x < Right) //远离射击
                 {
                     if (f.pos.x > Nearx)
                     {
@@ -186,7 +186,7 @@ public class Mage : Knight
                     }
                     return;
                 }
-                else if (Dis < new Fixpoint(15, 0) || f.pos.x < Left || f.pos.x > Right) //射击
+                else if (Dis < new Fixpoint(10, 0) || f.pos.x < Left || f.pos.x > Right) //射击
                 {
                     if (f.pos.x < Nearx)
                     {

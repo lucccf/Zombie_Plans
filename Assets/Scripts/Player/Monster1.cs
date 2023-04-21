@@ -10,7 +10,7 @@ public class Monster1 : Monster
     private Player player = null;
     public override void Startx()
     {
-        SetStatus(500, 10);
+        SetStatus(620, 10);
         animator = GetComponent<Animator>();
         CharacterType = 1 + type2;
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
