@@ -6,6 +6,7 @@ public class AB : MonoBehaviour
 {
     // Start is called before the first frame update
     static Dictionary<string, object> objs = new Dictionary<string, object>();
+    static List<object> items = new List<object>();
     static List<AssetBundleCreateRequest> bundle_req = new List<AssetBundleCreateRequest>();
     static List<AssetBundleRequest> bundles= new List<AssetBundleRequest>();
 
@@ -60,6 +61,10 @@ public class AB : MonoBehaviour
                 objs[y.name] = y;
             }
         }
+        foreach (var y in bundles[1].allAssets)
+        {
+            items.Add(y);
+        }
         foreach (var x in bundle_req)
         {
             x.assetBundle.Unload(false);
@@ -72,6 +77,10 @@ public class AB : MonoBehaviour
     {
         //Debug.Log(name);
         return objs[name];
-        //return Resources.Load("Prefabs/" + name);
+    }
+
+    public static List<object> getitems()
+    {
+        return items;
     }
 }
