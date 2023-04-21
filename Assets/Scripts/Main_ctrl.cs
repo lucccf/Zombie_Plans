@@ -534,6 +534,11 @@ public class Main_ctrl : MonoBehaviour
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     m.Startx();
+                    if (info.falls == null)
+                    {
+                        info.falls = new Dictionary<string, int>();
+                        info.falls["Mineral"] = 50;
+                    }
                     m.Falls = info.falls;
                     if (m.type2 == 1)
                     {
