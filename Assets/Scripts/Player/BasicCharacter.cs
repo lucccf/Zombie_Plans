@@ -312,9 +312,14 @@ public class BasicCharacter : MonoBehaviour
         }
     }
 
-    protected void DeathFall(string name,int num,float size)
+    public Dictionary<string, int> Falls = new Dictionary<string, int>();
+
+    protected void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), name, num, size,new Fix_vector2(0,0));
+        foreach (var xx in Falls)
+        {
+            Main_ctrl.NewItem(f.pos + new Fix_vector2(new Fixpoint((long)(Rand.rand() % 21 - 10), 1), new Fixpoint(0, 0)), xx.Key, xx.Value, 1f, new Fix_vector2(0, 0));
+        }
     }
 
     public float CheckHealth()

@@ -13,6 +13,11 @@ public class Map_create : MonoBehaviour
 
     static List<List<Fixpoint>> col_list = new List<List<Fixpoint>>();
     static List<List<bool>> ok_list = new List<List<bool>>();
+    public static void init()
+    {
+        col_list = new List<List<Fixpoint>>();
+        ok_list = new List<List<bool>>();
+    }
 
     public static void Wall_create()
     {
