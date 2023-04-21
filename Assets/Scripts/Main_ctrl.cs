@@ -64,6 +64,7 @@ public class Main_ctrl : MonoBehaviour
         Map_ctrl.Map_items = new Dictionary<long, GameObject>();
         Flow_path.init();
         Monster_create.init();
+        Map_create.init();
     }
 
     void Start()
@@ -423,19 +424,6 @@ public class Main_ctrl : MonoBehaviour
         }
     }
 
-    public static void NewMonster()
-    {
-        Obj_info p = new Obj_info();
-        p.name = "Monster1";
-        p.hei = new Fixpoint(225, 2);
-        p.wid = new Fixpoint(113, 2);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
-        p.col_type = Fix_col2d.col_status.Collider;
-        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-        p.classnames.Add(Object_ctrl.class_name.Moster);
-        CreateObj(p);
-    }
-
     public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
         long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type)
     {
@@ -541,6 +529,7 @@ public class Main_ctrl : MonoBehaviour
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     m.Startx();
+                    m.Falls = info.falls;
                     if (m.type2 == 1)
                     {
                         m.ToHome();
@@ -826,7 +815,8 @@ public class Obj_info
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
     public int hit_fly_type;
-    public int cre_type; 
+    public int cre_type;
+    public Dictionary<String, int> falls;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();

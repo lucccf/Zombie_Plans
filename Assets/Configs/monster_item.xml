@@ -1,0 +1,87 @@
+<monster_item>
+
+	<monster>
+		<id> 普通怪 </id>
+		<surely>
+			<id>2</id>
+			<num>2</num>
+		</surely>
+		<random>
+			
+		</random>
+	</monster>
+
+	<monster>
+		<id> 法师 </id>
+		<surely>
+			<id>1</id>
+			<num>5</num>
+		</surely>
+		<random>
+			<total_type>4</total_type>
+			<type>2</type>
+			<id>3</id>
+			<num>2</num>
+			<id>4</id>
+			<num>2</num>
+			<id>5</id>
+			<num>2</num>
+			<id>6</id>
+			<num>2</num>
+		</random>
+		
+	</monster>
+
+	<monster>
+		<id> 黑骑士 </id>
+		<surely>
+			<id>1</id>
+			<num>5</num>
+		</surely>
+		<random>
+			<total_type>4</total_type>
+			<type>2</type>
+			<id>3</id>
+			<num>2</num>
+			<id>4</id>
+			<num>2</num>
+			<id>5</id>
+			<num>2</num>
+			<id>6</id>
+			<num>2</num>
+		</random>
+	</monster>
+
+	<monster>
+		<id> boss </id>
+		<surely>
+			<id>11</id>
+			<num>2</num>
+		</surely>
+		<random>
+		</random>
+		<room>
+			<area>
+				<areaid>1</areaid>
+				<id>7</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>2</areaid>
+				<id>8</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>3</areaid>
+				<id>9</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>4</areaid>
+				<id>10</id>
+				<num>5</num>
+			</area>
+		</room>
+	</monster>
+	
+</monster_item>

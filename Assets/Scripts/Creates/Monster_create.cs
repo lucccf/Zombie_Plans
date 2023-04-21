@@ -33,6 +33,7 @@ public class Monster_create : MonoBehaviour
         size_zombies1 = new List<Fix_vector2>();
         pos_zombies2 = new List<Mon_pos>();
         size_zombies2 = new List<Fix_vector2>();
+        
     }
 
     public static void Mon_create1()  //生成资源怪

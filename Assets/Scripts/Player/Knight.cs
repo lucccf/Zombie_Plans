@@ -388,6 +388,7 @@ public class Knight : Monster
         KnightAnimaAttack = 0;
         if(StatusTime > new Fixpoint(2,0))//死亡到消失的时间
         {
+            DeathFall();
             if (type2 == 1)
             {
                 Flow_path.zombie_cnt--;
