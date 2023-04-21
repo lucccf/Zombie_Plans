@@ -1,19 +1,17 @@
 ManifestFileVersion: 0
-CRC: 704579880
+CRC: 23345648
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9bcc2f72b4b2aa84bde3017a2e8f521a
+    Hash: ac4802a4606362150c2e572a8df0d7b8
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c584b826671b614c0947f5ed9972cb20
+    Hash: 26dc8c3ab6228db87b1c69b1b5744072
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
-  Script: {instanceID: 0}
-- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -121,7 +119,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Prefabs/UI/Tiny_camera.prefab
 - Assets/Prefabs/particle.prefab
 - Assets/Prefabs/UI_scene/Login_scene.prefab
 - Assets/Map/All_map.renderTexture
@@ -131,8 +128,7 @@ Assets:
 - Assets/Prefabs/TinyFacButton.prefab
 - Assets/Map/Tiny_map.renderTexture
 - Assets/Prefabs/TinyProtalButton.prefab
-- Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/prefabs

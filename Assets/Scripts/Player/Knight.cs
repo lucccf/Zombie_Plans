@@ -16,6 +16,7 @@ public class Knight : Monster
         HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
+        audiosource = GetComponent<AudioSource>();
         SetFindStatus();
         //ToHome();
 
@@ -275,7 +276,11 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();//距离判定
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack1Damage,ref KnightCreatedAttack);
+            if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) 
+            {
+                PlayMusic("sword1");
+                KnightCreateAttack(Attack1Damage, ref KnightCreatedAttack); 
+            }
         }
         else if (KnightAnimaAttack == 2)
         {
@@ -284,7 +289,11 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack2Damage, ref KnightCreatedAttack);
+            if (StatusTime > Attack2BeginToHitTime && KnightCreatedAttack == false) 
+            {
+                PlayMusic("sword2");
+                KnightCreateAttack(Attack2Damage, ref KnightCreatedAttack); 
+            }
         }
         else if (KnightAnimaAttack == 3)
         {
@@ -292,7 +301,10 @@ public class Knight : Monster
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack3Damage, ref KnightCreatedAttack);
+            if (StatusTime > Attack3BeginToHitTime && KnightCreatedAttack == false) {
+                PlayMusic("sword3");
+                KnightCreateAttack(Attack3Damage, ref KnightCreatedAttack); 
+            }
         }
 
         if (StatusTime <= new Fixpoint(2, 1))
@@ -350,6 +362,7 @@ public class Knight : Monster
         {
             if(SkillAttackTimes == 0)
             {
+                PlayMusic("爆裂重击释放语音");
                 Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
                 if (AnimaToward < 0) pos.x -= 3f;
                 else pos.x += 3f;

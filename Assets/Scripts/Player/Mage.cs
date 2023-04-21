@@ -12,7 +12,7 @@ public class Mage : Knight
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
         HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(5, 1), new Fixpoint(2, 1) };
         ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
-
+        audiosource = GetComponent<AudioSource>();
         SetFindStatus();
         //ToHome();
     }
@@ -310,6 +310,7 @@ public class Mage : Knight
         if(StatusTime > FireBeginToHitTime && Fired == false)
         {
             Fired = true;
+            PlayMusic("火焰释放");
             Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
         }
         if(StatusTime > FireDuringTime)
@@ -323,6 +324,10 @@ public class Mage : Knight
     private static int RecoverHp = 100;//回血量
     private void Recover()
     {
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("回血语音");
+        }
         if(StatusTime > RecoverTime)
         {
             status.RecoverHp(RecoverHp);

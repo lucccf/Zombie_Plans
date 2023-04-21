@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5046087499321705248}
   - component: {fileID: 198059168995235928}
   - component: {fileID: 199469222070960104}
-  - component: {fileID: 1370529335028496602}
   m_Layer: 0
   m_Name: debuff
   m_TagString: Untagged
@@ -4783,20 +4782,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &1370529335028496602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1048394385358214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debuffparticle: {fileID: 0}
-  t: 0
 --- !u!1 &1352915096013946
 GameObject:
   m_ObjectHideFlags: 0

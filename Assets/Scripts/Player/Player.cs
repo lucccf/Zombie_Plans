@@ -590,9 +590,8 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻1");
                 CreatedAttack = true;
-                audiosource.clip = musicClip;
-                audiosource.Play();
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
 
@@ -612,6 +611,7 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻2");
                 CreatedAttack = true;
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
@@ -631,6 +631,7 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻3");
                 CreatedAttack = true;
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
             }
@@ -650,6 +651,7 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻4");
                 CreatedAttack = true;
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
             }
@@ -666,6 +668,7 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻5");
                 CreatedAttack = true;
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
             }
@@ -797,6 +800,7 @@ public class Player : BasicCharacter
         if(StatusTime > KickBeginToHit && is_kicked == false)
         {
             is_kicked = true;
+            PlayMusic("飞踢");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
                 new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 90, AnimaToward,3);//最后一个参数是击飞类型
         }
@@ -855,6 +859,7 @@ public class Player : BasicCharacter
         if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
         {
             HeavyAttackHasHited = true;
+            PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
                 new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0);//最后一个参数是击飞类型
         } 
@@ -904,6 +909,7 @@ public class Player : BasicCharacter
         if (StatusTime > UpAttackBeginToHit && UpAttackHasHited == false)
         {
             UpAttackHasHited = true;
+            PlayMusic("升龙拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
                 new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward,2);//最后一个参数是击飞类型
         }
@@ -940,7 +946,10 @@ public class Player : BasicCharacter
     private static Fixpoint Fire1Damage = new Fixpoint(2, 0);
     private void Fire1()
     {
-
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("mf_moonlight_earth");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -988,6 +997,10 @@ public class Player : BasicCharacter
     private static Fixpoint Fire2Attack3 = new Fixpoint(2, 0);
     private void Fire2()
     {
+        if (StatusTime == Dt.dt)
+        {
+            PlayMusic("三连波");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -1021,6 +1034,10 @@ public class Player : BasicCharacter
     private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); //喝药的时间
     private void RecoverHp(bool first)
     {
+        if (StatusTime == Dt.dt)
+        {
+            PlayMusic("喝药");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -1041,6 +1058,10 @@ public class Player : BasicCharacter
 
     private void Death()
     {
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("mf_die");
+        }
         AnimaAttack = 0;
         AnimaHited = 0;
         AnimaSpeed = 0;

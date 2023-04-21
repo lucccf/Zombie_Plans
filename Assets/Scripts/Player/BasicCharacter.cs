@@ -88,7 +88,13 @@ public class BasicCharacter : MonoBehaviour
 
     }
 
-    
+    protected void PlayMusic(string name)
+    {
+        audiosource.Stop();
+        audiosource.clip = (AudioClip)AB.getobj(name);
+        audiosource.Play();
+    }
+
     /*
     protected void ChangeStatus(int animastatus)
     {

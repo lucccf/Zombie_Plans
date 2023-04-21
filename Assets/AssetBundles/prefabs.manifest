@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2313939454
+CRC: 3424284756
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 752795e7831ebd3a0991259ff66f0b44
+    Hash: 3603f60235a09e41b74236a369e0a427
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 66d4124d75d7b4395acda860786544ae
+    Hash: 97d7c73dbdfa9bb4c654421c685b1d55
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -89,8 +89,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -165,4 +163,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/music
