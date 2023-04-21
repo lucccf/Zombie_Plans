@@ -1514,7 +1514,7 @@ GameObject:
   - component: {fileID: 7496483347801086566}
   - component: {fileID: 1382331463443437617}
   m_Layer: 5
-  m_Name: "\u4E3B\u754C\u9762UI"
+  m_Name: Start_scene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
