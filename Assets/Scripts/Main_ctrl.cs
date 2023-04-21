@@ -79,7 +79,15 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Background_create();
         Player_ctrl.Init_bag();
         CalRoad();
-        Item[] Items = Resources.LoadAll<Item>("Prefabs/items/");
+        Item[] Items;
+
+        List<object> items = AB.getitems();
+        Items = new Item[items.Count];
+        for (int i = 0; i < items.Count; i++)
+        {
+            Items[i] = (Item)items[i];
+        }
+
         for (int i = 0; i < Items.Length; ++i)
         {
             ItemList.Add(Items[i].id, Items[i]);
@@ -493,7 +501,6 @@ public class Main_ctrl : MonoBehaviour
     public static GameObject CreateObj(Obj_info info)
     {
         GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        //GameObject obj = Instantiate((GameObject)Resources.Load("Prefabs/" + info.name));
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();

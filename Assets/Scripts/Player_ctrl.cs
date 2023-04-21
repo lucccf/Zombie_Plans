@@ -40,7 +40,12 @@ public class Player_ctrl : MonoBehaviour
         //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
         //MakeSuccessUI.SetActive(false);
         //MakeFailedUI.SetActive(false);
-        item = Resources.LoadAll<Item>("Prefabs/items/");
+        List<object> items = AB.getitems();
+        item = new Item[items.Count];
+        for(int i = 0; i < items.Count; i++)
+        {
+            item[i] = (Item)items[i];
+        }
         ItemList.Clear();
         Attack = new Dictionary<(int, int), int>();
         for (int i = 0; i < item.Length; ++i)

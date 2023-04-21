@@ -213,7 +213,7 @@ public class Player : BasicCharacter
                 {
                     if (checkid() == true)
                     {
-                        GameObject ui = (GameObject)Resources.Load("Prefabs/UI/提示UI");
+                        GameObject ui = (GameObject)AB.getobj("提示UI");
                         Instantiate(ui, Player_ctrl.BagUI.transform);
                     }
                     //Player_ctrl.MakeFailedUI.SetActive(true);
