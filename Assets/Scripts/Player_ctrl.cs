@@ -33,7 +33,7 @@ public class Player_ctrl : MonoBehaviour
 
     public static void Init_bag()
     {
-        BagUI = GameObject.Find("Canvas/PlayerPanel/BagButton").GetComponent<NewBag>();
+        BagUI = GameObject.Find("BagButton").GetComponent<NewBag>();
         QCD = GameObject.Find("QCD").GetComponentInChildren<Text>();
         ECD = GameObject.Find("ECD").GetComponentInChildren<Text>();
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
