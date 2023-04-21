@@ -1,18 +1,15 @@
 <monster_item>
 
 	<monster>
-		<id> 普通怪 </id>
+		<id>Monster1</id>
 		<surely>
 			<id>2</id>
 			<num>2</num>
 		</surely>
-		<random>
-			
-		</random>
 	</monster>
 
 	<monster>
-		<id> 法师 </id>
+		<id>Mage</id>
 		<surely>
 			<id>1</id>
 			<num>5</num>
@@ -33,7 +30,7 @@
 	</monster>
 
 	<monster>
-		<id> 黑骑士 </id>
+		<id>knight</id>
 		<surely>
 			<id>1</id>
 			<num>5</num>
@@ -53,13 +50,11 @@
 	</monster>
 
 	<monster>
-		<id> boss </id>
+		<id>Devil</id>
 		<surely>
 			<id>11</id>
 			<num>2</num>
 		</surely>
-		<random>
-		</random>
 		<room>
 			<area>
 				<areaid>1</areaid>
