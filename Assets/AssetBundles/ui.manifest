@@ -1,17 +1,19 @@
 ManifestFileVersion: 0
-CRC: 23345648
+CRC: 1056141600
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ac4802a4606362150c2e572a8df0d7b8
+    Hash: fb8cec0e7cba4ab57e832fe6b8793091
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 26dc8c3ab6228db87b1c69b1b5744072
+    Hash: bd37aff9661ab36ad68ae04571fadf09
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
+  Script: {instanceID: 0}
+- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -124,10 +126,12 @@ Assets:
 - Assets/Map/All_map.renderTexture
 - Assets/Prefabs/UI_scene/Start_scene.prefab
 - Assets/Prefabs/ProtalButton.prefab
+- Assets/Prefabs/UI/Tiny_camera.prefab
 - Assets/Prefabs/UI_scene/Battle_scene.prefab
 - Assets/Prefabs/TinyFacButton.prefab
 - Assets/Map/Tiny_map.renderTexture
 - Assets/Prefabs/TinyProtalButton.prefab
+- Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
 - D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item

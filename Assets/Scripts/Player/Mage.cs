@@ -246,13 +246,13 @@ public class Mage : Knight
         ChangeStatus(StatusType.Normal);
         return;
     }
-    protected void MageCreateAttack(Fixpoint damage, ref bool created_attack)
+    protected void MageCreateAttack(Fixpoint damage, ref bool created_attack,string Music)
     {
         created_attack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward, 3);//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward, 3,Music);//最后一个参数是击飞类型
     }
     protected void Attack(bool first)
     {
@@ -268,7 +268,7 @@ public class Mage : Knight
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack1Damage, ref MageCreatedAttack);
+            if (StatusTime > Attack1BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack1Damage, ref MageCreatedAttack, "木棍1");
         }
         else if (KnightAnimaAttack == 2)
         {
@@ -277,7 +277,7 @@ public class Mage : Knight
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack2Damage, ref MageCreatedAttack);
+            if (StatusTime > Attack2BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack2Damage, ref MageCreatedAttack, "木棍2");
         }
         else if (KnightAnimaAttack == 3)
         {
@@ -285,7 +285,7 @@ public class Mage : Knight
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack3Damage, ref MageCreatedAttack);
+            if (StatusTime > Attack3BeginToHitTime && MageCreatedAttack == false) MageCreateAttack(Attack3Damage, ref MageCreatedAttack, "木棍3");
         }
 
         if (StatusTime <= new Fixpoint(2, 1))
@@ -311,7 +311,7 @@ public class Mage : Knight
         {
             Fired = true;
             PlayMusic("火焰释放");
-            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType,3, "火球命中");//最后一个参数是击飞类型
         }
         if(StatusTime > FireDuringTime)
         {

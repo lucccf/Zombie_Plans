@@ -425,7 +425,7 @@ public class Main_ctrl : MonoBehaviour
     }
 
     public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type)
+        long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type,string Music)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -441,6 +441,7 @@ public class Main_ctrl : MonoBehaviour
         p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
         p.hit_fly_type = hit_fly_type;
+        p.MusicName = Music;
         if(with == true)
         {
             p.type = "1";
@@ -448,7 +449,7 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
     public static void NewAttack2(string name,Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id, float toward,int attacker_type,int hit_fly_type)
+        long attacker_id, float toward,int attacker_type,int hit_fly_type,string Music)
     {
         Obj_info p = new Obj_info();
         p.name = name;
@@ -464,6 +465,7 @@ public class Main_ctrl : MonoBehaviour
         p.type = "wave";
         p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
+        p.MusicName = Music;
 
         Creobj(p);
     }
@@ -546,6 +548,7 @@ public class Main_ctrl : MonoBehaviour
                     a.toward = info.toward;
                     a.attacker_type = info.attacker_type;
                     a.hited_fly_type = info.hit_fly_type;
+                    a.MusicName = info.MusicName;
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
@@ -817,6 +820,7 @@ public class Obj_info
     public int hit_fly_type;
     public int cre_type;
     public Dictionary<String, int> falls;
+    public string MusicName;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();

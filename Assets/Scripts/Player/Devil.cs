@@ -223,7 +223,7 @@ public class Devil : Knight
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), HPDamage, ToughnessDamage, AnimaToward,3);
+        CreateAttack(AttackPos, new Fixpoint(2, 0), new Fixpoint(2, 0), HPDamage, ToughnessDamage, AnimaToward,3,"");
     }
     private void DevilAttack()
     {
@@ -235,19 +235,19 @@ public class Devil : Knight
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x + new Fixpoint(5,1), f.pos.y), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack1Damage, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
+                DevilAttack1Damage, 40, id, AnimaToward, CharacterType,3,"");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
         } else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x ,f.pos.y + new Fixpoint(5,1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack2Damage, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
+                DevilAttack2Damage, 40, id, AnimaToward, CharacterType,3,"");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
         } else if(StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y - new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack3Damage, 40, id, AnimaToward, CharacterType,3);//最后一个参数是击飞类型
+                DevilAttack3Damage, 40, id, AnimaToward, CharacterType,3,"");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
         } else
         {
@@ -266,7 +266,7 @@ public class Devil : Knight
         {
             DevilCannonMagicShooted = true;
             Main_ctrl.NewAttack2("MagicCannon", new Fix_vector2(f.pos.x, f.pos.y + new Fixpoint(5, 1)), new Fixpoint(2, 0), new Fixpoint(2, 0),
-                status.Damage() * DevilCannonMagicAttack, 120, id, AnimaToward, CharacterType,2);//最后一个参数是击飞类型
+                status.Damage() * DevilCannonMagicAttack, 120, id, AnimaToward, CharacterType,2,"");//最后一个参数是击飞类型
         }
         if(StatusTime > DevilCannonMagicQuitTime)
         {
@@ -294,7 +294,7 @@ public class Devil : Knight
             ++DevilBonmTimes;
             Fix_vector2 pos = f.pos.Clone();
             pos.y += new Fixpoint(18,1);
-            CreateAttack(pos, new Fixpoint(45, 1), new Fixpoint(7, 0), status.Damage() * DevilBombAttack, 60, AnimaToward,3);//最后一个参数是击飞类型
+            CreateAttack(pos, new Fixpoint(45, 1), new Fixpoint(7, 0), status.Damage() * DevilBombAttack, 60, AnimaToward,3,"");//最后一个参数是击飞类型
         }
         if(StatusTime > DevilBombQuitTime)
         {
@@ -321,7 +321,7 @@ public class Devil : Knight
             if (DevilSuckerPunckCreatedAttack == false)
             {
                 DevilSuckerPunckCreatedAttack = true;
-                CreateAttackWithCharacter(f.pos, new Fix_vector2(0, 0), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * DevilSuckerPunchAttack, 105, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttackWithCharacter(f.pos, new Fix_vector2(0, 0), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * DevilSuckerPunchAttack, 105, AnimaToward,2,"");//最后一个参数是击飞类型
             }
         }
         if(StatusTime > DevilSuckerPunckQuitTime)

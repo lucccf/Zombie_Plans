@@ -132,7 +132,7 @@ public class Knight : Monster
                 Attack2 attack2 = (Attack2)attack;
                 if (attack2.toward * AnimaToward < 0)
                 {
-                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type);
+                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type, "气功波命中");
                     Main_ctrl.Desobj(attack2.id);
                 } else
                 {
@@ -259,7 +259,7 @@ public class Knight : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward,3);//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward,3, "骑士普攻命中");//最后一个参数是击飞类型
     }
     private void Attack(bool first)
     {
@@ -373,7 +373,7 @@ public class Knight : Monster
             if (AnimaToward > 0) tmp_pos.x += new Fixpoint(3, 0);
             else tmp_pos.x -= new Fixpoint(3, 0);
             tmp_pos.y += new Fixpoint(25, 1);
-            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward,2);//最后一个参数是击飞类型
+            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward,2, "爆裂重击命中");//最后一个参数是击飞类型
         }
         if(StatusTime > SkillDruingTime)
         {
