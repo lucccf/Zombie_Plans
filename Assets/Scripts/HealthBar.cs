@@ -4,32 +4,29 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     private GameObject HP_Bar;
+    public Text txt;
     private Image HP_Image;
-    public float Cur_HP = 100;
+    private float Cur_HP = 100;
     float HP_Percent;
     float Max_HP = 100;
+    PlayerStatus ps;
     // Start is called before the first frame update
-    void Start()
+    public void Startx()
     {
         //在游戏开始的时候获取Image组件和最大HP
         HP_Bar = GameObject.Find("Heart_full");
         HP_Image = HP_Bar.GetComponent<Image>();
-        Cur_HP = Max_HP;
+        ps = ((Player)Main_ctrl.All_objs[Main_ctrl.Ser_to_cli[Main_ctrl.user_id]].modules[Object_ctrl.class_name.Player]).status;
+        Max_HP = ps.max_hp;
+        Cur_HP = ps.hp;
     }
-    void InitHealthBar(float max_hp) 
-    {
-        Max_HP= max_hp;
-        Cur_HP= Max_HP;
-    }
+
     // Update is called once per frame
     void Update()
     {
+        Cur_HP = ps.hp;
         HP_Percent = Cur_HP / Max_HP;
         HP_Image.fillAmount = HP_Percent;
-    }
-
-    void CurHpChange(float cur) 
-    {
-        Cur_HP = cur;
+        txt.text = Cur_HP + "/" + Max_HP;
     }
 }
