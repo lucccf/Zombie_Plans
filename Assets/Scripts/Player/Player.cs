@@ -14,6 +14,8 @@ public class Player : BasicCharacter
     public string words = string.Empty;
     public bool words_ok = false;
 
+    public AudioClip musicClip;
+
     public enum Identity
     {
         Populace,
@@ -31,6 +33,7 @@ public class Player : BasicCharacter
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
         bag = new PlayerBag(id);
+        audiosource = GetComponent<AudioSource>();
     }
 
     HashSet<PlayerOpt> list;
@@ -588,6 +591,8 @@ public class Player : BasicCharacter
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
                 CreatedAttack = true;
+                audiosource.clip = musicClip;
+                audiosource.Play();
                 CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
             }
 
