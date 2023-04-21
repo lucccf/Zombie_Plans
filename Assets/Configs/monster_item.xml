@@ -61,7 +61,26 @@
 		<random>
 		</random>
 		<room>
-			<num>5</num>
+			<area>
+				<areaid>1</areaid>
+				<id>7</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>2</areaid>
+				<id>8</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>3</areaid>
+				<id>9</id>
+				<num>5</num>
+			</area>
+			<area>
+				<areaid>4</areaid>
+				<id>10</id>
+				<num>5</num>
+			</area>
 		</room>
 	</monster>
 	
