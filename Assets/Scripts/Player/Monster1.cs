@@ -218,6 +218,11 @@ public class Monster1 : Monster
         return;
     }
 
+    private string[] Music = new string[4]
+    {
+        "啊？！（王）","来！","易建联~","Fack you~（van）"
+    };
+
     private void Attack(bool first)
     {
         int hited = BasicCharacterGetHited();
@@ -237,7 +242,10 @@ public class Monster1 : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack1Damage);
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) {
+                PlayMusic(Music[Random.Range(0, 4)]);
+                MonsterCreateAttack(Attack1Damage); 
+            }
         } else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
         {
             if (StatusTime > Attack2DuringTime)
@@ -245,7 +253,10 @@ public class Monster1 : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack2Damage);
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) {
+                PlayMusic(Music[Random.Range(0, 4)]);
+                MonsterCreateAttack(Attack2Damage); 
+            }
         } else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
         {
             if (StatusTime > Attack3DuringTime)
@@ -253,7 +264,10 @@ public class Monster1 : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) MonsterCreateAttack(Attack3Damage);
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) {
+                PlayMusic(Music[Random.Range(0, 4)]);
+                MonsterCreateAttack(Attack3Damage); 
+            }
         } else if(AnimaAttack > 3.5f)
         {
             if (StatusTime > Attack4DuringTime)
@@ -278,6 +292,10 @@ public class Monster1 : Monster
     }
     private void Death()
     {
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("啊~~~（王）");
+        }
         if(StatusTime > new Fixpoint(3,0))
         {
             if (type2 == 1)

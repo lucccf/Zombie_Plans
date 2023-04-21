@@ -290,6 +290,9 @@ public class BasicCharacter : MonoBehaviour
                     }
                 }
                 return;
+            } else
+            {
+                Moves(-AnimaToward, HitSpeed[AnimaHited]);
             }
             if(StatusTime > HitTime[AnimaHited])
             {
