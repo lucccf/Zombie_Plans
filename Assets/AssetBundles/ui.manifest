@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1056141600
+CRC: 704579880
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fb8cec0e7cba4ab57e832fe6b8793091
+    Hash: e8c0279c4d559403d396de43eab71205
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bd37aff9661ab36ad68ae04571fadf09
+    Hash: 70a1986e1fc5cd0bc4ebff31a9f2d7b3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -102,9 +102,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 7e95ba8e41e2cc749aba913edeb9a91e, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4a6d5cce3909a0a4d96e5515293be632, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -121,12 +121,12 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Prefabs/UI/Tiny_camera.prefab
 - Assets/Prefabs/particle.prefab
 - Assets/Prefabs/UI_scene/Login_scene.prefab
 - Assets/Map/All_map.renderTexture
 - Assets/Prefabs/UI_scene/Start_scene.prefab
 - Assets/Prefabs/ProtalButton.prefab
-- Assets/Prefabs/UI/Tiny_camera.prefab
 - Assets/Prefabs/UI_scene/Battle_scene.prefab
 - Assets/Prefabs/TinyFacButton.prefab
 - Assets/Map/Tiny_map.renderTexture

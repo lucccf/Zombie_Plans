@@ -63,8 +63,8 @@ public class Main_ctrl : MonoBehaviour
         Player_ctrl.plays = new List<Player>();
         Map_ctrl.Map_items = new Dictionary<long, GameObject>();
         Flow_path.init();
-        Monster_create.init();
         Map_create.init();
+        Monster_create.init();
     }
 
     void Start()
@@ -89,15 +89,18 @@ public class Main_ctrl : MonoBehaviour
             Items[i] = (Item)items[i];
         }
 
+        Debug.Log(Items.Length);
         for (int i = 0; i < Items.Length; ++i)
         {
             ItemList.Add(Items[i].id, Items[i]);
+            Debug.Log(Items[i].id);
         }
 
         Play_create();
         players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
+        Monster_create.Get_mon_items();
         Monster_create.Mon_create1();
 
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
@@ -819,8 +822,8 @@ public class Obj_info
     public Dictionary<int, int> materials;
     public int hit_fly_type;
     public int cre_type;
-    public Dictionary<String, int> falls;
     public string MusicName;
+    public Dictionary<string, int> falls;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
