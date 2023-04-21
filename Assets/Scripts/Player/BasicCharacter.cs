@@ -4,7 +4,7 @@ using UnityEngine;
 public class BasicCharacter : MonoBehaviour
 {
     // Start is called before the first frame update
-    protected PlayerStatus status = new PlayerStatus(100,10);
+    public PlayerStatus status = new PlayerStatus(100,10);
     //碰撞体变量
     public Fix_col2d f;
     public Fix_rig2d r;
