@@ -828,7 +828,7 @@ public class Player : BasicCharacter
     private static Fixpoint HeavyAttackShifty = new Fixpoint(0, 0);
     private bool HeavyAttackHasHited = false;
 
-    private static Fixpoint HeavyAttackDamage = new Fixpoint(6,0);
+    private static Fixpoint HeavyAttackDamage = new Fixpoint(3,0);
     private void HeavyAttack()
     {
         int hit = BasicCharacterGetHited();
@@ -867,7 +867,7 @@ public class Player : BasicCharacter
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
 
-    private static Fixpoint UpattackDamage = new Fixpoint(2, 0);
+    private static Fixpoint UpattackDamage = new Fixpoint(3, 0);
 
     private void UpAttack(bool first)
     {
@@ -961,7 +961,7 @@ public class Player : BasicCharacter
                 Fix_vector2 tmp = f.pos.Clone();
                 if (AnimaToward > 0) tmp.x += new Fixpoint(65, 1);
                 else tmp.x -= new Fixpoint(65, 1);
-                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 10, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 0, AnimaToward,2);//最后一个参数是击飞类型
                 return;
             }
         }
@@ -978,9 +978,9 @@ public class Player : BasicCharacter
     private static Fixpoint Fire2BeginToAttack3Time = new Fixpoint(8, 1);//第3次发射的时间
     private int HasFired1 = 0;
 
-    private static Fixpoint Fire2Attack1 = new Fixpoint(2, 0);
-    private static Fixpoint Fire2Attack2 = new Fixpoint(2, 0);
-    private static Fixpoint Fire2Attack3 = new Fixpoint(2, 0);
+    private static Fixpoint Fire2Attack1 = new Fixpoint(4, 0);
+    private static Fixpoint Fire2Attack2 = new Fixpoint(4, 0);
+    private static Fixpoint Fire2Attack3 = new Fixpoint(4, 0);
     private void Fire2()
     {
         int hit = BasicCharacterGetHited();
