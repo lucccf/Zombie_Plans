@@ -1,17 +1,19 @@
 ManifestFileVersion: 0
-CRC: 430478755
+CRC: 704579880
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 32e980062895de14bfe8abb1da85c07f
+    Hash: 9bcc2f72b4b2aa84bde3017a2e8f521a
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 94fb1a68069f498c755d4ed656474677
+    Hash: c584b826671b614c0947f5ed9972cb20
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
+  Script: {instanceID: 0}
+- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -101,6 +103,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 7e95ba8e41e2cc749aba913edeb9a91e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4a6d5cce3909a0a4d96e5515293be632, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -117,6 +121,7 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/Prefabs/UI/Tiny_camera.prefab
 - Assets/Prefabs/particle.prefab
 - Assets/Prefabs/UI_scene/Login_scene.prefab
 - Assets/Map/All_map.renderTexture
@@ -126,6 +131,7 @@ Assets:
 - Assets/Prefabs/TinyFacButton.prefab
 - Assets/Map/Tiny_map.renderTexture
 - Assets/Prefabs/TinyProtalButton.prefab
+- Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
 - D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
