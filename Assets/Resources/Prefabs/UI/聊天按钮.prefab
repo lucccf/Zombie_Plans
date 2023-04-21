@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 8316511697493627823}
   - component: {fileID: 8316511697493627822}
   - component: {fileID: 8316511697493627821}
+  - component: {fileID: 103739731}
   m_Layer: 5
   m_Name: "\u804A\u5929\u6309\u94AE"
   m_TagString: Untagged
@@ -195,3 +196,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &103739731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8316511697493626963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bf6fd204d576a41ab2b7e34d530b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatUI: {fileID: 0}
+  closebutton: {fileID: 0}
