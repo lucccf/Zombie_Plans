@@ -37,12 +37,12 @@ public class Knight : Monster
         HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
 
-        FindPosUp = new Fixpoint(10, 0);
-        FindPosDown = new Fixpoint(-3, 0);
+        FindPosUp = new Fixpoint(7, 0);//小框
+        FindPosDown = new Fixpoint(-2, 0);
         FindPosLeft = new Fixpoint(-20, 0);
         FindPosRight = new Fixpoint(20, 0);
 
-        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);//大框
         CatchPosDown = f.pos.y.Clone() - new Fixpoint(20, 0);
         CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
         CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
