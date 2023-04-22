@@ -2,7 +2,7 @@
 
 public class Dt
 {
-    public static Fixpoint dt = new Fixpoint(1, 0) / new Fixpoint(30, 0);
+    public static Fixpoint dt = new Fixpoint(1, 0) / new Fixpoint(60, 0);
 }
 
 public class Const_class : MonoBehaviour
