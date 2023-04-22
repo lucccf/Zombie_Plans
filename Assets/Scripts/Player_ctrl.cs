@@ -33,14 +33,19 @@ public class Player_ctrl : MonoBehaviour
 
     public static void Init_bag()
     {
-        BagUI = GameObject.Find("Canvas/PlayerPanel/BagButton").GetComponent<NewBag>();
+        BagUI = GameObject.Find("BagButton").GetComponent<NewBag>();
         QCD = GameObject.Find("QCD").GetComponentInChildren<Text>();
         ECD = GameObject.Find("ECD").GetComponentInChildren<Text>();
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
         //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
         //MakeSuccessUI.SetActive(false);
         //MakeFailedUI.SetActive(false);
-        item = Resources.LoadAll<Item>("Prefabs/items/");
+        List<object> items = AB.getitems();
+        item = new Item[items.Count];
+        for(int i = 0; i < items.Count; i++)
+        {
+            item[i] = (Item)items[i];
+        }
         ItemList.Clear();
         Attack = new Dictionary<(int, int), int>();
         for (int i = 0; i < item.Length; ++i)

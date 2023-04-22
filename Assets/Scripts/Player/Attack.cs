@@ -16,6 +16,7 @@ public class Attack : MonoBehaviour
     public int type;
     public int attacker_type;
     public int hited_fly_type;
+    public string MusicName;
 
     protected Fixpoint AliveTime = new Fixpoint(0, 0); 
 

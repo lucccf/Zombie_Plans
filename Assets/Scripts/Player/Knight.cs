@@ -14,8 +14,9 @@ public class Knight : Monster
         SetStatus(930, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
-        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
+        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(6, 1) };
         ToughnessStatus = new int[2] { 20, 0 };//阶段
+        audiosource = GetComponent<AudioSource>();
         SetFindStatus();
         //ToHome();
 
@@ -131,7 +132,7 @@ public class Knight : Monster
                 Attack2 attack2 = (Attack2)attack;
                 if (attack2.toward * AnimaToward < 0)
                 {
-                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type);
+                    Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type, "气功波命中");
                     Main_ctrl.Desobj(attack2.id);
                 } else
                 {
@@ -258,7 +259,7 @@ public class Knight : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward,3);//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward,3, "骑士普攻命中");//最后一个参数是击飞类型
     }
     private void Attack(bool first)
     {
@@ -275,7 +276,11 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();//距离判定
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack1Damage,ref KnightCreatedAttack);
+            if (StatusTime > Attack1BeginToHitTime && KnightCreatedAttack == false) 
+            {
+                PlayMusic("sword1");
+                KnightCreateAttack(Attack1Damage, ref KnightCreatedAttack); 
+            }
         }
         else if (KnightAnimaAttack == 2)
         {
@@ -284,7 +289,11 @@ public class Knight : Monster
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack2Damage, ref KnightCreatedAttack);
+            if (StatusTime > Attack2BeginToHitTime && KnightCreatedAttack == false) 
+            {
+                PlayMusic("sword2");
+                KnightCreateAttack(Attack2Damage, ref KnightCreatedAttack); 
+            }
         }
         else if (KnightAnimaAttack == 3)
         {
@@ -292,7 +301,10 @@ public class Knight : Monster
             {
                 RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && KnightCreatedAttack == false) KnightCreateAttack(Attack3Damage, ref KnightCreatedAttack);
+            if (StatusTime > Attack3BeginToHitTime && KnightCreatedAttack == false) {
+                PlayMusic("sword3");
+                KnightCreateAttack(Attack3Damage, ref KnightCreatedAttack); 
+            }
         }
 
         if (StatusTime <= new Fixpoint(2, 1))
@@ -307,7 +319,7 @@ public class Knight : Monster
             }
         }
     }
-    private static Fixpoint DefenceTime = new Fixpoint(5, 0);//防御时间
+    private static Fixpoint DefenceTime = new Fixpoint(1, 0);//防御时间
     private static Fixpoint DefenceRate = new Fixpoint(5, 1);//承受伤害倍率
     private void Defence()
     {
@@ -350,6 +362,7 @@ public class Knight : Monster
         {
             if(SkillAttackTimes == 0)
             {
+                PlayMusic("爆裂重击释放语音");
                 Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
                 if (AnimaToward < 0) pos.x -= 3f;
                 else pos.x += 3f;
@@ -360,7 +373,7 @@ public class Knight : Monster
             if (AnimaToward > 0) tmp_pos.x += new Fixpoint(3, 0);
             else tmp_pos.x -= new Fixpoint(3, 0);
             tmp_pos.y += new Fixpoint(25, 1);
-            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward,2);//最后一个参数是击飞类型
+            CreateAttack(tmp_pos, new Fixpoint(5, 0), new Fixpoint(7, 0), status.Damage() * SkillAttackRate, 120, AnimaToward,2, "爆裂重击命中");//最后一个参数是击飞类型
         }
         if(StatusTime > SkillDruingTime)
         {
@@ -375,6 +388,7 @@ public class Knight : Monster
         KnightAnimaAttack = 0;
         if(StatusTime > new Fixpoint(2,0))//死亡到消失的时间
         {
+            DeathFall();
             if (type2 == 1)
             {
                 Flow_path.zombie_cnt--;
