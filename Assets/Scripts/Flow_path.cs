@@ -21,6 +21,11 @@ public class Flow_path : MonoBehaviour
 
     private static int cnt_flag = 0;
 
+    public static int get_flag()
+    {
+        return cnt_flag;
+    }
+
     private static int main_flag = 0;
 
     public static int zombie_cnt = 0;

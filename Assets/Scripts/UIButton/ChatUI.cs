@@ -14,7 +14,6 @@ public class ChatUI : MonoBehaviour
 
     void Start()
     {
-        textpanel.GetComponent<Text>().text = "???????????"; 
         commitbutton.GetComponent<Button>().onClick.AddListener(CommitMessage);
     }
 
@@ -23,15 +22,12 @@ public class ChatUI : MonoBehaviour
         x.Userid = (int)Main_ctrl.user_id;
         Text tmptext = textpanel.GetComponent<Text>();
         x.Content = tmptext.text;
-        Debug.Log("before:" + tmptext.text);
-        tmptext.text = "";
-        Debug.Log("affter:" + tmptext.text);
         Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
+        tmptext.text = " ";
         gameObject.SetActive(false);
         ClientSend.Send = true;
         commitbuttonable = false;
         t = Time.time;
-        Debug.Log("Enable Changed"+ commitbuttonable);
     }
 
     // Update is called once per frame
