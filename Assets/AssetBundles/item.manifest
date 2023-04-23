@@ -1,9 +1,13 @@
 ManifestFileVersion: 0
-CRC: 3633941729
+CRC: 2087480410
 Hashes:
   AssetFileHash:
     serializedVersion: 2
+<<<<<<< HEAD
     Hash: 08054ca07a118f2512c3ea31f434b9cd
+=======
+    Hash: 8d8322bf074bddf765cc7a9a81d07a50
+>>>>>>> 5acbe01d07ba68c1d86886c2185d162f62dcfcc5
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9d77e6eae0edcdad553d2dedda84ea37
@@ -26,6 +30,7 @@ Assets:
 - Assets/Prefabs/items/RedMaterial.asset
 - Assets/Prefabs/items/Mineral.asset
 - Assets/Prefabs/items/Lightball.asset
+- Assets/Prefabs/items/Trap.asset
 - Assets/Prefabs/items/Light.asset
 - Assets/Prefabs/items/BlueMaterial.asset
 - Assets/Prefabs/items/GreenMaterial.asset
