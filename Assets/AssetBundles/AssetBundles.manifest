@@ -1,5 +1,9 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 3866632728
+=======
+CRC: 4189863632
+>>>>>>> 5ade16a4a714d9861b7ea3045286766a9e752643
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,10 +11,10 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: music
     Info_1:
-      Name: item
+      Name: background
       Dependencies: {}
     Info_2:
-      Name: background
+      Name: item
       Dependencies: {}
     Info_3:
       Name: ui
