@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 649923295985004399}
   - component: {fileID: 649923295985004398}
   - component: {fileID: 649923295985004394}
+  - component: {fileID: 8887686227773307489}
   m_Layer: 0
   m_Name: Socket_AB
   m_TagString: Untagged
@@ -90,5 +91,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bfad9ce75da71a4b9f7647d45de2dea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8887686227773307489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649923295985004385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed8c0f8772ed814d90bf648cc0a26b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

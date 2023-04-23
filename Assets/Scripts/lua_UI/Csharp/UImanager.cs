@@ -18,7 +18,7 @@ public class UImanager : MonoBehaviour
         BindLua.Register(lua);
         lua.AddSearchPath(Application.dataPath + "/Scripts/lua");
         DontDestroyOnLoad(gameObject);
-        lua.DoFile("UImanager.lua");
+        //lua.DoFile("UImanager.lua");
     }
 
     // Update is called once per frame
