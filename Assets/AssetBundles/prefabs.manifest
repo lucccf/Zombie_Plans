@@ -3,7 +3,7 @@ CRC: 1710457322
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 04b0dcb98da1e64599ae35346e708f55
+    Hash: 4e79992f2f507d954af1f6f5ded24a1d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0606f83a2da36f28b8a20ba96e26a28a
@@ -165,4 +165,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music

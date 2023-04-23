@@ -147,6 +147,7 @@ namespace Net
         [pbr::OriginalName("Mark_User")] MarkUser = 28,
         [pbr::OriginalName("UnMark_USer")] UnMarkUser = 29,
         [pbr::OriginalName("Throw_item")] ThrowItem = 30,
+        [pbr::OriginalName("Mark_fac")] Markfac = 31,
     }
 
     #endregion
