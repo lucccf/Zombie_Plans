@@ -165,4 +165,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/../BuildABs/music

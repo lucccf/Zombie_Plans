@@ -136,5 +136,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/item
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/../BuildABs/item
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/../BuildABs/prefabs

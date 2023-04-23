@@ -6,6 +6,7 @@ public class Flow_path : MonoBehaviour
     // Start is called before the first frame update
     public static Dictionary<long, Facility> facilities = new Dictionary<long, Facility>();
 
+    public static Dictionary<long, Facility> onlyid_facilities = new Dictionary<long, Facility>();
     public const int cons = 5;
     public static int[] conditions = new int[cons];
 

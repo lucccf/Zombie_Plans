@@ -14,13 +14,18 @@ public class ChatUI : MonoBehaviour
 
     void Start()
     {
+        textpanel.GetComponent<Text>().text = "???????????"; 
         commitbutton.GetComponent<Button>().onClick.AddListener(CommitMessage);
     }
 
     void CommitMessage() {
         PlayerMessage x = new PlayerMessage();
         x.Userid = (int)Main_ctrl.user_id;
-        x.Content = textpanel.GetComponent<Text>().text;   
+        Text tmptext = textpanel.GetComponent<Text>();
+        x.Content = tmptext.text;
+        Debug.Log("before:" + tmptext.text);
+        tmptext.text = "";
+        Debug.Log("affter:" + tmptext.text);
         Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
         gameObject.SetActive(false);
         ClientSend.Send = true;
