@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1710457322
+CRC: 3254134038
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4e79992f2f507d954af1f6f5ded24a1d
+    Hash: 75aa44e1b314ac051876b11b7c1757fa
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0606f83a2da36f28b8a20ba96e26a28a
+    Hash: 546b9a3e1a85f76de16936e20d7eadce
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -165,4 +165,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/../BuildABs/music
+- D:/zt/unity/Zombie_Plans/Assets/../BuildABs/music

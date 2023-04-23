@@ -1,23 +1,12 @@
 ManifestFileVersion: 0
-CRC: 476034057
+CRC: 1407048387
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-<<<<<<< HEAD
-    Hash: 4e79992f2f507d954af1f6f5ded24a1d
-=======
-<<<<<<< HEAD
-    Hash: a1930531a06f916ff663d87aad39469f
+    Hash: 75aa44e1b314ac051876b11b7c1757fa
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 36acd1ee28395a283b9d3f63f47c8f2f
-=======
-    Hash: 04b0dcb98da1e64599ae35346e708f55
->>>>>>> 6ba5bd36e9b775863092df44a13acaf4d761a0be
-  TypeTreeHash:
-    serializedVersion: 2
-    Hash: 0606f83a2da36f28b8a20ba96e26a28a
->>>>>>> 5ade16a4a714d9861b7ea3045286766a9e752643
+    Hash: 546b9a3e1a85f76de16936e20d7eadce
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -176,12 +165,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-<<<<<<< HEAD
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
-=======
-<<<<<<< HEAD
-- D:/pro/Zombie_Plans/Assets/AssetBundles/music
-=======
 - D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
->>>>>>> 5ade16a4a714d9861b7ea3045286766a9e752643
->>>>>>> 6ba5bd36e9b775863092df44a13acaf4d761a0be

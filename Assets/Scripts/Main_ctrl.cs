@@ -111,7 +111,8 @@ public class Main_ctrl : MonoBehaviour
 
     static void Wolf_create()
     {
-        for(int i = 0; i < wolf_cnt; i++)
+        wolf_cnt = (Player_ctrl.plays.Count + 3) / 4;
+        for (int i = 0; i < wolf_cnt; i++)
         {
             int k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
             while (Player_ctrl.plays[k].identity == Player.Identity.Wolf)
