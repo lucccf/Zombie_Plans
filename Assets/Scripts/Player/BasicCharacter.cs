@@ -34,6 +34,8 @@ public class BasicCharacter : MonoBehaviour
             new Fix_vector2(new Fixpoint(187, 2), new Fixpoint(38, 1)), //2,x轴y轴速度
             new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(86, 1)) };//3,x轴y轴速度
     protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(3, 0), new Fixpoint(11, 1));//倒地的x速度和y速度
+
+    protected int FlyTimes = 0;
     protected enum StatusType
     {
         Normal,
@@ -194,6 +196,11 @@ public class BasicCharacter : MonoBehaviour
                 continue;
             }
 
+            if(FlyTimes > 10)
+            {
+                continue;
+            }
+
             PlayMusic(attack.MusicName);
 
             AnimaToward = -attack.toward;
@@ -227,6 +234,7 @@ public class BasicCharacter : MonoBehaviour
     {
         if (status.GetToughness() < 0)
         {
+            ++FlyTimes;
             status.toughness = -500;
             AnimaHited = ToughnessStatus.Length;
             Fix_vector2 speed = HitFlySpeed[hit_fly_type].Clone();
@@ -311,6 +319,7 @@ public class BasicCharacter : MonoBehaviour
         RemoveHited();
         if(StatusTime > GroundTime)
         {
+            FlyTimes = 0;
             status.toughness = status.max_toughness;
             ChangeStatus(StatusType.Normal);
             AnimaHited = 0;

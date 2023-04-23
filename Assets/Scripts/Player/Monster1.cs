@@ -90,7 +90,8 @@ public class Monster1 : Monster
 
 
         int Location = 0;
-        if (NormalFind(ref Location) == true)
+        int Normalstatus = NormalFind(ref Location);
+        if (Normalstatus == 1 || Normalstatus == 2)
         {
             int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
             Fixpoint Nearx = LockPos.x;
@@ -313,6 +314,7 @@ public class Monster1 : Monster
         if (ToHomeFlag == true)
         {
             ToHome();
+            BeAngry();
         }
 
         animator.SetFloat("speed", AnimaSpeed);
