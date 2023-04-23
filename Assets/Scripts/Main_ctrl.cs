@@ -41,6 +41,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static bool Exit = false;
 
+    public static Player.Identity main_identity;
+
     public enum objtype
     {
         Character,
@@ -420,6 +422,7 @@ public class Main_ctrl : MonoBehaviour
         if (player_id == user_id)
         {
             play = CreateObj(p);
+            main_identity = play.GetComponent<Player>().identity;
         }
         else
         {
