@@ -1469,6 +1469,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4609951894136500713}
   - component: {fileID: 4609951894136500714}
+  - component: {fileID: 5549518425481618835}
   m_Layer: 5
   m_Name: Login_scene
   m_TagString: Untagged
@@ -1507,6 +1508,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4609951894136500712}
   m_CullTransparentMesh: 0
+--- !u!114 &5549518425481618835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609951894136500712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7438fee25bc16e418f3b8c092d947e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  refs:
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
+  - obj: {fileID: 0}
+    type: 0
 --- !u!1 &4609951894155743547
 GameObject:
   m_ObjectHideFlags: 0
