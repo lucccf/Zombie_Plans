@@ -1086,6 +1086,8 @@ public class Player : BasicCharacter
         }
         if (StatusTime > RecoverHpDuringTime)
         {
+            GameObject x = Instantiate((GameObject)AB.getobj("recover"),transform.position,transform.rotation);
+            x.transform.localScale = new Vector3(3, 3, 1);
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(100);//恢复的血量
             Preform(-100);
