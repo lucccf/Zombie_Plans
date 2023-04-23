@@ -11,7 +11,7 @@ public class Text_to_play : MonoBehaviour
     Dictionary<int, List<string>> words2 = new Dictionary<int, List<string>>();
     int word_pos = 0;
     float t = 0;
-    float dt = 3f;
+    float dt = 10f;
 
     // Start is called before the first frame update
     void Start()
