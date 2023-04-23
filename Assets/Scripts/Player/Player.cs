@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
+using static Net.Frame.Types;
 
 public class Player : BasicCharacter
 {
@@ -34,6 +36,7 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
+
     }
 
     HashSet<PlayerOpt> list;
@@ -1127,6 +1130,50 @@ public class Player : BasicCharacter
         animator.SetFloat("attack", AnimaAttack);
         animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
+        //Change_color();
+    }
+    
+    void Change_color()
+    {
+        // Get the source texture
+        Texture2D sourceTexture = gameObject.GetComponent<SpriteRenderer>().sprite.texture;
+
+        // Create a new texture with RGB24 format
+        Texture2D newTexture = new Texture2D(sourceTexture.width, sourceTexture.height, TextureFormat.RGB24, false);
+
+        // Copy the pixels from the source texture to the new texture
+        newTexture.SetPixels(sourceTexture.GetPixels());
+
+        // Apply the changes to the new texture
+        newTexture.Apply();
+
+        Texture2D image = newTexture;
+        Color[] pixels = image.GetPixels(); // 获取所有像素的颜色
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            Color pixelColor = pixels[i];
+            // 判断像素颜色是否在指定范围内
+            if (IsSimilarColor(pixelColor, new Color(0x7f, 0x00, 0x00), new Color(0xff, 0x7f, 0x7f)))
+            {
+                // 将像素颜色更改为新颜色
+                pixels[i] = new Color(0xff, 0xff, 0xff);
+            }
+        }
+        image.SetPixels(pixels);
+        image.Apply();
+        Sprite x = Sprite.Create(image, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
+        x.name = "x";
+        gameObject.GetComponent<SpriteRenderer>().sprite = x;
+        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite.name);
+    }
+
+    bool IsSimilarColor(Color c1, Color c2, Color c3)
+    {
+        if (c1.g >= c2.g && c1.g <= c3.g && c1.a >= c2.a && c1.a <= c3.a && c1.b >= c2.b && c1.b <= c3.b && c1.r >= c2.r && c1.r <= c3.r)
+        {
+            return true;
+        }
+        else return false;
     }
 
     private static Fixpoint TrapTime = new Fixpoint(2,0);
