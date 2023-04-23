@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Load_Assets : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class Load_Assets : MonoBehaviour
                 break;
             case 3:
                 AB.FetchAllobjs();
+                SceneManager.LoadScene("Login");
                 q = 4;
                 break;
         }
