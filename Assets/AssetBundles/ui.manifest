@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 570193298
+CRC: 3110337498
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 08a3426927ec44ad92d1b15686d0f16e
+    Hash: cd9682e5d70b010a3c0ce6f9e7e56d56
   TypeTreeHash:
     serializedVersion: 2
     Hash: d049979dfcfca41d9823d84172cbcc88
@@ -140,5 +140,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/prefabs

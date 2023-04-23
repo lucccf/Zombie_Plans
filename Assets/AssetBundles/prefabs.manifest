@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 1407048387
+CRC: 3078777024
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 75aa44e1b314ac051876b11b7c1757fa
+    Hash: faddc7dc2e7c6fe96908e7cdb665507a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 546b9a3e1a85f76de16936e20d7eadce
@@ -163,6 +163,7 @@ Assets:
 - Assets/Prefabs/wall_a.prefab
 - Assets/Prefabs/Map_item/Devil_m.prefab
 - Assets/Prefabs/Monster1.prefab
+- Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/music

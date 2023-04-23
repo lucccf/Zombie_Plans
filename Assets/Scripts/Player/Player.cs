@@ -252,6 +252,10 @@ public class Player : BasicCharacter
                 break;
         }
     }
+    public void IsWolf()
+    {
+        status.max_hp = 100000000;
+    }
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -334,6 +338,10 @@ public class Player : BasicCharacter
             case StatusType.Stay:
                 AnimaStatus = 16;
                 Stay();
+                break;
+            case StatusType.Trap:
+                AnimaStatus = 17;
+                Trap(false);
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -420,6 +428,13 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Fall);
             return;
 
+        }
+
+        else if (Press[KeyCode.Space] && Press[KeyCode.L] && bag.BagCheckItemNums(99,1))
+        {
+            ChangeStatus(StatusType.Trap);
+            Trap(true);
+            return;
         }
 
         else if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
@@ -752,8 +767,10 @@ public class Player : BasicCharacter
             TriggerQueue.Dequeue();
             if (a.type == Fix_col2d_act.col_action.Trigger_in)
             {
-                //Debug.Log("Trigger in");
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+
+                //Debug.Log("Trigger in" + trigger.triggername);
+
                 if (trigger.triggertype == "building" && checkid() == true)
                 {
                     Flow_path.Now_fac = a.opsite.id;
@@ -767,17 +784,22 @@ public class Player : BasicCharacter
                 else if (trigger.triggername == "ItemSample")
                 {
                     bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
+                    PlayMusic("拾取物品");
                     Main_ctrl.Desobj(a.opsite.id);
                 }
                 else if (trigger.triggername == "protal" && checkid() == true) {
                     GameObject parent = GameObject.Find("PlayerPanel");
                     GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
+                } else if(trigger.triggername == "TrapX")
+                {
+                    trigger.Explore();
                 }
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+                //Debug.Log("Trigger out" + trigger.triggername);
                 if (trigger.triggertype == "building")
                 {
                     Destroy(Building);
@@ -1105,5 +1127,35 @@ public class Player : BasicCharacter
         animator.SetFloat("attack", AnimaAttack);
         animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
+    }
+
+    private static Fixpoint TrapTime = new Fixpoint(2,0);
+    private void Trap(bool first)
+    {
+        int hit = BasicCharacterGetHited();
+        if (hit != 0)
+        {
+            ChangeStatus(StatusType.Hit);
+            return;
+        }
+        if(first)
+        {
+            if (bag.BagCheckItemNums(99, 1))
+            {
+                bag.BagGetItem(99, -1, Player_ctrl.BagUI);
+                Fix_vector2 TrapPos = f.pos.Clone();
+                TrapPos.y -= new Fixpoint(1, 0);
+                Main_ctrl.NewTrap(TrapPos, 1f);
+            } else
+            {
+                ChangeStatus(StatusType.Normal);
+                return;
+            }
+        }
+        if(StatusTime > TrapTime)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
     }
 }
