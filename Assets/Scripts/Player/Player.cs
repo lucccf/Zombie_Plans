@@ -160,7 +160,7 @@ public class Player : BasicCharacter
                     else {
                         GameObject facui = (GameObject)AB.getobj("提示UI");
                         GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                        factmp.GetComponent<MakeSuccess>().Type = 1;
+                        factmp.GetComponent<MakeSuccess>().Type = 5;
                     }
                 }
                 break;
