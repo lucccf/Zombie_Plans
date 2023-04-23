@@ -16,6 +16,7 @@ public class AB : MonoBehaviour
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/item"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/background"));
         bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/ui"));
+        bundle_req.Add(AssetBundle.LoadFromFileAsync(Application.dataPath + "/AssetBundles/music"));
     }
 
     public static bool LoadAllbundles()

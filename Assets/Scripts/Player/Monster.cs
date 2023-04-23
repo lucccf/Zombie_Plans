@@ -52,13 +52,13 @@ public class Monster : BasicCharacter
 
     protected void SetFindStatus()
     {
-        FindPosUp = new Fixpoint(10, 0);
+        FindPosUp = new Fixpoint(7, 0);
         FindPosDown = new Fixpoint(-3, 0);
-        FindPosLeft = new Fixpoint(-20, 0);
-        FindPosRight = new Fixpoint(20, 0);
+        FindPosLeft = new Fixpoint(-15, 0);
+        FindPosRight = new Fixpoint(15, 0);
 
-        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);
-        CatchPosDown = f.pos.y.Clone() - new Fixpoint(20, 0);
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(22, 0);
+        CatchPosDown = f.pos.y.Clone() - new Fixpoint(22, 0);
         CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
         CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
 

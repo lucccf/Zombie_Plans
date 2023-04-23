@@ -30,7 +30,7 @@ public class Player : BasicCharacter
         animator = GetComponent<Animator>();
         SetStatus(1000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(2, 1) };//击退速度，第一个为占位
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
@@ -540,11 +540,11 @@ public class Player : BasicCharacter
         //}
     }
     private bool CreatedAttack = false;
-    private static Fixpoint Attack1DuringTime = new Fixpoint(32, 2);
+    private static Fixpoint Attack1DuringTime = new Fixpoint(24, 2);
     private static Fixpoint Attack1QuitTime = new Fixpoint(44, 2);
-    private static Fixpoint Attack2DuringTime = new Fixpoint(32, 2);
+    private static Fixpoint Attack2DuringTime = new Fixpoint(24, 2);
     private static Fixpoint Attack2QuitTime = new Fixpoint(44, 2);
-    private static Fixpoint Attack3DuringTime = new Fixpoint(32, 2);
+    private static Fixpoint Attack3DuringTime = new Fixpoint(24, 2);
     private static Fixpoint Attack3QuitTime = new Fixpoint(44, 2);
     private static Fixpoint Attack4DuringTime = new Fixpoint(43, 2);
     private static Fixpoint Attack4QuitTime = new Fixpoint(49, 2);
@@ -590,10 +590,9 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack1BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻1");
                 CreatedAttack = true;
-                audiosource.clip = musicClip;
-                audiosource.Play();
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1,"hit1");//最后一个参数是击飞类型
             }
 
         } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
@@ -612,8 +611,9 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack2BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻2");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1,"hit2");//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
@@ -631,8 +631,9 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack3BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻3");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1,"hit3");//最后一个参数是击飞类型
             }
         } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
@@ -650,8 +651,9 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack4BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻4");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2,"hit4");//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -666,8 +668,9 @@ public class Player : BasicCharacter
             }
             if (StatusTime >= Attack5BeginToHitTime && CreatedAttack == false)
             {
+                PlayMusic("普攻5");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(35, 1), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3);//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3,0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3,"hit5");//最后一个参数是击飞类型
             }
         }
 
@@ -783,7 +786,7 @@ public class Player : BasicCharacter
     private static Fixpoint KickShiftx = new Fixpoint(1, 0);//飞踢攻击框
     private static Fixpoint KickShifty = new Fixpoint(-1, 0);
 
-    private static Fixpoint KickDamage = new Fixpoint(6, 0);
+    private static Fixpoint KickDamage = new Fixpoint(5, 0);
     private bool is_kicked = false;
     private void Kick()
     {
@@ -797,8 +800,9 @@ public class Player : BasicCharacter
         if(StatusTime > KickBeginToHit && is_kicked == false)
         {
             is_kicked = true;
+            PlayMusic("飞踢");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 90, AnimaToward,3);//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 105, AnimaToward,3, "飞踢命中");//最后一个参数是击飞类型
         }
 
         if (Press[KeyCode.A])
@@ -833,7 +837,7 @@ public class Player : BasicCharacter
     private static Fixpoint HeavyAttackShifty = new Fixpoint(0, 0);
     private bool HeavyAttackHasHited = false;
 
-    private static Fixpoint HeavyAttackDamage = new Fixpoint(6,0);
+    private static Fixpoint HeavyAttackDamage = new Fixpoint(3,0);
     private void HeavyAttack()
     {
         int hit = BasicCharacterGetHited();
@@ -855,8 +859,9 @@ public class Player : BasicCharacter
         if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
         {
             HeavyAttackHasHited = true;
+            PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0);//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0, "前冲拳命中");//最后一个参数是击飞类型
         } 
 
         if(!f.onground || StatusTime > HeavyAttackDuring)
@@ -872,7 +877,7 @@ public class Player : BasicCharacter
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
 
-    private static Fixpoint UpattackDamage = new Fixpoint(2, 0);
+    private static Fixpoint UpattackDamage = new Fixpoint(3, 0);
 
     private void UpAttack(bool first)
     {
@@ -904,8 +909,9 @@ public class Player : BasicCharacter
         if (StatusTime > UpAttackBeginToHit && UpAttackHasHited == false)
         {
             UpAttackHasHited = true;
+            PlayMusic("升龙拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward,2);//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward,2, "升龙拳命中");//最后一个参数是击飞类型
         }
 
         if(f.onground && StatusTime > new Fixpoint(5,1))//最短进入下蹲状态的时间
@@ -940,7 +946,10 @@ public class Player : BasicCharacter
     private static Fixpoint Fire1Damage = new Fixpoint(2, 0);
     private void Fire1()
     {
-
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("mf_moonlight_earth");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -966,7 +975,7 @@ public class Player : BasicCharacter
                 Fix_vector2 tmp = f.pos.Clone();
                 if (AnimaToward > 0) tmp.x += new Fixpoint(65, 1);
                 else tmp.x -= new Fixpoint(65, 1);
-                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 10, AnimaToward,2);//最后一个参数是击飞类型
+                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 0, AnimaToward,2, "聚气炮命中");//最后一个参数是击飞类型
                 return;
             }
         }
@@ -983,11 +992,15 @@ public class Player : BasicCharacter
     private static Fixpoint Fire2BeginToAttack3Time = new Fixpoint(8, 1);//第3次发射的时间
     private int HasFired1 = 0;
 
-    private static Fixpoint Fire2Attack1 = new Fixpoint(2, 0);
-    private static Fixpoint Fire2Attack2 = new Fixpoint(2, 0);
-    private static Fixpoint Fire2Attack3 = new Fixpoint(2, 0);
+    private static Fixpoint Fire2Attack1 = new Fixpoint(4, 0);
+    private static Fixpoint Fire2Attack2 = new Fixpoint(4, 0);
+    private static Fixpoint Fire2Attack3 = new Fixpoint(4, 0);
     private void Fire2()
     {
+        if (StatusTime == Dt.dt)
+        {
+            PlayMusic("三连波");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -999,17 +1012,17 @@ public class Player : BasicCharacter
         if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1 , 40, id, AnimaToward, CharacterType,2);//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1 , 40, id, AnimaToward, CharacterType,2,"气功波命中");//最后一个参数是击飞类型
         } 
         else if(StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward, CharacterType,2);//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward, CharacterType,2,"气功波命中");//最后一个参数是击飞类型
         }
         else if(StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward, CharacterType,2);//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward, CharacterType,2, "气功波命中");//最后一个参数是击飞类型
         }
         else if (StatusTime > Fire2DuringTime)
         {
@@ -1021,6 +1034,10 @@ public class Player : BasicCharacter
     private Fixpoint RecoverHpDuringTime = new Fixpoint(2, 0); //喝药的时间
     private void RecoverHp(bool first)
     {
+        if (StatusTime == Dt.dt)
+        {
+            PlayMusic("喝药");
+        }
         int hit = BasicCharacterGetHited();
         if (hit != 0)
         {
@@ -1041,6 +1058,10 @@ public class Player : BasicCharacter
 
     private void Death()
     {
+        if(StatusTime == Dt.dt)
+        {
+            PlayMusic("mf_die");
+        }
         AnimaAttack = 0;
         AnimaHited = 0;
         AnimaSpeed = 0;

@@ -30,7 +30,7 @@ public class BasicCharacter : MonoBehaviour
     protected Fix_vector2[] HitFlySpeed = new Fix_vector2[4] { new Fix_vector2(new Fixpoint(0,0),new Fixpoint(9,0)),//击飞0,x轴y轴速度
             new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(8, 1)), //击飞1,x轴y轴速度
             new Fix_vector2(new Fixpoint(187, 2), new Fixpoint(38, 1)), //2,x轴y轴速度
-            new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(66, 1)) };//3,x轴y轴速度
+            new Fix_vector2(new Fixpoint(4, 0), new Fixpoint(86, 1)) };//3,x轴y轴速度
     protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(3, 0), new Fixpoint(11, 1));//倒地的x速度和y速度
     protected enum StatusType
     {
@@ -88,7 +88,14 @@ public class BasicCharacter : MonoBehaviour
 
     }
 
-    
+    protected void PlayMusic(string name)
+    {
+        if (name == "") return;
+        audiosource.Stop();
+        audiosource.clip = (AudioClip)AB.getobj(name);
+        audiosource.Play();
+    }
+
     /*
     protected void ChangeStatus(int animastatus)
     {
@@ -113,14 +120,14 @@ public class BasicCharacter : MonoBehaviour
         }
     }
     
-    protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype)
+    protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype,string Music)
     {
-        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false,CharacterType , Flytype);
+        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false,CharacterType , Flytype,Music);
     }
 
-    protected void CreateAttackWithCharacter(Fix_vector2 pos , Fix_vector2 with_pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype)
+    protected void CreateAttackWithCharacter(Fix_vector2 pos , Fix_vector2 with_pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype,string Music)
     {
-        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true, CharacterType,Flytype);
+        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true, CharacterType,Flytype,Music);
     }
 
     protected void GetColider()
@@ -183,7 +190,9 @@ public class BasicCharacter : MonoBehaviour
             {
                 continue;
             }
-            
+
+            PlayMusic(attack.MusicName);
+
             AnimaToward = -attack.toward;
             this_hited = true;
             hit_fly_type = attack.hited_fly_type;
@@ -281,6 +290,9 @@ public class BasicCharacter : MonoBehaviour
                     }
                 }
                 return;
+            } else
+            {
+                Moves(-AnimaToward, HitSpeed[AnimaHited]);
             }
             if(StatusTime > HitTime[AnimaHited])
             {
@@ -312,9 +324,14 @@ public class BasicCharacter : MonoBehaviour
         }
     }
 
-    protected void DeathFall(string name,int num,float size)
+    public Dictionary<string, int> Falls = new Dictionary<string, int>();
+
+    protected void DeathFall()
     {
-        Main_ctrl.NewItem(f.pos.Clone(), name, num, size,new Fix_vector2(0,0));
+        foreach (var xx in Falls)
+        {
+            Main_ctrl.NewItem(f.pos + new Fix_vector2(new Fixpoint((long)(Rand.rand() % 21 - 10), 1), new Fixpoint(0, 0)), xx.Key, xx.Value, 1f, new Fix_vector2(0, 0));
+        }
     }
 
     public float CheckHealth()

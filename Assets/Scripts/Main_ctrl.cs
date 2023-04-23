@@ -63,6 +63,7 @@ public class Main_ctrl : MonoBehaviour
         Player_ctrl.plays = new List<Player>();
         Map_ctrl.Map_items = new Dictionary<long, GameObject>();
         Flow_path.init();
+        Map_create.init();
         Monster_create.init();
     }
 
@@ -88,15 +89,18 @@ public class Main_ctrl : MonoBehaviour
             Items[i] = (Item)items[i];
         }
 
+        Debug.Log(Items.Length);
         for (int i = 0; i < Items.Length; ++i)
         {
             ItemList.Add(Items[i].id, Items[i]);
+            Debug.Log(Items[i].id);
         }
 
         Play_create();
         players.Clear();
         Wolf_create();
         main_id = Ser_to_cli[user_id];
+        Monster_create.Get_mon_items();
         Monster_create.Mon_create1();
 
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
@@ -423,21 +427,8 @@ public class Main_ctrl : MonoBehaviour
         }
     }
 
-    public static void NewMonster()
-    {
-        Obj_info p = new Obj_info();
-        p.name = "Monster1";
-        p.hei = new Fixpoint(225, 2);
-        p.wid = new Fixpoint(113, 2);
-        p.pos = new Fix_vector2(new Fixpoint(1 * 7 * 5, 1), new Fixpoint(-1 * 7 * 5, 1));
-        p.col_type = Fix_col2d.col_status.Collider;
-        p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
-        p.classnames.Add(Object_ctrl.class_name.Moster);
-        CreateObj(p);
-    }
-
     public static void NewAttack(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type)
+        long attacker_id ,float toward,bool with,int attacker_type ,int hit_fly_type,string Music)
     {
         Obj_info p = new Obj_info();
         p.name = "yellow";
@@ -453,6 +444,7 @@ public class Main_ctrl : MonoBehaviour
         p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
         p.hit_fly_type = hit_fly_type;
+        p.MusicName = Music;
         if(with == true)
         {
             p.type = "1";
@@ -460,7 +452,7 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
     public static void NewAttack2(string name,Fix_vector2 pos, Fixpoint width, Fixpoint high, Fixpoint Hpdamage, int Toughnessdamage, 
-        long attacker_id, float toward,int attacker_type,int hit_fly_type)
+        long attacker_id, float toward,int attacker_type,int hit_fly_type,string Music)
     {
         Obj_info p = new Obj_info();
         p.name = name;
@@ -476,6 +468,7 @@ public class Main_ctrl : MonoBehaviour
         p.type = "wave";
         p.attacker_type = attacker_type;
         p.classnames.Add(Object_ctrl.class_name.Attack);
+        p.MusicName = Music;
 
         Creobj(p);
     }
@@ -541,6 +534,12 @@ public class Main_ctrl : MonoBehaviour
                     m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                     m.id = cnt;
                     m.Startx();
+                    if (info.falls == null)
+                    {
+                        info.falls = new Dictionary<string, int>();
+                        info.falls["Mineral"] = 50;
+                    }
+                    m.Falls = info.falls;
                     if (m.type2 == 1)
                     {
                         m.ToHome();
@@ -557,6 +556,7 @@ public class Main_ctrl : MonoBehaviour
                     a.toward = info.toward;
                     a.attacker_type = info.attacker_type;
                     a.hited_fly_type = info.hit_fly_type;
+                    a.MusicName = info.MusicName;
                     if (info.type == "1") {
                         a.with_attacker = true;
                         a.with_pos = info.with_pos.Clone();
@@ -826,7 +826,9 @@ public class Obj_info
     public Fix_vector2 with_pos;
     public Dictionary<int, int> materials;
     public int hit_fly_type;
-    public int cre_type; 
+    public int cre_type;
+    public string MusicName;
+    public Dictionary<string, int> falls;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();

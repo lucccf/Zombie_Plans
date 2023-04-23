@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2313939454
+CRC: 3498239693
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 752795e7831ebd3a0991259ff66f0b44
+    Hash: 0d2893e55f18808a9ba3ca7e216707f7
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 66d4124d75d7b4395acda860786544ae
+    Hash: c45497f85fe0da224d880be587c1a3e9
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -36,9 +36,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -89,8 +89,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4a60cd83776806145bf740765b63dad1, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -165,4 +163,4 @@ Assets:
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/hst/Zombie_Plans/Assets/AssetBundles/music
