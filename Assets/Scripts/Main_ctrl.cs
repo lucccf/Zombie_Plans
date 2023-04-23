@@ -120,6 +120,7 @@ public class Main_ctrl : MonoBehaviour
             }
             Player_ctrl.plays[k].identity = Player.Identity.Wolf;
         }
+        main_identity = ((Player)All_objs[Ser_to_cli[user_id]].modules[Object_ctrl.class_name.Player]).identity;
     }
 
     public struct node
@@ -422,7 +423,6 @@ public class Main_ctrl : MonoBehaviour
         if (player_id == user_id)
         {
             play = CreateObj(p);
-            main_identity = play.GetComponent<Player>().identity;
         }
         else
         {
