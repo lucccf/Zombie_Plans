@@ -33,7 +33,7 @@ public class MakeSuccess : MonoBehaviour
             color.g = 1;
             color.b = 0.2f;
             image.color = color;
-            text.text = "设施已成功修复，不再需要材料";
+            text.text = "合成成功";
         }
         if (Type == 2)
         {
@@ -61,6 +61,16 @@ public class MakeSuccess : MonoBehaviour
             color.b = 0.2f;
             image.color = color;
             text.text = "已经拥有";
+        }
+
+        if (Type == 5)
+        {
+            Color color = image.color;
+            color.r = 1;
+            color.g = 0.2f;
+            color.b = 0.2f;
+            image.color = color;
+            text.text = "设施已修复完成，无法提交材料";
         }
     }
 
