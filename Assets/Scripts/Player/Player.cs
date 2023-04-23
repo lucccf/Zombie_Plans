@@ -1105,5 +1105,31 @@ public class Player : BasicCharacter
         animator.SetFloat("attack", AnimaAttack);
         animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
+        Change_color();
+    }
+    
+    void Change_color()
+    {
+        Texture2D image = gameObject.GetComponent<SpriteRenderer>().sprite.texture;
+        Color[] pixels = image.GetPixels(); // 获取所有像素的颜色
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            Color pixelColor = pixels[i];
+            // 判断像素颜色是否在指定范围内
+            if (IsSimilarColor(pixelColor, new Color(0x7f, 0x00, 0x00), new Color(0xff, 0x7f, 0x7f)))
+            {
+                // 将像素颜色更改为新颜色
+                pixels[i] = new Color(0xff, 0xff, 0xff);
+            }
+        }
+    }
+
+    bool IsSimilarColor(Color c1, Color c2, Color c3)
+    {
+        if (c1.g >= c2.g && c1.g <= c3.g && c1.a >= c2.a && c1.a <= c3.a && c1.b >= c2.b && c1.b <= c3.b && c1.r >= c2.r && c1.r <= c3.r)
+        {
+            return true;
+        }
+        else return false;
     }
 }
