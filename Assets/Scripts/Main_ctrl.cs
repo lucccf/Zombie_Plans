@@ -534,7 +534,10 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Moster] = m;
                     m.f = f;
                     m.type2 = info.cre_type;
-                    m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
+                    if (ctrl.modules.ContainsKey(Object_ctrl.class_name.Fix_rig2d))
+                    {
+                        m.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
+                    }
                     m.id = cnt;
                     m.Startx();
                     if (info.falls == null)

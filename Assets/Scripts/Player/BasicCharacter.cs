@@ -182,6 +182,7 @@ public class BasicCharacter : MonoBehaviour
             if (attack.attacker_type == 1 && CharacterType == 2) continue;
             if (attack.attacker_type == 2 && CharacterType == 1) continue;
             if (attack.attacker_type != 2 && CharacterType == 4) continue;
+            if (attack.attacker_type != 0 && CharacterType == 5) continue;
             if (attack.attakcer_id == id)
             {
                 continue;
