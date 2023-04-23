@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3038040104
+CRC: 1849790462
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e9e82f36ac3b338057a75482b03b010b
+    Hash: 55fe10463a297532e82b7a9e531bf21d
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -134,6 +134,7 @@ Assets:
 - "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u6280\u80FD\u91CA\u653E\u7684\u97F3\u6548/\u559D\u8840\u836F/\u559D\u836F.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u554A~~~\uFF08\u738B\uFF09.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u54E6\u54C4\u54C4\uFF0C\u5168\u7ED9\u515A.mp3"
+- "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u6280\u80FD\u91CA\u653E\u7684\u97F3\u6548/\u4E09\u8FDE\u6CE2/\u4E09\u8FDE\u6CE2.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/V V.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/Suction\uFF08\u9B54\u7537\uFF09.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u554A\uFF1F\u65E0\u53CC\u5927\u9EC4\u74DC\uFF1F\uFF01\uFF08\u738B\uFF09.mp3"
