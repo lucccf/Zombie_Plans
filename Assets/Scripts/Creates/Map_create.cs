@@ -334,6 +334,7 @@ public class Map_create : MonoBehaviour
         home_info.col_type = Fix_col2d.col_status.Collider;
         home_info.attacker_id = id;
         home_info.classnames.Add(Object_ctrl.class_name.Only_Facility);
+        home_info.classnames.Add(Object_ctrl.class_name.Moster);
         home_info.pos = pos;
         home = Main_ctrl.CreateObj(home_info);
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);

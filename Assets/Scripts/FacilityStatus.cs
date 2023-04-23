@@ -7,10 +7,10 @@ public class FacilityStatus : Monster
     // Start is called before the first frame update
     public override void Startx()
     {
-        CharacterType = 4;
+        CharacterType = 5;
         status.max_toughness = 1000000;
         status.toughness = 1000000;
-        SetStatus(500, 10);
+        SetStatus(10, 10);
     }
 
     // Update is called once per frame
