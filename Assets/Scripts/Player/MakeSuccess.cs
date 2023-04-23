@@ -26,6 +26,24 @@ public class MakeSuccess : MonoBehaviour
             image.color = color;
             text.text = "材料不足";
         }
+        if (Type == 1)
+        {
+            Color color = image.color;
+            color.r = 0.2f;
+            color.g = 1;
+            color.b = 0.2f;
+            image.color = color;
+            text.text = "设施已成功修复，不再需要材料";
+        }
+        if (Type == 2)
+        {
+            Color color = image.color;
+            color.r = 0.2f;
+            color.g = 1;
+            color.b = 0.2f;
+            image.color = color;
+            text.text = "设施成功修复";
+        }
         if (Type == 3)
         {
             Color color = image.color;

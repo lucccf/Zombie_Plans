@@ -1,18 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Login : MonoBehaviour
+public class Only_Facility : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button login;
-    public Button register;
-
+    public Facility myfac;
     void Start()
     {
-        login.onClick.AddListener(LoginController.LoginClicked);
-        register.onClick.AddListener(LoginController.RegisterClicked);
+        
     }
 
     // Update is called once per frame

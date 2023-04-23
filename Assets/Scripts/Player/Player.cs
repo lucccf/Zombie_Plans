@@ -117,22 +117,13 @@ public class Player : BasicCharacter
                 break;
             case PlayerOpt.FixFacility:
                 Facility fa = Flow_path.facilities[inputs.Itemid];
-                bool flag = true;
-                foreach(var m in fa.materials)
+                foreach (var m in fa.materials)
                 {
-                    if (bag.BagGetItemsNums(m.Key) < 0)
+                    if (fa.commited[m.Key] < fa.materials[m.Key])
                     {
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag)
-                {
-                    foreach (var m in fa.materials)
-                    {
-                        
-                        bool value = bag.BagGetItem(m.Key, -1,Player_ctrl.BagUI);
-                        if (value) {
+                        bool value = bag.BagGetItem(m.Key, -1, Player_ctrl.BagUI);
+                        if (value)
+                        {
                             if (!fa.commited.ContainsKey(m.Key))
                             {
                                 fa.commited[m.Key] = 1;
@@ -149,19 +140,29 @@ public class Player : BasicCharacter
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 3;
                         }
-                        else 
+                        else
                         {
                             GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 0;
                         }
+                        if (fa.commited[m.Key] == fa.materials[m.Key])
+                        {
+                            GameObject facui = (GameObject)AB.getobj("提示UI");
+                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                            factmp.GetComponent<MakeSuccess>().Type = 2;
+                        }
+
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
-                        GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key]*100 / fa.materials[m.Key]).ToString()+"%";
-                        
+                        GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                    }
+                    else {
+                        GameObject facui = (GameObject)AB.getobj("提示UI");
+                        GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                        factmp.GetComponent<MakeSuccess>().Type = 1;
                     }
                 }
-                Debug.Log(flag);
                 break;
             case PlayerOpt.MoveItem:
                 Item Makeitem = Main_ctrl.GetItemById(inputs.Itemid);

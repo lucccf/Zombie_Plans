@@ -120,6 +120,7 @@ public class Main_ctrl : MonoBehaviour
             }
             Player_ctrl.plays[k].identity = Player.Identity.Wolf;
         }
+        main_identity = ((Player)All_objs[Ser_to_cli[user_id]].modules[Object_ctrl.class_name.Player]).identity;
     }
 
     public struct node
@@ -422,7 +423,6 @@ public class Main_ctrl : MonoBehaviour
         if (player_id == user_id)
         {
             play = CreateObj(p);
-            main_identity = play.GetComponent<Player>().identity;
         }
         else
         {
@@ -623,6 +623,7 @@ public class Main_ctrl : MonoBehaviour
                     }
                     fa.commited = newCommited;
                     Flow_path.facilities[cnt] = fa;
+                    Flow_path.onlyid_facilities[info.attacker_id] = fa;
                     int k = (int)(Rand.rand() % Flow_path.cons);
                     while (Flow_path.conditions[k] != 0)
                     {
@@ -649,6 +650,11 @@ public class Main_ctrl : MonoBehaviour
                     Home h = obj.AddComponent<Home>();
                     ctrl.modules[Object_ctrl.class_name.Home] = h;
                     h.hp = 100;
+                    break;
+                case Object_ctrl.class_name.Only_Facility:
+                    Only_Facility of = obj.AddComponent<Only_Facility>();
+                    ctrl.modules[Object_ctrl.class_name.Only_Facility] = of;
+                    of.myfac = Flow_path.onlyid_facilities[info.attacker_id];
                     break;
             }
         }

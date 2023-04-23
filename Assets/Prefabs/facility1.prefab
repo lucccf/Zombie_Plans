@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5512299739616151122}
   - component: {fileID: 7433952987492444153}
+  - component: {fileID: 8892245375051358036}
   m_Layer: 0
   m_Name: facility1
   m_TagString: Untagged
@@ -81,3 +82,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8892245375051358036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477335447486326482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e71249582ea32794dac07d36451ac043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  type2: 0
+  AnimaToward: 0
+  LockId: -1
+  Check: 0
+  ToHomeFlag: 0

@@ -48,10 +48,14 @@ public class LoginController : MonoBehaviour
 
     public static void Trans(LoginResponse l)
     {
-        if (l.Result)
+        Debug.Log(l);
+        if (l.Opt == LoginResponse.Types.Operation.Login)
         {
-            Main_ctrl.user_id = l.Userid;
-            SceneManager.LoadScene("Start");
+            if (l.Result)
+            {
+                Main_ctrl.user_id = l.Userid;
+                SceneManager.LoadScene("Start");
+            }
         }
     }
 
