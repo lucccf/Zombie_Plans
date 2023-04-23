@@ -213,9 +213,9 @@ public class Devil : Knight
     private static Fixpoint DevilAttack2HitTime = new Fixpoint(6, 1);
     private static Fixpoint DevilAttack3HitTime = new Fixpoint(9, 1);
     private static Fixpoint DevilAttackQuitTime = new Fixpoint(1, 0);
-    private static Fixpoint DevilAttack1Damage = new Fixpoint(4, 0);
-    private static Fixpoint DevilAttack2Damage = new Fixpoint(4, 0);
-    private static Fixpoint DevilAttack3Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack1Damage = new Fixpoint(40, 0);
+    private static Fixpoint DevilAttack2Damage = new Fixpoint(40, 0);
+    private static Fixpoint DevilAttack3Damage = new Fixpoint(40, 0);
     private int DevilAttackTimes = 0;
 
     private void DevilCreateAttack(Fixpoint HPDamage, int ToughnessDamage)
@@ -258,7 +258,7 @@ public class Devil : Knight
 
     private static Fixpoint DevilCannonMagicShootTime = new Fixpoint(65,2);
     private static Fixpoint DevilCannonMagicQuitTime = new Fixpoint(1166, 3);
-    private static Fixpoint DevilCannonMagicAttack = new Fixpoint(7, 1);
+    private static Fixpoint DevilCannonMagicAttack = new Fixpoint(70, 0);
     private bool DevilCannonMagicShooted = false;
     private void CannonMagic()
     {
@@ -279,7 +279,7 @@ public class Devil : Knight
     private static Fixpoint DevilBombHitTime = new Fixpoint(4, 1);
     private static Fixpoint DevilBombHitBetween = new Fixpoint(5, 0);
     private static Fixpoint DevilBombQuitTime = new Fixpoint(139, 2);
-    private static Fixpoint DevilBombAttack = new Fixpoint(5, 1);
+    private static Fixpoint DevilBombAttack = new Fixpoint(50, 1);
     private int DevilBonmTimes = 0;
     private void Bomb()
     {
@@ -308,7 +308,7 @@ public class Devil : Knight
 
     }
 
-    private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(5, 1);
+    private static Fixpoint DevilSuckerPunchAttack = new Fixpoint(50, 1);
     private static Fixpoint DevilSuckerPunckBeginTime = new Fixpoint(17, 2);
     private static Fixpoint DevilSuckerPunckQuitTime = new Fixpoint(59, 2);
     private static Fixpoint DevilSuckerPunckSpeed = new Fixpoint(15, 0);
