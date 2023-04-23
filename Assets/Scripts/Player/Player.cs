@@ -240,6 +240,16 @@ public class Player : BasicCharacter
                     Player_ctrl.Attack[((int)id, inputs.Itemid)] = 1;
                 }
                 break;
+            case PlayerOpt.Markfac:
+                if (Attack_fac)
+                {
+                    Attack_fac = false;
+                }
+                else
+                {
+                    Attack_fac = true;
+                }
+                break;
         }
     }
     public override void Updatex()
