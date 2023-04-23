@@ -6,6 +6,7 @@ using UnityEditor;
 
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
+using Net;
 
 public static class CustomSettings
 {
@@ -158,6 +159,12 @@ public static class CustomSettings
         _GT(typeof(UnityEngine.UI.Image)),
         _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
         _GT(typeof(UnityEngine.UI.Slider)),
+        _GT(typeof(Clisocket)),
+        _GT(typeof(LoginData)),
+        _GT(typeof(PlayerOptData)),
+        _GT(typeof(LoginData.Types)),
+        _GT(typeof(LoginData.Types.Operation)),
+        _GT(typeof(BODYTYPE)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

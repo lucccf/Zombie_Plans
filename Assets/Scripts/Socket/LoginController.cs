@@ -28,8 +28,7 @@ public class LoginController : MonoBehaviour
         loginData.Username = text1;
         loginData.Passwd = text2;
         loginData.Opt = LoginData.Types.Operation.Login;
-
-        Clisocket.Sendmessage(BODYTYPE.LoginData, loginData);
+        //Clisocket.Sendmessage(BODYTYPE.LoginData, loginData);
     }
 
     public static void RegisterClicked()

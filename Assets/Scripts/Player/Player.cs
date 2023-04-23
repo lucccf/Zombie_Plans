@@ -1,5 +1,6 @@
 ﻿using Net;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
@@ -1110,9 +1111,30 @@ public class Player : BasicCharacter
         animator.SetInteger("status", AnimaStatus);
         //Change_color();
     }
-    
+
+    public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
+    {
+        public AnimationClipOverrides(int capacity) : base(capacity) { }
+
+        public AnimationClip this[string name]
+        {
+            get { return this.Find(x => x.Key.name.Equals(name)).Value; }
+            set
+            {
+                int index = this.FindIndex(x => x.Key.name.Equals(name));
+                if (index != -1)
+                    this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
+            }
+        }
+    }
+
     void Change_color()
     {
+        AnimatorOverrideController overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animator.runtimeAnimatorController = overrideController;
+        var overrides = new AnimationClipOverrides(overrideController.overridesCount);
+        overrideController.GetOverrides(overrides);
+
         // Get the source texture
         Texture2D sourceTexture = gameObject.GetComponent<SpriteRenderer>().sprite.texture;
 
