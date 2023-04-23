@@ -20,13 +20,14 @@ public class ChatUI : MonoBehaviour
     void CommitMessage() {
         PlayerMessage x = new PlayerMessage();
         x.Userid = (int)Main_ctrl.user_id;
-        x.Content = textpanel.GetComponent<Text>().text;   
+        Text tmptext = textpanel.GetComponent<Text>();
+        x.Content = tmptext.text;
         Clisocket.Sendmessage(BODYTYPE.PlayerMessage, x);
+        tmptext.text = " ";
         gameObject.SetActive(false);
         ClientSend.Send = true;
         commitbuttonable = false;
         t = Time.time;
-        Debug.Log("Enable Changed"+ commitbuttonable);
     }
 
     // Update is called once per frame

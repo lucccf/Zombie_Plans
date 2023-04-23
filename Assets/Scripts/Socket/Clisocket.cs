@@ -34,8 +34,8 @@ public class Clisocket : MonoBehaviour
     IPEndPoint remoteEP;// = new IPEndPoint(ipAddress, 8080);
     static int HEAD_SIZE = 4;
     static int offset = 0;
-    static byte[] buffer = new byte[1024];
-    static byte[] sendbuffer = new byte[1024];
+    static byte[] buffer = new byte[65536];
+    static byte[] sendbuffer = new byte[65536];
     static Socket clientSocket;
 
     public struct op
