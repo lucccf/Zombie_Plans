@@ -12,7 +12,6 @@ public class Dead_panel : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("1111111");
         flag = false;
         dr1 = dr;
         dr1.SetActive(false);
