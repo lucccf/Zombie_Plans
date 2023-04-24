@@ -3,10 +3,10 @@ CRC: 570193298
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 08a3426927ec44ad92d1b15686d0f16e
+    Hash: 4a1fbb59119a9cdcc70c4184e1ed320e
   TypeTreeHash:
     serializedVersion: 2
-    Hash: d049979dfcfca41d9823d84172cbcc88
+    Hash: c93cbf5555469a351c5ff4ef6848e876
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,9 +28,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -140,5 +140,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/hst/Zombie_Plans/Assets/AssetBundles/item
+- D:/hst/Zombie_Plans/Assets/AssetBundles/prefabs

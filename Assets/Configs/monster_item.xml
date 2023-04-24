@@ -54,27 +54,29 @@
 		<surely>
 			<id>11</id>
 			<num>2</num>
+			<id>1</id>
+			<num>20</num>
 		</surely>
 		<room>
 			<area>
 				<areaid>1</areaid>
 				<id>7</id>
-				<num>5</num>
+				<num>8</num>
 			</area>
 			<area>
 				<areaid>2</areaid>
 				<id>8</id>
-				<num>5</num>
+				<num>8</num>
 			</area>
 			<area>
 				<areaid>3</areaid>
 				<id>9</id>
-				<num>5</num>
+				<num>8</num>
 			</area>
 			<area>
 				<areaid>4</areaid>
 				<id>10</id>
-				<num>5</num>
+				<num>8</num>
 			</area>
 		</room>
 	</monster>

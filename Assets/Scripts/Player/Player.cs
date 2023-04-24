@@ -950,7 +950,7 @@ public class Player : BasicCharacter
 
     private static Fixpoint Fire1DuringTime = new Fixpoint(12, 1);//人物动作的总时间
     private static Fixpoint Fire1BeginToAttackTime = new Fixpoint(2, 1);//发射激光的时间点
-    private static Fixpoint FireBetweenDuring = new Fixpoint(1, 1);//激光的攻击间隔
+    private static Fixpoint FireBetweenDuring = new Fixpoint(3, 1);//激光的攻击间隔
     private int FireTime = 0;
     private bool CreatedLighting = false;
 
@@ -1062,7 +1062,7 @@ public class Player : BasicCharacter
         if (StatusTime > RecoverHpDuringTime)
         {
             ChangeStatus(StatusType.Normal);
-            status.RecoverHp(100);//恢复的血量
+            status.RecoverHp(200);//恢复的血量
             Preform(-100);
         }
     }
