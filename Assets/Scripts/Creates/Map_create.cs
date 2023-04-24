@@ -186,6 +186,7 @@ public class Map_create : MonoBehaviour
         home_info = new Obj_info();
         home_info.name = "home";
         home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+        home_info.classnames.Add(Object_ctrl.class_name.Moster);
         //home_info.classnames.Add(Object_ctrl.class_name.Tinybutton);
         home_info.hei = new Fixpoint(wall_hei * 4, 1);
         home_info.wid = new Fixpoint(hf_thick * 5, 0);

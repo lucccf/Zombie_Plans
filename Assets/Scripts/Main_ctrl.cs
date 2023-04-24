@@ -41,6 +41,7 @@ public class Main_ctrl : MonoBehaviour
 
     public static bool Exit = false;
 
+    public static bool homegg = false;
     public static Player.Identity main_identity;
 
     public enum objtype
