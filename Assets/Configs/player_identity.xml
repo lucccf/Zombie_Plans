@@ -1,0 +1,26 @@
+<player_identity>
+	<case>
+		<total>1</total>
+		<wolf>0</wolf>
+	</case>
+	<case>
+		<total>2</total>
+		<wolf>1</wolf>
+	</case>
+	<case>
+		<total>3</total>
+		<wolf>1</wolf>
+	</case>
+	<case>
+		<total>4</total>
+		<wolf>1</wolf>
+	</case>
+	<case>
+		<total>5</total>
+		<wolf>1</wolf>
+	</case>
+	<case>
+		<total>6</total>
+		<wolf>2</wolf>
+	</case>
+</player_identity>

@@ -15,8 +15,6 @@ public class BuildingButton : MonoBehaviour
     GameObject allfacility;
     GameObject homeuiclosebutton;
     GameObject worktableclosebutton;
-    GameObject itemprogress;
-    GameObject itemprogresstext;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
@@ -38,13 +36,22 @@ public class BuildingButton : MonoBehaviour
             tmp = playerpanel.transform.Find("Facility").gameObject;
             //标题
             titletext = playerpanel.transform.Find("Facility/Title/Text").gameObject;
-            titletext.GetComponent<Text>().text = "设施详情";
+            titletext.GetComponent<Text>().text = gameObject.name;
             //关闭键
             closebutton = playerpanel.transform.Find("Facility/Background/CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
             //材料列表
 
-            tmp.GetComponent<FacilityUpdate>().buildingid = buildingid;
+            itemimage = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage").gameObject;
+            itemtext = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage/Text").gameObject;
+            Facility fa = Flow_path.facilities[buildingid];
+            Dictionary<int, int> curmat = fa.materials;
+            foreach (KeyValuePair<int, int> mat in curmat)
+            {
+                Item x = Main_ctrl.GetItemById(mat.Key);
+                itemimage.GetComponent<Image>().sprite = x.image;
+                itemtext.GetComponent<Text>().text = "还需数量："+ (mat.Value - fa.commited[mat.Key]);
+            }
         }
     }
 

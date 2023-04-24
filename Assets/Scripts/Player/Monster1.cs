@@ -56,9 +56,9 @@ public class Monster1 : Monster
     public override void Updatex()
     {
         StatusTime += Dt.dt;
-        status.RecoverToughness(Dt.dt * new Fixpoint(20,0));//韧性值恢复
-        if(AnimaStatus != 6)CheckDeath();
-        switch(RealStatus)
+        status.RecoverToughness(Dt.dt * new Fixpoint(20, 0));//韧性值恢复
+        if (AnimaStatus != 6) CheckDeath();
+        switch (RealStatus)
         {
             case StatusType.Normal:
                 AnimaStatus = 0;
@@ -100,7 +100,7 @@ public class Monster1 : Monster
     }
     private void CheckDeath()
     {
-        if(status.death == true)
+        if (status.death == true)
         {
             AnimaAttack = 0f;
             AnimaHited = 0;
@@ -114,7 +114,7 @@ public class Monster1 : Monster
         int hited = BasicCharacterGetHited();
         if (hited != 0) return;
 
-        if(!f.onground)
+        if (!f.onground)
         {
             ChangeStatus(StatusType.Fall);
             return;
@@ -159,7 +159,8 @@ public class Monster1 : Monster
                         Moves(-1);
                     }
                 }
-            } else
+            }
+            else
             {
                 SearchX(Pos);
             }
@@ -241,7 +242,7 @@ public class Monster1 : Monster
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward,3,"");//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 30, AnimaToward, 3, "");//最后一个参数是击飞类型
 
     }
     private void RemoveAttack()
@@ -259,49 +260,57 @@ public class Monster1 : Monster
     private void Attack(bool first)
     {
         int hited = BasicCharacterGetHited();
-        if (hited != 0) {
+        if (hited != 0)
+        {
             AnimaAttack = 0;
-            return; 
+            return;
         }
-        
+
         Fixpoint Near = GetNearDistance();
-        if(first == true)
+        if (first == true)
         {
             AttackToNext();
-        } else if(AnimaAttack > 0.5f && AnimaAttack <= 1.5f)
+        }
+        else if (AnimaAttack > 0.5f && AnimaAttack <= 1.5f)
         {
-            if(StatusTime > Attack1DuringTime)
+            if (StatusTime > Attack1DuringTime)
             {
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false) {
+            if (StatusTime > Attack1BeginToHitTime && CreatedAttack == false)
+            {
                 PlayMusic(Music[Random.Range(0, 4)]);
-                MonsterCreateAttack(Attack1Damage); 
+                MonsterCreateAttack(Attack1Damage);
             }
-        } else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
+        }
+        else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f)
         {
             if (StatusTime > Attack2DuringTime)
             {
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false) {
+            if (StatusTime > Attack2BeginToHitTime && CreatedAttack == false)
+            {
                 PlayMusic(Music[Random.Range(0, 4)]);
-                MonsterCreateAttack(Attack2Damage); 
+                MonsterCreateAttack(Attack2Damage);
             }
-        } else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
+        }
+        else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f)
         {
             if (StatusTime > Attack3DuringTime)
             {
                 if (Near <= new Fixpoint(15, 1)) AttackToNext();
                 else RemoveAttack();
             }
-            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false) {
+            if (StatusTime > Attack3BeginToHitTime && CreatedAttack == false)
+            {
                 PlayMusic(Music[Random.Range(0, 4)]);
-                MonsterCreateAttack(Attack3Damage); 
+                MonsterCreateAttack(Attack3Damage);
             }
-        } else if(AnimaAttack > 3.5f)
+        }
+        else if (AnimaAttack > 3.5f)
         {
             if (StatusTime > Attack4DuringTime)
             {
@@ -325,11 +334,11 @@ public class Monster1 : Monster
     }
     private void Death()
     {
-        if(StatusTime == Dt.dt)
+        if (StatusTime == Dt.dt)
         {
             PlayMusic("啊~~~（王）");
         }
-        if(StatusTime > new Fixpoint(3,0))
+        if (StatusTime > new Fixpoint(3, 0))
         {
             if (type2 == 1)
             {

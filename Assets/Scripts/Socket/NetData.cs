@@ -148,8 +148,6 @@ namespace Net
         [pbr::OriginalName("UnMark_USer")] UnMarkUser = 29,
         [pbr::OriginalName("Throw_item")] ThrowItem = 30,
         [pbr::OriginalName("Mark_fac")] Markfac = 31,
-        [pbr::OriginalName("Use_item")] Useitem = 32,
-        [pbr::OriginalName("Save_TLB")] SaveTLB = 33,
     }
 
     #endregion

@@ -46,7 +46,7 @@ public class Terrorist : Knight
     {
         BasicCharacterGetHited();
         StatusTime += Dt.dt;
-        if(status.death == true)
+        if (status.death == true)
         {
             ChangeStatus(StatusType.Death);
             Death(true);
@@ -77,12 +77,12 @@ public class Terrorist : Knight
     }
     private void Death(bool first)
     {
-        if(first == true)
+        if (first == true)
         {
-            Main_ctrl.NewAttack(f.pos, new Fix_vector2(0, 0), new Fixpoint(6, 0), new Fixpoint(6, 0), status.Damage(), 120, id, AnimaToward, false, CharacterType,3,"");//最后一个参数是击飞类型
+            Main_ctrl.NewAttack(f.pos, new Fix_vector2(0, 0), new Fixpoint(6, 0), new Fixpoint(6, 0), status.Damage(), 120, id, AnimaToward, false, CharacterType, 3, "");//最后一个参数是击飞类型
             Main_ctrl.Desobj(id);
             GameObject obj = Instantiate((GameObject)AB.getobj("Bomb2"));
-            Instantiate(obj, transform.position,transform.rotation);
+            Instantiate(obj, transform.position, transform.rotation);
         }
     }
     private void Normal()
@@ -114,7 +114,7 @@ public class Terrorist : Knight
         }
         if (x == y)
         {
-            if(f.pos.x - Player_ctrl.HomePos.x < new Fixpoint(2,1) && f.pos.x - Player_ctrl.HomePos.x > new Fixpoint(-2,1))
+            if (f.pos.x - Player_ctrl.HomePos.x < new Fixpoint(2, 1) && f.pos.x - Player_ctrl.HomePos.x > new Fixpoint(-2, 1))
             {
                 ChangeStatus(StatusType.Death);
                 Death(true);
@@ -124,7 +124,8 @@ public class Terrorist : Knight
             {
                 AnimaToward = 1;
                 Moves(AnimaToward, status.WalkSpeed);
-            } else
+            }
+            else
             {
                 AnimaToward = -1;
                 Moves(AnimaToward, status.WalkSpeed);
