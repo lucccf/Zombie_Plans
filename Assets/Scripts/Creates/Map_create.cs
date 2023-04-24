@@ -199,6 +199,7 @@ public class Map_create : MonoBehaviour
     public static long Bud_cnt = 0;
 
     static int[] chos;
+    static (int, int)[] fac_pos;
 
     public static void Facility_create()
     {
@@ -207,7 +208,8 @@ public class Map_create : MonoBehaviour
         XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
 
         chos = new int[mill_info.Count];
-        for(int i = 0; i < 3; i++)
+        fac_pos = new (int, int)[mill_info.Count];
+        for (int i = 0; i < 3; i++)
         {
             int k = (int)(Rand.rand() % (ulong)mill_info.Count);
             while (chos[k] != 0)
@@ -215,6 +217,16 @@ public class Map_create : MonoBehaviour
                 k = (int)(Rand.rand() % (ulong)mill_info.Count);
             }
             chos[k] = 1;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            int k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            while (chos[k] != 0)
+            {
+                k = (int)(Rand.rand() % (ulong)mill_info.Count);
+            }
+            chos[k] = 2;
         }
 
         int ix = 0;
@@ -226,6 +238,7 @@ public class Map_create : MonoBehaviour
             tmp[mat_id] = mat_cnt;
             int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
             int mill_pos = int.Parse(p.SelectSingleNode("mill_pos").InnerText);
+            fac_pos[ix] = (mill_id, mill_pos / 28);
             string name = p.SelectSingleNode("mill_name").InnerText;
             Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
 
@@ -244,16 +257,6 @@ public class Map_create : MonoBehaviour
         XmlDocument ItemxmlDoc = new XmlDocument();
         ItemxmlDoc.Load(Application.dataPath + "/Configs/facility.xml");
         XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
-
-        for (int i = 0; i < 2; i++)
-        {
-            int k = (int)(Rand.rand() % (ulong)mill_info.Count);
-            while (chos[k] != 0)
-            {
-                k = (int)(Rand.rand() % (ulong)mill_info.Count);
-            }
-            chos[k] = 2;
-        }
 
         int ix = 0;
         foreach (XmlNode p in mill_info)
@@ -466,35 +469,50 @@ public class Map_create : MonoBehaviour
 
                 if (xml_name == "battle_pos")
                 {
-                    yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
-                    Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
-                    Monster_create.size_zombies1.Add(yy);
-                    yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
-                    Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
-                    Monster_create.size_zombies1.Add(yy);
-                    for(int ii = 0; ii < 3; ii++)
+                    int jj;
+                    for(jj = 0; jj < chos.Length; jj++)
                     {
-                        yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
-                        Monster_create.pos_zombies1.Add(new Mon_pos(1, getXX(xx, id)));
+                        Debug.Log(id + " " + pos + " " + fac_pos[jj].Item1 + " " + fac_pos[jj].Item2);
+                        if (id <= fac_pos[jj].Item1 + 1 && id >= fac_pos[jj].Item1 - 1 && pos <= fac_pos[jj].Item2 + 1 && pos >= fac_pos[jj].Item2 - 1) break;
+                    }
+                    if (jj >= chos.Length) continue;
+                    if (chos[jj] == 1)
+                    {
+                        yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                        Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
                         Monster_create.size_zombies1.Add(yy);
+                        yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                        Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
+                        Monster_create.size_zombies1.Add(yy);
+                        for (int ii = 0; ii < 3; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                            Monster_create.pos_zombies1.Add(new Mon_pos(1, getXX(xx, id)));
+                            Monster_create.size_zombies1.Add(yy);
+                        }
                     }
-                    for (int ii = 0; ii < 2; ii++)
+
+
+                    if (chos[jj] >= 1)
                     {
-                        yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
-                        Monster_create.pos_zombies2.Add(new Mon_pos(2, getXX(xx, id)));
-                        Monster_create.size_zombies2.Add(yy);
-                    }
-                    for (int ii = 0; ii < 2; ii++)
-                    {
-                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
-                        Monster_create.pos_zombies2.Add(new Mon_pos(3, getXX(xx, id)));
-                        Monster_create.size_zombies2.Add(yy);
-                    }
-                    for (int ii = 0; ii < 3; ii++)
-                    {
-                        yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
-                        Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
-                        Monster_create.size_zombies2.Add(yy);
+                        for (int ii = 0; ii < 2; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                            Monster_create.pos_zombies2.Add(new Mon_pos(2, getXX(xx, id)));
+                            Monster_create.size_zombies2.Add(yy);
+                        }
+                        for (int ii = 0; ii < 2; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                            Monster_create.pos_zombies2.Add(new Mon_pos(3, getXX(xx, id)));
+                            Monster_create.size_zombies2.Add(yy);
+                        }
+                        for (int ii = 0; ii < 3; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                            Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
+                            Monster_create.size_zombies2.Add(yy);
+                        }
                     }
                 }
             }
