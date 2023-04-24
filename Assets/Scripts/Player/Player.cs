@@ -209,6 +209,7 @@ public class Player : BasicCharacter
                             else
                             {
                                 fa.commited[m.Key] += 1;
+                                if(fa.repaired)Debug.Log("CommitDebug:" + fa.commited[m.Key]);
                             }
                         }
 
@@ -351,6 +352,9 @@ public class Player : BasicCharacter
                 int box_id = inputs.Itemid % 10000;
                 bag.BagGetItem(item_id,1,Player_ctrl.BagUI);
                 Player_ctrl.WolfBox[box_id].RemoveItem(item_id);
+                break;
+            case PlayerOpt.DeleteItem:
+                ThrowItem(inputs.Itemid);
                 break;
         }
     }
@@ -1019,7 +1023,7 @@ public class Player : BasicCharacter
             HeavyAttackHasHited = true;
             PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(15, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(7, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
         }
 
         if (!f.onground || StatusTime > HeavyAttackDuring)
