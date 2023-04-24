@@ -71,18 +71,12 @@ public class Monster : BasicCharacter
             Debug.LogError("Find Home Error" + f.pos.x.to_float() + " " + f.pos.y.to_float());
         }
     }
-    public virtual void ToHome()
+    public void ToHome()
     {
         if (HasToHome == true) return;
         HasToHome = true;
         HomePos = Player_ctrl.HomePos.Clone();
         HomeLocation = Main_ctrl.CalPos(Player_ctrl.HomePos.x, Player_ctrl.HomePos.y);
-
-        FindPosLeft = new Fixpoint(-3, 0);
-        FindPosRight = new Fixpoint(3, 0);
-        FindPosUp = new Fixpoint(7, 0);
-        FindPosDown = new Fixpoint(-3, 0);
-
         CatchPosUp = HomePos.x.Clone() + FindPosUp;
         CatchPosDown = HomePos.x.Clone() + FindPosDown;
         CatchPosLeft = HomePos.x.Clone() + FindPosLeft;

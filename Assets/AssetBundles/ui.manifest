@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 970943394
+CRC: 3400184955
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: f0730b9b16371213414682a69a5bc86a
+    Hash: 741e4d649d1111e9fd8cf79dd5d13e64
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c8454ae721b03be5b69571246f92bd2e
+    Hash: f301a931ec1f1f8b405305828547194f
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,9 +28,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -45,8 +47,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 0571e0f141cfcb54f8ced3945ecec18f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cc8c34424b045aa44bc5ae710df04353, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 980d3f9293bbb6048801aac05d02b727, type: 3}
 - Class: 114
@@ -98,8 +98,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 9f49690dc1ce16e4cb04762578a72007, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 53c7d65de299f0f4bb72cc8045ce8722, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 17bab69d8dcd405478ad6bc2c1d649a5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 7290c7dd3ede0dc44a053f5ed92e5300, type: 3}
@@ -144,5 +142,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/item
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/pro/Zombie_Plans/Assets/AssetBundles/item
+- D:/pro/Zombie_Plans/Assets/AssetBundles/prefabs

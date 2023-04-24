@@ -4,20 +4,6 @@ public class Terrorist : Knight
 {
     // Start is called before the first frame update
     private int y;
-
-    public override void InitNormal()
-    {
-        status.attack = 10;//基础攻击力
-        status.WalkSpeed = new Fixpoint(3, 0);//走路速度
-        status.max_hp = 100;//最大血量
-        status.hp = 100;//血量
-        status.max_toughness = 100000000;
-        status.toughness = 100000000;
-        HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
-        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(2, 1) };
-        ToughnessStatus = new int[2] { 20, 0 };//阶段
-    }
-
     void Start()
     {
         CharacterType = 2;

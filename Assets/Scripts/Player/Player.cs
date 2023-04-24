@@ -13,9 +13,6 @@ public class Player : BasicCharacter
     public PlayerBag bag;
     private Fixpoint QCD = new Fixpoint(100000000, 0);
     private Fixpoint ECD = new Fixpoint(100000000, 0);
-    private Fixpoint QCD_MAX = new Fixpoint(10, 0);
-    private Fixpoint ECD_MAX = new Fixpoint(10, 0);
-
 
     public string words = string.Empty;
     public bool words_ok = false;
@@ -31,6 +28,7 @@ public class Player : BasicCharacter
 
     public Identity identity = Identity.Populace;
 
+<<<<<<< HEAD
     public override void InitStatic()
     {
         QCD_MAX = new Fixpoint(10, 0);
@@ -100,6 +98,8 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
     }
 
+=======
+>>>>>>> 183adcac847341645038f3b0331e705593c995f1
     public override void Startx()
     {
         animator = GetComponent<Animator>();
@@ -342,8 +342,6 @@ public class Player : BasicCharacter
     {
         status.max_hp = 100000000;
     }
-
-
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -466,9 +464,6 @@ public class Player : BasicCharacter
         Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1,ItemSpeed);
     }
 
-
-    private static Fixpoint JumpSpeed1 = new Fixpoint(845, 2);
-    private static Fixpoint JumpSpeed2 = new Fixpoint(16, 0);
     private void Normal()
     {
         //站立，走路，跑步
@@ -557,7 +552,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed1.Clone());//跳跃起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(845, 2));//跳跃起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }
@@ -570,13 +565,13 @@ public class Player : BasicCharacter
 
         else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
-            QCD = QCD_MAX.Clone();
+            QCD = new Fixpoint(10, 0);//Q的CD
             ChangeStatus(StatusType.Fire1);
             return;
         }
         else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
-            ECD = ECD_MAX.Clone();
+            ECD = new Fixpoint(10, 0);//E的CD
             ChangeStatus(StatusType.Fire2);
             return;
         }
@@ -618,11 +613,10 @@ public class Player : BasicCharacter
 
         return;
     }
-    private static Fixpoint RollTime = new Fixpoint(66, 2);
     private void Roll()
     {
         RemoveHited();
-        if (StatusTime > RollTime)//翻滚的总时间
+        if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
         {
             ChangeStatus(StatusType.Normal);
             return;
@@ -841,7 +835,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed2.Clone());//二段跳的起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(16, 0));//二段跳的起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }

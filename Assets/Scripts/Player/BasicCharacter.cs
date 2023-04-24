@@ -66,15 +66,6 @@ public class BasicCharacter : MonoBehaviour
         Stay,
         Trap
     }
-    public virtual void InitNormal()
-    {
-
-    }
-
-    public virtual void InitStatic()
-    {
-
-    }
 
     public virtual void Startx()
     {

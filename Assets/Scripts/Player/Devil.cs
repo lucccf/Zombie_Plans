@@ -10,46 +10,7 @@ public class Devil : Knight
     private Fixpoint BombCD = new Fixpoint(0,0);
     private Fixpoint MagicCannonCD = new Fixpoint(0, 0);
     private Fixpoint SuckerPunchCd = new Fixpoint(0, 0);
-    private static Fixpoint BombCD_MAX = new Fixpoint(5, 0);
-    private static Fixpoint MagicCannonCD_MAX = new Fixpoint(3, 0);
-    private static Fixpoint SuckerPunchCD_MAX = new Fixpoint(5, 0);
 
-    public override void InitStatic()
-    {
-        BombCD_MAX = new Fixpoint(5, 0);
-        MagicCannonCD_MAX = new Fixpoint(3, 0);
-        SuckerPunchCD_MAX = new Fixpoint(5, 0);
-        DevilBombHitTime = new Fixpoint(4, 1);
-        DevilBombHitBetween = new Fixpoint(5, 0);
-        DevilBombQuitTime = new Fixpoint(139, 2);
-        DevilBombAttack = new Fixpoint(5, 0);
-        DevilAttack1HitTime = new Fixpoint(3, 1);
-        DevilAttack2HitTime = new Fixpoint(6, 1);
-        DevilAttack3HitTime = new Fixpoint(9, 1);
-        DevilAttackQuitTime = new Fixpoint(1, 0);
-        DevilAttack1Damage = new Fixpoint(4, 0);
-        DevilAttack2Damage = new Fixpoint(4, 0);
-        DevilAttack3Damage = new Fixpoint(4, 0);
-        DevilCannonMagicShootTime = new Fixpoint(65, 2);
-        DevilCannonMagicQuitTime = new Fixpoint(1166, 3);
-        DevilCannonMagicAttack = new Fixpoint(7, 0);
-        DevilSuckerPunchAttack = new Fixpoint(5, 0);
-        DevilSuckerPunckBeginTime = new Fixpoint(17, 2);
-        DevilSuckerPunckQuitTime = new Fixpoint(59, 2);
-        DevilSuckerPunckSpeed = new Fixpoint(15, 0);
-    }
-    public override void InitNormal()
-    {
-        status.attack = 10;//基础攻击力
-        status.WalkSpeed = new Fixpoint(3, 0);//走路速度
-        status.max_hp = 1240;//最大血量
-        status.hp = 1240;//血量
-        status.max_toughness = 100;//最大韧性值
-        status.toughness = 100;//韧性值
-        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
-        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(11, 1), new Fixpoint(11, 1), new Fixpoint(6, 1) };//击退速度，第一个为占位
-        ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
-    }
     public override void Startx()
     {
         CharacterType = 1 + type2;
@@ -195,7 +156,7 @@ public class Devil : Knight
             if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
             if (Dis < new Fixpoint(2, 0) && BombCD == new Fixpoint(0, 0))
             {
-                BombCD = BombCD_MAX.Clone();
+                BombCD = new Fixpoint(5, 0);
                 ChangeStatus(StatusType.Bomb);
                 return;
             }
@@ -212,7 +173,7 @@ public class Devil : Knight
                 else AnimaToward = -1;
                 if (SuckerPunchCd == new Fixpoint(0, 0))
                 {
-                    SuckerPunchCd = SuckerPunchCD_MAX.Clone();
+                    SuckerPunchCd = new Fixpoint(5, 0);
                     ChangeStatus(StatusType.SuckerPunch);
                 } else
                 {
@@ -226,7 +187,7 @@ public class Devil : Knight
                 else AnimaToward = -1;
                 if (MagicCannonCD == new Fixpoint(0, 0))
                 {
-                    MagicCannonCD = MagicCannonCD_MAX.Clone();
+                    MagicCannonCD = new Fixpoint(3, 0);
                     ChangeStatus(StatusType.CannonMagic);
                 } else
                 {
@@ -252,9 +213,9 @@ public class Devil : Knight
     private static Fixpoint DevilAttack2HitTime = new Fixpoint(6, 1);
     private static Fixpoint DevilAttack3HitTime = new Fixpoint(9, 1);
     private static Fixpoint DevilAttackQuitTime = new Fixpoint(1, 0);
-    private static Fixpoint DevilAttack1Damage = new Fixpoint(2, 0);
-    private static Fixpoint DevilAttack2Damage = new Fixpoint(2, 0);
-    private static Fixpoint DevilAttack3Damage = new Fixpoint(2, 0);
+    private static Fixpoint DevilAttack1Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack2Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack3Damage = new Fixpoint(4, 0);
     private int DevilAttackTimes = 0;
 
     private void DevilCreateAttack(Fixpoint HPDamage, int ToughnessDamage)
@@ -278,19 +239,19 @@ public class Devil : Knight
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x + new Fixpoint(5,1), f.pos.y), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack1Damage, 0, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack1Damage, 40, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
         } else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x ,f.pos.y + new Fixpoint(5,1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack2Damage, 0, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack2Damage, 40, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
         } else if(StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y - new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack3Damage, 0, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack3Damage, 40, id, AnimaToward, CharacterType,3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
         } else
         {
