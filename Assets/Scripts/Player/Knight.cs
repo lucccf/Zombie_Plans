@@ -9,6 +9,44 @@ public class Knight : Monster
     protected int KnightAnimaHited = 0;
 
     private Fixpoint KnightSkillCD = new Fixpoint(0, 0);
+    private static Fixpoint KnightSkillCD_MAX = new Fixpoint(10,0);
+
+    public override void InitStatic()
+    {
+        Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
+        Attack2DuringTime = new Fixpoint(61, 2);
+        Attack3DuringTime = new Fixpoint(64, 2);
+
+        Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
+        Attack2BeginToHitTime = new Fixpoint(2, 1);
+        Attack3BeginToHitTime = new Fixpoint(25, 2);
+
+        Attack1Damage = new Fixpoint(4, 0);//伤害倍率
+        Attack2Damage = new Fixpoint(4, 0);
+        Attack3Damage = new Fixpoint(4, 0);
+
+        DefenceTime = new Fixpoint(1, 0);//防御时间
+        DefenceRate = new Fixpoint(5, 1);//承受伤害倍率
+
+        SkillBeginToHitTime = new Fixpoint(133, 2);//技能的结算开始时间
+        SkillDruingTime = new Fixpoint(163, 2);
+        SkillBetweenTime = new Fixpoint(21, 2);//伤害的间隔
+        SkillAttackRate = new Fixpoint(5, 0);//攻击倍率
+
+        KnightSkillCD_MAX = new Fixpoint(10, 0);
+    }
+    public override void InitNormal()
+    {
+        status.attack = 10;//基础攻击力
+        status.WalkSpeed = new Fixpoint(5, 0);//走路速度
+        status.max_hp = 930;//最大血量
+        status.hp = 930;//血量
+        status.max_toughness = 100;//最大韧性值
+        status.toughness = 100;//韧性值
+        HitTime = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(8, 1) };
+        HitSpeed = new Fixpoint[2] { new Fixpoint(0, 0), new Fixpoint(6, 1) };
+        ToughnessStatus = new int[2] { 20, 0 };//阶段
+    }
     public override void Startx()
     {
         CharacterType = 1 + type2;
@@ -210,7 +248,7 @@ public class Knight : Monster
                     }
                     else if(KnightSkillCD <= new Fixpoint(0,0))
                     {
-                        KnightSkillCD = new Fixpoint(10, 0);
+                        KnightSkillCD = KnightSkillCD_MAX.Clone();
                         ChangeStatus(StatusType.Skill);//随机技能
                     } else
                     {

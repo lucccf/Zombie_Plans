@@ -8,6 +8,38 @@ public class Monster1 : Monster
     private float AnimaAttack = 0f;
 
     private Player player = null;
+
+    public override void InitStatic()
+    {
+        Attack1DuringTime = new Fixpoint(1, 0);//攻击的持续时间
+        Attack2DuringTime = new Fixpoint(33, 2);
+        Attack3DuringTime = new Fixpoint(33, 2);
+        Attack4DuringTime = new Fixpoint(58, 2);
+
+        Attack1BeginToHitTime = new Fixpoint(83, 2);//攻击的判定时间
+        Attack2BeginToHitTime = new Fixpoint(8, 2);
+        Attack3BeginToHitTime = new Fixpoint(8, 2);
+        Attack4BeginToHitTime = new Fixpoint(17, 2);
+
+        Attack1Damage = new Fixpoint(2, 0);
+        Attack2Damage = new Fixpoint(3, 0);
+        Attack3Damage = new Fixpoint(4, 0);
+        Attack4Damage = new Fixpoint(5, 0);
+    }
+
+    public override void InitNormal()
+    {
+        status.attack = 10;//基础攻击力
+        status.WalkSpeed = new Fixpoint(5, 0);//走路速度
+        status.max_hp = 620;//最大血量
+        status.hp = 620;//血量
+        status.max_toughness = 100;//最大韧性值
+        status.toughness = 100;//韧性值
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(49, 2), new Fixpoint(49, 2), new Fixpoint(9, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(3, 1) };//击退速度，第一个为占位
+        ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
+    }
+
     public override void Startx()
     {
         SetStatus(620, 10);
