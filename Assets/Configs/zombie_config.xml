@@ -1,0 +1,36 @@
+<zombie>
+	<first>
+		<monster>
+			<id>1</id>
+			<num>4</num>
+		</monster>
+
+		<monster>
+			<id>2</id>
+			<num>1</num>
+		</monster>
+
+		<monster>
+			<id>3</id>
+			<num>1</num>
+		</monster>
+	</first>
+
+	<second>
+		<monster>
+			<id>1</id>
+			<num>2</num>
+		</monster>
+
+		<monster>
+			<id>2</id>
+			<num>1</num>
+		</monster>
+
+		<monster>
+			<id>3</id>
+			<num>1</num>
+		</monster>
+	</second>
+	
+</zombie>

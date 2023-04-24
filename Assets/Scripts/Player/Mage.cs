@@ -4,6 +4,56 @@ using UnityEngine;
 
 public class Mage : Knight
 {
+    public override void InitStatic()
+    {
+        FireBallCD_MAX = new Fixpoint(4, 0);
+        RecoverCD_MAX = new Fixpoint(15, 0);
+        MoveCD_MAX = new Fixpoint(10, 0);
+        Attack1DuringTime = new Fixpoint(1, 0);//攻击的持续时间
+        Attack2DuringTime = new Fixpoint(29, 2);
+        Attack3DuringTime = new Fixpoint(84, 2);
+
+        Attack1BeginToHitTime = new Fixpoint(83, 2);//攻击的判定时间
+        Attack2BeginToHitTime = new Fixpoint(1, 1);
+        Attack3BeginToHitTime = new Fixpoint(41, 2);
+
+        Attack1Damage = new Fixpoint(3, 0);//伤害倍率
+        Attack2Damage = new Fixpoint(3, 0);
+        Attack3Damage = new Fixpoint(3, 0);
+
+        FireBeginToHitTime = new Fixpoint(27, 2);
+        FireDuringTime = new Fixpoint(66, 2);
+        FireAttack = new Fixpoint(2, 0);
+
+        RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一帧回血
+        RecoverHp = 100;//回血量
+    }
+    public override void InitNormal()
+    {
+        status.attack = 10;//基础攻击力
+        status.WalkSpeed = new Fixpoint(5, 0);//走路速度
+        status.max_hp = 370;//最大血量
+        status.hp = 370;//血量
+        status.max_toughness = 100;//最大韧性值
+        status.toughness = 100;//韧性值
+        HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(11, 1), new Fixpoint(6, 1) };
+        ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
+    }
+
+    public override void ToHome()
+    {
+        if (HasToHome == true) return;
+        HasToHome = true;
+        HomePos = Player_ctrl.HomePos.Clone();
+        HomeLocation = Main_ctrl.CalPos(Player_ctrl.HomePos.x, Player_ctrl.HomePos.y);
+
+        CatchPosUp = HomePos.x.Clone() + FindPosUp;
+        CatchPosDown = HomePos.x.Clone() + FindPosDown;
+        CatchPosLeft = HomePos.x.Clone() + FindPosLeft;
+        CatchPosRight = HomePos.x.Clone() + FindPosRight;
+    }
+
     public override void Startx()
     {
         CharacterType = 1 + type2;
@@ -110,16 +160,12 @@ public class Mage : Knight
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
-    /*
-    private int MageGetHited()
-    {
-        bool x = GetHited(ref AnimaToward);
-        return CheckToughStatus(x);
-    }
-    */
     private Fixpoint FireBallCD = new Fixpoint(0,0);
     private Fixpoint RecoverCD = new Fixpoint(0, 0);
     private Fixpoint MoveCD = new Fixpoint(0, 0);
+    private static Fixpoint FireBallCD_MAX = new Fixpoint(4, 0);
+    private static Fixpoint RecoverCD_MAX = new Fixpoint(15, 0);
+    private static Fixpoint MoveCD_MAX = new Fixpoint(10, 0);
     private void Normal()
     {
         KnightAnimaSpeed = 5f;
@@ -148,13 +194,13 @@ public class Mage : Knight
                 {
                     if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0) && RecoverCD <= new Fixpoint(0,0))
                     {
-                        RecoverCD = new Fixpoint(15, 0);
+                        RecoverCD = RecoverCD_MAX.Clone();
                         ChangeStatus(StatusType.Recover);
                         return;
                     }
                     else if(MoveCD <= new Fixpoint(0,0))
                     {
-                        MoveCD = new Fixpoint(10, 0);
+                        MoveCD = MoveCD_MAX.Clone();
                         ChangeStatus(StatusType.Disappear);
                         return;
                     }
@@ -198,10 +244,9 @@ public class Mage : Knight
                 }
                 else if (Dis < new Fixpoint(10, 0) || f.pos.x < Left || f.pos.x > Right) //射击
                 {
-                    Debug.Log("Mage" + FireBallCD.to_float());
                     if (FireBallCD <= new Fixpoint(0, 0))
                     {
-                        FireBallCD = new Fixpoint(4, 0);
+                        FireBallCD = FireBallCD_MAX.Clone();
                         if (f.pos.x < Nearx)
                         {
                             AnimaToward = 1;

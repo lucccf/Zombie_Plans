@@ -8,17 +8,18 @@ public class HomeStatus : Monster
     public override void Startx()
     {
         CharacterType = 4;
+        SetStatus(500000, 10);
         status.max_toughness = 1000000;
         status.toughness = 1000000;
-        SetStatus(500, 10);
+        HitTime = new Fixpoint[3] { new Fixpoint(100, 0), new Fixpoint(100, 0), new Fixpoint(200, 0) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };
+        ToughnessStatus = new int[3] { 50, 25, 0 };
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HitTime = new Fixpoint[3] { new Fixpoint(100, 0), new Fixpoint(100, 0), new Fixpoint(200, 0) };
-        HitSpeed = new Fixpoint[3] { new Fixpoint(5, 1), new Fixpoint(5, 1), new Fixpoint(5, 1) };
-        ToughnessStatus = new int[3] { 50, 25, 0 };
     }
 
     public override void Updatex()
@@ -26,7 +27,7 @@ public class HomeStatus : Monster
         BasicCharacterGetHited();
         if (status.death == true)
         {
-            Debug.Log("家坏了");
+            Main_ctrl.homegg = true;
         }
     }
 }

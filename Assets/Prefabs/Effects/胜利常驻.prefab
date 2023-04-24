@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198909533067274220}
   - component: {fileID: 199207802280456806}
   m_Layer: 0
-  m_Name: FX_Confetti_Falling_01
+  m_Name: "\u80DC\u5229\u5E38\u9A7B"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -66,6 +66,15 @@ public class BasicCharacter : MonoBehaviour
         Stay,
         Trap
     }
+    public virtual void InitNormal()
+    {
+
+    }
+
+    public virtual void InitStatic()
+    {
+
+    }
 
     public virtual void Startx()
     {
@@ -187,7 +196,8 @@ public class BasicCharacter : MonoBehaviour
             if (attack.attacker_type == 1 && CharacterType == 2) continue;
             if (attack.attacker_type == 2 && CharacterType == 1) continue;
             if (attack.attacker_type != 2 && CharacterType == 4) continue;
-            if (attack.attacker_type != 0 && CharacterType == 5 && Attack_fac) continue;
+            if (attack.attacker_type != 0 && CharacterType == 5) continue; 
+            if (CharacterType == 5 && ((Player)Main_ctrl.All_objs[attack.attakcer_id].modules[Object_ctrl.class_name.Player]).Attack_fac) continue;
             if (attack.attakcer_id == id)
             {
                 continue;
@@ -197,7 +207,7 @@ public class BasicCharacter : MonoBehaviour
                 continue;
             }
 
-            if(FlyTimes > 10)
+            if (FlyTimes > 10)
             {
                 continue;
             }

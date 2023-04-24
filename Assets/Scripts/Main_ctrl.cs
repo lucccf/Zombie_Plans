@@ -41,6 +41,7 @@ public class Main_ctrl : MonoBehaviour
 
     public static bool Exit = false;
 
+    public static bool homegg = false;
     public static Player.Identity main_identity;
 
     public enum objtype
@@ -54,6 +55,7 @@ public class Main_ctrl : MonoBehaviour
 
     private void init()
     {
+        homegg = false;
         All_objs = new Dictionary<long, Object_ctrl>();
         Ser_to_cli = new Dictionary<long, long>();
         ItemList = new Dictionary<int, Item>();
@@ -91,11 +93,9 @@ public class Main_ctrl : MonoBehaviour
             Items[i] = (Item)items[i];
         }
 
-        Debug.Log(Items.Length);
         for (int i = 0; i < Items.Length; ++i)
         {
             ItemList.Add(Items[i].id, Items[i]);
-            Debug.Log(Items[i].id);
         }
 
         Play_create();
@@ -111,7 +111,7 @@ public class Main_ctrl : MonoBehaviour
 
     static void Wolf_create()
     {
-        wolf_cnt = (Player_ctrl.plays.Count + 3) / 4;
+        wolf_cnt = (Player_ctrl.plays.Count + 1) / 3;
         for (int i = 0; i < wolf_cnt; i++)
         {
             int k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);
@@ -678,6 +678,7 @@ public class Main_ctrl : MonoBehaviour
                     Only_Facility of = obj.AddComponent<Only_Facility>();
                     ctrl.modules[Object_ctrl.class_name.Only_Facility] = of;
                     of.myfac = Flow_path.onlyid_facilities[info.attacker_id];
+                    obj.GetComponent<FacilityStatus>().fac = Flow_path.onlyid_facilities[info.attacker_id];
                     break;
             }
         }

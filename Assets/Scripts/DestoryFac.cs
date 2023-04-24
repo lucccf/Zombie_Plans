@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DestoryFac : MonoBehaviour
 {
-
+    public GameObject close;
     public void Facchange()
     {
         PlayerOptData x = new PlayerOptData();
@@ -13,5 +13,6 @@ public class DestoryFac : MonoBehaviour
         x.Userid = (int)Main_ctrl.user_id;
 
         Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
+        close.SetActive(!close.activeSelf);
     }
 }
