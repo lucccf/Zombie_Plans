@@ -249,6 +249,7 @@ public class Player : BasicCharacter
                 {
                     Attack_fac = true;
                 }
+                Debug.Log("Attack_fac:" + Attack_fac);
                 break;
         }
     }

@@ -3,7 +3,7 @@ CRC: 570193298
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 08a3426927ec44ad92d1b15686d0f16e
+    Hash: e7427570236e3e1acfaf2c31423d5174
   TypeTreeHash:
     serializedVersion: 2
     Hash: d049979dfcfca41d9823d84172cbcc88
@@ -140,5 +140,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/item
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/prefabs

@@ -10,6 +10,7 @@ public class HomeStatus : Monster
         CharacterType = 4;
         status.max_toughness = 1000000;
         status.toughness = 1000000;
+        audiosource = GetComponent<AudioSource>();
         SetStatus(500, 10);
     }
 

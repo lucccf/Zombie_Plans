@@ -103,7 +103,7 @@ public class Main_ctrl : MonoBehaviour
         Wolf_create();
         main_id = Ser_to_cli[user_id];
         Monster_create.Get_mon_items();
-        Monster_create.Mon_create1();
+        //Monster_create.Mon_create1();
 
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         hb.Startx();
