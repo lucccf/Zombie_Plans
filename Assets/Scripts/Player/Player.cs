@@ -13,6 +13,9 @@ public class Player : BasicCharacter
     public PlayerBag bag;
     private Fixpoint QCD = new Fixpoint(100000000, 0);
     private Fixpoint ECD = new Fixpoint(100000000, 0);
+    private Fixpoint QCD_MAX = new Fixpoint(10, 0);
+    private Fixpoint ECD_MAX = new Fixpoint(10, 0);
+
 
     public string words = string.Empty;
     public bool words_ok = false;
@@ -27,6 +30,75 @@ public class Player : BasicCharacter
     }
 
     public Identity identity = Identity.Populace;
+
+    public override void InitStatic()
+    {
+        QCD_MAX = new Fixpoint(10, 0);
+        ECD_MAX = new Fixpoint(10, 0);
+        Attack1DuringTime = new Fixpoint(24, 2);
+        Attack1QuitTime = new Fixpoint(44, 2);
+        Attack2DuringTime = new Fixpoint(24, 2);
+        Attack2QuitTime = new Fixpoint(44, 2);
+        Attack3DuringTime = new Fixpoint(24, 2);
+        Attack3QuitTime = new Fixpoint(44, 2);
+        Attack4DuringTime = new Fixpoint(43, 2);
+        Attack4QuitTime = new Fixpoint(49, 2);
+        Attack5DuringTime = new Fixpoint(43, 2);
+        Attack5QuitTime = new Fixpoint(44, 2);
+        Attack1BeginToHitTime = new Fixpoint(67, 3);//命中结算的开始时间
+        Attack2BeginToHitTime = new Fixpoint(67, 3);
+        Attack3BeginToHitTime = new Fixpoint(67, 3);
+        Attack4BeginToHitTime = new Fixpoint(167, 3);
+        Attack5BeginToHitTime = new Fixpoint(167, 3);
+        Attack1Damage = new Fixpoint(4, 0);
+        Attack2Damage = new Fixpoint(4, 0);
+        Attack3Damage = new Fixpoint(5, 0);
+        Attack4Damage = new Fixpoint(5, 0);
+        Attack5Damage = new Fixpoint(6, 0);
+        RollTime = new Fixpoint(66, 2);
+        KickBeginToHit = new Fixpoint(1, 1);//空中飞踢
+        KickDuring = new Fixpoint(5, 0);
+        KickShiftx = new Fixpoint(1, 0);//飞踢攻击框
+        KickShifty = new Fixpoint(-1, 0);
+        KickDamage = new Fixpoint(5, 0);
+        HeavyAttackBeginToHit = new Fixpoint(17, 2);//前冲拳
+        HeavyAttackDuring = new Fixpoint(64, 2);
+        HeavyAttackShiftx = new Fixpoint(1, 0);
+        HeavyAttackShifty = new Fixpoint(0, 0);
+        HeavyAttackDamage = new Fixpoint(3, 0);
+        Fire1DuringTime = new Fixpoint(12, 1);//人物动作的总时间
+        Fire1BeginToAttackTime = new Fixpoint(2, 1);//发射激光的时间点
+        FireBetweenDuring = new Fixpoint(3, 1);//激光的攻击间隔
+        Fire1Damage = new Fixpoint(2, 0);
+        Fire2DuringTime = new Fixpoint(85, 2);//三连波动作总时长
+        Fire2BeginToAttack1Time = new Fixpoint(2, 1);//第1次发射的时间
+        Fire2BeginToAttack2Time = new Fixpoint(55, 2);//第2次发射的时间
+        Fire2BeginToAttack3Time = new Fixpoint(8, 1);//第3次发射的时间
+        Fire2Attack1 = new Fixpoint(4, 0);
+        Fire2Attack2 = new Fixpoint(4, 0);
+        Fire2Attack3 = new Fixpoint(4, 0);
+        StayTime = new Fixpoint(2, 1);//下蹲的持续时间
+        TrapTime = new Fixpoint(2, 0);
+        UpAttackBeginToHit = new Fixpoint(13, 2);//升龙拳
+        UpAttackDuring = new Fixpoint(5, 0);
+        UpattackShiftx = new Fixpoint(1, 0);
+        UpattackShifty = new Fixpoint(1, 0);
+        UpattackDamage = new Fixpoint(3, 0);
+}
+
+    public override void InitNormal()
+    {
+        status.attack = 10;//基础攻击力
+        status.WalkSpeed = new Fixpoint(5, 0);//走路速度
+        status.RunSpeed = new Fixpoint(10, 0);//跑步速度
+        status.max_hp = 100000;//最大血量
+        status.hp = 100000;//血量
+        status.max_toughness = 100;//最大韧性值
+        status.toughness = 100;//韧性值
+        HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
+        HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
+        ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
+    }
 
     public override void Startx()
     {
@@ -270,6 +342,8 @@ public class Player : BasicCharacter
     {
         status.max_hp = 100000000;
     }
+
+
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -392,6 +466,9 @@ public class Player : BasicCharacter
         Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1,ItemSpeed);
     }
 
+
+    private static Fixpoint JumpSpeed1 = new Fixpoint(845, 2);
+    private static Fixpoint JumpSpeed2 = new Fixpoint(16, 0);
     private void Normal()
     {
         //站立，走路，跑步
@@ -480,7 +557,7 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(845, 2));//跳跃起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed1.Clone());//跳跃起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }
@@ -493,13 +570,13 @@ public class Player : BasicCharacter
 
         else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
         {
-            QCD = new Fixpoint(10, 0);//Q的CD
+            QCD = QCD_MAX.Clone();
             ChangeStatus(StatusType.Fire1);
             return;
         }
         else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
         {
-            ECD = new Fixpoint(10, 0);//E的CD
+            ECD = ECD_MAX.Clone();
             ChangeStatus(StatusType.Fire2);
             return;
         }
@@ -541,10 +618,11 @@ public class Player : BasicCharacter
 
         return;
     }
+    private static Fixpoint RollTime = new Fixpoint(66, 2);
     private void Roll()
     {
         RemoveHited();
-        if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
+        if (StatusTime > RollTime)//翻滚的总时间
         {
             ChangeStatus(StatusType.Normal);
             return;
@@ -763,7 +841,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(16, 0));//二段跳的起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed2.Clone());//二段跳的起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }
