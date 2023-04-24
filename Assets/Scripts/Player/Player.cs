@@ -155,12 +155,20 @@ public class Player : BasicCharacter
                             GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 2;
-                            fa.repaired = true;
+                            if (fa.repaired == false) {
+                                fa.repaired = true;
+                                fa.buff = true;
+                            }
                         }
 
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                        if ((fa.commited[m.Key] * 100 / fa.materials[m.Key]) >= 70) {
+                            if (fa.repaired) {
+                                fa.buff = true;
+                            }
+                        }
                     }
                     else {
                         GameObject facui = (GameObject)AB.getobj("提示UI");

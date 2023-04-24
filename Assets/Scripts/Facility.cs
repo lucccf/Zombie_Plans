@@ -8,6 +8,7 @@ public class Facility : BasicCharacter
     public Dictionary<int, int> commited;
     public int cond;
     public bool repaired;
+    public bool buff;
 
     // Start is called before the first frame update
     void Start()

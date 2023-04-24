@@ -7,7 +7,8 @@ public class HomeStatus : Monster
     // Start is called before the first frame update
     public override void Startx()
     {
-        CharacterType = 4;
+        Debug.Log("YYYYYYYYYYYYYYYYYYYYYY");
+        CharacterType = 1;
         SetStatus(5, 10);
         status.max_toughness = 1000000;
         status.toughness = 1000000;
@@ -24,6 +25,7 @@ public class HomeStatus : Monster
 
     public override void Updatex()
     {
+        Debug.Log("XXXXXXXXXXXXXXXXXXXXX");
         BasicCharacterGetHited();
         if (status.death == true)
         {

@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9004588464905421000}
   - component: {fileID: 179058752090852962}
-  - component: {fileID: 5314068694014809709}
+  - component: {fileID: 4647880597154428330}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5314068694014809709
+--- !u!114 &4647880597154428330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2789824243074207881}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28552f77981411943a6bf567faa1d6a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 179058752090852962}
