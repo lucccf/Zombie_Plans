@@ -21,10 +21,10 @@ public class Monster1 : Monster
         Attack3BeginToHitTime = new Fixpoint(8, 2);
         Attack4BeginToHitTime = new Fixpoint(17, 2);
 
-        Attack1Damage = new Fixpoint(2, 0);
+        Attack1Damage = new Fixpoint(3, 0);
         Attack2Damage = new Fixpoint(3, 0);
-        Attack3Damage = new Fixpoint(4, 0);
-        Attack4Damage = new Fixpoint(5, 0);
+        Attack3Damage = new Fixpoint(3, 0);
+        Attack4Damage = new Fixpoint(3, 0);
     }
 
     public override void InitNormal()

@@ -23,10 +23,10 @@ public class Mage : Knight
 
         FireBeginToHitTime = new Fixpoint(27, 2);
         FireDuringTime = new Fixpoint(66, 2);
-        FireAttack = new Fixpoint(2, 0);
+        FireAttack = new Fixpoint(3, 0);
 
         RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一帧回血
-        RecoverHp = 100;//回血量
+        RecoverHp = 200;//回血量
     }
     public override void InitNormal()
     {

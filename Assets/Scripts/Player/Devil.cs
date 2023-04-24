@@ -27,13 +27,13 @@ public class Devil : Knight
         DevilAttack2HitTime = new Fixpoint(6, 1);
         DevilAttack3HitTime = new Fixpoint(9, 1);
         DevilAttackQuitTime = new Fixpoint(1, 0);
-        DevilAttack1Damage = new Fixpoint(4, 0);
-        DevilAttack2Damage = new Fixpoint(4, 0);
-        DevilAttack3Damage = new Fixpoint(4, 0);
+        DevilAttack1Damage = new Fixpoint(2, 0);
+        DevilAttack2Damage = new Fixpoint(2, 0);
+        DevilAttack3Damage = new Fixpoint(2, 0);
         DevilCannonMagicShootTime = new Fixpoint(65, 2);
         DevilCannonMagicQuitTime = new Fixpoint(1166, 3);
         DevilCannonMagicAttack = new Fixpoint(7, 0);
-        DevilSuckerPunchAttack = new Fixpoint(5, 0);
+        DevilSuckerPunchAttack = new Fixpoint(3, 0);
         DevilSuckerPunckBeginTime = new Fixpoint(17, 2);
         DevilSuckerPunckQuitTime = new Fixpoint(59, 2);
         DevilSuckerPunckSpeed = new Fixpoint(15, 0);
