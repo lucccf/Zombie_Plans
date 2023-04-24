@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class Map_create : MonoBehaviour
@@ -344,7 +345,8 @@ public class Map_create : MonoBehaviour
         home.transform.position = new Vector3(home.transform.position.x, home.transform.position.y, 10);
 
     }
-
+    static int[] fst = new int[5];
+    static int[] sec = new int[5];
     public static void Background_create() {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(Application.dataPath + "/Configs/background.xml");
@@ -355,6 +357,20 @@ public class Map_create : MonoBehaviour
         room_cnt = int.Parse(map_info.SelectSingleNode("room_cnt").InnerText);
         floor_wid = int.Parse(map_info.SelectSingleNode("floor_wid").InnerText);
         floor_cnt = int.Parse(map_info.SelectSingleNode("floor_cnt").InnerText);
+
+        XmlDocument xmlDoc2 = new XmlDocument();
+        xmlDoc2.Load(Application.dataPath + "/Configs/zombie_config.xml");
+        XmlNodeList first = xmlDoc2.SelectNodes("/zombie/first/monster");
+        XmlNodeList second = xmlDoc2.SelectNodes("/zombie/second/monster");
+
+        foreach(XmlNode xx in first)
+        {
+            fst[int.Parse(xx.SelectSingleNode("id").InnerText)] = int.Parse(xx.SelectSingleNode("num").InnerText);
+        }
+        foreach (XmlNode xx in second)
+        {
+            sec[int.Parse(xx.SelectSingleNode("id").InnerText)] = int.Parse(xx.SelectSingleNode("num").InnerText);
+        }
 
         BK_create(Rooms, "boss_pos", "BK_monster");
         BKitem_create(Rooms, "boss_pos", "bg_outerlayer");
@@ -470,24 +486,30 @@ public class Map_create : MonoBehaviour
                 if (xml_name == "battle_pos")
                 {
                     int jj;
-                    for(jj = 0; jj < chos.Length; jj++)
+                    for (jj = 0; jj < chos.Length; jj++)
                     {
-                        Debug.Log(id + " " + pos + " " + fac_pos[jj].Item1 + " " + fac_pos[jj].Item2);
                         if (id <= fac_pos[jj].Item1 + 1 && id >= fac_pos[jj].Item1 - 1 && pos <= fac_pos[jj].Item2 + 1 && pos >= fac_pos[jj].Item2 - 1) break;
                     }
                     if (jj >= chos.Length) continue;
                     if (chos[jj] == 1)
                     {
-                        yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
-                        Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
-                        Monster_create.size_zombies1.Add(yy);
-                        yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
-                        Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
-                        Monster_create.size_zombies1.Add(yy);
-                        for (int ii = 0; ii < 3; ii++)
+                        Debug.Log("111");
+                        for (int ii = 0; ii < fst[1]; ii++)
                         {
                             yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
                             Monster_create.pos_zombies1.Add(new Mon_pos(1, getXX(xx, id)));
+                            Monster_create.size_zombies1.Add(yy);
+                        }
+                        for (int ii = 0; ii < fst[2]; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
+                            Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
+                            Monster_create.size_zombies1.Add(yy);
+                        }
+                        for (int ii = 0; ii < fst[3]; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
+                            Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
                             Monster_create.size_zombies1.Add(yy);
                         }
                     }
@@ -495,22 +517,23 @@ public class Map_create : MonoBehaviour
 
                     if (chos[jj] >= 1)
                     {
-                        for (int ii = 0; ii < 2; ii++)
+                        Debug.Log("222");
+                        for (int ii = 0; ii < sec[1]; ii++)
+                        {
+                            yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
+                            Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
+                            Monster_create.size_zombies2.Add(yy);
+                        }
+                        for (int ii = 0; ii < sec[2]; ii++)
                         {
                             yy = new Fix_vector2(new Fixpoint(146, 2), new Fixpoint(235, 2));
                             Monster_create.pos_zombies2.Add(new Mon_pos(2, getXX(xx, id)));
                             Monster_create.size_zombies2.Add(yy);
                         }
-                        for (int ii = 0; ii < 2; ii++)
+                        for (int ii = 0; ii < sec[3]; ii++)
                         {
                             yy = new Fix_vector2(new Fixpoint(165, 2), new Fixpoint(295, 2));
                             Monster_create.pos_zombies2.Add(new Mon_pos(3, getXX(xx, id)));
-                            Monster_create.size_zombies2.Add(yy);
-                        }
-                        for (int ii = 0; ii < 3; ii++)
-                        {
-                            yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
-                            Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
                             Monster_create.size_zombies2.Add(yy);
                         }
                     }

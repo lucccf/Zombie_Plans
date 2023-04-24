@@ -1,34 +1,34 @@
 <zombie>
 	<first>
-	<monster>
-		<id>Monster1</id>
-		<num>4</num>
-	</monster>
-
-	<monster>
-		<id>Mage</id>
-		<num>1</num>
-	</monster>
-
-	<monster>
-		<id>knight</id>
-		<num>1</num>
-	</monster>
-	</first>
-
-	<second>
 		<monster>
-			<id>Monster1</id>
-			<num>2</num>
+			<id>1</id>
+			<num>4</num>
 		</monster>
 
 		<monster>
-			<id>Mage</id>
+			<id>2</id>
 			<num>1</num>
 		</monster>
 
 		<monster>
-			<id>knight</id>
+			<id>3</id>
+			<num>1</num>
+		</monster>
+	</first>
+
+	<second>
+		<monster>
+			<id>1</id>
+			<num>2</num>
+		</monster>
+
+		<monster>
+			<id>2</id>
+			<num>1</num>
+		</monster>
+
+		<monster>
+			<id>3</id>
 			<num>1</num>
 		</monster>
 	</second>
