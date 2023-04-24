@@ -1,30 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 1384259809
+CRC: 3716961700
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-<<<<<<< HEAD
-    Hash: 4a1fbb59119a9cdcc70c4184e1ed320e
+    Hash: d88e276d8d246a2621f8fc6b5a9acadf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: c93cbf5555469a351c5ff4ef6848e876
-=======
-    Hash: e0e8fbf031e44af63424e387284cd168
-  TypeTreeHash:
-    serializedVersion: 2
-    Hash: 7b21fe7f6abd1db45dd15b49a8f1e510
-=======
-CRC: 1293319448
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 04966778f80ba49f7b0b986f7ce4d658
-  TypeTreeHash:
-    serializedVersion: 2
-    Hash: d049979dfcfca41d9823d84172cbcc88
->>>>>>> 5acbe01d07ba68c1d86886c2185d162f62dcfcc5
->>>>>>> 328b8fbd94d6f914e8a492981d7dac861a66cac1
+    Hash: 3922f84cfe655b78f6ec14438892c971
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -46,9 +28,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -65,8 +49,6 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 0571e0f141cfcb54f8ced3945ecec18f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cc8c34424b045aa44bc5ae710df04353, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 980d3f9293bbb6048801aac05d02b727, type: 3}
 - Class: 114
@@ -160,15 +142,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-<<<<<<< HEAD
-- D:/hst/Zombie_Plans/Assets/AssetBundles/item
-- D:/hst/Zombie_Plans/Assets/AssetBundles/prefabs
-=======
-<<<<<<< HEAD
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
-=======
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/prefabs
->>>>>>> 5acbe01d07ba68c1d86886c2185d162f62dcfcc5
->>>>>>> 328b8fbd94d6f914e8a492981d7dac861a66cac1
+- D:/pro/Zombie_Plans/Assets/AssetBundles/item
+- D:/pro/Zombie_Plans/Assets/AssetBundles/prefabs
