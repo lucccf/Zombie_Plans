@@ -78,11 +78,11 @@ public class Flow_path : MonoBehaviour
                     cnt_flag = 1;
                     countdown = new Fixpoint(times[2], 0);
                     //召唤第一波僵尸
-                    Debug.Log("dierbo");
                     Monster_create.Zom_create1();
                 }
                 break;
             case 1:
+                Debug.Log(zombie_cnt);
                 countdown = countdown - Dt.dt;
                 if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {
@@ -109,6 +109,11 @@ public class Flow_path : MonoBehaviour
                 }
                 break;
             case 4:
+                //怪暴怒
+                if (zombie_cnt == 0) cnt_flag = 5;
+                countdown = countdown + Dt.dt;
+                break;
+            case 5:
                 countdown = countdown + Dt.dt;
                 break;
         }
@@ -219,7 +224,7 @@ public class Flow_path : MonoBehaviour
             }
         }
 
-        if (false)
+        if (Main_ctrl.homegg)
         {
             //如果家的血量没了
             vic_wolf = true;
@@ -241,7 +246,7 @@ public class Flow_path : MonoBehaviour
 
     private static void Checkpeopvic()
     {
-        if (cnt_flag < 4)
+        if (cnt_flag < 5)
         {
             return;
         }
@@ -251,13 +256,6 @@ public class Flow_path : MonoBehaviour
             if (!Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Populace)
             {
                 flag_po = true;
-            }
-        }
-        for (int i = 0; i < Player_ctrl.plays.Count; i++)
-        {
-            if (Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Wolf)
-            {
-                flag_po = false;
             }
         }
         if (flag_po)
