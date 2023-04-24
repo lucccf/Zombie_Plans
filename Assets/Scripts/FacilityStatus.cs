@@ -8,9 +8,10 @@ public class FacilityStatus : Monster
     public override void Startx()
     {
         CharacterType = 5;
+        SetStatus(10, 10);
         status.max_toughness = 1000000;
         status.toughness = 1000000;
-        SetStatus(10, 10);
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
