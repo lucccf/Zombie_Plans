@@ -171,13 +171,13 @@ public class Monster_create : MonoBehaviour
         p.classnames.Add(Object_ctrl.class_name.Tinymap);
         //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
         Main_ctrl.CreateObj(p);
+        Flow_path.zombie_cnt++;
     }
 
     public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
         for (int i = 0; i < pos_zombies1.Count; i++)
         {
-            Debug.Log(i);
             create(pos_zombies1[i], size_zombies1[i], 1);
         }
     }
