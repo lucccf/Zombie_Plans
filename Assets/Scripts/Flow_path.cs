@@ -17,7 +17,7 @@ public class Flow_path : MonoBehaviour
         exit = true;
     }
 
-    public static Fixpoint countdown = new Fixpoint(300, 0);
+    public static Fixpoint countdown = new Fixpoint(10, 0);
 
     private static int cnt_flag = 0;
 
@@ -42,7 +42,7 @@ public class Flow_path : MonoBehaviour
         chat_panel = GameObject.Find("ChatUI");
         death_panel.SetActive(false);
         chat_panel.SetActive(false);
-        countdown = new Fixpoint(300, 0);
+        countdown = new Fixpoint(10, 0);
         cnt_flag = 0;
         zombie_cnt = 0;
         Now_fac = 0;
@@ -61,6 +61,7 @@ public class Flow_path : MonoBehaviour
                     cnt_flag = 1;
                     countdown = new Fixpoint(300, 0);
                     //召唤第一波僵尸
+                    Debug.Log("dierbo");
                     Monster_create.Zom_create1();
                 }
                 break;
@@ -85,7 +86,7 @@ public class Flow_path : MonoBehaviour
                 break;
             case 3:
                 countdown = countdown - Dt.dt;
-                if (countdown <= new Fixpoint(0))
+                if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {
                     cnt_flag = 4;
                 }
@@ -201,10 +202,10 @@ public class Flow_path : MonoBehaviour
             }
         }
 
-        if (true)
+        if (false)
         {
             //如果家的血量没了
-            vic_wolf = false;
+            vic_wolf = true;
         }
 
         if (vic_wolf)
@@ -233,6 +234,13 @@ public class Flow_path : MonoBehaviour
             if (!Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Populace)
             {
                 flag_po = true;
+            }
+        }
+        for (int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Wolf)
+            {
+                flag_po = false;
             }
         }
         if (flag_po)
