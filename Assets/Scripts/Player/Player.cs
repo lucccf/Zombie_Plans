@@ -352,6 +352,9 @@ public class Player : BasicCharacter
                 bag.BagGetItem(item_id,1,Player_ctrl.BagUI);
                 Player_ctrl.WolfBox[box_id].RemoveItem(item_id);
                 break;
+            case PlayerOpt.DeleteItem:
+                ThrowItem(inputs.Itemid);
+                break;
         }
     }
     public void IsWolf()
