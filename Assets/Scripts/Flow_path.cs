@@ -82,7 +82,6 @@ public class Flow_path : MonoBehaviour
                 }
                 break;
             case 1:
-                Debug.Log(zombie_cnt);
                 countdown = countdown - Dt.dt;
                 if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {

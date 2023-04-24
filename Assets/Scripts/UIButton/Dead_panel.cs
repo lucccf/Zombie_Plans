@@ -12,15 +12,16 @@ public class Dead_panel : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("1111111");
         flag = false;
-        dr.SetActive(false);
         dr1 = dr;
-        def.SetActive(false);
+        dr1.SetActive(false);
         def1 = def;
-        de.SetActive(false);
+        def1.SetActive(false);
         de1 = de;
-        vic.SetActive(false);
+        de1.SetActive(false);
         vic1 = vic;
+        vic1.SetActive(false);
     }
 
     public void deadstart()
