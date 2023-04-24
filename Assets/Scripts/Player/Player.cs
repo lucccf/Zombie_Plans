@@ -683,7 +683,7 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻4");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 33, AnimaToward,2,"hit4");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 101, AnimaToward,2,"hit4");//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -700,7 +700,7 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻5");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3,0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 33, AnimaToward,3,"hit5");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3,0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 101, AnimaToward,3,"hit5");//最后一个参数是击飞类型
             }
         }
 
@@ -898,7 +898,7 @@ public class Player : BasicCharacter
             HeavyAttackHasHited = true;
             PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0, "前冲拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(15, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0, "前冲拳命中");//最后一个参数是击飞类型
         } 
 
         if(!f.onground || StatusTime > HeavyAttackDuring)
