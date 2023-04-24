@@ -43,6 +43,9 @@ public class Main_ctrl : MonoBehaviour
     public static bool Exit = false;
 
     public static bool homegg = false;
+
+    public static List<WolfBoxInMap> wolfboxes = new List<WolfBoxInMap>();
+
     public static Player.Identity main_identity;
 
     public enum objtype
@@ -62,6 +65,7 @@ public class Main_ctrl : MonoBehaviour
         ItemList = new Dictionary<int, Item>();
         holes = new List<List<int>>();
         walls = new List<List<int>>();
+        wolfboxes = new List<WolfBoxInMap>();
         Exit = false;
         Rigid_ctrl.rigs = new List<Fix_rig2d>();
         Collider_ctrl.cols = new List<Fix_col2d>();
@@ -83,6 +87,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Facility_create();
         Map_create.Protal_create();
         Map_create.Background_create();
+        Map_create.Box_create();
         Player_ctrl.Init_bag();
         CalRoad();
         Item[] Items;
@@ -521,7 +526,7 @@ public class Main_ctrl : MonoBehaviour
     }
 
     private static int WolfboxCounter;
-    public static void NewWolfBox(Fix_vector2 pos, float size)
+    public static void NewWolfBox(Fix_vector2 pos)
     {
         ++WolfboxCounter;
         Obj_info p = new Obj_info();
@@ -530,7 +535,7 @@ public class Main_ctrl : MonoBehaviour
         p.wid = new Fixpoint(1, 0);
         p.pos = pos;
         p.col_type = Fix_col2d.col_status.Trigger;
-        p.toward = size;
+        p.toward = 1;
         p.col_type = Fix_col2d.col_status.Trigger;
         p.classnames.Add(Object_ctrl.class_name.Trigger);
         p.ToughnessDamage = WolfboxCounter;
@@ -711,6 +716,11 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Only_Facility] = of;
                     of.myfac = Flow_path.onlyid_facilities[info.attacker_id];
                     obj.GetComponent<FacilityStatus>().fac = Flow_path.onlyid_facilities[info.attacker_id];
+                    break;
+                case Object_ctrl.class_name.WolfBox:
+                    WolfBoxInMap w = obj.AddComponent<WolfBoxInMap>();
+                    ctrl.modules[Object_ctrl.class_name.WolfBox] = w;
+                    wolfboxes.Add(w);
                     break;
             }
         }

@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Xml.Schema;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -634,6 +635,59 @@ public class Map_create : MonoBehaviour
                 y1 = -(id - 0.5f) * floor_hei + sh.to_float() + floor_hei / 2f - 1 - y2;
             }
             obj.transform.position = new Vector3(x1.to_float(), y1, hei);
+        }
+    }
+
+    static Dictionary<int, int> boxitems = new Dictionary<int, int>();
+
+    public static void Box_create()
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/box.xml");
+        XmlNodeList boxes = xmlDoc.SelectNodes("/box/box_floor/box_info");
+
+        foreach(XmlNode xx in boxes)
+        {
+            int id = int.Parse(xx.SelectSingleNode("id").InnerText);
+            foreach(XmlNode yy in xx.SelectNodes("box_pos"))
+            {
+                int pos = int.Parse(yy.InnerText);
+                Main_ctrl.NewWolfBox(new Fix_vector2(new Fixpoint(pos, 0), new Fixpoint((-2 * id) * floor_hei * 5 + 20, 1)));
+            }
+        }
+        xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/boxitem.xml");
+        XmlNodeList boxitem = xmlDoc.SelectNodes("/boxitem/boxitem_info");
+
+        for (int i = 0; i < Main_ctrl.wolfboxes.Count; i++)
+        {
+            boxitems = new Dictionary<int, int>();
+            foreach(XmlNode xx in boxitem)
+            {
+                int k = 0;
+                int id = int.Parse(xx.SelectSingleNode("id").InnerText);
+                List<int> pro = new List<int>();
+                List<int> num = new List<int>();
+                foreach (XmlNode yy in xx.SelectNodes("boxitem_probability"))
+                {
+                    k += int.Parse(yy.InnerText);
+                    pro.Add(k);
+                }
+                foreach (XmlNode yy in xx.SelectNodes("boxitem_num"))
+                {
+                    num.Add(int.Parse(yy.InnerText));
+                }
+                int l = (int)(Rand.rand() % (ulong)k);
+                for(int j = 0; j < pro.Count; j++)
+                {
+                    if (k < pro[j])
+                    {
+                        boxitems[id] = pro[j];
+                        break;
+                    }
+                }
+            }
+            Main_ctrl.wolfboxes[i].InitBoxItem(boxitems);
         }
     }
 }

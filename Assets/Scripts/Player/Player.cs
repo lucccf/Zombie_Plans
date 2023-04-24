@@ -1339,7 +1339,7 @@ public class Player : BasicCharacter
                 Fix_vector2 TrapPos = f.pos.Clone();
                 TrapPos.y -= new Fixpoint(1, 0);
                 Main_ctrl.NewTrap(TrapPos, 1f);
-                Main_ctrl.NewWolfBox(new Fix_vector2(f.pos.x + new Fixpoint(3, 0), f.pos.y), 1);
+                //Main_ctrl.NewWolfBox(new Fix_vector2(f.pos.x + new Fixpoint(3, 0), f.pos.y));
             }
             else
             {

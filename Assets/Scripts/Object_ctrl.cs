@@ -25,6 +25,7 @@ public class Object_ctrl : MonoBehaviour
         Protalbutton,
         Protal,
         Home,
+        WolfBox,
         //...
     }
 

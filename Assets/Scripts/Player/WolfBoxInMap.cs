@@ -8,9 +8,10 @@ public class WolfBoxInMap : MonoBehaviour
     public GameObject BoxUI;
     public GameObject ButtonUI;
     public int BoxId;
-    public Dictionary<int, int> TestItem = new Dictionary<int, int>();
+    //public Dictionary<int, int> TestItem = new Dictionary<int, int>();
     void Start()
     {
+        /*
         TestItem.Add(1, 2);
         TestItem.Add(2, 4);
         TestItem.Add(3, 8);
@@ -20,11 +21,11 @@ public class WolfBoxInMap : MonoBehaviour
         TestItem.Add(7, 4);
         TestItem.Add(8, 1);
         TestItem.Add(9, 9);
+        */
         WolfBox box = BoxUI.GetComponent<WolfBox>();
-        box.GetItem(TestItem);
+        //box.GetItem(TestItem);
         box.Boxid = BoxId;
         Player_ctrl.WolfBox.Add(BoxId, box);
-        
     }
 
     public void InitBoxItem(Dictionary<int,int> items)
