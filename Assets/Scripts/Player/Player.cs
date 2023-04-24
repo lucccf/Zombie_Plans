@@ -28,6 +28,16 @@ public class Player : BasicCharacter
 
     public Identity identity = Identity.Populace;
 
+    public override void InitStatic()
+    {
+        
+    }
+
+    public override void InitNormal()
+    {
+        
+    }
+
     public override void Startx()
     {
         animator = GetComponent<Animator>();
