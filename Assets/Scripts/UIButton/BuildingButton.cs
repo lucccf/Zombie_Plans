@@ -15,6 +15,8 @@ public class BuildingButton : MonoBehaviour
     GameObject allfacility;
     GameObject homeuiclosebutton;
     GameObject worktableclosebutton;
+    GameObject itemprogress;
+    GameObject itemprogresstext;
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
@@ -44,6 +46,8 @@ public class BuildingButton : MonoBehaviour
 
             itemimage = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage").gameObject;
             itemtext = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage/Text").gameObject;
+            itemprogress = tmp.transform.Find("progress").gameObject;
+            itemprogresstext = tmp.transform.Find("progress/progressText").gameObject;
             Facility fa = Flow_path.facilities[buildingid];
             Dictionary<int, int> curmat = fa.materials;
             foreach (KeyValuePair<int, int> mat in curmat)
@@ -51,6 +55,9 @@ public class BuildingButton : MonoBehaviour
                 Item x = Main_ctrl.GetItemById(mat.Key);
                 itemimage.GetComponent<Image>().sprite = x.image;
                 itemtext.GetComponent<Text>().text = "还需数量："+ (mat.Value - fa.commited[mat.Key]);
+                Debug.Log("这是啥"+fa.commited[mat.Key]);
+                itemprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)fa.materials[mat.Key]);
+                itemprogresstext.gameObject.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / fa.materials[mat.Key]).ToString() + "%";
             }
         }
     }

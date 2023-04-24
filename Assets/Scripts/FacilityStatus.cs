@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FacilityStatus : Monster
@@ -43,11 +44,18 @@ public class FacilityStatus : Monster
         
         if (status.hp <= 0)
         {
+            status.hp = 0;
             Debug.Log("建筑坏了");
         }
         else {
             if (fac.repaired) {
                 BasicCharacterGetHited();
+                for (int i = 0; i < fac.commited.Count; i++)
+                {
+                    var key = fac.commited.Keys.ElementAt(i);
+                    fac.commited[key] = status.hp / 100;
+                    Debug.Log("改变了commit:" + fac.commited[key]);
+                }
             }
         }
     }
