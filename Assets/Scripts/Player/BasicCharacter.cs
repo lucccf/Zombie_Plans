@@ -104,7 +104,6 @@ public class BasicCharacter : MonoBehaviour
 
     protected void PlayMusic(string name)
     {
-        Debug.Log(name + Time.time);
         if (name == "") return;
         audiosource.Stop();
         audiosource.clip = (AudioClip)AB.getobj(name);
@@ -199,17 +198,14 @@ public class BasicCharacter : MonoBehaviour
             if (attack.attacker_type != 2 && CharacterType == 4) continue;
             if (attack.attacker_type != 0 && CharacterType == 5) continue; 
             if (CharacterType == 5 && ((Player)Main_ctrl.All_objs[attack.attakcer_id].modules[Object_ctrl.class_name.Player]).Attack_fac) continue;
-            Debug.Log(attack.attacker_type + " " + CharacterType + "asa");
             if (attack.attakcer_id == id)
             {
                 continue;
             }
-            Debug.Log(attack.attacker_type + " " + CharacterType + "asa");
             if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id) && attack.attacker_type == CharacterType)
             {
                 continue;
             }
-            Debug.Log(attack.attacker_type + " " + CharacterType + "asa");
 
             if (FlyTimes > 10)
             {

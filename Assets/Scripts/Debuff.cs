@@ -8,6 +8,7 @@ public class Debuff : MonoBehaviour
 {
     // Start is called before the first frame update
     ParticleSystem particle;
+    bool showbuf = false;
     void Start()
     {
         particle = gameObject.GetComponent<ParticleSystem>();
@@ -19,9 +20,13 @@ public class Debuff : MonoBehaviour
     {
         foreach (var m in Flow_path.facilities) {
             if (m.Value.repaired) {
-                particle.Play();
-                Invoke("StopParticleSystem", 3f);
+                showbuf= true;
+                break;
             }
+        }
+        if (showbuf) {
+            particle.Play();
+            showbuf= false;
         }
     }
 

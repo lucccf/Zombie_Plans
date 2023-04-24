@@ -14,6 +14,7 @@ public class Facility : BasicCharacter
     void Start()
     {
         repaired= false;
+        buff = false;
     }
 
     // Update is called once per frame

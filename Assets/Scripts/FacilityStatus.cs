@@ -5,6 +5,8 @@ using UnityEngine;
 public class FacilityStatus : Monster
 {
     // Start is called before the first frame update
+    public Facility fac;
+    public GameObject hp;
     public override void Startx()
     {
         //Debug.Log("FFFF");
@@ -12,12 +14,17 @@ public class FacilityStatus : Monster
         SetStatus(0, 10);
         status.max_toughness = 100000000;
         status.toughness = 1000000000;
-        status.max_hp = 100;
-        status.hp = 100;
+        foreach (var m in fac.materials)
+        {
+            status.max_hp = 100*m.Value;
+            status.hp = 100*m.Value;
+            Debug.Log("FacBar:"+100 * m.Value);
+        }
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
+        hp.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,14 +37,18 @@ public class FacilityStatus : Monster
 
     public override void Updatex()
     {
-        //Debug.Log("F" + status.toughness);
+        if (!hp.activeSelf && fac.repaired) {
+            hp.SetActive(true);
+        }
         
         if (status.hp <= 0)
         {
             Debug.Log("建筑坏了");
         }
         else {
-            BasicCharacterGetHited();
+            if (fac.repaired) {
+                BasicCharacterGetHited();
+            }
         }
     }
 }

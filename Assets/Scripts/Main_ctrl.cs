@@ -55,6 +55,7 @@ public class Main_ctrl : MonoBehaviour
 
     private void init()
     {
+        homegg = false;
         All_objs = new Dictionary<long, Object_ctrl>();
         Ser_to_cli = new Dictionary<long, long>();
         ItemList = new Dictionary<int, Item>();
@@ -92,11 +93,9 @@ public class Main_ctrl : MonoBehaviour
             Items[i] = (Item)items[i];
         }
 
-        Debug.Log(Items.Length);
         for (int i = 0; i < Items.Length; ++i)
         {
             ItemList.Add(Items[i].id, Items[i]);
-            Debug.Log(Items[i].id);
         }
 
         Play_create();
@@ -679,6 +678,7 @@ public class Main_ctrl : MonoBehaviour
                     Only_Facility of = obj.AddComponent<Only_Facility>();
                     ctrl.modules[Object_ctrl.class_name.Only_Facility] = of;
                     of.myfac = Flow_path.onlyid_facilities[info.attacker_id];
+                    obj.GetComponent<FacilityStatus>().fac = Flow_path.onlyid_facilities[info.attacker_id];
                     break;
             }
         }
