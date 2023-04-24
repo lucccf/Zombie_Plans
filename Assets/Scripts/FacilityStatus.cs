@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FacilityStatus : Monster
@@ -16,9 +17,9 @@ public class FacilityStatus : Monster
         status.toughness = 1000000000;
         foreach (var m in fac.materials)
         {
-            status.max_hp = 100*m.Value;
-            status.hp = 100*m.Value;
-            Debug.Log("FacBar:"+100 * m.Value);
+            status.max_hp = 100 * m.Value;
+            status.hp = 100 * m.Value;
+            Debug.Log("FacBar:" + 100 * m.Value);
         }
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
@@ -37,17 +38,34 @@ public class FacilityStatus : Monster
 
     public override void Updatex()
     {
-        if (!hp.activeSelf && fac.repaired) {
+        if (!hp.activeSelf && fac.repaired)
+        {
             hp.SetActive(true);
         }
-        
+
         if (status.hp <= 0)
         {
+            status.hp = 0;
             Debug.Log("建筑坏了");
         }
-        else {
-            if (fac.repaired) {
+        else
+        {
+            if (fac.repaired)
+            {
                 BasicCharacterGetHited();
+                for (int i = 0; i < fac.commited.Count; i++)
+                {
+                    var key = fac.commited.Keys.ElementAt(i);
+                    fac.commited[key] = status.hp / 100;
+                    if ((fac.commited[key] * 100 / fac.materials[key]) < 70)
+                    {
+                        fac.buff = false;
+                    }
+                    else
+                    {
+                        fac.buff = true;
+                    }
+                }
             }
         }
     }
