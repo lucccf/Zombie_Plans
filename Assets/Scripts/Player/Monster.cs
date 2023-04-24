@@ -24,7 +24,8 @@ public class Monster : BasicCharacter
     protected GameObject Follow = null;
 
     public bool Check;
-    public bool ToHomeFlag;
+    public bool ToHomeFlag = false;
+    protected bool AngryFlag = false;
     protected bool HasToHome = false;
     void Start()
     {
@@ -62,6 +63,7 @@ public class Monster : BasicCharacter
         CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
         CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
 
+
         HomePos = f.pos.Clone();
         HomeLocation = Main_ctrl.CalPos(f.pos.x.Clone(), f.pos.y.Clone());
         if (HomeLocation == -1)
@@ -79,6 +81,24 @@ public class Monster : BasicCharacter
         CatchPosDown = HomePos.x.Clone() + FindPosDown;
         CatchPosLeft = HomePos.x.Clone() + FindPosLeft;
         CatchPosRight = HomePos.x.Clone() + FindPosRight;
+    }
+
+    public void BeAngry()
+    {
+        if (AngryFlag == true) return;
+        AngryFlag = true;
+        //CatchPosUp = HomePos.x.Clone();
+        //CatchPosDown = HomePos.x.Clone();
+        //CatchPosLeft = HomePos.x.Clone();
+        //CatchPosRight = HomePos.x.Clone();
+        FindPosLeft = new Fixpoint(0, 0);
+        FindPosRight = new Fixpoint(0, 0);
+        FindPosUp = new Fixpoint(0, 0);
+        FindPosDown = new Fixpoint(0, 0);
+
+        status.max_toughness = 100000000;
+        status.toughness = 100000000;
+        status.WalkSpeed = new Fixpoint(8,0);
     }
 
     protected void SetBlueAndRed()
@@ -116,13 +136,13 @@ public class Monster : BasicCharacter
     }
 
 
-    protected bool NormalFind(ref int Location)
+    protected int NormalFind(ref int Location)
     {
         Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
         if (Location == -1)
         {
             Moves(AnimaToward, status.WalkSpeed);
-            return false;
+            return 0;
         }
 
         if (LockId == -1) // 如果没有锁定玩家
@@ -130,10 +150,28 @@ public class Monster : BasicCharacter
             if (Main_ctrl.CalPos(f.pos.x, f.pos.y) != HomeLocation)//如果不在家的区域
             {
                 SearchX(HomeLocation);
-                return false;
+                return 0;
             }
             else //如果在家的区域，巡逻
             {
+                if(HasToHome == true)
+                {
+                    if(f.pos.x + new Fixpoint(1,0) < HomePos.x)
+                    {
+                        AnimaToward = 1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                        return 0;
+                    } else if(f.pos.x - new Fixpoint(1,0) > HomePos.x)
+                    {
+                        AnimaToward = -1;
+                        Moves(AnimaToward, status.WalkSpeed);
+                        return 0;
+                    } else
+                    {
+                        LockPos = HomePos;
+                        return 2;
+                    }
+                }
                 Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
                 Fixpoint Left = new Fixpoint(area.left, 0) + new Fixpoint(15, 1);
                 Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
@@ -148,10 +186,10 @@ public class Monster : BasicCharacter
                     AnimaToward = -1;
                 }
                 Moves(AnimaToward, status.WalkSpeed);
-                return false;
+                return 0;
             }
         }
-        return true;
+        return 1;
     }
 
     protected void Fall()

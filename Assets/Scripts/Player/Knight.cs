@@ -8,6 +8,7 @@ public class Knight : Monster
     protected int KnightAnimaAttack = 0;
     protected int KnightAnimaHited = 0;
 
+    private Fixpoint KnightSkillCD = new Fixpoint(0, 0);
     public override void Startx()
     {
         CharacterType = 1 + type2;
@@ -34,12 +35,13 @@ public class Knight : Monster
         if (ToHomeFlag == true)
         {
             ToHome();
+            BeAngry();
         } 
     }
 
     public override void Updatex()
     {
-
+        KnightSkillCD -= Dt.dt;
         NormalUpdate();
         
         status.RecoverToughness(Dt.dt * new Fixpoint(10, 0));//自然恢复韧性值
@@ -132,10 +134,12 @@ public class Knight : Monster
                 Attack2 attack2 = (Attack2)attack;
                 if (attack2.toward * AnimaToward < 0)
                 {
+                    PlayMusic("格挡成功");
                     Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), attack2.HpDamage, attack2.ToughnessDamage, id, AnimaToward, CharacterType,attack.hited_fly_type, "气功波命中");
                     Main_ctrl.Desobj(attack2.id);
                 } else
                 {
+                    PlayMusic(attack.MusicName);
                     status.GetAttacked(attack.HpDamage/DefenceRate, attack.ToughnessDamage);
                     attack2.DestroySelf();
                     Preform(status.last_damage);
@@ -150,10 +154,12 @@ public class Knight : Monster
 
             if (attack.toward * AnimaToward < 0)
             {
+                PlayMusic("格挡成功");
                 status.GetAttacked(HpDamage, ToughnessDamage/2);
             }
             else
             {
+                PlayMusic(attack.MusicName);
                 status.GetAttacked(HpDamage/DefenceRate, ToughnessDamage);
             }
 
@@ -178,7 +184,8 @@ public class Knight : Monster
             return;
         }
         int Location = 0;
-        if(NormalFind(ref Location) == true)
+        int Normalstatus = NormalFind(ref Location);
+        if (Normalstatus == 1 || Normalstatus == 2)
         {
             int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
             Fixpoint Nearx = LockPos.x;
@@ -201,9 +208,22 @@ public class Knight : Monster
                     {
                         ChangeStatus(StatusType.Defence);//随机防御
                     }
-                    else
+                    else if(KnightSkillCD <= new Fixpoint(0,0))
                     {
+                        KnightSkillCD = new Fixpoint(10, 0);
                         ChangeStatus(StatusType.Skill);//随机技能
+                    } else
+                    {
+                        if (f.pos.x < Nearx)
+                        {
+                            AnimaToward = 1;
+                            Moves(AnimaToward, status.WalkSpeed);
+                        }
+                        else
+                        {
+                            AnimaToward = -1;
+                            Moves(AnimaToward, status.WalkSpeed);
+                        }
                     }
                     return;
                 }
@@ -263,7 +283,6 @@ public class Knight : Monster
     }
     private void Attack(bool first)
     {
-        //Fixpoint Near = GetNearDistance();
         Fixpoint Near = LockPos.x;
         if (first == true)
         {

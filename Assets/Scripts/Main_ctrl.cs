@@ -494,6 +494,20 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
+    public static void NewTrap(Fix_vector2 pos, float size)
+    {
+        Obj_info p = new Obj_info();
+        p.name = "TrapX";
+        p.hei = new Fixpoint(1, 0);
+        p.wid = new Fixpoint(1, 0);
+        p.pos = pos;
+        p.col_type = Fix_col2d.col_status.Trigger;
+        p.toward = size;
+        p.col_type = Fix_col2d.col_status.Trigger;
+        //p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+        p.classnames.Add(Object_ctrl.class_name.Trigger);
+        Creobj(p);
+    }
 
     public static GameObject CreateObj(Obj_info info)
     {
@@ -596,6 +610,11 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Trigger] = t;
                     t.triggertype = info.type;
                     t.triggername = info.name;
+                    t.id = cnt;
+                    if(info.name == "TrapX")
+                    {
+                        t.f = f;
+                    }
                     if(info.name == "ItemSample")
                     {
                         

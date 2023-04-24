@@ -1,0 +1,18 @@
+<zombie>
+
+	<monster>
+		<id>Monster1</id>
+		<num>5</num>
+	</monster>
+
+	<monster>
+		<id>Mage</id>
+		<num>1</num>
+	</monster>
+
+	<monster>
+		<id>knight</id>
+		<num>1</num>
+	</monster>
+
+</zombie>

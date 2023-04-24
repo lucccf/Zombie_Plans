@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class UImanager : MonoBehaviour
 {
-    LuaState lua;
-    Dictionary <string, LuaFunction> Luafunc_man;
+    static LuaState lua;
+    static Dictionary<string, LuaFunction> Luafunc_man = new Dictionary<string, LuaFunction>();
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +27,7 @@ public class UImanager : MonoBehaviour
         
     }
 
-    public LuaFunction GetLuafunc(string func)
+    public static LuaFunction GetLuafunc(string func)
     {
         if (Luafunc_man.ContainsKey(func))
         {
@@ -38,15 +38,9 @@ public class UImanager : MonoBehaviour
         return luafunc;
     }
 
-    public void OpenUI(string name)
+    public static void DoLuafile(string name)
     {
-        //lua.GetFunction("Open_" + name).Call();
-        GetLuafunc("Open_" + name).Call();
-    }
-
-    public void DoLuafile(string name)
-    {
-        lua.DoFile("name");
+        lua.DoFile(name);
     }
 
     private void OnDestroy()

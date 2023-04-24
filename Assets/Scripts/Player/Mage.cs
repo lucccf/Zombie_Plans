@@ -28,10 +28,14 @@ public class Mage : Knight
         if (ToHomeFlag == true)
         {
             ToHome();
+            BeAngry();
         }
     }
     public override void Updatex()
     {
+        FireBallCD -= Dt.dt;
+        MoveCD -= Dt.dt;
+        RecoverCD -= Dt.dt;
         NormalUpdate();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(15, 0));//自然恢复韧性值
@@ -113,7 +117,9 @@ public class Mage : Knight
         return CheckToughStatus(x);
     }
     */
-
+    private Fixpoint FireBallCD = new Fixpoint(0,0);
+    private Fixpoint RecoverCD = new Fixpoint(0, 0);
+    private Fixpoint MoveCD = new Fixpoint(0, 0);
     private void Normal()
     {
         KnightAnimaSpeed = 5f;
@@ -125,7 +131,8 @@ public class Mage : Knight
         }
 
         int Location = 0;
-        if (NormalFind(ref Location) == true)
+        int Normalstatus = NormalFind(ref Location);
+        if (Normalstatus == 1 || Normalstatus == 2)
         {
             int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
             Fixpoint Nearx = LockPos.x;
@@ -139,15 +146,18 @@ public class Mage : Knight
                 if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
                 if (Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))//使用技能的概率
                 {
-                    if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0))
+                    if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0) && RecoverCD <= new Fixpoint(0,0))
                     {
+                        RecoverCD = new Fixpoint(15, 0);
                         ChangeStatus(StatusType.Recover);
+                        return;
                     }
-                    else
+                    else if(MoveCD <= new Fixpoint(0,0))
                     {
+                        MoveCD = new Fixpoint(10, 0);
                         ChangeStatus(StatusType.Disappear);
+                        return;
                     }
-                    return;
                 }
                 if (Dis < new Fixpoint(14, 1)) //攻击
                 {
@@ -188,15 +198,33 @@ public class Mage : Knight
                 }
                 else if (Dis < new Fixpoint(10, 0) || f.pos.x < Left || f.pos.x > Right) //射击
                 {
-                    if (f.pos.x < Nearx)
+                    Debug.Log("Mage" + FireBallCD.to_float());
+                    if (FireBallCD <= new Fixpoint(0, 0))
                     {
-                        AnimaToward = 1;
+                        FireBallCD = new Fixpoint(4, 0);
+                        if (f.pos.x < Nearx)
+                        {
+                            AnimaToward = 1;
+                        }
+                        else
+                        {
+                            AnimaToward = -1;
+                        }
+                        ChangeStatus(StatusType.Fire);
                     }
                     else
                     {
-                        AnimaToward = -1;
+                        if (f.pos.x > Nearx)
+                        {
+                            AnimaToward = 1;
+                            Moves(AnimaToward, status.WalkSpeed);
+                        }
+                        else
+                        {
+                            AnimaToward = -1;
+                            Moves(AnimaToward, status.WalkSpeed);
+                        }
                     }
-                    ChangeStatus(StatusType.Fire);
                     return;
                 }
                 else //靠近
