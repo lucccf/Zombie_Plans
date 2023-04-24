@@ -1,5 +1,4 @@
 local panel
-local GameObject = UnityEngine.GameObject
 
 UI_login_addlis = function (uiRefs)
     panel = BindLuaUI(uiRefs)

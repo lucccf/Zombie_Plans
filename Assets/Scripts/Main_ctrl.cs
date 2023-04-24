@@ -520,8 +520,10 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
+    private static int WolfboxCounter;
     public static void NewWolfBox(Fix_vector2 pos, float size)
     {
+        ++WolfboxCounter;
         Obj_info p = new Obj_info();
         p.name = "WolfBox";
         p.hei = new Fixpoint(1, 0);
@@ -531,6 +533,7 @@ public class Main_ctrl : MonoBehaviour
         p.toward = size;
         p.col_type = Fix_col2d.col_status.Trigger;
         p.classnames.Add(Object_ctrl.class_name.Trigger);
+        p.ToughnessDamage = WolfboxCounter;
         Creobj(p);
     }
 
@@ -636,6 +639,10 @@ public class Main_ctrl : MonoBehaviour
                     t.triggertype = info.type;
                     t.triggername = info.name;
                     t.id = cnt;
+                    if(info.name == "WolfBox")
+                    {
+                        obj.GetComponent<WolfBoxInMap>().BoxId = info.ToughnessDamage;
+                    }
                     if(info.name == "TrapX")
                     {
                         t.f = f;

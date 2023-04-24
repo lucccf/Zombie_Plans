@@ -21,9 +21,9 @@ public class Knight : Monster
         Attack2BeginToHitTime = new Fixpoint(2, 1);
         Attack3BeginToHitTime = new Fixpoint(25, 2);
 
-        Attack1Damage = new Fixpoint(4, 0);//伤害倍率
-        Attack2Damage = new Fixpoint(4, 0);
-        Attack3Damage = new Fixpoint(4, 0);
+        Attack1Damage = new Fixpoint(3, 0);//伤害倍率
+        Attack2Damage = new Fixpoint(3, 0);
+        Attack3Damage = new Fixpoint(3, 0);
 
         DefenceTime = new Fixpoint(1, 0);//防御时间
         DefenceRate = new Fixpoint(5, 1);//承受伤害倍率
@@ -31,7 +31,7 @@ public class Knight : Monster
         SkillBeginToHitTime = new Fixpoint(133, 2);//技能的结算开始时间
         SkillDruingTime = new Fixpoint(163, 2);
         SkillBetweenTime = new Fixpoint(21, 2);//伤害的间隔
-        SkillAttackRate = new Fixpoint(5, 0);//攻击倍率
+        SkillAttackRate = new Fixpoint(3, 0);//攻击倍率
 
         KnightSkillCD_MAX = new Fixpoint(10, 0);
     }
