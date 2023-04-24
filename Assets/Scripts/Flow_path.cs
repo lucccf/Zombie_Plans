@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class Flow_path : MonoBehaviour
@@ -17,7 +19,7 @@ public class Flow_path : MonoBehaviour
         exit = true;
     }
 
-    public static Fixpoint countdown = new Fixpoint(300, 0);
+    public static Fixpoint countdown = new Fixpoint(10, 0);
 
     private static int cnt_flag = 0;
 
@@ -32,6 +34,8 @@ public class Flow_path : MonoBehaviour
 
     public static long Now_fac = 0;
 
+    public static int[] times = new int[10];
+
     public static GameObject play_panel;
     public static GameObject death_panel;
     public static GameObject chat_panel;
@@ -42,12 +46,25 @@ public class Flow_path : MonoBehaviour
         chat_panel = GameObject.Find("ChatUI");
         death_panel.SetActive(false);
         chat_panel.SetActive(false);
-        countdown = new Fixpoint(300, 0);
+        inittime();
+        countdown = new Fixpoint(times[1], 0);
         cnt_flag = 0;
         zombie_cnt = 0;
         Now_fac = 0;
         main_flag = 0;
         conditions = new int[cons];
+    }
+
+    private static void inittime()
+    {
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/time.xml");
+        XmlNodeList T = xmlDoc.SelectNodes("/time/info");
+
+        foreach(XmlNode xx in T)
+        {
+            times[int.Parse(xx.SelectSingleNode("id").InnerText)] = int.Parse(xx.SelectSingleNode("second").InnerText);
+        }
     }
 
     public static void Updatex()
@@ -59,8 +76,9 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0))
                 {
                     cnt_flag = 1;
-                    countdown = new Fixpoint(300, 0);
+                    countdown = new Fixpoint(times[2], 0);
                     //召唤第一波僵尸
+                    Debug.Log("dierbo");
                     Monster_create.Zom_create1();
                 }
                 break;
@@ -69,7 +87,7 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {
                     cnt_flag = 2;
-                    countdown = new Fixpoint(180, 0);
+                    countdown = new Fixpoint(times[3], 0);
                     Map_create.Facility_create2();
                 }
                 break;
@@ -78,14 +96,14 @@ public class Flow_path : MonoBehaviour
                 if (countdown <= new Fixpoint(0))
                 {
                     cnt_flag = 3;
-                    countdown = new Fixpoint(180, 0);
+                    countdown = new Fixpoint(times[4], 0);
                     //召唤第二波僵尸
                     Monster_create.Zom_create2();
                 }
                 break;
             case 3:
                 countdown = countdown - Dt.dt;
-                if (countdown <= new Fixpoint(0))
+                if (countdown <= new Fixpoint(0) || zombie_cnt == 0)
                 {
                     cnt_flag = 4;
                 }
@@ -201,10 +219,10 @@ public class Flow_path : MonoBehaviour
             }
         }
 
-        if (true)
+        if (false)
         {
             //如果家的血量没了
-            vic_wolf = false;
+            vic_wolf = true;
         }
 
         if (vic_wolf)
@@ -233,6 +251,13 @@ public class Flow_path : MonoBehaviour
             if (!Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Populace)
             {
                 flag_po = true;
+            }
+        }
+        for (int i = 0; i < Player_ctrl.plays.Count; i++)
+        {
+            if (Player_ctrl.plays[i].CheckDeath() && Player_ctrl.plays[i].identity == Player.Identity.Wolf)
+            {
+                flag_po = false;
             }
         }
         if (flag_po)

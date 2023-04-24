@@ -41,6 +41,7 @@ public class Main_ctrl : MonoBehaviour
 
     public static bool Exit = false;
 
+    public static bool homegg = false;
     public static Player.Identity main_identity;
 
     public enum objtype
@@ -103,7 +104,7 @@ public class Main_ctrl : MonoBehaviour
         Wolf_create();
         main_id = Ser_to_cli[user_id];
         Monster_create.Get_mon_items();
-        //Monster_create.Mon_create1();
+        Monster_create.Mon_create1();
 
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         hb.Startx();
@@ -111,7 +112,7 @@ public class Main_ctrl : MonoBehaviour
 
     static void Wolf_create()
     {
-        wolf_cnt = (Player_ctrl.plays.Count + 3) / 4;
+        wolf_cnt = (Player_ctrl.plays.Count + 1) / 3;
         for (int i = 0; i < wolf_cnt; i++)
         {
             int k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);

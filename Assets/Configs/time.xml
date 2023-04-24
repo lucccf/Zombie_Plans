@@ -7,7 +7,7 @@
 
 	<info>
 		<id>2</id>
-		<second>60</second>
+		<second>300</second>
 	</info>
 
 
@@ -18,13 +18,7 @@
 	
 	<info>
 		<id>4</id>
-		<second>300</second>
+		<second>180</second>
 	</info>
 
-
-	<info>
-		<id>5</id>
-		<second>600</second>
-	</info>
-	
 </time>

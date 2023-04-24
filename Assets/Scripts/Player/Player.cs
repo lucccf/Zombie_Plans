@@ -155,6 +155,7 @@ public class Player : BasicCharacter
                             GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 2;
+                            fa.repaired = true;
                         }
 
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();

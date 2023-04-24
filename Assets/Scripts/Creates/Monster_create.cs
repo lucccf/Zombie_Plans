@@ -177,6 +177,7 @@ public class Monster_create : MonoBehaviour
     {
         for (int i = 0; i < pos_zombies1.Count; i++)
         {
+            Debug.Log(i);
             create(pos_zombies1[i], size_zombies1[i], 1);
         }
     }

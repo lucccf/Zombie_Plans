@@ -1,20 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 1663418139
+CRC: 1900296173
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ec6935827e3a03070df8202f0f239999
-=======
-CRC: 2973063946
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: a4e371b7057fad06d7c9fa2dac30feae
->>>>>>> 5e51749e82bdff2e9cef42a29bb5c432b5586b1d
+    Hash: 7299c6286f21ae93ad605e562e935658
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 4ccbb850cb73825d0ab32f86339222a8
+    Hash: 99210e48ec471dc890e0390654a57da5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -42,11 +34,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -101,6 +93,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3977dce7c98e32a43a361fff8fc31cbb, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -138,11 +132,11 @@ Assets:
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
-- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/home.prefab
 - Assets/Prefabs/Attack.prefab
 - Assets/Prefabs/number/33.png
 - Assets/Prefabs/UI/NeeItemPrefabs.prefab
+- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/number/22.png
 - Assets/Prefabs/Bomb2.prefab
 - Assets/Prefabs/red.prefab
@@ -177,8 +171,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-<<<<<<< HEAD
 - D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
-=======
-- D:/pro/Zombie_Plans/Assets/AssetBundles/music
->>>>>>> 5e51749e82bdff2e9cef42a29bb5c432b5586b1d
