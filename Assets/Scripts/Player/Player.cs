@@ -1019,7 +1019,7 @@ public class Player : BasicCharacter
             HeavyAttackHasHited = true;
             PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(15, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(7, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
         }
 
         if (!f.onground || StatusTime > HeavyAttackDuring)
