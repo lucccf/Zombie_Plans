@@ -201,7 +201,7 @@ public class BasicCharacter : MonoBehaviour
             }
             Debug.Log(attack.attacker_type + " " + CharacterType + "asa");
 
-            if(FlyTimes > 10)
+            if (FlyTimes > 10)
             {
                 continue;
             }
