@@ -1,4 +1,5 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 4161242275
 Hashes:
   AssetFileHash:
@@ -7,6 +8,16 @@ Hashes:
   TypeTreeHash:
     serializedVersion: 2
     Hash: 0fdaca2289664bc0280e949cd8af1dce
+=======
+CRC: 4122310833
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 005615a85cd4052dfb034cd116a44277
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 235489940d8de75ab041952c2d7bcfe3
+>>>>>>> 21463c0ce729f126f25eef1506df8bd227d66261
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,12 +45,21 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+<<<<<<< HEAD
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
+=======
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+>>>>>>> 21463c0ce729f126f25eef1506df8bd227d66261
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: c0606e10920cabb4e9be2acf04e7c378, type: 3}
@@ -90,13 +110,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -131,6 +151,7 @@ Assets:
 - Assets/Prefabs/number/0.png
 - Assets/Prefabs/number/5.png
 - Assets/Prefabs/skull.prefab
+- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png

@@ -18,7 +18,6 @@ public class FacilityStatus : Monster
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
-        //status.GetAttacked(new Fixpoint(-10, 0), 0);
     }
 
     // Update is called once per frame
