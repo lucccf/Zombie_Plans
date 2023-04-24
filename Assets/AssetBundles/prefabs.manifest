@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1240245094
+CRC: 4161242275
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3d56924ac0e5ca01e1d8e047939354f2
+    Hash: c33e1ad2142483312ef42bb1645bedb3
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ec4efdedc669bfbb84d9e7966d7c34fd
+    Hash: 0fdaca2289664bc0280e949cd8af1dce
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -34,11 +34,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -134,11 +134,11 @@ Assets:
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
+- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/home.prefab
 - Assets/Prefabs/Attack.prefab
 - Assets/Prefabs/number/33.png
 - Assets/Prefabs/UI/NeeItemPrefabs.prefab
-- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/number/22.png
 - Assets/Prefabs/Bomb2.prefab
 - Assets/Prefabs/red.prefab
@@ -173,4 +173,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
+- D:/pro/Zombie_Plans/Assets/AssetBundles/music
