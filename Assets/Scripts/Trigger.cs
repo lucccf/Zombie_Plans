@@ -37,6 +37,16 @@ public class Trigger : MonoBehaviour
         Instantiate(obj, transform.position + new Vector3(0,1.1f,0), transform.rotation);
     }
 
+    public void BoxTriggerIn()
+    {
+        GetComponent<WolfBoxInMap>().TriggerIn();
+    }
+
+    public void BoxTriggerOut()
+    {
+        GetComponent<WolfBoxInMap>().Triggerout();
+    }
+
     public void Updatex()
     {
         AilveTime += Dt.dt;

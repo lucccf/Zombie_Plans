@@ -19,7 +19,8 @@ public class AllFacility : MonoBehaviour
     {
         closebutton.onClick.AddListener(CloseUI);
         tinybuttons = tinymap.transform.GetComponentsInChildren<Transform>(true);
-        foreach (Transform onebuttons in tinybuttons) {
+        foreach (Transform onebuttons in tinybuttons)
+        {
             Button tinyButton = onebuttons.gameObject.GetComponent<Button>();
             if (tinyButton != null)
             {
@@ -27,26 +28,44 @@ public class AllFacility : MonoBehaviour
             }
         }
         init = matimage.GetComponent<Image>().sprite;
+        facprogress.SetActive(false);
+        progresstext.SetActive(false);
     }
-    void CloseUI() {
+    void CloseUI()
+    {
         factitile.GetComponent<Text>().text = "查看设施详情";
         gameObject.SetActive(false);
     }
-    void HandleTinyButton(GameObject tinybutton) {
-        foreach ( KeyValuePair<long,Facility> tmp in Flow_path.facilities) {
+    void HandleTinyButton(GameObject tinybutton)
+    {
+        foreach (KeyValuePair<long, Facility> tmp in Flow_path.facilities)
+        {
             Debug.Log("Dicid:" + tmp.Key + "  Fac:" + tmp.Value);
         }
         Facility fa = Flow_path.facilities[tinybutton.GetComponent<Tinyfacilitybutton>().facilityid];
         //Debug.Log(fa.materials);
-        factitile.GetComponent<Text>().text = tinybutton.GetComponent<Tinyfacilitybutton>().facilityid+"号设施";
+        factitile.GetComponent<Text>().text = tinybutton.GetComponent<Tinyfacilitybutton>().facilityid + "号设施";
         Dictionary<int, int> curmat = fa.materials;
         foreach (KeyValuePair<int, int> mat in curmat)
         {
             Item x = Main_ctrl.GetItemById(mat.Key);
             matimage.GetComponent<Image>().sprite = x.image;
-            mattext.GetComponent<Text>().text = "还需数量：" + (mat.Value - fa.commited[mat.Key]);
-            facprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)mat.Value);
-            progresstext.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / mat.Value).ToString() + "%";
+            if (fa.repaired == false) mattext.GetComponent<Text>().text = "还需数量：" + (fa.materials[mat.Key] - fa.commited[mat.Key]);
+            else
+            {
+                Debug.Log("fa.buff:" + fa.buff);
+                if (fa.buff)
+                {
+                    mattext.GetComponent<Text>().text = "已修复";
+
+                }
+                else
+                {
+                    mattext.GetComponent<Text>().text = "待修复";
+                }
+            }
+            //facprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)mat.Value);
+            //progresstext.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / mat.Value).ToString() + "%";
         }
     }
 }

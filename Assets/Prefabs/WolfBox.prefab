@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2a33fc76394b048ae0389542a7c34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoxUI: {fileID: 0}
-  ButtonUI: {fileID: 0}
+  BoxUI: {fileID: 4365831623041594361}
+  ButtonUI: {fileID: 4833835057940073494}
 --- !u!1 &8150728763502114520
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +321,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b2846972c77fd249aef9febd679b1ff, type: 3}
+--- !u!1 &4365831623041594361 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3436554806282817396, guid: 0b2846972c77fd249aef9febd679b1ff,
+    type: 3}
+  m_PrefabInstance: {fileID: 1380235473211473037}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4365831623041594360 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3436554806282817397, guid: 0b2846972c77fd249aef9febd679b1ff,
@@ -444,8 +450,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfBoxButton
       objectReference: {fileID: 0}
+    - target: {fileID: 2044704437719395891, guid: 3424e6e10bac5bf458c8f772b74a837d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980213137564728214, guid: 3424e6e10bac5bf458c8f772b74a837d,
+        type: 3}
+      propertyPath: WolfBoxUI
+      value: 
+      objectReference: {fileID: 4365831623041594361}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3424e6e10bac5bf458c8f772b74a837d, type: 3}
+--- !u!1 &4833835057940073494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2044704437719395891, guid: 3424e6e10bac5bf458c8f772b74a837d,
+    type: 3}
+  m_PrefabInstance: {fileID: 6878408977499349541}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5635078452146706293 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1244917069227324752, guid: 3424e6e10bac5bf458c8f772b74a837d,

@@ -98,6 +98,8 @@ public class Player : BasicCharacter
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
+
+
     }
 
     public override void Startx()
@@ -343,6 +345,9 @@ public class Player : BasicCharacter
                     Attack_fac = true;
                 }
                 Debug.Log("Attack_fac:" + Attack_fac);
+                break;
+            case PlayerOpt.CreateItem:
+                bag.BagGetItem(inputs.Itemid,1,Player_ctrl.BagUI);
                 break;
         }
     }
@@ -902,6 +907,9 @@ public class Player : BasicCharacter
                 else if (trigger.triggername == "TrapX")
                 {
                     trigger.Explore();
+                } else if(trigger.triggername == "WolfBox" && checkid() == true)
+                {
+                    trigger.BoxTriggerIn();
                 }
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
@@ -915,6 +923,9 @@ public class Player : BasicCharacter
                 else if (trigger.triggertype == "protal")
                 {
                     Destroy(Protal);
+                } else if(trigger.triggername == "WolfBox" && checkid() == true)
+                {
+                    trigger.BoxTriggerOut();
                 }
             }
             else
@@ -1325,6 +1336,7 @@ public class Player : BasicCharacter
                 Fix_vector2 TrapPos = f.pos.Clone();
                 TrapPos.y -= new Fixpoint(1, 0);
                 Main_ctrl.NewTrap(TrapPos, 1f);
+                Main_ctrl.NewWolfBox(new Fix_vector2(f.pos.x + new Fixpoint(3, 0), f.pos.y), 1);
             }
             else
             {
