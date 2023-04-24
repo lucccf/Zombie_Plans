@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Net;
 
 public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -29,15 +30,20 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            Debug.Log("VVVLeft" + id);
+            //Debug.Log("VVVLeft" + id);
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log("VVVRight" + id);
-            Player player = Player_ctrl.plays[0];
+            PlayerOptData x = new PlayerOptData();
+            x.Opt = PlayerOpt.DeleteItem;
+            x.Userid = (int)Main_ctrl.user_id;
+            x.Itemid = id;
+            Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
+            // Debug.Log("VVVRight" + id);
+            //Player player = Player_ctrl.plays[0];
             //发帧
 
-            player.ThrowItem(id);  //收到以后
+            //player.ThrowItem(id);  //收到以后
             // 处理鼠标右键点击
         }
     }
