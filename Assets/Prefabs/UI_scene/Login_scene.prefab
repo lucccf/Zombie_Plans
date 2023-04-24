@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 4609951893284838187}
   - component: {fileID: 7725009507417546145}
   m_Layer: 5
-  m_Name: "\u767B\u5F55\u6309\u94AE"
+  m_Name: Login_but
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,6 +668,7 @@ GameObject:
   - component: {fileID: 4609951894136500713}
   - component: {fileID: 4609951894136500714}
   - component: {fileID: 5549518425481618835}
+  - component: {fileID: 4779317990959809311}
   m_Layer: 5
   m_Name: Login_scene
   m_TagString: Untagged
@@ -736,6 +737,18 @@ MonoBehaviour:
     type: 2
   - obj: {fileID: 4609951893906117946}
     type: 2
+--- !u!114 &4779317990959809311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609951894136500712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fb8cbad35f0b843ba88349834d540c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4609951894155743547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1661,7 +1674,7 @@ GameObject:
   - component: {fileID: 6969498647098967391}
   - component: {fileID: 3256209392772762526}
   m_Layer: 5
-  m_Name: "\u6CE8\u518C\u6309\u94AE"
+  m_Name: Rig_but
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

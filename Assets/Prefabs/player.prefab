@@ -120,6 +120,7 @@ MonoBehaviour:
   id: 0
   type2: 0
   AnimaToward: 1
+  Attack_fac: 0
   words: 
   words_ok: 0
   musicClip: {fileID: 8300000, guid: 38968ae759bd60e4d9d024430624543c, type: 3}

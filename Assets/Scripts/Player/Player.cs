@@ -1,7 +1,10 @@
 ﻿using Net;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
+using static Net.Frame.Types;
 
 public class Player : BasicCharacter
 {
@@ -34,6 +37,7 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
+
     }
 
     HashSet<PlayerOpt> list;
@@ -252,6 +256,10 @@ public class Player : BasicCharacter
                 break;
         }
     }
+    public void IsWolf()
+    {
+        status.max_hp = 100000000;
+    }
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -334,6 +342,10 @@ public class Player : BasicCharacter
             case StatusType.Stay:
                 AnimaStatus = 16;
                 Stay();
+                break;
+            case StatusType.Trap:
+                AnimaStatus = 17;
+                Trap(false);
                 break;
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
@@ -420,6 +432,13 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Fall);
             return;
 
+        }
+
+        else if (Press[KeyCode.Space] && Press[KeyCode.L] && bag.BagCheckItemNums(99,1))
+        {
+            ChangeStatus(StatusType.Trap);
+            Trap(true);
+            return;
         }
 
         else if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
@@ -752,8 +771,10 @@ public class Player : BasicCharacter
             TriggerQueue.Dequeue();
             if (a.type == Fix_col2d_act.col_action.Trigger_in)
             {
-                //Debug.Log("Trigger in");
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+
+                //Debug.Log("Trigger in" + trigger.triggername);
+
                 if (trigger.triggertype == "building" && checkid() == true)
                 {
                     Flow_path.Now_fac = a.opsite.id;
@@ -767,17 +788,22 @@ public class Player : BasicCharacter
                 else if (trigger.triggername == "ItemSample")
                 {
                     bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
+                    PlayMusic("拾取物品");
                     Main_ctrl.Desobj(a.opsite.id);
                 }
                 else if (trigger.triggername == "protal" && checkid() == true) {
                     GameObject parent = GameObject.Find("PlayerPanel");
                     GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
+                } else if(trigger.triggername == "TrapX")
+                {
+                    trigger.Explore();
                 }
             }
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
+                //Debug.Log("Trigger out" + trigger.triggername);
                 if (trigger.triggertype == "building")
                 {
                     Destroy(Building);
@@ -1061,6 +1087,8 @@ public class Player : BasicCharacter
         }
         if (StatusTime > RecoverHpDuringTime)
         {
+            GameObject x = Instantiate((GameObject)AB.getobj("recover"),transform.position,transform.rotation);
+            x.transform.localScale = new Vector3(3, 3, 1);
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(200);//恢复的血量
             Preform(-100);
@@ -1105,5 +1133,100 @@ public class Player : BasicCharacter
         animator.SetFloat("attack", AnimaAttack);
         animator.SetInteger("hited", AnimaHited);
         animator.SetInteger("status", AnimaStatus);
+        //Change_color();
+    }
+
+    public class AnimationClipOverrides : List<KeyValuePair<AnimationClip, AnimationClip>>
+    {
+        public AnimationClipOverrides(int capacity) : base(capacity) { }
+
+        public AnimationClip this[string name]
+        {
+            get { return this.Find(x => x.Key.name.Equals(name)).Value; }
+            set
+            {
+                int index = this.FindIndex(x => x.Key.name.Equals(name));
+                if (index != -1)
+                    this[index] = new KeyValuePair<AnimationClip, AnimationClip>(this[index].Key, value);
+            }
+        }
+    }
+
+    void Change_color()
+    {
+        AnimatorOverrideController overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        animator.runtimeAnimatorController = overrideController;
+        var overrides = new AnimationClipOverrides(overrideController.overridesCount);
+        overrideController.GetOverrides(overrides);
+
+        // Get the source texture
+        Texture2D sourceTexture = gameObject.GetComponent<SpriteRenderer>().sprite.texture;
+
+        // Create a new texture with RGB24 format
+        Texture2D newTexture = new Texture2D(sourceTexture.width, sourceTexture.height, TextureFormat.RGB24, false);
+
+        // Copy the pixels from the source texture to the new texture
+        newTexture.SetPixels(sourceTexture.GetPixels());
+
+        // Apply the changes to the new texture
+        newTexture.Apply();
+
+        Texture2D image = newTexture;
+        Color[] pixels = image.GetPixels(); // 获取所有像素的颜色
+        for (int i = 0; i < pixels.Length; i++)
+        {
+            Color pixelColor = pixels[i];
+            // 判断像素颜色是否在指定范围内
+            if (IsSimilarColor(pixelColor, new Color(0x7f, 0x00, 0x00), new Color(0xff, 0x7f, 0x7f)))
+            {
+                // 将像素颜色更改为新颜色
+                pixels[i] = new Color(0xff, 0xff, 0xff);
+            }
+        }
+        image.SetPixels(pixels);
+        image.Apply();
+        Sprite x = Sprite.Create(image, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
+        x.name = "x";
+        gameObject.GetComponent<SpriteRenderer>().sprite = x;
+        Debug.Log(gameObject.GetComponent<SpriteRenderer>().sprite.name);
+    }
+
+    bool IsSimilarColor(Color c1, Color c2, Color c3)
+    {
+        if (c1.g >= c2.g && c1.g <= c3.g && c1.a >= c2.a && c1.a <= c3.a && c1.b >= c2.b && c1.b <= c3.b && c1.r >= c2.r && c1.r <= c3.r)
+        {
+            return true;
+        }
+        else return false;
+    }
+
+    private static Fixpoint TrapTime = new Fixpoint(2,0);
+    private void Trap(bool first)
+    {
+        int hit = BasicCharacterGetHited();
+        if (hit != 0)
+        {
+            ChangeStatus(StatusType.Hit);
+            return;
+        }
+        if(first)
+        {
+            if (bag.BagCheckItemNums(99, 1))
+            {
+                bag.BagGetItem(99, -1, Player_ctrl.BagUI);
+                Fix_vector2 TrapPos = f.pos.Clone();
+                TrapPos.y -= new Fixpoint(1, 0);
+                Main_ctrl.NewTrap(TrapPos, 1f);
+            } else
+            {
+                ChangeStatus(StatusType.Normal);
+                return;
+            }
+        }
+        if(StatusTime > TrapTime)
+        {
+            ChangeStatus(StatusType.Normal);
+            return;
+        }
     }
 }

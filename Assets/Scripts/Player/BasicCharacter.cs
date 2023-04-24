@@ -63,7 +63,8 @@ public class BasicCharacter : MonoBehaviour
         Kick,
         Upattack,
         HeavyAttack,
-        Stay
+        Stay,
+        Trap
     }
 
     public virtual void Startx()

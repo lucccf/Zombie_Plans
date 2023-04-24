@@ -1,4 +1,5 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 3254134038
 Hashes:
   AssetFileHash:
@@ -7,6 +8,27 @@ Hashes:
   TypeTreeHash:
     serializedVersion: 2
     Hash: d4dc1d165300c66201839414245e11a7
+=======
+<<<<<<< HEAD
+CRC: 2374227631
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b2b1586ef133fe45d4ef6cb84ed8523c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 546b9a3e1a85f76de16936e20d7eadce
+=======
+CRC: 547173927
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fa5e014a0e86765f9e86760fab770f4e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1d27f3e5127cfbc3e7b80a187d93f07a
+>>>>>>> 5acbe01d07ba68c1d86886c2185d162f62dcfcc5
+>>>>>>> 328b8fbd94d6f914e8a492981d7dac861a66cac1
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -91,6 +113,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3dc8cd91b5bb4f744a385a5927fc3726, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -119,14 +143,15 @@ Assets:
 - Assets/Prefabs/UI/Button.prefab
 - Assets/Prefabs/number/2.png
 - Assets/Prefabs/UI/BagItem.prefab
+- Assets/Prefabs/recover.prefab
 - Assets/Prefabs/protal.prefab
+- Assets/Prefabs/facility.prefab
 - Assets/Prefabs/number/0.png
 - Assets/Prefabs/number/5.png
 - Assets/Prefabs/skull.prefab
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
-- Assets/Prefabs/facility.prefab
 - Assets/Prefabs/home.prefab
 - Assets/Prefabs/Attack.prefab
 - Assets/Prefabs/number/33.png
@@ -163,6 +188,15 @@ Assets:
 - Assets/Prefabs/wall_a.prefab
 - Assets/Prefabs/Map_item/Devil_m.prefab
 - Assets/Prefabs/Monster1.prefab
+- Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
+<<<<<<< HEAD
 - D:/hst/Zombie_Plans/Assets/AssetBundles/music
+=======
+<<<<<<< HEAD
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+=======
+- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/music
+>>>>>>> 5acbe01d07ba68c1d86886c2185d162f62dcfcc5
+>>>>>>> 328b8fbd94d6f914e8a492981d7dac861a66cac1
