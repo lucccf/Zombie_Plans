@@ -197,7 +197,7 @@ public class BasicCharacter : MonoBehaviour
                 continue;
             }
 
-            if(FlyTimes > 10)
+            if (FlyTimes > 10)
             {
                 continue;
             }
