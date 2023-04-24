@@ -54,7 +54,13 @@ public class FacilityStatus : Monster
                 {
                     var key = fac.commited.Keys.ElementAt(i);
                     fac.commited[key] = status.hp / 100;
-                    Debug.Log("改变了commit:" + fac.commited[key]);
+                    if ((fac.commited[key] * 100 / fac.materials[key]) < 70)
+                    {
+                        fac.buff = true;
+                    }
+                    else {
+                        fac.buff = false;
+                    }
                 }
             }
         }

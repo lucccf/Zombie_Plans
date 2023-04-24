@@ -38,27 +38,13 @@ public class BuildingButton : MonoBehaviour
             tmp = playerpanel.transform.Find("Facility").gameObject;
             //标题
             titletext = playerpanel.transform.Find("Facility/Title/Text").gameObject;
-            titletext.GetComponent<Text>().text = gameObject.name;
+            titletext.GetComponent<Text>().text = "设施详情";
             //关闭键
             closebutton = playerpanel.transform.Find("Facility/Background/CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
             //材料列表
 
-            itemimage = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage").gameObject;
-            itemtext = tmp.transform.Find("ItemTitle/ItemDetail/ItemImage/Text").gameObject;
-            itemprogress = tmp.transform.Find("progress").gameObject;
-            itemprogresstext = tmp.transform.Find("progress/progressText").gameObject;
-            Facility fa = Flow_path.facilities[buildingid];
-            Dictionary<int, int> curmat = fa.materials;
-            foreach (KeyValuePair<int, int> mat in curmat)
-            {
-                Item x = Main_ctrl.GetItemById(mat.Key);
-                itemimage.GetComponent<Image>().sprite = x.image;
-                itemtext.GetComponent<Text>().text = "还需数量："+ (mat.Value - fa.commited[mat.Key]);
-                Debug.Log("这是啥"+fa.commited[mat.Key]);
-                itemprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)fa.materials[mat.Key]);
-                itemprogresstext.gameObject.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / fa.materials[mat.Key]).ToString() + "%";
-            }
+            tmp.GetComponent<FacilityUpdate>().buildingid = buildingid;
         }
     }
 
