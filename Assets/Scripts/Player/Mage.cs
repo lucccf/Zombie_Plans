@@ -4,13 +4,63 @@ using UnityEngine;
 
 public class Mage : Knight
 {
+    public override void InitStatic()
+    {
+        FireBallCD_MAX = new Fixpoint(4, 0);
+        RecoverCD_MAX = new Fixpoint(15, 0);
+        MoveCD_MAX = new Fixpoint(10, 0);
+        Attack1DuringTime = new Fixpoint(1, 0);//攻击的持续时间
+        Attack2DuringTime = new Fixpoint(29, 2);
+        Attack3DuringTime = new Fixpoint(84, 2);
+
+        Attack1BeginToHitTime = new Fixpoint(83, 2);//攻击的判定时间
+        Attack2BeginToHitTime = new Fixpoint(1, 1);
+        Attack3BeginToHitTime = new Fixpoint(41, 2);
+
+        Attack1Damage = new Fixpoint(3, 0);//伤害倍率
+        Attack2Damage = new Fixpoint(3, 0);
+        Attack3Damage = new Fixpoint(3, 0);
+
+        FireBeginToHitTime = new Fixpoint(27, 2);
+        FireDuringTime = new Fixpoint(66, 2);
+        FireAttack = new Fixpoint(2, 0);
+
+        RecoverTime = new Fixpoint(1, 0);//回血的时间，默认最后一帧回血
+        RecoverHp = 100;//回血量
+    }
+    public override void InitNormal()
+    {
+        status.attack = 10;//基础攻击力
+        status.WalkSpeed = new Fixpoint(5, 0);//走路速度
+        status.max_hp = 370;//最大血量
+        status.hp = 370;//血量
+        status.max_toughness = 100;//最大韧性值
+        status.toughness = 100;//韧性值
+        HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(11, 1), new Fixpoint(6, 1) };
+        ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
+    }
+
+    public override void ToHome()
+    {
+        if (HasToHome == true) return;
+        HasToHome = true;
+        HomePos = Player_ctrl.HomePos.Clone();
+        HomeLocation = Main_ctrl.CalPos(Player_ctrl.HomePos.x, Player_ctrl.HomePos.y);
+
+        CatchPosUp = HomePos.x.Clone() + FindPosUp;
+        CatchPosDown = HomePos.x.Clone() + FindPosDown;
+        CatchPosLeft = HomePos.x.Clone() + FindPosLeft;
+        CatchPosRight = HomePos.x.Clone() + FindPosRight;
+    }
+
     public override void Startx()
     {
         CharacterType = 1 + type2;
         SetStatus(370, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
         HitTime = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(8, 1) };
-        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0) , new Fixpoint(11, 1), new Fixpoint(6, 1) };
+        HitSpeed = new Fixpoint[3] { new Fixpoint(0, 0), new Fixpoint(11, 1), new Fixpoint(6, 1) };
         ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
@@ -110,16 +160,12 @@ public class Mage : Knight
         }
         transform.position = new Vector3(f.pos.x.to_float(), f.pos.y.to_float(), 0);
     }
-    /*
-    private int MageGetHited()
-    {
-        bool x = GetHited(ref AnimaToward);
-        return CheckToughStatus(x);
-    }
-    */
-    private Fixpoint FireBallCD = new Fixpoint(0,0);
+    private Fixpoint FireBallCD = new Fixpoint(0, 0);
     private Fixpoint RecoverCD = new Fixpoint(0, 0);
     private Fixpoint MoveCD = new Fixpoint(0, 0);
+    private static Fixpoint FireBallCD_MAX = new Fixpoint(4, 0);
+    private static Fixpoint RecoverCD_MAX = new Fixpoint(15, 0);
+    private static Fixpoint MoveCD_MAX = new Fixpoint(10, 0);
     private void Normal()
     {
         KnightAnimaSpeed = 5f;
@@ -136,7 +182,7 @@ public class Mage : Knight
         {
             int Pos = Main_ctrl.CalPos(LockPos.x, LockPos.y);
             Fixpoint Nearx = LockPos.x;
-            
+
             if (Location == Pos) //如果在同一区域
             {
                 Main_ctrl.node area = Main_ctrl.GetMapNode(f.pos.x, f.pos.y);
@@ -146,15 +192,15 @@ public class Mage : Knight
                 if (Dis < new Fixpoint(0, 0)) Dis = new Fixpoint(0, 0) - Dis;
                 if (Rand.rand() % ((ulong)status.max_hp * 10) < (ulong)(status.max_hp - status.hp))//使用技能的概率
                 {
-                    if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0) && RecoverCD <= new Fixpoint(0,0))
+                    if (Rand.rand() % 2 == 1 || Dis > new Fixpoint(10, 0) && RecoverCD <= new Fixpoint(0, 0))
                     {
-                        RecoverCD = new Fixpoint(15, 0);
+                        RecoverCD = RecoverCD_MAX.Clone();
                         ChangeStatus(StatusType.Recover);
                         return;
                     }
-                    else if(MoveCD <= new Fixpoint(0,0))
+                    else if (MoveCD <= new Fixpoint(0, 0))
                     {
-                        MoveCD = new Fixpoint(10, 0);
+                        MoveCD = MoveCD_MAX.Clone();
                         ChangeStatus(StatusType.Disappear);
                         return;
                     }
@@ -200,7 +246,7 @@ public class Mage : Knight
                 {
                     if (FireBallCD <= new Fixpoint(0, 0))
                     {
-                        FireBallCD = new Fixpoint(4, 0);
+                        FireBallCD = FireBallCD_MAX.Clone();
                         if (f.pos.x < Nearx)
                         {
                             AnimaToward = 1;
@@ -273,13 +319,13 @@ public class Mage : Knight
         ChangeStatus(StatusType.Normal);
         return;
     }
-    protected void MageCreateAttack(Fixpoint damage, ref bool created_attack,string Music)
+    protected void MageCreateAttack(Fixpoint damage, ref bool created_attack, string Music)
     {
         created_attack = true;
         Fix_vector2 AttackPos = f.pos.Clone();
         if (AnimaToward > 0) AttackPos.x += new Fixpoint(1, 0);
         else AttackPos.x -= new Fixpoint(1, 0);
-        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward, 3,Music);//最后一个参数是击飞类型
+        CreateAttack(AttackPos, new Fixpoint(15, 1), new Fixpoint(2, 0), status.Damage() * damage, 45, AnimaToward, 3, Music);//最后一个参数是击飞类型
     }
     protected void Attack(bool first)
     {
@@ -334,13 +380,13 @@ public class Mage : Knight
     private bool Fired = false;
     private void Fire()
     {
-        if(StatusTime > FireBeginToHitTime && Fired == false)
+        if (StatusTime > FireBeginToHitTime && Fired == false)
         {
             Fired = true;
             PlayMusic("火焰释放");
-            Main_ctrl.NewAttack2("FireBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType,3, "火球命中");//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("FireBall", f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * FireAttack, 40, id, AnimaToward, CharacterType, 3, "火球命中");//最后一个参数是击飞类型
         }
-        if(StatusTime > FireDuringTime)
+        if (StatusTime > FireDuringTime)
         {
             Fired = false;
             ChangeStatus(StatusType.Normal);
@@ -351,11 +397,11 @@ public class Mage : Knight
     private static int RecoverHp = 100;//回血量
     private void Recover()
     {
-        if(StatusTime == Dt.dt)
+        if (StatusTime == Dt.dt)
         {
             PlayMusic("回血语音");
         }
-        if(StatusTime > RecoverTime)
+        if (StatusTime > RecoverTime)
         {
             status.RecoverHp(RecoverHp);
             ChangeStatus(StatusType.Normal);
@@ -364,7 +410,7 @@ public class Mage : Knight
     private static Fixpoint DisappearTime = new Fixpoint(1, 0);//瞬移的时间，默认最后一帧消失
     private void Disappaer()
     {
-        if(StatusTime > DisappearTime)
+        if (StatusTime > DisappearTime)
         {
             int Location = Main_ctrl.CalPos(f.pos.x, f.pos.y);
             if (Location == -1)
@@ -378,10 +424,11 @@ public class Mage : Knight
                 Fixpoint Right = new Fixpoint(area.right, 0) - new Fixpoint(15, 1);
                 Fixpoint DisL = f.pos.x - Left;
                 Fixpoint DisR = Right - f.pos.x;
-                if(DisL > DisR)
+                if (DisL > DisR)
                 {
                     f.pos.x = Left + new Fixpoint(15, 1);
-                } else
+                }
+                else
                 {
                     f.pos.x = Right - new Fixpoint(15, 1);
                 }
@@ -392,7 +439,7 @@ public class Mage : Knight
     private static Fixpoint AppearTime = new Fixpoint(1, 0);//出现所需时间
     private void Appear()
     {
-        if(StatusTime > AppearTime)
+        if (StatusTime > AppearTime)
         {
             ChangeStatus(StatusType.Normal);
         }

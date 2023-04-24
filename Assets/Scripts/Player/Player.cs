@@ -13,6 +13,9 @@ public class Player : BasicCharacter
     public PlayerBag bag;
     private Fixpoint QCD = new Fixpoint(100000000, 0);
     private Fixpoint ECD = new Fixpoint(100000000, 0);
+    private Fixpoint QCD_MAX = new Fixpoint(10, 0);
+    private Fixpoint ECD_MAX = new Fixpoint(10, 0);
+
 
     public string words = string.Empty;
     public bool words_ok = false;
@@ -28,7 +31,6 @@ public class Player : BasicCharacter
 
     public Identity identity = Identity.Populace;
 
-<<<<<<< HEAD
     public override void InitStatic()
     {
         QCD_MAX = new Fixpoint(10, 0);
@@ -98,15 +100,13 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
     }
 
-=======
->>>>>>> 183adcac847341645038f3b0331e705593c995f1
     public override void Startx()
     {
         animator = GetComponent<Animator>();
         SetStatus(100000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
-        ToughnessStatus = new int[4] { 75, 50, 25, 0};//阶段
+        ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
 
@@ -227,7 +227,8 @@ public class Player : BasicCharacter
                             GameObject facui = (GameObject)AB.getobj("提示UI");
                             GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                             factmp.GetComponent<MakeSuccess>().Type = 2;
-                            if (fa.repaired == false) {
+                            if (fa.repaired == false)
+                            {
                                 fa.repaired = true;
                                 fa.buff = true;
                             }
@@ -236,13 +237,16 @@ public class Player : BasicCharacter
                         GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
                         GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
                         GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
-                        if ((fa.commited[m.Key] * 100 / fa.materials[m.Key]) >= 70) {
-                            if (fa.repaired) {
+                        if ((fa.commited[m.Key] * 100 / fa.materials[m.Key]) >= 70)
+                        {
+                            if (fa.repaired)
+                            {
                                 fa.buff = true;
                             }
                         }
                     }
-                    else {
+                    else
+                    {
                         GameObject facui = (GameObject)AB.getobj("提示UI");
                         GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
                         factmp.GetComponent<MakeSuccess>().Type = 5;
@@ -252,7 +256,7 @@ public class Player : BasicCharacter
             case PlayerOpt.MoveItem:
                 Item Makeitem = Main_ctrl.GetItemById(inputs.Itemid);
                 bool flag2 = true;
-                for(int i=0;i<Makeitem.MakeNeeds.Length;++i)
+                for (int i = 0; i < Makeitem.MakeNeeds.Length; ++i)
                 {
                     if (bag.BagCheckItemNums(Makeitem.MakeNeeds[i], Makeitem.NeedsNumber[i]) == false) flag2 = false;
                 }
@@ -261,19 +265,22 @@ public class Player : BasicCharacter
                     if (Makeitem.id != 114 && Makeitem.id != 514)
                     {
                         bag.BagGetItem(Makeitem.id, 1, Player_ctrl.BagUI);
-                    } else if(Makeitem.id == 114)
+                    }
+                    else if (Makeitem.id == 114)
                     {
-                        if(QCD < new Fixpoint(100,0))
+                        if (QCD < new Fixpoint(100, 0))
                         {
                             GameObject ui = (GameObject)AB.getobj("提示UI");
                             GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                             tmp.GetComponent<MakeSuccess>().Type = 4;
                             break;
-                        } else
+                        }
+                        else
                         {
                             QCD = new Fixpoint(0, 0);
                         }
-                    } else
+                    }
+                    else
                     {
                         if (ECD < new Fixpoint(100, 0))
                         {
@@ -281,7 +288,8 @@ public class Player : BasicCharacter
                             GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                             tmp.GetComponent<MakeSuccess>().Type = 4;
                             break;
-                        } else
+                        }
+                        else
                         {
                             ECD = new Fixpoint(0, 0);
                         }
@@ -296,7 +304,7 @@ public class Player : BasicCharacter
                         GameObject ui = (GameObject)AB.getobj("提示UI");
                         GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                         tmp.GetComponent<MakeSuccess>().Type = 1;
-                    } 
+                    }
                 }
                 else
                 {
@@ -342,6 +350,8 @@ public class Player : BasicCharacter
     {
         status.max_hp = 100000000;
     }
+
+
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -378,8 +388,8 @@ public class Player : BasicCharacter
                 break;
             //case StatusType.CallMagic:
             //    AnimaStatus = 5;
-                //击飞
-                //HitedFly();
+            //击飞
+            //HitedFly();
             //    break;
             case StatusType.Fall://下落
                 AnimaStatus = 6;
@@ -417,8 +427,8 @@ public class Player : BasicCharacter
                 AnimaStatus = 14;
                 Ground();
                 break;
-           // case StatusType.Appear:
-           //     AnimaStatus = 15;
+            // case StatusType.Appear:
+            //     AnimaStatus = 15;
             //    Fly2();
             //    break;
             case StatusType.Stay:
@@ -446,7 +456,7 @@ public class Player : BasicCharacter
 
     public void ThrowItem(int id)
     {
-        if(bag.BagCheckItemNums(id,1) == false)
+        if (bag.BagCheckItemNums(id, 1) == false)
         {
             return;
         }
@@ -456,14 +466,18 @@ public class Player : BasicCharacter
         if (AnimaToward > 0)
         {
             ItemPos.x += new Fixpoint(1, 0);
-        } else
+        }
+        else
         {
             ItemPos.x -= new Fixpoint(1, 0);
             ItemSpeed.x = new Fixpoint(0, 0) - ItemSpeed.x;
         }
-        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1,ItemSpeed);
+        Main_ctrl.NewItem(ItemPos, Main_ctrl.GetItemById(id).itemname, 1, 1, ItemSpeed);
     }
 
+
+    private static Fixpoint JumpSpeed1 = new Fixpoint(845, 2);
+    private static Fixpoint JumpSpeed2 = new Fixpoint(16, 0);
     private void Normal()
     {
         //站立，走路，跑步
@@ -516,7 +530,7 @@ public class Player : BasicCharacter
 
         }
 
-        else if (Press[KeyCode.Space] && Press[KeyCode.L] && bag.BagCheckItemNums(99,1))
+        else if (Press[KeyCode.Space] && Press[KeyCode.L] && bag.BagCheckItemNums(99, 1))
         {
             ChangeStatus(StatusType.Trap);
             Trap(true);
@@ -552,26 +566,26 @@ public class Player : BasicCharacter
         }
         else if (Press[KeyCode.K])
         {
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(845, 2));//跳跃起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed1.Clone());//跳跃起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }
-        else if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11,1))
+        else if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11, 1))
         {
             ChangeStatus(StatusType.Recover);
             RecoverHp(true);
             return;
         }
 
-        else if (Press[KeyCode.Q] && QCD == new Fixpoint(0,0))
+        else if (Press[KeyCode.Q] && QCD == new Fixpoint(0, 0))
         {
-            QCD = new Fixpoint(10, 0);//Q的CD
+            QCD = QCD_MAX.Clone();
             ChangeStatus(StatusType.Fire1);
             return;
         }
-        else if (Press[KeyCode.E] && ECD == new Fixpoint(0,0))
+        else if (Press[KeyCode.E] && ECD == new Fixpoint(0, 0))
         {
-            ECD = new Fixpoint(10, 0);//E的CD
+            ECD = ECD_MAX.Clone();
             ChangeStatus(StatusType.Fire2);
             return;
         }
@@ -613,10 +627,11 @@ public class Player : BasicCharacter
 
         return;
     }
+    private static Fixpoint RollTime = new Fixpoint(66, 2);
     private void Roll()
     {
         RemoveHited();
-        if (StatusTime > new Fixpoint(66, 2))//翻滚的总时间
+        if (StatusTime > RollTime)//翻滚的总时间
         {
             ChangeStatus(StatusType.Normal);
             return;
@@ -686,17 +701,18 @@ public class Player : BasicCharacter
         if (AnimaAttack <= 0.5f) //刚进入，进入一段攻击状态
         {
             AttackToNext();
-        } else if(AnimaAttack > 0.5f && AnimaAttack <= 1.5f) //一段攻击
+        }
+        else if (AnimaAttack > 0.5f && AnimaAttack <= 1.5f) //一段攻击
         {
-            if(Press[KeyCode.J] && StatusTime > Attack1DuringTime)
+            if (Press[KeyCode.J] && StatusTime > Attack1DuringTime)
             {
                 AttackToNext();
             }
-            else if(StatusTime > Attack1DuringTime && StatusTime < Attack1QuitTime)
+            else if (StatusTime > Attack1DuringTime && StatusTime < Attack1QuitTime)
             {
                 CheckQuitAttack();
             }
-            else if(StatusTime > Attack1QuitTime)
+            else if (StatusTime > Attack1QuitTime)
             {
                 RemoveAttack();
             }
@@ -704,10 +720,11 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻1");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33,AnimaToward,1,"hit1");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack1Damage, 33, AnimaToward, 1, "hit1");//最后一个参数是击飞类型
             }
 
-        } else if(AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
+        }
+        else if (AnimaAttack > 1.5f && AnimaAttack <= 2.5f) //二段攻击
         {
             if (Press[KeyCode.J] && StatusTime > Attack2DuringTime)
             {
@@ -725,9 +742,10 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻2");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33,AnimaToward,1,"hit2");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack2Damage, 33, AnimaToward, 1, "hit2");//最后一个参数是击飞类型
             }
-        } else if(AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
+        }
+        else if (AnimaAttack > 2.5f && AnimaAttack <= 3.5f) //三段攻击
         {
             if (Press[KeyCode.J] && StatusTime > Attack3DuringTime)
             {
@@ -745,9 +763,10 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻3");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward,1,"hit3");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack3Damage, 33, AnimaToward, 1, "hit3");//最后一个参数是击飞类型
             }
-        } else if(AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
+        }
+        else if (AnimaAttack > 3.5f && AnimaAttack <= 4.5f) //四段攻击
         {
             if (Press[KeyCode.J] && StatusTime > Attack4DuringTime)
             {
@@ -765,7 +784,7 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻4");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 101, AnimaToward,2,"hit4");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack4Damage, 101, AnimaToward, 2, "hit4");//最后一个参数是击飞类型
             }
         }
         else //五段攻击
@@ -782,16 +801,17 @@ public class Player : BasicCharacter
             {
                 PlayMusic("普攻5");
                 CreatedAttack = true;
-                CreateAttack(NormalFixVector(), new Fixpoint(3,0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 101, AnimaToward,3,"hit5");//最后一个参数是击飞类型
+                CreateAttack(NormalFixVector(), new Fixpoint(3, 0), new Fixpoint(2, 0), status.Damage() * Attack5Damage, 101, AnimaToward, 3, "hit5");//最后一个参数是击飞类型
             }
         }
 
-        if(StatusTime <= new Fixpoint(2,1))
+        if (StatusTime <= new Fixpoint(2, 1))
         {
-            if(AnimaToward > 0)
+            if (AnimaToward > 0)
             {
-                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1 , 0);
-            } else
+                f.pos.x = f.pos.x + Dt.dt * new Fixpoint(1, 0);
+            }
+            else
             {
                 f.pos.x = f.pos.x - Dt.dt * new Fixpoint(1, 0);
             }
@@ -835,7 +855,7 @@ public class Player : BasicCharacter
         if (Press[KeyCode.K] == true && JumpNumber == 0)
         {
             ++JumpNumber;
-            r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(16, 0));//二段跳的起始速度
+            r.velocity = new Fix_vector2(new Fixpoint(0, 0), JumpSpeed2.Clone());//二段跳的起始速度
             ChangeStatus(StatusType.Jump);
             return;
         }
@@ -847,7 +867,7 @@ public class Player : BasicCharacter
     {
         GetColider();
 
-        while(TriggerQueue.Count > 0)
+        while (TriggerQueue.Count > 0)
         {
             Fix_col2d_act a = TriggerQueue.Peek();
             TriggerQueue.Dequeue();
@@ -873,11 +893,13 @@ public class Player : BasicCharacter
                     PlayMusic("拾取物品");
                     Main_ctrl.Desobj(a.opsite.id);
                 }
-                else if (trigger.triggername == "protal" && checkid() == true) {
+                else if (trigger.triggername == "protal" && checkid() == true)
+                {
                     GameObject parent = GameObject.Find("PlayerPanel");
                     GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
-                } else if(trigger.triggername == "TrapX")
+                }
+                else if (trigger.triggername == "TrapX")
                 {
                     trigger.Explore();
                 }
@@ -890,10 +912,12 @@ public class Player : BasicCharacter
                 {
                     Destroy(Building);
                 }
-                else if (trigger.triggertype == "protal") {
+                else if (trigger.triggertype == "protal")
+                {
                     Destroy(Protal);
                 }
-            } else
+            }
+            else
             {
                 Debug.Log("Trigger error");
             }
@@ -916,12 +940,12 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Hit);
             return;
         }
-        if(StatusTime > KickBeginToHit && is_kicked == false)
+        if (StatusTime > KickBeginToHit && is_kicked == false)
         {
             is_kicked = true;
             PlayMusic("飞踢");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 105, AnimaToward,3, "飞踢命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 105, AnimaToward, 3, "飞踢命中");//最后一个参数是击飞类型
         }
 
         if (Press[KeyCode.A])
@@ -938,11 +962,12 @@ public class Player : BasicCharacter
         if (StatusTime > KickDuring || f.onground)
         {
             is_kicked = false;
-            if(f.onground)
+            if (f.onground)
             {
                 ChangeStatus(StatusType.Normal);
                 return;
-            } else
+            }
+            else
             {
                 ChangeStatus(StatusType.Fall);
                 return;
@@ -956,7 +981,7 @@ public class Player : BasicCharacter
     private static Fixpoint HeavyAttackShifty = new Fixpoint(0, 0);
     private bool HeavyAttackHasHited = false;
 
-    private static Fixpoint HeavyAttackDamage = new Fixpoint(3,0);
+    private static Fixpoint HeavyAttackDamage = new Fixpoint(3, 0);
     private void HeavyAttack()
     {
         int hit = BasicCharacterGetHited();
@@ -975,15 +1000,15 @@ public class Player : BasicCharacter
         {
             f.pos.x = f.pos.x - Dt.dt * status.RunSpeed;
         }
-        if(StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
+        if (StatusTime > HeavyAttackBeginToHit && HeavyAttackHasHited == false)
         {
             HeavyAttackHasHited = true;
             PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(15, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward,0, "前冲拳命中");//最后一个参数是击飞类型
-        } 
+                new Fixpoint(2, 0), new Fixpoint(15, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
+        }
 
-        if(!f.onground || StatusTime > HeavyAttackDuring)
+        if (!f.onground || StatusTime > HeavyAttackDuring)
         {
             HeavyAttackHasHited = false;
             ChangeStatus(StatusType.Normal);
@@ -1000,7 +1025,7 @@ public class Player : BasicCharacter
 
     private void UpAttack(bool first)
     {
-        if(first == true)
+        if (first == true)
         {
             r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(10, 0));//升龙拳向上的速度
         }
@@ -1013,9 +1038,9 @@ public class Player : BasicCharacter
             return;
         }
 
-        if(!f.onground)
+        if (!f.onground)
         {
-            if(AnimaToward > 0)
+            if (AnimaToward > 0)
             {
                 f.pos.x += new Fixpoint(1, 0) * Dt.dt;//升龙拳x轴速度
             }
@@ -1030,17 +1055,17 @@ public class Player : BasicCharacter
             UpAttackHasHited = true;
             PlayMusic("升龙拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward,2, "升龙拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward, 2, "升龙拳命中");//最后一个参数是击飞类型
         }
 
-        if(f.onground && StatusTime > new Fixpoint(5,1))//最短进入下蹲状态的时间
+        if (f.onground && StatusTime > new Fixpoint(5, 1))//最短进入下蹲状态的时间
         {
             UpAttackHasHited = false;
             ChangeStatus(StatusType.Stay);
             return;
         }
 
-        if(StatusTime > UpAttackDuring)
+        if (StatusTime > UpAttackDuring)
         {
             UpAttackHasHited = false;
             ChangeStatus(StatusType.Normal);
@@ -1065,7 +1090,7 @@ public class Player : BasicCharacter
     private static Fixpoint Fire1Damage = new Fixpoint(2, 0);
     private void Fire1()
     {
-        if(StatusTime == Dt.dt)
+        if (StatusTime == Dt.dt)
         {
             PlayMusic("mf_moonlight_earth");
         }
@@ -1078,9 +1103,9 @@ public class Player : BasicCharacter
             return;
         }
 
-        if(StatusTime > Fire1BeginToAttackTime && StatusTime < Fire1DuringTime)
+        if (StatusTime > Fire1BeginToAttackTime && StatusTime < Fire1DuringTime)
         {
-            if(CreatedLighting == false)
+            if (CreatedLighting == false)
             {
                 CreatedLighting = true;
                 GameObject lighting = Instantiate((GameObject)AB.getobj("Lighting"));
@@ -1088,13 +1113,13 @@ public class Player : BasicCharacter
                 lighting.transform.localScale = new Vector3(3f, 3f, 1f);
                 lighting.GetComponent<Lighting>().toward = AnimaToward;
             }
-            if(StatusTime > Fire1BeginToAttackTime + FireBetweenDuring * new Fixpoint(FireTime,0))
+            if (StatusTime > Fire1BeginToAttackTime + FireBetweenDuring * new Fixpoint(FireTime, 0))
             {
                 ++FireTime;
                 Fix_vector2 tmp = f.pos.Clone();
                 if (AnimaToward > 0) tmp.x += new Fixpoint(65, 1);
                 else tmp.x -= new Fixpoint(65, 1);
-                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 0, AnimaToward,2, "聚气炮命中");//最后一个参数是击飞类型
+                CreateAttack(tmp, new Fixpoint(12, 0), new Fixpoint(2, 0), status.Damage() * Fire1Damage, 0, AnimaToward, 2, "聚气炮命中");//最后一个参数是击飞类型
                 return;
             }
         }
@@ -1131,17 +1156,17 @@ public class Player : BasicCharacter
         if (StatusTime > Fire2BeginToAttack1Time && StatusTime < Fire2DuringTime && HasFired1 == 0)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1 , 40, id, AnimaToward, CharacterType,2,"气功波命中");//最后一个参数是击飞类型
-        } 
-        else if(StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
-        {
-            ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward, CharacterType,2,"气功波命中");//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("LightBall", f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack1, 40, id, AnimaToward, CharacterType, 2, "气功波命中");//最后一个参数是击飞类型
         }
-        else if(StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
+        else if (StatusTime > Fire2BeginToAttack2Time && StatusTime < Fire2DuringTime && HasFired1 == 1)
         {
             ++HasFired1;
-            Main_ctrl.NewAttack2("LightBall",f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward, CharacterType,2, "气功波命中");//最后一个参数是击飞类型
+            Main_ctrl.NewAttack2("LightBall", f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack2, 40, id, AnimaToward, CharacterType, 2, "气功波命中");//最后一个参数是击飞类型
+        }
+        else if (StatusTime > Fire2BeginToAttack3Time && StatusTime < Fire2DuringTime && HasFired1 == 2)
+        {
+            ++HasFired1;
+            Main_ctrl.NewAttack2("LightBall", f.pos, new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() * Fire2Attack3, 40, id, AnimaToward, CharacterType, 2, "气功波命中");//最后一个参数是击飞类型
         }
         else if (StatusTime > Fire2DuringTime)
         {
@@ -1163,13 +1188,14 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Hit);
             return;
         }
-        if (first == true) {
+        if (first == true)
+        {
             //Player_ctrl.BagUI.GetItem(11, -1);
             bag.BagGetItem(11, -1, Player_ctrl.BagUI);
         }
         if (StatusTime > RecoverHpDuringTime)
         {
-            GameObject x = Instantiate((GameObject)AB.getobj("recover"),transform.position,transform.rotation);
+            GameObject x = Instantiate((GameObject)AB.getobj("recover"), transform.position, transform.rotation);
             x.transform.localScale = new Vector3(3, 3, 1);
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(200);//恢复的血量
@@ -1179,7 +1205,7 @@ public class Player : BasicCharacter
 
     private void Death()
     {
-        if(StatusTime == Dt.dt)
+        if (StatusTime == Dt.dt)
         {
             PlayMusic("mf_die");
         }
@@ -1203,7 +1229,7 @@ public class Player : BasicCharacter
     }
     private void Update()
     {
-        if(checkid() == true)
+        if (checkid() == true)
         {
             if (QCD > new Fixpoint(100, 0)) Player_ctrl.QCD.text = "Unable";
             else Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
@@ -1282,7 +1308,7 @@ public class Player : BasicCharacter
         else return false;
     }
 
-    private static Fixpoint TrapTime = new Fixpoint(2,0);
+    private static Fixpoint TrapTime = new Fixpoint(2, 0);
     private void Trap(bool first)
     {
         int hit = BasicCharacterGetHited();
@@ -1291,7 +1317,7 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Hit);
             return;
         }
-        if(first)
+        if (first)
         {
             if (bag.BagCheckItemNums(99, 1))
             {
@@ -1299,13 +1325,14 @@ public class Player : BasicCharacter
                 Fix_vector2 TrapPos = f.pos.Clone();
                 TrapPos.y -= new Fixpoint(1, 0);
                 Main_ctrl.NewTrap(TrapPos, 1f);
-            } else
+            }
+            else
             {
                 ChangeStatus(StatusType.Normal);
                 return;
             }
         }
-        if(StatusTime > TrapTime)
+        if (StatusTime > TrapTime)
         {
             ChangeStatus(StatusType.Normal);
             return;

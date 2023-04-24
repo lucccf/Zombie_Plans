@@ -4,7 +4,7 @@ using UnityEngine;
 public class BasicCharacter : MonoBehaviour
 {
     // Start is called before the first frame update
-    public PlayerStatus status = new PlayerStatus(100,10);
+    public PlayerStatus status = new PlayerStatus(100, 10);
     //碰撞体变量
     public Fix_col2d f;
     public Fix_rig2d r;
@@ -22,7 +22,7 @@ public class BasicCharacter : MonoBehaviour
     protected AudioSource audiosource;
 
     public bool Attack_fac = false;
-    
+
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 
@@ -66,6 +66,15 @@ public class BasicCharacter : MonoBehaviour
         Stay,
         Trap
     }
+    public virtual void InitNormal()
+    {
+
+    }
+
+    public virtual void InitStatic()
+    {
+
+    }
 
     public virtual void Startx()
     {
@@ -75,7 +84,7 @@ public class BasicCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     protected void ClearNumber()
@@ -83,7 +92,7 @@ public class BasicCharacter : MonoBehaviour
 
     }
 
-    protected void SetStatus(int hp,int attack)
+    protected void SetStatus(int hp, int attack)
     {
         status = new PlayerStatus(hp, attack);
     }
@@ -113,7 +122,7 @@ public class BasicCharacter : MonoBehaviour
         RealStatus = realstatus;
         StatusTime = new Fixpoint(0, 0);
     }
-    protected void Moves(float toward,Fixpoint speed)
+    protected void Moves(float toward, Fixpoint speed)
     {
         if (toward < 0)
         {
@@ -124,15 +133,15 @@ public class BasicCharacter : MonoBehaviour
             f.pos.x += speed * Dt.dt;
         }
     }
-    
-    protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype,string Music)
+
+    protected void CreateAttack(Fix_vector2 pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward, int Flytype, string Music)
     {
-        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward , false,CharacterType , Flytype,Music);
+        Main_ctrl.NewAttack(pos, new Fix_vector2(0, 0), wide, high, HpDamage, toughness, id, Toward, false, CharacterType, Flytype, Music);
     }
 
-    protected void CreateAttackWithCharacter(Fix_vector2 pos , Fix_vector2 with_pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward,int Flytype,string Music)
+    protected void CreateAttackWithCharacter(Fix_vector2 pos, Fix_vector2 with_pos, Fixpoint wide, Fixpoint high, Fixpoint HpDamage, int toughness, float Toward, int Flytype, string Music)
     {
-        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true, CharacterType,Flytype,Music);
+        Main_ctrl.NewAttack(pos, with_pos, wide, high, HpDamage, toughness, id, Toward, true, CharacterType, Flytype, Music);
     }
 
     protected void GetColider()
@@ -187,7 +196,7 @@ public class BasicCharacter : MonoBehaviour
             if (attack.attacker_type == 1 && CharacterType == 2) continue;
             if (attack.attacker_type == 2 && CharacterType == 1) continue;
             if (attack.attacker_type != 2 && CharacterType == 4) continue;
-            if (attack.attacker_type != 0 && CharacterType == 5) continue; 
+            if (attack.attacker_type != 0 && CharacterType == 5) continue;
             if (CharacterType == 5 && ((Player)Main_ctrl.All_objs[attack.attakcer_id].modules[Object_ctrl.class_name.Player]).Attack_fac) continue;
             if (attack.attakcer_id == id)
             {
@@ -209,7 +218,7 @@ public class BasicCharacter : MonoBehaviour
             this_hited = true;
             hit_fly_type = attack.hited_fly_type;
 
-            if(!f.onground && status.toughness < 100000)
+            if (!f.onground && status.toughness < 100000)
             {
                 status.toughness = 0;
             }
@@ -240,17 +249,17 @@ public class BasicCharacter : MonoBehaviour
             status.toughness = -500;
             AnimaHited = ToughnessStatus.Length;
             Fix_vector2 speed = HitFlySpeed[hit_fly_type].Clone();
-            if(AnimaToward > 0)
+            if (AnimaToward > 0)
             {
-                speed.x = new Fixpoint(0,0) - speed.x;
+                speed.x = new Fixpoint(0, 0) - speed.x;
             }
             r.velocity = speed;
             ChangeStatus(StatusType.Hit);
             return 2;
         }
-        for(int i = ToughnessStatus.Length - 1 ; i >= 0 ; --i)
+        for (int i = ToughnessStatus.Length - 1; i >= 0; --i)
         {
-            if(status.GetToughness() < ToughnessStatus[i])
+            if (status.GetToughness() < ToughnessStatus[i])
             {
                 AnimaHited = i + 1;
                 ChangeStatus(StatusType.Hit);
@@ -263,7 +272,7 @@ public class BasicCharacter : MonoBehaviour
     protected int BasicCharacterGetHited()
     {
         bool hited = GetHited();
-        if(hited == true)
+        if (hited == true)
         {
             return CheckToughnessStatus();
         }
@@ -275,11 +284,11 @@ public class BasicCharacter : MonoBehaviour
     protected void Hited()
     {
         int HitType = BasicCharacterGetHited();
-        if(HitType == 0)
+        if (HitType == 0)
         {
-            if(AnimaHited == ToughnessStatus.Length)
+            if (AnimaHited == ToughnessStatus.Length)
             {
-                if (f.onground && StatusTime > new Fixpoint(1,1))
+                if (f.onground && StatusTime > new Fixpoint(1, 1))
                 {
                     if (status.toughness < -1000)
                     {
@@ -287,7 +296,8 @@ public class BasicCharacter : MonoBehaviour
                         AnimaHited = 0;
                         ChangeStatus(StatusType.Ground);
                         r.velocity = new Fix_vector2(new Fixpoint(0, 0), new Fixpoint(0, 0));
-                    } else
+                    }
+                    else
                     {
                         //Debug.Log("Ground1");
                         animator.Rebind();
@@ -303,11 +313,12 @@ public class BasicCharacter : MonoBehaviour
                     }
                 }
                 return;
-            } else
+            }
+            else
             {
                 Moves(-AnimaToward, HitSpeed[AnimaHited]);
             }
-            if(StatusTime > HitTime[AnimaHited])
+            if (StatusTime > HitTime[AnimaHited])
             {
                 AnimaHited = 0;
                 ChangeStatus(StatusType.Normal);
@@ -319,7 +330,7 @@ public class BasicCharacter : MonoBehaviour
     protected void Ground()
     {
         RemoveHited();
-        if(StatusTime > GroundTime)
+        if (StatusTime > GroundTime)
         {
             FlyTimes = 0;
             status.toughness = status.max_toughness;

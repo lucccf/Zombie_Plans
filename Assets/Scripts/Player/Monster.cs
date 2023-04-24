@@ -29,13 +29,13 @@ public class Monster : BasicCharacter
     protected bool HasToHome = false;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     protected void NormalUpdate()
@@ -71,12 +71,18 @@ public class Monster : BasicCharacter
             Debug.LogError("Find Home Error" + f.pos.x.to_float() + " " + f.pos.y.to_float());
         }
     }
-    public void ToHome()
+    public virtual void ToHome()
     {
         if (HasToHome == true) return;
         HasToHome = true;
         HomePos = Player_ctrl.HomePos.Clone();
         HomeLocation = Main_ctrl.CalPos(Player_ctrl.HomePos.x, Player_ctrl.HomePos.y);
+
+        FindPosLeft = new Fixpoint(-3, 0);
+        FindPosRight = new Fixpoint(3, 0);
+        FindPosUp = new Fixpoint(7, 0);
+        FindPosDown = new Fixpoint(-3, 0);
+
         CatchPosUp = HomePos.x.Clone() + FindPosUp;
         CatchPosDown = HomePos.x.Clone() + FindPosDown;
         CatchPosLeft = HomePos.x.Clone() + FindPosLeft;
@@ -98,7 +104,7 @@ public class Monster : BasicCharacter
 
         status.max_toughness = 100000000;
         status.toughness = 100000000;
-        status.WalkSpeed = new Fixpoint(8,0);
+        status.WalkSpeed = new Fixpoint(8, 0);
     }
 
     protected void SetBlueAndRed()
@@ -154,19 +160,21 @@ public class Monster : BasicCharacter
             }
             else //如果在家的区域，巡逻
             {
-                if(HasToHome == true)
+                if (HasToHome == true)
                 {
-                    if(f.pos.x + new Fixpoint(1,0) < HomePos.x)
+                    if (f.pos.x + new Fixpoint(1, 0) < HomePos.x)
                     {
                         AnimaToward = 1;
                         Moves(AnimaToward, status.WalkSpeed);
                         return 0;
-                    } else if(f.pos.x - new Fixpoint(1,0) > HomePos.x)
+                    }
+                    else if (f.pos.x - new Fixpoint(1, 0) > HomePos.x)
                     {
                         AnimaToward = -1;
                         Moves(AnimaToward, status.WalkSpeed);
                         return 0;
-                    } else
+                    }
+                    else
                     {
                         LockPos = HomePos;
                         return 2;
