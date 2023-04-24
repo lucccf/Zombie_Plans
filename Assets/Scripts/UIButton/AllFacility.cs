@@ -27,6 +27,8 @@ public class AllFacility : MonoBehaviour
             }
         }
         init = matimage.GetComponent<Image>().sprite;
+        facprogress.SetActive(false);
+        progresstext.SetActive(false);
     }
     void CloseUI() {
         factitile.GetComponent<Text>().text = "查看设施详情";
@@ -44,9 +46,20 @@ public class AllFacility : MonoBehaviour
         {
             Item x = Main_ctrl.GetItemById(mat.Key);
             matimage.GetComponent<Image>().sprite = x.image;
-            mattext.GetComponent<Text>().text = "还需数量：" + (mat.Value - fa.commited[mat.Key]);
-            facprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)mat.Value);
-            progresstext.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / mat.Value).ToString() + "%";
-        }
+            if (fa.repaired == false) mattext.GetComponent<Text>().text = "还需数量：" + (mat.Value - fa.commited[mat.Key]);
+            else {
+                Debug.Log("fa.buff:" + fa.buff);
+                if (fa.buff)
+                {
+                    mattext.GetComponent<Text>().text = "已修复";
+                 
+                }
+                else {
+                    mattext.GetComponent<Text>().text = "待修复";
+                }
+            }
+        //facprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)mat.Value);
+        //progresstext.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / mat.Value).ToString() + "%";
     }
+}
 }

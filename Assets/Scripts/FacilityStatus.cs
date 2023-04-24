@@ -56,10 +56,10 @@ public class FacilityStatus : Monster
                     fac.commited[key] = status.hp / 100;
                     if ((fac.commited[key] * 100 / fac.materials[key]) < 70)
                     {
-                        fac.buff = true;
+                        fac.buff = false;
                     }
                     else {
-                        fac.buff = false;
+                        fac.buff = true;
                     }
                 }
             }
