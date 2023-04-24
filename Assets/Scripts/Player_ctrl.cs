@@ -17,7 +17,7 @@ public class Player_ctrl : MonoBehaviour
     public static Fix_vector2 HomePos;
 
     public static Dictionary<(int, int), int> Attack = new Dictionary<(int, int), int>();
-
+    public static Dictionary<int, WolfBox> WolfBox = new Dictionary<int, WolfBox>();
 
     public static bool checkattack(int sf_id, int op_id)
     {

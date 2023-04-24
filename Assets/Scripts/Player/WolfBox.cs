@@ -15,6 +15,7 @@ public class WolfBox : MonoBehaviour
     public Text Description;
     public Image SelectedImage;
     public Image UnSelectedImage;
+    public int Boxid;
 
 
     private int CheckItemId = -1;
@@ -45,7 +46,7 @@ public class WolfBox : MonoBehaviour
         }
     }
 
-    private void GetItem(int id)
+    public void RemoveItem(int id)
     {
         --BoxItem[id];
         if (BoxItem[id] == 0)
@@ -92,9 +93,9 @@ public class WolfBox : MonoBehaviour
             PlayerOptData x = new PlayerOptData();
             x.Opt = PlayerOpt.CreateItem;
             x.Userid = (int)Main_ctrl.user_id;
-            x.Itemid = CheckItemId;
+            x.Itemid = CheckItemId * 10000 + Boxid;
             Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
-            GetItem(CheckItemId);
+            //GetItem(CheckItemId);
             //Player_ctrl.plays[0].bag.BagGetItem(CheckItemId, 1,Player_ctrl.BagUI);
         }
     }

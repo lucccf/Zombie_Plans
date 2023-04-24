@@ -347,7 +347,10 @@ public class Player : BasicCharacter
                 Debug.Log("Attack_fac:" + Attack_fac);
                 break;
             case PlayerOpt.CreateItem:
-                bag.BagGetItem(inputs.Itemid,1,Player_ctrl.BagUI);
+                int item_id = inputs.Itemid / 10000;
+                int box_id = inputs.Itemid % 10000;
+                bag.BagGetItem(item_id,1,Player_ctrl.BagUI);
+                Player_ctrl.WolfBox[box_id].RemoveItem(item_id);
                 break;
         }
     }
