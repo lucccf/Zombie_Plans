@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -111,7 +112,17 @@ public class Main_ctrl : MonoBehaviour
 
     static void Wolf_create()
     {
-        wolf_cnt = (Player_ctrl.plays.Count + 1) / 3;
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/player_identity.xml");
+        XmlNodeList cases = xmlDoc.SelectNodes("/player_identity/case");
+
+        Dictionary<int, int> dict = new Dictionary<int, int>();
+
+        foreach(XmlNode xx in cases)
+        {
+            dict[int.Parse(xx.SelectSingleNode("total").InnerText)] = int.Parse(xx.SelectSingleNode("wolf").InnerText);
+        }
+        wolf_cnt = dict[Player_ctrl.plays.Count];
         for (int i = 0; i < wolf_cnt; i++)
         {
             int k = (int)(Rand.rand() % (ulong)Player_ctrl.plays.Count);

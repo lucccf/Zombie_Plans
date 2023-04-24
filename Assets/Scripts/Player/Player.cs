@@ -84,7 +84,7 @@ public class Player : BasicCharacter
         UpattackShiftx = new Fixpoint(1, 0);
         UpattackShifty = new Fixpoint(1, 0);
         UpattackDamage = new Fixpoint(3, 0);
-}
+    }
 
     public override void InitNormal()
     {
