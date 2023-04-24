@@ -104,6 +104,7 @@ public class BasicCharacter : MonoBehaviour
 
     protected void PlayMusic(string name)
     {
+        Debug.Log(name + Time.time);
         if (name == "") return;
         audiosource.Stop();
         audiosource.clip = (AudioClip)AB.getobj(name);

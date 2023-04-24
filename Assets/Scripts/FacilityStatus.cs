@@ -9,6 +9,12 @@ public class FacilityStatus : Monster
     {
         //Debug.Log("FFFF");
         CharacterType = 5;
+<<<<<<< HEAD
+        SetStatus(10, 10);
+        status.max_toughness = 1000000;
+        status.toughness = 1000000;
+        audiosource = GetComponent<AudioSource>();
+=======
         SetStatus(0, 10);
         status.max_toughness = 100000000;
         status.toughness = 1000000000;
@@ -19,6 +25,7 @@ public class FacilityStatus : Monster
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
         //status.GetAttacked(new Fixpoint(-10, 0), 0);
+>>>>>>> 068048e853b47642349c2527f4382465425aff08
     }
 
     // Update is called once per frame

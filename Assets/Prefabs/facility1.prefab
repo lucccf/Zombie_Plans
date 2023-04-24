@@ -431,7 +431,11 @@ GameObject:
   - component: {fileID: 5512299739616151122}
   - component: {fileID: 7433952987492444153}
   - component: {fileID: 8892245375051358036}
+<<<<<<< HEAD
+  - component: {fileID: 7651364775184512858}
+=======
   - component: {fileID: 3313457800812002510}
+>>>>>>> 068048e853b47642349c2527f4382465425aff08
   m_Layer: 0
   m_Name: facility1
   m_TagString: Untagged
@@ -524,7 +528,11 @@ MonoBehaviour:
   LockId: -1
   Check: 0
   ToHomeFlag: 0
+<<<<<<< HEAD
+--- !u!82 &7651364775184512858
+=======
 --- !u!82 &3313457800812002510
+>>>>>>> 068048e853b47642349c2527f4382465425aff08
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -620,6 +628,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+<<<<<<< HEAD
+=======
 --- !u!1001 &318162709731596104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -822,3 +832,4 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2456063176421723383}
   m_PrefabAsset: {fileID: 0}
+>>>>>>> 068048e853b47642349c2527f4382465425aff08
