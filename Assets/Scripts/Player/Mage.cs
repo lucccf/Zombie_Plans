@@ -198,7 +198,6 @@ public class Mage : Knight
                 }
                 else if (Dis < new Fixpoint(10, 0) || f.pos.x < Left || f.pos.x > Right) //射击
                 {
-                    Debug.Log("Mage" + FireBallCD.to_float());
                     if (FireBallCD <= new Fixpoint(0, 0))
                     {
                         FireBallCD = new Fixpoint(4, 0);

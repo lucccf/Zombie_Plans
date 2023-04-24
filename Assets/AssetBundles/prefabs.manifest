@@ -1,31 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 3109242488
-=======
-<<<<<<< HEAD
-CRC: 4161242275
+CRC: 2117399216
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c33e1ad2142483312ef42bb1645bedb3
+    Hash: 39b251a7875dde8644b749367eddf0bf
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0fdaca2289664bc0280e949cd8af1dce
-=======
-CRC: 4122310833
->>>>>>> 4cefb8b426008332931f59b9d34192a67beb76e2
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 076270813fd9a7705201ab60dea4d9af
-  TypeTreeHash:
-    serializedVersion: 2
-<<<<<<< HEAD
-    Hash: 6c3b99786da6d6b26954a54007bc156e
-=======
-    Hash: 235489940d8de75ab041952c2d7bcfe3
->>>>>>> 21463c0ce729f126f25eef1506df8bd227d66261
->>>>>>> 4cefb8b426008332931f59b9d34192a67beb76e2
+    Hash: d94778ab0c854edbc320a685015ebc29
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -53,26 +34,12 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-- Class: 114
-=======
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
->>>>>>> 4cefb8b426008332931f59b9d34192a67beb76e2
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
->>>>>>> 21463c0ce729f126f25eef1506df8bd227d66261
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: c0606e10920cabb4e9be2acf04e7c378, type: 3}
@@ -168,7 +135,6 @@ Assets:
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
-- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/home.prefab
 - Assets/Prefabs/Attack.prefab
 - Assets/Prefabs/number/33.png
@@ -207,4 +173,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/pro/Zombie_Plans/Assets/AssetBundles/music
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
