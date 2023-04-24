@@ -704,6 +704,7 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Only_Facility] = of;
                     of.myfac = Flow_path.onlyid_facilities[info.attacker_id];
                     obj.GetComponent<FacilityStatus>().fac = Flow_path.onlyid_facilities[info.attacker_id];
+                    obj.GetComponent<FacEffect>().fac = Flow_path.onlyid_facilities[info.attacker_id];
                     break;
             }
         }

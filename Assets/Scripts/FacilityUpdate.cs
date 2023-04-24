@@ -26,7 +26,6 @@ public class FacilityUpdate : MonoBehaviour
             Item x = Main_ctrl.GetItemById(mat.Key);
             itemimage.GetComponent<Image>().sprite = x.image;
             itemtext.GetComponent<Text>().text = "还需数量：" + (fa.materials[mat.Key] - fa.commited[mat.Key]);
-            Debug.Log("这是啥" + fa.commited[mat.Key]);
             itemprogress.GetComponent<Image>().fillAmount = ((float)fa.commited[mat.Key] / (float)fa.materials[mat.Key]);
             itemprogresstext.gameObject.GetComponent<Text>().text = (fa.commited[mat.Key] * 100 / fa.materials[mat.Key]).ToString() + "%";
         }

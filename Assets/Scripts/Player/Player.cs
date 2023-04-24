@@ -209,6 +209,7 @@ public class Player : BasicCharacter
                             else
                             {
                                 fa.commited[m.Key] += 1;
+                                if(fa.repaired)Debug.Log("CommitDebug:" + fa.commited[m.Key]);
                             }
                         }
 

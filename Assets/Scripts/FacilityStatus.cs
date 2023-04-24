@@ -8,6 +8,7 @@ public class FacilityStatus : Monster
     // Start is called before the first frame update
     public Facility fac;
     public GameObject hp;
+    public int curhp;
     public override void Startx()
     {
         //Debug.Log("FFFF");
@@ -19,6 +20,7 @@ public class FacilityStatus : Monster
         {
             status.max_hp = 100 * m.Value;
             status.hp = 100 * m.Value;
+            curhp = status.hp;
             Debug.Log("FacBar:" + 100 * m.Value);
         }
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
@@ -56,7 +58,12 @@ public class FacilityStatus : Monster
                 for (int i = 0; i < fac.commited.Count; i++)
                 {
                     var key = fac.commited.Keys.ElementAt(i);
-                    fac.commited[key] = status.hp / 100;
+                    if ((curhp - status.hp) / 100 >= 1)
+                    {
+                        fac.commited[key] -= 1;
+                        curhp = fac.commited[key] * 100;
+                    }
+                    //fac.commited[key] = status.hp / 100;    
                     if ((fac.commited[key] * 100 / fac.materials[key]) < 70)
                     {
                         fac.buff = false;

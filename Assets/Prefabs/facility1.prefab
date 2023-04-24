@@ -432,6 +432,7 @@ GameObject:
   - component: {fileID: 7433952987492444153}
   - component: {fileID: 8892245375051358036}
   - component: {fileID: 3313457800812002510}
+  - component: {fileID: 4972552499997804435}
   m_Layer: 0
   m_Name: facility1
   m_TagString: Untagged
@@ -622,6 +623,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4972552499997804435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477335447486326482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2863647e31d5b334583aee97ad48c8f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repairedeffect: {fileID: 319328618364793518}
+  buffeffect: {fileID: 2456220712751297109}
+  fac: {fileID: 0}
 --- !u!1001 &318162709731596104
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -715,6 +731,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb6904452295d0d4ba1ce77f66662d0a, type: 3}
+--- !u!1 &319328618364793518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1175256570799590, guid: bb6904452295d0d4ba1ce77f66662d0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 318162709731596104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &316712431242892998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4335422775558542, guid: bb6904452295d0d4ba1ce77f66662d0a,
@@ -818,6 +840,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2cfd9cf3b1dc4ad489f9d2a7574d2463, type: 3}
+--- !u!1 &2456220712751297109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1002530091286178, guid: 2cfd9cf3b1dc4ad489f9d2a7574d2463,
+    type: 3}
+  m_PrefabInstance: {fileID: 2456063176421723383}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2451084816573587055 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4979504664547992, guid: 2cfd9cf3b1dc4ad489f9d2a7574d2463,
