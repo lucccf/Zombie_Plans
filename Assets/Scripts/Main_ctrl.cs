@@ -520,6 +520,20 @@ public class Main_ctrl : MonoBehaviour
         Creobj(p);
     }
 
+    public static void NewWolfBox(Fix_vector2 pos, float size)
+    {
+        Obj_info p = new Obj_info();
+        p.name = "WolfBox";
+        p.hei = new Fixpoint(1, 0);
+        p.wid = new Fixpoint(1, 0);
+        p.pos = pos;
+        p.col_type = Fix_col2d.col_status.Trigger;
+        p.toward = size;
+        p.col_type = Fix_col2d.col_status.Trigger;
+        p.classnames.Add(Object_ctrl.class_name.Trigger);
+        Creobj(p);
+    }
+
     public static GameObject CreateObj(Obj_info info)
     {
         GameObject obj = Instantiate((GameObject)AB.getobj(info.name));

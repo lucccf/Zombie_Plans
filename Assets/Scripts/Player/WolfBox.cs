@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Net;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,25 +19,10 @@ public class WolfBox : MonoBehaviour
 
     private int CheckItemId = -1;
 
-    public Dictionary<int, int> TestItem = new Dictionary<int, int>();
-
-    float alivetime = 0f;
-    bool Created = false;
-
     void Start()
     {
         GetButton.GetComponent<Button>().onClick.AddListener(GetButtonOnCilck);
         CloseButton.GetComponent<Button>().onClick.AddListener(CloseButtonOnClick);
-
-        TestItem.Add(1, 2);
-        TestItem.Add(2, 4);
-        TestItem.Add(3, 8);
-        TestItem.Add(4, 1);
-        TestItem.Add(5, 2);
-        TestItem.Add(6, 3);
-        TestItem.Add(7, 4);
-        TestItem.Add(8, 1);
-        TestItem.Add(9, 9);
     }
 
 
@@ -102,8 +88,14 @@ public class WolfBox : MonoBehaviour
     {
         if(BoxItem.ContainsKey(CheckItemId))
         {
+
+            PlayerOptData x = new PlayerOptData();
+            x.Opt = PlayerOpt.CreateItem;
+            x.Userid = (int)Main_ctrl.user_id;
+            x.Itemid = CheckItemId;
+            Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
             GetItem(CheckItemId);
-            Player_ctrl.plays[0].bag.BagGetItem(CheckItemId, 1,Player_ctrl.BagUI);
+            //Player_ctrl.plays[0].bag.BagGetItem(CheckItemId, 1,Player_ctrl.BagUI);
         }
     }
     private void CloseButtonOnClick()
@@ -114,11 +106,6 @@ public class WolfBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        alivetime += Time.deltaTime;
-        if(alivetime > 1f && Created == false)
-        {
-            Created = true;
-            GetItem(TestItem);
-        }
+
     }
 }

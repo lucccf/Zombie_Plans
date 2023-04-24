@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2460485264
+CRC: 2861494809
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b1406c2477321d77c5d46d0d70cbf96d
+    Hash: 90a33d6415f5ec479476188015226c71
   TypeTreeHash:
     serializedVersion: 2
-    Hash: de8109aabb15eba62310a8238d598244
+    Hash: dcec6f52efaab823f6fb0e1030b6d945
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -48,11 +48,17 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 7a7994c038438dc4495c66163f70fc63, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: a684d35155ad3fa44b5483e458c34f8d, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 3dc8cd91b5bb4f744a385a5927fc3726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: e8119a724da3eec4bb4f91f7b2b4fa8b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: aee607920057d704fb5ac714f0990cc9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 08d5b243722e18148b50eca785d0ea90, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: b4d0334399409654ebbc795e69053d96, type: 3}
 - Class: 114
@@ -91,6 +97,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ae2a33fc76394b048ae0389542a7c34a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
 - Class: 114
@@ -169,6 +177,7 @@ Assets:
 - Assets/Prefabs/number/55.png
 - Assets/Prefabs/wall_a.prefab
 - Assets/Prefabs/Map_item/Devil_m.prefab
+- Assets/Prefabs/WolfBox.prefab
 - Assets/Prefabs/Monster1.prefab
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png

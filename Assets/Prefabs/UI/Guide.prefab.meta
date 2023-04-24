@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/picture/player/道具/陷阱/陷阱UI.meta
+guid: 6b8c37ce99193b542acd6cd05f3394a7
+folderAsset: yes
+DefaultImporter:
+========
 guid: 8a19a37c19562ff4b901bb743716428a
 PrefabImporter:
+>>>>>>>> a2d02c5a29a8d911e209702c95029964cc309250:Assets/Prefabs/UI/Guide.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
