@@ -1,20 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 2639946407
+CRC: 4122310833
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9e2a0df71c20d08a16ab81991238eb16
-=======
-CRC: 1240245094
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 3d56924ac0e5ca01e1d8e047939354f2
->>>>>>> 068048e853b47642349c2527f4382465425aff08
+    Hash: 005615a85cd4052dfb034cd116a44277
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ec4efdedc669bfbb84d9e7966d7c34fd
+    Hash: 235489940d8de75ab041952c2d7bcfe3
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -42,11 +34,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -98,13 +90,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 7b6e2bdc16791bc49bbdee407a4e9657, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61c8cbdc94f08c94897ab0f126cd3126, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -139,6 +131,7 @@ Assets:
 - Assets/Prefabs/number/0.png
 - Assets/Prefabs/number/5.png
 - Assets/Prefabs/skull.prefab
+- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
@@ -146,7 +139,6 @@ Assets:
 - Assets/Prefabs/Attack.prefab
 - Assets/Prefabs/number/33.png
 - Assets/Prefabs/UI/NeeItemPrefabs.prefab
-- Assets/Prefabs/facility1.prefab
 - Assets/Prefabs/number/22.png
 - Assets/Prefabs/Bomb2.prefab
 - Assets/Prefabs/red.prefab
