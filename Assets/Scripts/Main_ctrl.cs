@@ -87,7 +87,6 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Facility_create();
         Map_create.Protal_create();
         Map_create.Background_create();
-        Map_create.Box_create();
         Player_ctrl.Init_bag();
         CalRoad();
         Item[] Items;
@@ -103,6 +102,7 @@ public class Main_ctrl : MonoBehaviour
         {
             ItemList.Add(Items[i].id, Items[i]);
         }
+        Map_create.Box_create();
 
         Play_create();
         players.Clear();
@@ -538,8 +538,9 @@ public class Main_ctrl : MonoBehaviour
         p.toward = 1;
         p.col_type = Fix_col2d.col_status.Trigger;
         p.classnames.Add(Object_ctrl.class_name.Trigger);
+        p.classnames.Add(Object_ctrl.class_name.WolfBox);
         p.ToughnessDamage = WolfboxCounter;
-        Creobj(p);
+        CreateObj(p);
     }
 
     public static GameObject CreateObj(Obj_info info)
@@ -646,6 +647,7 @@ public class Main_ctrl : MonoBehaviour
                     t.id = cnt;
                     if(info.name == "WolfBox")
                     {
+                        Debug.Log("XXXXXYYY" + info.ToughnessDamage );
                         obj.GetComponent<WolfBoxInMap>().BoxId = info.ToughnessDamage;
                     }
                     if(info.name == "TrapX")
@@ -719,9 +721,10 @@ public class Main_ctrl : MonoBehaviour
                     obj.GetComponent<FacEffect>().fac = Flow_path.onlyid_facilities[info.attacker_id];
                     break;
                 case Object_ctrl.class_name.WolfBox:
-                    WolfBoxInMap w = obj.AddComponent<WolfBoxInMap>();
+                    WolfBoxInMap w = obj.GetComponent<WolfBoxInMap>();
                     ctrl.modules[Object_ctrl.class_name.WolfBox] = w;
                     wolfboxes.Add(w);
+                    Debug.Log("??????");
                     break;
             }
         }

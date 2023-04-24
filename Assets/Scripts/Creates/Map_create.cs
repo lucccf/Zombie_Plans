@@ -2,7 +2,6 @@
 using System.Xml;
 using System.Xml.Schema;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class Map_create : MonoBehaviour
 {
@@ -680,13 +679,14 @@ public class Map_create : MonoBehaviour
                 int l = (int)(Rand.rand() % (ulong)k);
                 for(int j = 0; j < pro.Count; j++)
                 {
-                    if (k < pro[j])
+                    if (l < pro[j])
                     {
                         boxitems[id] = pro[j];
                         break;
                     }
                 }
             }
+            Debug.Log("???" + boxitems.Count);
             Main_ctrl.wolfboxes[i].InitBoxItem(boxitems);
         }
     }

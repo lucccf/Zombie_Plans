@@ -1,23 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 1766844900
+CRC: 644404322
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8b7abac1a9ed1a80a9be041fa66b5159
+    Hash: 09d3f8624173f5ad9d537f0ba6bf1a92
   TypeTreeHash:
     serializedVersion: 2
-    Hash: f5a87ccbc873a2f25aa7bffa597b4c46
-=======
-CRC: 2861494809
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 90a33d6415f5ec479476188015226c71
-  TypeTreeHash:
-    serializedVersion: 2
-    Hash: dcec6f52efaab823f6fb0e1030b6d945
->>>>>>> 2b937277af2bd4a6c13c0a9186c0152e0dba10f5
+    Hash: 6efb531e4f7b498e22045cd0a9983bd5
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -45,9 +34,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
@@ -113,14 +102,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 544c342e9f5045d4dac98753f3f838e3, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 2863647e31d5b334583aee97ad48c8f8, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-<<<<<<< HEAD
-- Class: 114
-  Script: {fileID: 11500000, guid: 2863647e31d5b334583aee97ad48c8f8, type: 3}
-=======
->>>>>>> 2b937277af2bd4a6c13c0a9186c0152e0dba10f5
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -198,8 +184,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-<<<<<<< HEAD
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
-=======
 - D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
->>>>>>> 2b937277af2bd4a6c13c0a9186c0152e0dba10f5

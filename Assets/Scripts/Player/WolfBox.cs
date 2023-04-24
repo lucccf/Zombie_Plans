@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class WolfBox : MonoBehaviour
 {
-    private Dictionary<int, int> BoxItem;
+    private Dictionary<int, int> BoxItem = new Dictionary<int, int>();
     private Dictionary<int, GameObject> BoxItemObject = new Dictionary<int, GameObject>();
     
     public GameObject ItemParent;
@@ -16,7 +16,6 @@ public class WolfBox : MonoBehaviour
     public Image SelectedImage;
     public Image UnSelectedImage;
     public int Boxid;
-
 
     private int CheckItemId = -1;
 
@@ -30,6 +29,7 @@ public class WolfBox : MonoBehaviour
 
     public void GetItem(Dictionary<int,int>item)
     {
+        Debug.Log("YYYYY" + item.Count);
         BoxItem = item;
         //GameObject ItemButton = Instantiate((GameObject)AB.getobj("UI/BagItem"));
         GameObject ItemButton = Instantiate((GameObject)AB.getobj("BagItem"));
