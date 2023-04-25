@@ -322,23 +322,22 @@ public class Map_create : MonoBehaviour
 
         foreach (XmlNode p in gate_info)
         {
-            int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
-            int mill_pos = int.Parse(p.SelectSingleNode("gate_pos").InnerText);
-            string name = p.SelectSingleNode("gate_name").InnerText;
-            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
+            int mill_id = int.Parse(p.SelectSingleNode("floor").InnerText);
+            int mill_pos = int.Parse(p.SelectSingleNode("pos").InnerText);
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2+3, 1));
 
             Obj_info protal_info = new Obj_info();
-            protal_info.name = "protal";
+            protal_info.name = "saveboom";
             //protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
-            protal_info.classnames.Add(Object_ctrl.class_name.Protalbutton);
+            //protal_info.classnames.Add(Object_ctrl.class_name.Protalbutton);
             protal_info.hei = new Fixpoint(floor_hei * 4, 1);
             protal_info.wid = new Fixpoint(floor_hei * 4, 1);
             protal_info.col_type = Fix_col2d.col_status.Trigger;
             protal_info.pos = pos;
-            protal_info.type = "protal";
+            protal_info.type = "saveboom";
             protal_info.classnames.Add(Object_ctrl.class_name.Trigger);
-            protal_info.classnames.Add(Object_ctrl.class_name.Protal);
-            protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+            //protal_info.classnames.Add(Object_ctrl.class_name.Protal);
+            //protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
             GameObject gate = Main_ctrl.CreateObj(protal_info);
             gate.transform.position = new Vector3(gate.transform.position.x, gate.transform.position.y, 10);
 

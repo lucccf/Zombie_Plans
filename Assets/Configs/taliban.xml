@@ -8,9 +8,12 @@
     <info>
 		<floor>1</floor>
         <pos>84</pos>
-	    <pos>168</pos>
     </info>
-    
+    <info>
+		<floor>1</floor>
+		<pos>168</pos>
+	</info>
+	
 	<info>
 		<floor>2</floor>
         <pos>196</pos>
@@ -34,7 +37,14 @@
 	<info>
         <floor>10</floor>
         <pos>84</pos>
-	    <pos>170</pos>
     </info>
+	<info>
+		<floor>10</floor>
+		<pos>170</pos>
+	</info>
+	<info>
+		<floor>6</floor>
+		<pos>140</pos>
+	</info>
 
 </taliban>
