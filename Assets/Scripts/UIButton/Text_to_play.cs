@@ -40,6 +40,26 @@ public class Text_to_play : MonoBehaviour
             words2[int.Parse(pp.SelectSingleNode("id").InnerText)] = s1;
             Debug.Log(pp.SelectSingleNode("id").InnerText);
         }
+
+        foreach(var xx in words1[-1])
+        {
+            Infomation.p1 = Infomation.p1 + xx + "\n";
+        }
+        foreach (var xx in words2[-1])
+        {
+            Infomation.w1 = Infomation.w1 + xx + "\n";
+        }
+        Infomation.p2 = Infomation.p1;
+        Infomation.w2 = Infomation.w1;
+
+        foreach (var xx in words1[-2])
+        {
+            Infomation.p2 = Infomation.p2 + xx + "\n";
+        }
+        foreach (var xx in words2[-2])
+        {
+            Infomation.w2 = Infomation.w2 + xx + "\n";
+        }
     }
 
     // Update is called once per frame

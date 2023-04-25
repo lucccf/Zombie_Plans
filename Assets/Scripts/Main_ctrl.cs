@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Net;
 using System.Xml;
+using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,6 +64,7 @@ public class Main_ctrl : MonoBehaviour
 
     private void init()
     {
+        Pool.init();
         homegg = false;
         All_objs = new Dictionary<long, Object_ctrl>();
         Ser_to_cli = new Dictionary<long, long>();
@@ -439,7 +441,7 @@ public class Main_ctrl : MonoBehaviour
         p.name = "player";
         p.hei = new Fixpoint(216, 2);
         p.wid = new Fixpoint(111, 2);
-        p.pos = new Fix_vector2(new Fixpoint(10 * 28 * 5, 1), new Fixpoint(-11 * 7 * 5, 1));
+        p.pos = new Fix_vector2(new Fixpoint(130, 0), new Fixpoint((-5 * 6 + 1) * 9 * 2, 1));
         p.col_type = Fix_col2d.col_status.Collider;
         p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
         p.classnames.Add(Object_ctrl.class_name.Player);
@@ -553,7 +555,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        GameObject obj = Pool.getobj(info.name);
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -619,6 +622,7 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Attack:
                     Attack a = obj.GetComponent<Attack>();
+                    a.Startx();
                     ctrl.modules[Object_ctrl.class_name.Attack] = a;
                     a.f = f;
                     a.id = cnt;
@@ -641,10 +645,14 @@ public class Main_ctrl : MonoBehaviour
                     if(info.name == "MagicCannon")
                     {
                         Attack2 a2 = obj.GetComponent<Attack2>();
-                        a2.SetDestroyTime(new Fixpoint(1,0));
+                        a2.Startx();
+                        a2.SetSpeed(new Fixpoint(15, 0));
+                        a2.SetAliveTime(new Fixpoint(10, 0));
+                        a2.SetDestroyTime(new Fixpoint(5, 1));
                     } else if (info.name == "skull")
                     {
                         Attack2 a2 = obj.GetComponent<Attack2>();
+                        a2.Startx();
                         a2.SetSpeed(new Fixpoint(15, 0));
                         a2.SetAliveTime(new Fixpoint(9, 1));
                         a2.SetDestroyTime(new Fixpoint(25, 2));
@@ -658,6 +666,7 @@ public class Main_ctrl : MonoBehaviour
                     break;
                 case Object_ctrl.class_name.Trigger:
                     Trigger t = obj.AddComponent<Trigger>();
+                    t.Startx();
                     ctrl.modules[Object_ctrl.class_name.Trigger] = t;
                     t.triggertype = info.type;
                     t.triggername = info.name;
@@ -740,7 +749,6 @@ public class Main_ctrl : MonoBehaviour
                     WolfBoxInMap w = obj.GetComponent<WolfBoxInMap>();
                     ctrl.modules[Object_ctrl.class_name.WolfBox] = w;
                     wolfboxes.Add(w);
-                    Debug.Log("??????");
                     break;
             }
         }
@@ -790,7 +798,19 @@ public class Main_ctrl : MonoBehaviour
         }
         Collider_ctrl.cols.Remove((Fix_col2d)obj.modules[Object_ctrl.class_name.Fix_col2d]);
 
-        Destroy(obj.gameObject);
+        Trigger t = obj.GetComponent<Trigger>();
+        if (t != null) Destroy(t);
+        Facility fa = obj.GetComponent<Facility>();
+        if (fa != null) Destroy(fa);
+        Home h = obj.GetComponent<Home>();
+        if (h != null) Destroy(h);
+        Only_Facility of = obj.GetComponent<Only_Facility>();
+        if (of != null) Destroy(of);
+        Destroy(obj);
+
+
+        //Destroy(obj.gameObject);
+        Pool.desobj(obj.gameObject);
         All_objs.Remove(id);
     }
 

@@ -26,6 +26,13 @@ public class Attack : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
     }
 
+    public void Startx()
+    {
+        attakcer_id = 0;
+        with_attacker = false;
+        AliveTime = new Fixpoint(0, 0);
+    }
+
     public void PlayMusic()
     {
         //Debug.Log("Music " + Time.time + " " + MusicName);

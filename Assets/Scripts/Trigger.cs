@@ -13,9 +13,9 @@ public class Trigger : MonoBehaviour
     public Fix_rig2d r;
     public Fixpoint AilveTime = new Fixpoint(0,0);
     public long id;
-    void Start()
+    public void Startx()
     {
-        
+        Fixpoint AilveTime = new Fixpoint(0, 0);
     }
 
     // Update is called once per frame

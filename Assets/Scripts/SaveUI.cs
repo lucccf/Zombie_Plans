@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Net;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class SaveUI : MonoBehaviour
     public int talibanid;
     void Start()
     {
-        savetext.GetComponent<Text>().text = ">>>";
+        savetext.GetComponent<Text>().text = "花费:30";
         commitbutton.GetComponent<Button>().onClick.AddListener(trysave);
     }
 
@@ -21,6 +22,13 @@ public class SaveUI : MonoBehaviour
     }
     void trysave()
     {
-        Debug.Log("trysave");
+        //Debug.Log("塔利班id:" + talibanid);
+        PlayerOptData x = new PlayerOptData();
+        x.Opt = PlayerOpt.SaveTLB;
+        x.Userid = (int)Main_ctrl.user_id;
+        x.Itemid = talibanid;
+
+        Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
+
     }
 }

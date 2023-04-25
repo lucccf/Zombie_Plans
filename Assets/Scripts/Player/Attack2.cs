@@ -16,7 +16,7 @@ public class Attack2 : Attack
     {
         animator = GetComponent<Animator>();
     }
-    
+
     public void SetDestroyTime(Fixpoint x)
     {
         DestroyTime = MaxAliveTime - x;
