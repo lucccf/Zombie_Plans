@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 755636790
+CRC: 378032687
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 420f0f8f5c9aa02581c5359a691a3ef2
+    Hash: 9a1cdc9ef3a6696915ce550f3dedf47b
   TypeTreeHash:
     serializedVersion: 2
-    Hash: e043a140986075ebf23825e3581f6b4a
+    Hash: 3f9365d37fd86280be2c7d8c68ad5c5a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,11 +28,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -49,6 +47,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 0571e0f141cfcb54f8ced3945ecec18f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cc8c34424b045aa44bc5ae710df04353, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 980d3f9293bbb6048801aac05d02b727, type: 3}
 - Class: 114
@@ -117,6 +117,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: b7438fee25bc16e418f3b8c092d947e1, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 85973daf6ab7b444bb7562dc49e25793, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -146,5 +148,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/pro/Zombie_Plans/Assets/AssetBundles/item
-- D:/pro/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
