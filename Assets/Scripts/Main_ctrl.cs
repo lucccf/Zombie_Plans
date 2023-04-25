@@ -114,6 +114,7 @@ public class Main_ctrl : MonoBehaviour
 
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         hb.Startx();
+        Music.Startx();
     }
 
     static void Wolf_create()
@@ -563,6 +564,10 @@ public class Main_ctrl : MonoBehaviour
         if (aa != null)
         {
             Music.aas[(int)cnt] = aa;
+            aa.rolloffMode = AudioRolloffMode.Linear;
+            aa.minDistance = 10;
+            aa.maxDistance = 30;
+            aa.spatialBlend = 1;
         }
 
         foreach (Object_ctrl.class_name c in info.classnames)
