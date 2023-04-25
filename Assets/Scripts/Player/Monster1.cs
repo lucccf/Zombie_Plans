@@ -339,6 +339,10 @@ public class Monster1 : Monster
         {
             PlayMusic("啊~~~（王）");
         }
+        if(f.onground)
+        {
+            r.velocity = new Fix_vector2(0, 0);
+        }
         if (StatusTime > new Fixpoint(3, 0))
         {
             if (type2 == 1)
