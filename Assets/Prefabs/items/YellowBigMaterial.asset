@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: YellowBigMaterial
   m_EditorClassIdentifier: 
   itemname: YellowBigMaterial
-  description: "\u7528\u4E8E\u4FEE\u590D\u8BBE\u65BD"
+  description: "\u7528\u4E8E\u4FEE\u590D\u9EC4\u6750\u6599\u8BBE\u65BD"
   image: {fileID: 21300000, guid: 8373354243a829243a0035a06e5469d0, type: 3}
   id: 10
   MakeNeeds: 06000000

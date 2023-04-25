@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Light
   m_EditorClassIdentifier: 
   itemname: Light
-  description: "\u53D1\u5C04\u6FC0\u5149"
+  description: "\u53D1\u5C04\u77ED\u8DDD\u79BB\u6FC0\u5149\uFF0C\u6BCF\u6B21\u4F24\u5BB320\u70B9"
   image: {fileID: 21300000, guid: 682cad47b72ef9342bb5717af199a849, type: 3}
   id: 114
   MakeNeeds: 01000000

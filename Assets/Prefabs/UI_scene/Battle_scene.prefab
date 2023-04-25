@@ -6177,6 +6177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Facility
       objectReference: {fileID: 0}
+    - target: {fileID: 840307438984210032, guid: 2000cc6c0659df44b96879427c6d0565,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 840307438984210033, guid: 2000cc6c0659df44b96879427c6d0565,
         type: 3}
       propertyPath: m_Pivot.x
