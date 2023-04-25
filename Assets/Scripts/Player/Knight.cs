@@ -339,7 +339,12 @@ public class Knight : Monster
     }
     private void Attack(bool first)
     {
-        Fixpoint Near = LockPos.x;
+        Fixpoint Near = LockPos.x - f.pos.x;
+        if(Near < new Fixpoint(0,0))
+        {
+            Near = new Fixpoint(0, 0) - Near;
+        }
+        //Debug.Log("Knight" + KnightAnimaAttack+ " " + Near.to_float());
         if (first == true)
         {
             AttackToNext();

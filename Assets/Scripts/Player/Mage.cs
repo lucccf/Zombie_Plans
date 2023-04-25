@@ -337,7 +337,11 @@ public class Mage : Knight
     }
     protected void Attack(bool first)
     {
-        Fixpoint Near = GetNearDistance();
+        Fixpoint Near = LockPos.x - f.pos.x;
+        if (Near < new Fixpoint(0, 0))
+        {
+            Near = new Fixpoint(0, 0) - Near;
+        }
         if (first == true)
         {
             AttackToNext();

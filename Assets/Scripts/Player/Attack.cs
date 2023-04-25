@@ -26,7 +26,7 @@ public class Attack : MonoBehaviour
         audiosource = GetComponent<AudioSource>();
     }
 
-    public void Startx()
+    public virtual void Startx()
     {
         attakcer_id = 0;
         with_attacker = false;
