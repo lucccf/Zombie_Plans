@@ -17,6 +17,7 @@ public class Player_ctrl : MonoBehaviour
     public static Image QCD_mask;
     public static Image ECD_mask;
     public static Fix_vector2 HomePos;
+    public static PublicAudio audiox;
 
     public static Dictionary<(int, int), int> Attack = new Dictionary<(int, int), int>();
     public static Dictionary<int, WolfBox> WolfBox = new Dictionary<int, WolfBox>();
@@ -45,6 +46,7 @@ public class Player_ctrl : MonoBehaviour
     public static void Init_bag()
     {
         BagUI = GameObject.Find("BagButton").GetComponent<NewBag>();
+        audiox = GameObject.Find("PublicAudio").GetComponent<PublicAudio>();
         GameObject QCD_Object = GameObject.Find("QCD");
         GameObject ECD_Object = GameObject.Find("ECD");
         QCD = QCD_Object.GetComponentInChildren<Text>();
