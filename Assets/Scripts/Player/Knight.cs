@@ -448,6 +448,10 @@ public class Knight : Monster
     {
         KnightAnimaHited = 0;
         KnightAnimaAttack = 0;
+        if (f.onground)
+        {
+            r.velocity = new Fix_vector2(0, 0);
+        }
         if (StatusTime > new Fixpoint(2, 0))//死亡到消失的时间
         {
             DeathFall();
