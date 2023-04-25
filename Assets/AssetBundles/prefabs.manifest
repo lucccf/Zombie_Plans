@@ -1,9 +1,17 @@
 ManifestFileVersion: 0
-CRC: 3789164156
+CRC: 1537033420
 Hashes:
   AssetFileHash:
     serializedVersion: 2
+<<<<<<< HEAD
     Hash: 3d4c30d80530c3d10b3dcecb06d487f5
+=======
+<<<<<<< HEAD
+    Hash: 1786a0132d32d4652131e16faa773c56
+=======
+    Hash: 09d3f8624173f5ad9d537f0ba6bf1a92
+>>>>>>> 25cf4aa5839cc652bf3ee88e5755e5ecbab6c796
+>>>>>>> 2f2cd6bf15eda05e8978b5d4045ec93105c5fb60
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2ff45f02d1d56825161692e25edaec0c
@@ -142,6 +150,7 @@ Assets:
 - Assets/Prefabs/number/5.png
 - Assets/Prefabs/skull.prefab
 - Assets/Prefabs/facility1.prefab
+- Assets/Prefabs/saveboom.prefab
 - Assets/Prefabs/knightskill.prefab
 - Assets/Prefabs/number/6.png
 - Assets/Prefabs/number/3.png
@@ -184,4 +193,12 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
+<<<<<<< HEAD
 - D:/pro/Zombie_Plans/Assets/AssetBundles/music
+=======
+<<<<<<< HEAD
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
+=======
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+>>>>>>> 25cf4aa5839cc652bf3ee88e5755e5ecbab6c796
+>>>>>>> 2f2cd6bf15eda05e8978b5d4045ec93105c5fb60
