@@ -33,8 +33,12 @@ public class Loading_ctrl : MonoBehaviour
                     Main_ctrl.players.Remove(f.Opts[i].Userid);
                     roomcnt--;
                 }
+                else if (f.Opts[i].Opt == PlayerOpt.SendSeed)
+                {
+                    Debug.Log("Recvseed" + f.Opts[i].Itemid);
+                    Rand.Setseed((ulong)f.Opts[i].Itemid);
+                }
             }
-
             if (roomcnt >= room_num)
             {
                 roomcnt = 0;

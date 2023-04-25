@@ -39,6 +39,9 @@ public class Main_ctrl : MonoBehaviour
     public static GameObject Tinymap;
     public static GameObject play;
 
+    public static GameObject home;
+    public static GameObject taliban;
+
     public static long frame_index = 0;
 
     public static bool Exit = false;
@@ -68,6 +71,8 @@ public class Main_ctrl : MonoBehaviour
         walls = new List<List<int>>();
         wolfboxes = new List<WolfBoxInMap>();
         Exit = false;
+        taliban = null;
+        home = null;
         Rigid_ctrl.rigs = new List<Fix_rig2d>();
         Collider_ctrl.cols = new List<Fix_col2d>();
         Player_ctrl.plays = new List<Player>();
@@ -80,7 +85,6 @@ public class Main_ctrl : MonoBehaviour
     void Start()
     {
         init();
-        Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tinymap = GameObject.Find("Tiny_camera(Clone)");
         Map_create.Wall_create();
@@ -744,6 +748,14 @@ public class Main_ctrl : MonoBehaviour
             Ser_to_cli[info.user_id] = cnt;
         }
         cnt++;
+        if (info.name == "home")
+        {
+            home = obj;
+        }
+        if (info.name == "Terrorist")
+        {
+            taliban = obj;
+        }
         return obj;
     }
 
