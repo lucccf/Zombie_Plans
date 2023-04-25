@@ -62,6 +62,7 @@ public class Devil : Knight
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(11, 1), new Fixpoint(11, 1), new Fixpoint(6, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
+        HitMisuc = "魔王挨打";
     }
 
     // Update is called once per frame

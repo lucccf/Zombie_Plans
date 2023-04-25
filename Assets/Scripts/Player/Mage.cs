@@ -64,6 +64,7 @@ public class Mage : Knight
         ToughnessStatus = new int[3] { 60, 30, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
+        HitMisuc = "魔法师挨打";
         //ToHome();
     }
     void Update()

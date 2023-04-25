@@ -37,7 +37,7 @@ public class BasicCharacter : MonoBehaviour
 
     protected int FlyTimes = 0;
 
-    protected string HitMisuc;
+    protected string HitMisuc = "";
     protected enum StatusType
     {
         Normal,
@@ -214,7 +214,9 @@ public class BasicCharacter : MonoBehaviour
                 continue;
             }
 
-            PlayMusic(attack.MusicName);
+            PlayMusic(HitMisuc);
+            attack.PlayMusic();
+            //PlayMusic(attack.MusicName);
 
             AnimaToward = -attack.toward;
             this_hited = true;

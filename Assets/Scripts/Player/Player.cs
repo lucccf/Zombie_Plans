@@ -112,6 +112,7 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
+        HitMisuc = "主角挨打";
 
     }
 
