@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Map_arrow : MonoBehaviour
 {
-    public GameObject home, taliban;
+    public GameObject home;
+    public GameObject taliban;
+    public GameObject map_bk;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +30,7 @@ public class Map_arrow : MonoBehaviour
 
     Vector3 getpos(GameObject obj)
     {
+        if (obj == null) return new Vector3(0, 0, 0);
         Vector3 pos = obj.transform.position;
         Vector3 p2 = Main_ctrl.camara.transform.position;
         Vector3 p3 = pos - p2;
@@ -59,7 +62,9 @@ public class Map_arrow : MonoBehaviour
                 p3 = p3 * (-k / p3.y);
             }
         }
-        p3 = p3 * 12;
+        p3.z = 0;
+        Debug.Log(obj.name + p3);
+        p3 = p3 * 6.2f;
         return p3;
     }
 
@@ -83,11 +88,11 @@ public class Map_arrow : MonoBehaviour
         }
         if (taliban.activeSelf)
         {
-            taliban.transform.position = getpos(Main_ctrl.taliban);
+            taliban.transform.localPosition = getpos(Main_ctrl.taliban);
         }
         if (home.activeSelf)
         {
-            home.transform.position = getpos(Main_ctrl.home);
+            home.transform.localPosition = getpos(Main_ctrl.home);
         }
     }
 }
