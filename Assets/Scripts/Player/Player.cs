@@ -280,6 +280,7 @@ public class Player : BasicCharacter
                         }
                         else
                         {
+                            //激光
                             QCD = new Fixpoint(0, 0);
                         }
                     }
@@ -294,6 +295,7 @@ public class Player : BasicCharacter
                         }
                         else
                         {
+                            //三连波
                             ECD = new Fixpoint(0, 0);
                         }
 
