@@ -16,6 +16,7 @@ public class Player : BasicCharacter
     private Fixpoint ECD = new Fixpoint(100000000, 0);
     private Fixpoint QCD_MAX = new Fixpoint(10, 0);
     private Fixpoint ECD_MAX = new Fixpoint(10, 0);
+    private Fixpoint BuffTime = new Fixpoint(0, 0);
 
     public Text Name;
 
@@ -373,6 +374,17 @@ public class Player : BasicCharacter
             case PlayerOpt.DeleteItem:
                 ThrowItem(inputs.Itemid);
                 break;
+            case PlayerOpt.Useitem:
+                if(inputs.Itemid == 11)
+                {
+                    ChangeStatus(StatusType.Recover);
+                    RecoverHp(true);
+                } else if (inputs.Itemid == 99)
+                {
+                    ChangeStatus(StatusType.Trap);
+                    Trap(true);
+                }
+                break;
         }
     }
     public void IsWolf()
@@ -382,6 +394,12 @@ public class Player : BasicCharacter
 
     public override void Updatex()
     {
+        BuffTime -= Dt.dt;
+        if(BuffTime > new Fixpoint(0,0))
+        {
+            if (QCD < new Fixpoint(100, 0)) QCD = new Fixpoint(0, 0);
+            if (ECD < new Fixpoint(100, 0)) ECD = new Fixpoint(0, 0);
+        }
         QCD = QCD - Dt.dt;
         if (QCD < new Fixpoint(0, 0)) QCD = new Fixpoint(0, 0);
         ECD = ECD - Dt.dt;
@@ -918,8 +936,14 @@ public class Player : BasicCharacter
                 }
                 else if (trigger.triggername == "ItemSample")
                 {
-                    bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
-                    PlayMusic("拾取物品");
+                    if(trigger.itemid == 88)
+                    {
+                        BuffTime = new Fixpoint(5, 1);
+                    } else
+                    {
+                        bag.BagGetItem(trigger.itemid, trigger.itemnum, Player_ctrl.BagUI);
+                        PlayMusic("拾取物品");
+                    }
                     Main_ctrl.Desobj(a.opsite.id);
                 }
                 else if (trigger.triggername == "protal" && checkid() == true)
