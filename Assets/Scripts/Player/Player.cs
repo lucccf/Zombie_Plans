@@ -388,9 +388,13 @@ public class Player : BasicCharacter
                     p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                     p.classnames.Add(Object_ctrl.class_name.Moster);
                     p.classnames.Add(Object_ctrl.class_name.Tinymap);
-                    //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
+                    GameObject tlbui =  GameObject.Find("PlayerPanel/SaveUI");
+                    if (tlbui.activeSelf) {
+                        tlbui.SetActive(false);
+                    }
                     Main_ctrl.Creobj(p);
                     Main_ctrl.Desobj(inputs.Itemid);
+
                 }
                 break;
         }

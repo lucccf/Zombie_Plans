@@ -10,6 +10,7 @@ public class FacilityStatus : Monster
     public GameObject hp;
     public int curhp;
     public int curnum;
+    private int onehp = 700;
     public override void Startx()
     {
         //Debug.Log("FFFF");
@@ -19,8 +20,8 @@ public class FacilityStatus : Monster
         status.toughness = 1000000000;
         foreach (var m in fac.materials)
         {
-            status.max_hp = 100 * m.Value;
-            status.hp = 100 * m.Value;
+            status.max_hp = onehp * m.Value;
+            status.hp = onehp * m.Value;
             curhp = status.hp;
             curnum = fac.commited[m.Key];
             curnum = fac.commited[m.Key];
@@ -58,15 +59,15 @@ public class FacilityStatus : Monster
             for (int i = 0; i < fac.commited.Count; i++)
             {
                 var key = fac.commited.Keys.ElementAt(i);
-                if ((curhp - status.hp) / 100 >= 1)
+                if ((curhp - status.hp) / onehp >= 1)
                 {
                     fac.commited[key] -= 1;
-                    curhp = fac.commited[key] * 100;
+                    curhp = fac.commited[key] * onehp;
                     curnum = fac.commited[key];
                 }
                 if (curnum != fac.commited[key])
                 {
-                    status.hp = fac.commited[key] * 100;
+                    status.hp = fac.commited[key] * onehp;
                     curhp = status.hp;
                     curnum = fac.commited[key];
                 }
