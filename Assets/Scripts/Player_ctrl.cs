@@ -33,6 +33,15 @@ public class Player_ctrl : MonoBehaviour
         return false;
     }
 
+    public static void init_color()
+    {
+        for(int i = 0; i < plays.Count; i++)
+        {
+            plays[i].Name.color = PlayerColor.playercolors[i];
+            plays[i].Name.text = "user" + (i + 1);
+        }
+    }
+
     public static void Init_bag()
     {
         BagUI = GameObject.Find("BagButton").GetComponent<NewBag>();

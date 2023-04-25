@@ -1,0 +1,33 @@
+<buff_txt>
+	
+	<buff>
+		<id>1</id>
+		<value>30</value>
+		<txt>怪物血量缩减30%</txt>
+	</buff>
+
+	<buff>
+		<id>2</id>
+		<value>30</value>
+		<txt>怪物基础攻击力缩减30%</txt>
+	</buff>
+
+	<buff>
+		<id>3</id>
+		<value>40</value>
+		<txt>怪物移动速度缩减40%</txt>
+	</buff>
+
+	<buff>
+		<id>4</id>
+		<value>200</value>
+		<txt>怪物韧性值不再翻倍</txt>
+	</buff>
+
+	<buff>
+		<id>5</id>
+		<value>40</value>
+		<txt>怪物技能CD缩减30%</txt>
+	</buff>
+	
+</buff_txt>

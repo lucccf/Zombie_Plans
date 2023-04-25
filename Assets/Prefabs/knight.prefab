@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2683561746731605350}
   - component: {fileID: 7977842617341694584}
   - component: {fileID: 6521767745740302253}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 2211022329946258809}
   - component: {fileID: 1023201841887161327}
   - component: {fileID: 609640648248002674}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 927551891245889610}
   - component: {fileID: 5134058797760179983}
   - component: {fileID: 451426408580894919}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,6 +367,7 @@ MonoBehaviour:
   id: 0
   type2: 0
   AnimaToward: 1
+  Attack_fac: 0
   LockId: -1
   Check: 0
   ToHomeFlag: 0
@@ -475,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7102012409209567067}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,7 +514,7 @@ GameObject:
   - component: {fileID: 2580728601601924520}
   - component: {fileID: 8783903045556533462}
   - component: {fileID: 4944527080883075336}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

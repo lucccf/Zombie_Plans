@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8999797256035710647}
   - component: {fileID: 7775223039783633451}
   - component: {fileID: 3897601442488301863}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 7198656974727184016}
   - component: {fileID: 3709470016361762615}
   - component: {fileID: 5991087494610624095}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 5786557272739948929}
   - component: {fileID: 2860824360202149505}
   - component: {fileID: 1515747631873160561}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,7 +507,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4406111172734757081}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -545,7 +545,7 @@ GameObject:
   - component: {fileID: 1310955874913712915}
   - component: {fileID: 5298591847711301465}
   - component: {fileID: 4985323940540133344}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
