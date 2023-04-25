@@ -27,6 +27,7 @@
 	</info>
 	
 	<info>
+		<id>-1</id>
 		<text>[Tips] 打击矿石、怪物可收集材料,前往基地制造道具</text>
 		<text>[Tips] 地标信息在基地查看,修复成功可削弱怪物潮</text>
 		<text>[Tips] 每波怪物潮会进攻基地,基地血量不可恢复</text>
@@ -59,6 +60,7 @@
 	</info>
 
 	<info>
+		<id>-1</id>
 		<text>[Tips] 怪物潮生成的怪物能破坏基地耐久，耐久无法恢复</text>
 		<text>[Tips] 启动地图外围的爆破兵，它们也能降低基地耐久</text>
 		<text>[Tips] 破坏好人修复地标进度,也可以寻找机会干掉他们</text>
