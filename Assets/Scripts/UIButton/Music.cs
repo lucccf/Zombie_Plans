@@ -27,7 +27,7 @@ public class Music : MonoBehaviour
         }
         foreach(var aa in aas.Values)
         {
-            aa.spatialBlend = 1;
+            aa.maxDistance = 50;
         }
     }
 
