@@ -165,6 +165,7 @@ public static class CustomSettings
         _GT(typeof(LoginData.Types)),
         _GT(typeof(LoginData.Types.Operation)),
         _GT(typeof(BODYTYPE)),
+        _GT(typeof(UnityEngine.UI.InputField)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

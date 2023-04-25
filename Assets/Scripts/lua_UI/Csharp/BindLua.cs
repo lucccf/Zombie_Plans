@@ -77,6 +77,7 @@ public class BindLua : MonoBehaviour
             case objtype.Button: return go.GetComponent<Button>();
             case objtype.Image: return go.GetComponent<Image>();
             case objtype.Text: return go.GetComponent<Text>();
+            case objtype.InputField: return go.GetComponent<InputField>();
             case objtype.AudioSource: return go.GetComponent<AudioSource>();
             case objtype.Slider: return go.GetComponent<Slider>();
         }

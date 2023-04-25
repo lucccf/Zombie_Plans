@@ -16,6 +16,29 @@ public class Attack_change : MonoBehaviour
     {
         typetxt.text = "友方";
 
+        if (pl_id == 0) {
+            usertxt.color = PlayerColor.Player1;
+        }
+        if (pl_id == 1)
+        {
+            usertxt.color = PlayerColor.Player2;
+        }
+        if (pl_id == 2)
+        {
+            usertxt.color = PlayerColor.Player3;
+        }
+        if (pl_id == 3)
+        {
+            usertxt.color = PlayerColor.Player4;
+        }
+        if (pl_id == 4)
+        {
+            usertxt.color = PlayerColor.Player5;
+        }
+        if (pl_id == 5)
+        {
+            usertxt.color = PlayerColor.Player6;
+        }
     }
 
     void Update()
