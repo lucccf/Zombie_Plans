@@ -213,6 +213,7 @@ public class BasicCharacter : MonoBehaviour
             {
                 continue;
             }
+            Debug.Log("Hit" + id);
 
             PlayMusic(HitMisuc);
             attack.PlayMusic();

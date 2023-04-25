@@ -20,6 +20,7 @@ public class Terrorist : Knight
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         CharacterType = 2;
         SetStatus(100, 10);//血量，基础攻击力
         status.max_toughness = 100000000;

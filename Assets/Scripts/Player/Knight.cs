@@ -54,6 +54,7 @@ public class Knight : Monster
     }
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         CharacterType = 1 + type2;
         SetStatus(930, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();

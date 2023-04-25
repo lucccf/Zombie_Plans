@@ -28,6 +28,8 @@ public class Attack : MonoBehaviour
 
     public virtual void Startx()
     {
+        transform.rotation = Quaternion.identity;
+        audiosource.Stop();
         attakcer_id = 0;
         with_attacker = false;
         AliveTime = new Fixpoint(0, 0);

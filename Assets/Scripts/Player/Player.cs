@@ -107,6 +107,7 @@ public class Player : BasicCharacter
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         animator = GetComponent<Animator>();
         SetStatus(1000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段

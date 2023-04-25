@@ -40,6 +40,7 @@ public class Devil : Knight
     }
     public override void InitNormal()
     {
+        transform.rotation = Quaternion.identity;
         status.attack = 10;//基础攻击力
         status.WalkSpeed = new Fixpoint(3, 0);//走路速度
         status.max_hp = 1240;//最大血量
