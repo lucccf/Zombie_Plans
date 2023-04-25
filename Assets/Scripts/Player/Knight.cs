@@ -166,7 +166,16 @@ public class Knight : Monster
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attacker_type == CharacterType) continue;
+            if (attack.attacker_type == CharacterType && attack.attacker_type != 0) continue;
+            if (attack.attacker_type == 1 && CharacterType == 2) continue;
+            if (attack.attacker_type == 2 && CharacterType == 1) continue;
+            if (attack.attacker_type != 2 && CharacterType == 4) continue;
+            if (attack.attacker_type != 0 && CharacterType == 5) continue;
+            if (CharacterType == 5 && ((Player)Main_ctrl.All_objs[attack.attakcer_id].modules[Object_ctrl.class_name.Player]).Attack_fac) continue;
+            if (attack.attakcer_id == id)
+            {
+                continue;
+            }
 
             if (attack.type == 1)
             {
@@ -425,7 +434,7 @@ public class Knight : Monster
             if (SkillAttackTimes == 0)
             {
                 PlayMusic("爆裂重击释放语音");
-                Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
+                Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2f, 0);
                 if (AnimaToward < 0) pos.x -= 3f;
                 else pos.x += 3f;
                 Instantiate((GameObject)AB.getobj("knightskill"), pos, Quaternion.identity);

@@ -25,8 +25,15 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         Cur_HP = ps.hp;
-        HP_Percent = Cur_HP / Max_HP;
-        HP_Image.fillAmount = HP_Percent;
-        txt.text = Cur_HP + "/" + Max_HP;
+        if (Max_HP < 10000)
+        {
+            HP_Percent = Cur_HP / Max_HP;
+            HP_Image.fillAmount = HP_Percent;
+            txt.text = Cur_HP + "/" + Max_HP;
+        } else
+        {
+            HP_Image.fillAmount = 1;
+            txt.text = Cur_HP.ToString();
+        }
     }
 }
