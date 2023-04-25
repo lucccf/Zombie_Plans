@@ -987,7 +987,7 @@ public class Player : BasicCharacter
                 else if (trigger.triggername == "TrapX")
                 {
                     trigger.Explore();
-                } else if(trigger.triggername == "WolfBox" && checkid() == true)
+                } else if(trigger.triggername == "WolfBox" && checkid() == true && identity == Identity.Wolf)
                 {
                     trigger.BoxTriggerIn();
                 }

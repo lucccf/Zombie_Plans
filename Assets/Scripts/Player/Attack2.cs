@@ -16,6 +16,7 @@ public class Attack2 : Attack
     {
         base.Startx();
         AnimaDestroy = false;
+        transform.rotation = Quaternion.identity;
     }
     void Start()
     {
