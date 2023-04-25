@@ -32,7 +32,10 @@ public class Zombie_show : MonoBehaviour
                 flag = 2;
                 break;
             case 2:
-                while()
+                while(false)
+                {
+
+                }
                 break;
         }
     }
