@@ -9,7 +9,7 @@ public class Load_battle : MonoBehaviour
 
     void Start()
     {
-        Instantiate((GameObject)AB.getobj("Battle_scene"), canvas.transform);
+        Instantiate((GameObject)AB.getobj("Battle_scene"), canvas.transform, false);
         Camera c1 = Instantiate((GameObject)AB.getobj("All_camera")).GetComponent<Camera>();
         c1.targetTexture = (RenderTexture)AB.getobj("All_map");
         Camera c2 = Instantiate((GameObject)AB.getobj("Tiny_camera")).GetComponent<Camera>();
