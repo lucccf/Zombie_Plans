@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
 using static Net.Frame.Types;
+using static UnityEngine.ParticleSystem;
 
 public class Player : BasicCharacter
 {
@@ -281,6 +282,16 @@ public class Player : BasicCharacter
                         else
                         {
                             //激光
+                            //GameObject effect = (GameObject)AB.getobj("解锁特效");
+                            //Camera effectCamera = GameObject.Find("EffectCamera").GetComponent<Camera>();
+
+                            //// 将屏幕坐标转换为世界坐标
+                            //Vector3 worldPos = effectCamera.ScreenToWorldPoint(new Vector3(100,100, effectCamera.nearClipPlane));
+
+                            //GameObject particle_instance = Instantiate(effect, effectCamera.transform);
+                            //particle_instance.transform.position = worldPos;
+                            //particle_instance.transform.localScale = new Vector3(1, 1, 0);
+                            //Destroy(particle_instance, 10f);
                             QCD = new Fixpoint(0, 0);
                         }
                     }
@@ -306,6 +317,7 @@ public class Player : BasicCharacter
                     }
                     if (checkid() == true)
                     {
+                        PlayMusic("合成成功");
                         GameObject ui = (GameObject)AB.getobj("提示UI");
                         GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                         tmp.GetComponent<MakeSuccess>().Type = 1;
@@ -315,6 +327,7 @@ public class Player : BasicCharacter
                 {
                     if (checkid() == true)
                     {
+                        PlayMusic("合成失败");
                         GameObject ui = (GameObject)AB.getobj("提示UI");
                         Instantiate(ui, Player_ctrl.BagUI.transform);
                     }

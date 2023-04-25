@@ -313,6 +313,39 @@ public class Map_create : MonoBehaviour
         }
     }
 
+    public static void TaLiBan_create()
+    {
+
+        XmlDocument ProtalxmlDoc = new XmlDocument();
+        ProtalxmlDoc.Load(Application.dataPath + "/Configs/taliban.xml");
+        XmlNodeList gate_info = ProtalxmlDoc.SelectNodes("/taliban/info");
+
+        foreach (XmlNode p in gate_info)
+        {
+            int mill_id = int.Parse(p.SelectSingleNode("id").InnerText);
+            int mill_pos = int.Parse(p.SelectSingleNode("gate_pos").InnerText);
+            string name = p.SelectSingleNode("gate_name").InnerText;
+            Fix_vector2 pos = new Fix_vector2(new Fixpoint(mill_pos, 0), new Fixpoint((-5 * mill_id + 1) * floor_hei * 2, 1));
+
+            Obj_info protal_info = new Obj_info();
+            protal_info.name = "protal";
+            //protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+            protal_info.classnames.Add(Object_ctrl.class_name.Protalbutton);
+            protal_info.hei = new Fixpoint(floor_hei * 4, 1);
+            protal_info.wid = new Fixpoint(floor_hei * 4, 1);
+            protal_info.col_type = Fix_col2d.col_status.Trigger;
+            protal_info.pos = pos;
+            protal_info.type = "protal";
+            protal_info.classnames.Add(Object_ctrl.class_name.Trigger);
+            protal_info.classnames.Add(Object_ctrl.class_name.Protal);
+            protal_info.classnames.Add(Object_ctrl.class_name.Tinymap);
+            GameObject gate = Main_ctrl.CreateObj(protal_info);
+            gate.transform.position = new Vector3(gate.transform.position.x, gate.transform.position.y, 10);
+
+        }
+    }
+
+
     public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
     {
         Obj_info home_info = new Obj_info();
