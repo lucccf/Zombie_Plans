@@ -12,10 +12,10 @@ public class Map_arrow : MonoBehaviour
         taliban.SetActive(false);
     }
 
+    int k = 15;
     bool inside(GameObject obj)
     {
         if (obj == null) return true;
-        int k = 15;
         bool flag = true;
         Vector2 t1 = obj.transform.position;
         Vector2 t2 = Main_ctrl.camara.transform.position;
@@ -24,6 +24,43 @@ public class Map_arrow : MonoBehaviour
         if (t1.y - t2.y > k) flag = false;
         if (t2.y - t1.y > k) flag = false;
         return flag;
+    }
+
+    Vector3 getpos(GameObject obj)
+    {
+        Vector3 pos = obj.transform.position;
+        Vector3 p2 = Main_ctrl.camara.transform.position;
+        Vector3 p3 = pos - p2;
+        if (p3.x >= 0)
+        {
+            if (p3.x > 2 * k)
+            {
+                p3 = p3 * (2 * k / p3.x);
+            }
+        }
+        else
+        {
+            if (p3.x < -2 * k)
+            {
+                p3 = p3 * (-2 * k / p3.x);
+            }
+        }
+        if (p3.y >= 0)
+        {
+            if (p3.y > k)
+            {
+                p3 = p3 * (k / p3.y);
+            }
+        }
+        else
+        {
+            if (p3.y < -k)
+            {
+                p3 = p3 * (-k / p3.y);
+            }
+        }
+        p3 = p3 * 12;
+        return p3;
     }
 
     // Update is called once per frame
@@ -46,7 +83,11 @@ public class Map_arrow : MonoBehaviour
         }
         if (taliban.activeSelf)
         {
-            
+            taliban.transform.position = getpos(Main_ctrl.taliban);
+        }
+        if (home.activeSelf)
+        {
+            home.transform.position = getpos(Main_ctrl.home);
         }
     }
 }

@@ -15,7 +15,7 @@ public class Attack_change : MonoBehaviour
     private void Start()
     {
         typetxt.text = "友方";
-
+        usertxt.text = "User" + (pl_id + 1);
         if (pl_id == 0) {
             usertxt.color = PlayerColor.Player1;
         }
