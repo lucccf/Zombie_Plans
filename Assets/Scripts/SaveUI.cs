@@ -10,7 +10,7 @@ public class SaveUI : MonoBehaviour
     public int talibanid;
     void Start()
     {
-        savetext.GetComponent<Text>().text = ">>>";
+        savetext.GetComponent<Text>().text = "30";
         commitbutton.GetComponent<Button>().onClick.AddListener(trysave);
     }
 

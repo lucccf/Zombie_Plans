@@ -373,6 +373,26 @@ public class Player : BasicCharacter
             case PlayerOpt.DeleteItem:
                 ThrowItem(inputs.Itemid);
                 break;
+            case PlayerOpt.SaveTLB:
+                bool value2 = bag.BagGetItem(1, -30, Player_ctrl.BagUI);
+                if (value2)
+                {
+                    Obj_info p = new Obj_info();
+                    p.name = "Terrorist";
+                    p.cre_type = 1;
+                    Fix_vector2 p2 = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    p.hei = p2.y.Clone();
+                    p.wid = p2.x.Clone();
+                    p.pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
+                    p.col_type = Fix_col2d.col_status.Collider;
+                    p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
+                    p.classnames.Add(Object_ctrl.class_name.Moster);
+                    p.classnames.Add(Object_ctrl.class_name.Tinymap);
+                    //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
+                    Main_ctrl.Creobj(p);
+                    Main_ctrl.Desobj(inputs.Itemid);
+                }
+                break;
         }
     }
     public void IsWolf()
