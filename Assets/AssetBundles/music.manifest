@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2314650052
+CRC: 2283185369
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 9967279347e91961d3a14b0f46368d07
+    Hash: c1a72c4646c5f56d595acb7e0fcdf95a
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -43,6 +43,7 @@ Assets:
 - "Assets/music/\u8FDC\u7A0B\u6CD5\u5E08/\u4EBA\u7269\u558A\u8BDD/\u706B\u7130\u91CA\u653E.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/Yeees\uFF08van\uFF09.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/Next.mp3"
+- "Assets/music/\u6050\u6016\u5206\u5B50/\u6050\u6016\u5206\u5B50\u6B7B\u4EA1-\u4F60\u5E72\u561B\u54CE\u54DF.mp3"
 - "Assets/music/\u9A91\u58EB/\u547D\u4E2D\u97F3\u6548/\u7206\u88C2\u91CD\u51FB\u547D\u4E2D.mp3"
 - "Assets/music/BOSS/\u4EBA\u7269\u558A\u8BDD/\u9B54\u6CD5\u70AE/\u9B54\u6CD5\u888D.mp3"
 - "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u547D\u4E2D\u97F3\u6548/\u666E\u653B/hit5.mp3"
@@ -59,6 +60,7 @@ Assets:
 - "Assets/music/\u8BED\u97F3\u5305/(HIT)\u554A\u554A\u554A~.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/Fack you~\uFF08van\uFF09.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u55F7~We doing.mp3"
+- "Assets/music/\u8BED\u97F3\u5305/\u65B0\u7684\u6328\u6253.mp3"
 - "Assets/music/\u8865\u5145/\u70B9\u51FB\u8840\u836F.ogg"
 - "Assets/music/\u8BED\u97F3\u5305/As we can\uFF08\u738B\uFF09.mp3"
 - "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u547D\u4E2D\u97F3\u6548/\u4E09\u8FDE\u6CE2/\u6C14\u529F\u6CE2\u547D\u4E2D.mp3"
@@ -136,6 +138,7 @@ Assets:
 - "Assets/music/BOSS/\u4EBA\u7269\u558A\u8BDD/\u5927\u81EA\u7206/\u5927\u81EA\u72062D.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u554A\uFF1F\u5E7B\u60F3\u4E61\uFF0C\u554A\uFF1F\uFF01\uFF08\u738B\uFF09.mp3"
 - "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u547D\u4E2D\u97F3\u6548/\u524D\u51B2\u62F3/\u524D\u51B2\u62F3\u547D\u4E2D.mp3"
+- "Assets/music/\u6050\u6016\u5206\u5B50/\u6050\u6016\u5206\u5B50\u6328\u6253-\u53EA\u56E0.mp3"
 - "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u547D\u4E2D\u97F3\u6548/\u98DE\u8E22/\u98DE\u8E22\u547D\u4E2D.ogg"
 - "Assets/music/\u8BED\u97F3\u5305/Youre alright then.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u738B\u8001\u677F my cum~\uFF08van\uFF09.mp3"
