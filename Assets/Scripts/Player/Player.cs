@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Google.Protobuf.Compiler.CodeGeneratorResponse.Types;
 using static Net.Frame.Types;
+using static UnityEngine.ParticleSystem;
 
 public class Player : BasicCharacter
 {
@@ -280,6 +281,16 @@ public class Player : BasicCharacter
                         }
                         else
                         {
+                            //GameObject effect = (GameObject)AB.getobj("解锁特效");
+                            //Camera effectCamera = GameObject.Find("EffectCamera").GetComponent<Camera>();
+
+                            //// 将屏幕坐标转换为世界坐标
+                            //Vector3 worldPos = effectCamera.ScreenToWorldPoint(new Vector3(100,100, effectCamera.nearClipPlane));
+
+                            //GameObject particle_instance = Instantiate(effect, effectCamera.transform);
+                            //particle_instance.transform.position = worldPos;
+                            //particle_instance.transform.localScale = new Vector3(1, 1, 0);
+                            //Destroy(particle_instance, 10f);
                             QCD = new Fixpoint(0, 0);
                         }
                     }
