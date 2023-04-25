@@ -6,6 +6,11 @@ public class Pool : MonoBehaviour
 {
     static Dictionary<string, Queue<GameObject>> pool = new Dictionary<string, Queue<GameObject>>();
 
+    public static void init()
+    {
+        pool = new Dictionary<string, Queue<GameObject>>();
+    }
+
     public static GameObject getobj(string name)
     {
         if (pool.ContainsKey(name))
@@ -31,7 +36,8 @@ public class Pool : MonoBehaviour
     public static void desobj(GameObject obj)
     {
         obj.SetActive(false);
-        pool[obj.name].Enqueue(obj);
+        Debug.Log(obj.name.Remove(obj.name.Length - 7));
+        pool[obj.name.Remove(obj.name.Length - 7)].Enqueue(obj);
     }
 
     public static void crepool(string name, int cnt)
