@@ -22,6 +22,7 @@ public class Player : BasicCharacter
     public bool words_ok = false;
 
     public AudioClip musicClip;
+    public bool Die = false;
 
     public enum Identity
     {
@@ -106,7 +107,7 @@ public class Player : BasicCharacter
     public override void Startx()
     {
         animator = GetComponent<Animator>();
-        SetStatus(100000, 10);//血量。基础攻击力       
+        SetStatus(100, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
@@ -379,7 +380,6 @@ public class Player : BasicCharacter
         status.max_hp = 100000000;
     }
 
-
     public override void Updatex()
     {
         QCD = QCD - Dt.dt;
@@ -389,7 +389,7 @@ public class Player : BasicCharacter
         GetTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(18, 0)); //是每秒恢复韧性值
-        if (status.death == true) ChangeStatus(StatusType.Death);
+        if (status.death == true && RealStatus != StatusType.Death) ChangeStatus(StatusType.Death);
         switch (RealStatus)
         {
             case StatusType.Normal:
@@ -1253,6 +1253,11 @@ public class Player : BasicCharacter
 
     private void Death()
     {
+        if(StatusTime > new Fixpoint(3,0))
+        {
+            Die = true;
+            gameObject.SetActive(false);
+        }
         if (StatusTime == Dt.dt)
         {
             PlayMusic("mf_die");
@@ -1280,9 +1285,27 @@ public class Player : BasicCharacter
         if (checkid() == true)
         {
             if (QCD > new Fixpoint(100, 0)) Player_ctrl.QCD.text = "Unable";
-            else Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+            else if (QCD > new Fixpoint(0, 0))
+            {
+                Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+                Player_ctrl.QCD_mask.fillAmount = QCD.to_float() / QCD_MAX.to_float();
+            }
+            else 
+            { 
+                Player_ctrl.QCD.text = "";
+                Player_ctrl.QCD_mask.fillAmount = 0;
+            }
             if (ECD > new Fixpoint(100, 0)) Player_ctrl.ECD.text = "Unable";
-            else Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
+            else if (ECD > new Fixpoint(0, 0))
+            {
+                Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
+                Player_ctrl.ECD_mask.fillAmount = ECD.to_float() / ECD_MAX.to_float();
+            }
+            else 
+            {
+                Player_ctrl.ECD.text = "";
+                Player_ctrl.ECD_mask.fillAmount = 0;
+            }
         }
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);

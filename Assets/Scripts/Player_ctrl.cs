@@ -14,6 +14,8 @@ public class Player_ctrl : MonoBehaviour
     public static NewBag BagUI;
     public static Text QCD;
     public static Text ECD;
+    public static Image QCD_mask;
+    public static Image ECD_mask;
     public static Fix_vector2 HomePos;
 
     public static Dictionary<(int, int), int> Attack = new Dictionary<(int, int), int>();
@@ -34,8 +36,26 @@ public class Player_ctrl : MonoBehaviour
     public static void Init_bag()
     {
         BagUI = GameObject.Find("BagButton").GetComponent<NewBag>();
-        QCD = GameObject.Find("QCD").GetComponentInChildren<Text>();
-        ECD = GameObject.Find("ECD").GetComponentInChildren<Text>();
+        GameObject QCD_Object = GameObject.Find("QCD");
+        GameObject ECD_Object = GameObject.Find("ECD");
+        QCD = QCD_Object.GetComponentInChildren<Text>();
+        ECD = ECD_Object.GetComponentInChildren<Text>();
+        Image[] children = QCD_Object.GetComponentsInChildren<Image>();
+        foreach(Image child in children)
+        {
+            if(child.name == "mask")
+            {
+                QCD_mask = child;
+            }
+        }
+        children = ECD_Object.GetComponentsInChildren<Image>();
+        foreach(Image child in children)
+        {
+            if(child.name == "mask")
+            {
+                ECD_mask = child;
+            }
+        }
         //MakeSuccessUI = GameObject.Find("Canvas/MakeSuccess");
         //MakeFailedUI = GameObject.Find("Canvas/MakeFail");
         //MakeSuccessUI.SetActive(false);
