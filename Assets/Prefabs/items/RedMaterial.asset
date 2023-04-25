@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RedMaterial
   m_EditorClassIdentifier: 
   itemname: RedMaterial
-  description: "\u9AD8\u7EA7\u6750\u6599\uFF0C\u7528\u4E8E\u5408\u6210\u4FEE\u590D\u8BBE\u65BD\u7684\u5927\u6750\u6599"
+  description: "\u7528\u4E8E\u5408\u6210\u4FEE\u590D\u8BBE\u65BD\u7684\u5927\u7EA2\u6750\u6599"
   image: {fileID: 21300000, guid: 9787cb1f8f456ca4fbdcd6674d0b1cc0, type: 3}
   id: 3
   MakeNeeds: 01000000

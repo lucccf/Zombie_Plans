@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lightball
   m_EditorClassIdentifier: 
   itemname: Lightball
-  description: "\u53D1\u5C04\u6C14\u529F\u6CE2"
+  description: "\u53D1\u5C043\u9897\u98DE\u5F39\uFF0C\u6BCF\u4F24\u5BB340\u70B9"
   image: {fileID: 21300000, guid: cf873fcde8b0e3e4aa62beedf836fbd7, type: 3}
   id: 514
   MakeNeeds: 01000000

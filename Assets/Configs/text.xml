@@ -28,10 +28,20 @@
 	
 	<info>
 		<id>-1</id>
-		<text>[Tips] 打击矿石、怪物可收集材料,前往基地制造道具</text>
-		<text>[Tips] 地标信息在基地查看,修复成功可削弱怪物潮</text>
-		<text>[Tips] 每波怪物潮会进攻基地,基地血量不可恢复</text>
-		<text>[New] 新增2座地标,现在共有5座地标</text>
+		<text>[制造道具]</text>
+		<text>打击矿石、怪物可收集材料,在基地制造道具</text>
+		<text>[修复地标]</text>
+		<text>地标信息在基地查看,修复成功可削弱怪物潮</text>
+		<text>[防御基地]</text>
+		<text>每波怪物潮会进攻基地,基地血量不可恢复</text>
+		<text>[提防狼人]</text>
+		<text>狼人会尽力杀死好人或破坏修复的进度</text>
+	</info>
+
+	<info>
+		<id>-2</id>
+		<text>[New]</text>
+		<text>新增2座地标,目前共有5座地标</text>
 	</info>
 	
 	
@@ -61,13 +71,24 @@
 
 	<info>
 		<id>-1</id>
-		<text>[Tips] 怪物潮生成的怪物能破坏基地耐久，耐久无法恢复</text>
-		<text>[Tips] 启动地图外围的爆破兵，它们也能降低基地耐久</text>
-		<text>[Tips] 破坏好人修复地标进度,也可以寻找机会干掉他们</text>
-		<text>[Tips] 地标没有被修复成功的数量越多，怪物潮能力就越强</text>
-		<text>[Tips] 使用地图中的灰色洞传送门，可以快速移动</text>
-		<text>[New] 新增2座地标,现在共有5座地标</text>
+		<text>[破坏基地耐久]</text>
+		<text>耐久不会恢复,尽力利用怪物潮的怪物</text>
+		<text>[破坏基地耐久]</text>
+		<text>启动地图外围的爆破兵</text>
+		<text>[阻止好人]</text>
+		<text>对地标重拳出击,破坏好人修复地标进度</text>
+		<text>[阻止好人]</text>
+		<text>寻找机会除掉好人</text>
+		<text>[Tips]</text>
+		<text>地标未修复的数量越多,怪物潮能力就越强</text>
+		<text>[Tips]</text>
+		<text>地图中的灰色洞传送门,可以快速移动</text>
 	</info>
 	
+	<info>
+		<id>-2</id>
+		<text>[New]</text>
+		<text>新增2座地标,目前共有5座地标</text>
+	</info>
 </wolf>
 </Text>
