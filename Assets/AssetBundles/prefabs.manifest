@@ -1,20 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 1837380789
+CRC: 3911804390
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8143210d31c2217e2b1ee1f5dd259b09
-=======
-CRC: 4127648970
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 0adbc626bb0006c2f0f6a5153fec1f05
->>>>>>> 6dd3b9ff4e6e60b3c0d96e047b5eecc6325363cc
+    Hash: 2908d39f1dcb9d3708c588a9fa099d18
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bbf7850d786b0d8fcfddfacef2df78aa
+    Hash: 05541860188952425291a0b87642ea22
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -112,6 +104,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2863647e31d5b334583aee97ad48c8f8, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
@@ -162,6 +156,7 @@ Assets:
 - Assets/Prefabs/Bomb2.prefab
 - Assets/Prefabs/red.prefab
 - Assets/Prefabs/Lighting.prefab
+- Assets/Prefabs/PlayerButton.prefab
 - Assets/Prefabs/FireBall.prefab
 - Assets/Prefabs/number/4.png
 - Assets/Prefabs/number/1.png
