@@ -8,7 +8,7 @@ public class AttackButtonController : MonoBehaviour
     public int buttonCount;
 
     // Button的Prefab
-    public GameObject buttonPrefab;
+    GameObject buttonPrefab;
 
     // 控制Button的GameObject
     public GameObject controlButton;
@@ -20,7 +20,7 @@ public class AttackButtonController : MonoBehaviour
     {
         // 找到控制Button的组件
         Button controlButtonComponent = controlButton.GetComponent<Button>();
-
+        buttonPrefab = (GameObject)AB.getobj("PlayerButton");
         // 给控制Button添加OnClick事件
         controlButtonComponent.onClick.AddListener(ToggleUI);
     }
@@ -45,7 +45,7 @@ public class AttackButtonController : MonoBehaviour
             att.pl_id = i;
             att.op_id = (int)Player_ctrl.plays[i].id;
 
-            buttonObject.transform.localPosition = new Vector3(120 * i + 120, 0, 0);
+            buttonObject.transform.localPosition = new Vector3(150 * i + 140, 0, 0);
         }
     }
 

@@ -150,6 +150,7 @@ namespace Net
         [pbr::OriginalName("Mark_fac")] Markfac = 31,
         [pbr::OriginalName("Use_item")] Useitem = 32,
         [pbr::OriginalName("Save_TLB")] SaveTLB = 33,
+        [pbr::OriginalName("Send_Seed")] SendSeed = 34,
     }
 
     #endregion
