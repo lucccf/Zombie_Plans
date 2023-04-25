@@ -52,6 +52,7 @@ public class BuildingButton : MonoBehaviour
         {
             tmp = playerpanel.transform.Find("SaveUI").gameObject;
             //关闭键
+            tmp.GetComponent<SaveUI>().talibanid = (int)talibanid;
             closebutton = playerpanel.transform.Find("SaveUI/background/CloseButton").gameObject;
             closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
