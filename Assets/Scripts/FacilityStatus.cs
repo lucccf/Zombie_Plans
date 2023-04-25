@@ -23,7 +23,7 @@ public class FacilityStatus : Monster
             status.hp = 100 * m.Value;
             curhp = status.hp;
             curnum = fac.commited[m.Key];
-            Debug.Log("FacBar:" + 100 * m.Value);
+            curnum = fac.commited[m.Key];
         }
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位

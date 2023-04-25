@@ -27,7 +27,9 @@ public class Music : MonoBehaviour
         }
         foreach(var aa in aas.Values)
         {
-            aa.maxDistance = 50;
+            aa.rolloffMode = AudioRolloffMode.Linear;
+            aa.minDistance = 1;
+            aa.maxDistance = 1;
         }
     }
 

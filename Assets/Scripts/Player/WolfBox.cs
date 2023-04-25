@@ -29,7 +29,6 @@ public class WolfBox : MonoBehaviour
 
     public void GetItem(Dictionary<int,int>item)
     {
-        Debug.Log("YYYYY" + item.Count);
         BoxItem = item;
         //GameObject ItemButton = Instantiate((GameObject)AB.getobj("UI/BagItem"));
         GameObject ItemButton = Instantiate((GameObject)AB.getobj("BagItem"));
