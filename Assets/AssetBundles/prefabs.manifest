@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 915403197
+CRC: 1837380789
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4c372302015751d0d29a8fc4c04db8a8
+    Hash: 8143210d31c2217e2b1ee1f5dd259b09
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 771664007337ae8abdc145732424b5d0
+    Hash: bbf7850d786b0d8fcfddfacef2df78aa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -185,4 +185,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music

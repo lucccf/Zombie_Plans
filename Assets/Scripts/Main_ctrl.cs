@@ -88,6 +88,7 @@ public class Main_ctrl : MonoBehaviour
         Map_create.Facility_create();
         Map_create.Protal_create();
         Map_create.Background_create();
+        Map_create.TaLiBan_create();
         Player_ctrl.Init_bag();
         CalRoad();
         Item[] Items;

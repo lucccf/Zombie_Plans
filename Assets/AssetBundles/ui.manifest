@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 3750831378
+CRC: 956395542
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 14f08f3f6fa9ce5b945d6085b0939e22
+    Hash: d4ad023647df123c257fdd39e1a83aa4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: b6db42f64e3e05d87f65cc4ba027c64a
+    Hash: e61062e604aedc0cbbf12564f5ad334a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -121,6 +121,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 85973daf6ab7b444bb7562dc49e25793, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 00f8fab196d04884894e35b326b7422c, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -150,5 +152,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/item
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/prefabs
