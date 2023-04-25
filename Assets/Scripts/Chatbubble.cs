@@ -9,7 +9,7 @@ public class Chatbubble : MonoBehaviour
     public Player player;
     public GameObject bub;
     public Transform target;
-    private Vector3 offset = new Vector3(0f, 1f, 0f);
+    private Vector3 offset = new Vector3(0f, 2.2f, 0f);
     Vector3 screenPos;
 
     private float t = 0;
