@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/picture/player/道具/陷阱/陷阱UI.meta
+guid: 417ae32cc693b7842ba2bd0fd875d4ea
+folderAsset: yes
+DefaultImporter:
+========
 guid: 5bca98635933ace4f835dfedf8d89525
 TextScriptImporter:
+>>>>>>>> 2ef39708db9360858b236f2db24066198718649b:Assets/Configs/buff_txt.xml.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

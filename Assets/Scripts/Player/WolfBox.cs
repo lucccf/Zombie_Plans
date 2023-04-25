@@ -81,7 +81,7 @@ public class WolfBox : MonoBehaviour
         }
         CheckItemId = x;
         ChangeFrame(BoxItemObject[CheckItemId], 1);
-        Description.text = Main_ctrl.GetItemById(x).name;
+        Description.text = Main_ctrl.GetItemById(x).description;
     }
 
     private void GetButtonOnCilck()

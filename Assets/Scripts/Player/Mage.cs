@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Mage : Knight
 {
+
+    public override void WeakenCD(Fixpoint rate)
+    {
+        FireBallCD_MAX = FireBallCD_MAX * new Fixpoint(2, 0);
+        RecoverCD_MAX = RecoverCD_MAX * new Fixpoint(2, 0);
+        MoveCD_MAX = MoveCD_MAX * new Fixpoint(2, 0);
+    }
     public override void InitStatic()
     {
         FireBallCD_MAX = new Fixpoint(4, 0);
@@ -164,9 +171,9 @@ public class Mage : Knight
     private Fixpoint FireBallCD = new Fixpoint(0, 0);
     private Fixpoint RecoverCD = new Fixpoint(0, 0);
     private Fixpoint MoveCD = new Fixpoint(0, 0);
-    private static Fixpoint FireBallCD_MAX = new Fixpoint(4, 0);
-    private static Fixpoint RecoverCD_MAX = new Fixpoint(15, 0);
-    private static Fixpoint MoveCD_MAX = new Fixpoint(10, 0);
+    private Fixpoint FireBallCD_MAX = new Fixpoint(4, 0);
+    private Fixpoint RecoverCD_MAX = new Fixpoint(15, 0);
+    private Fixpoint MoveCD_MAX = new Fixpoint(10, 0);
     private void Normal()
     {
         KnightAnimaSpeed = 5f;

@@ -9,7 +9,12 @@ public class Knight : Monster
     protected int KnightAnimaHited = 0;
 
     private Fixpoint KnightSkillCD = new Fixpoint(0, 0);
-    private static Fixpoint KnightSkillCD_MAX = new Fixpoint(10, 0);
+    private Fixpoint KnightSkillCD_MAX = new Fixpoint(10, 0);
+
+    public override void WeakenCD(Fixpoint rate)
+    {
+        KnightSkillCD_MAX = KnightSkillCD_MAX * rate;
+    }
 
     public override void InitStatic()
     {
@@ -33,7 +38,7 @@ public class Knight : Monster
         SkillBetweenTime = new Fixpoint(21, 2);//伤害的间隔
         SkillAttackRate = new Fixpoint(3, 0);//攻击倍率
 
-        KnightSkillCD_MAX = new Fixpoint(10, 0);
+        //KnightSkillCD_MAX = new Fixpoint(10, 0);
     }
     public override void InitNormal()
     {
@@ -166,7 +171,16 @@ public class Knight : Monster
             long AttackId = a.opsite.id;
             if (!Main_ctrl.All_objs.ContainsKey(AttackId)) continue;
             Attack attack = (Attack)(Main_ctrl.All_objs[AttackId].modules[Object_ctrl.class_name.Attack]);
-            if (attack.attacker_type == CharacterType) continue;
+            if (attack.attacker_type == CharacterType && attack.attacker_type != 0) continue;
+            if (attack.attacker_type == 1 && CharacterType == 2) continue;
+            if (attack.attacker_type == 2 && CharacterType == 1) continue;
+            if (attack.attacker_type != 2 && CharacterType == 4) continue;
+            if (attack.attacker_type != 0 && CharacterType == 5) continue;
+            if (CharacterType == 5 && ((Player)Main_ctrl.All_objs[attack.attakcer_id].modules[Object_ctrl.class_name.Player]).Attack_fac) continue;
+            if (attack.attakcer_id == id)
+            {
+                continue;
+            }
 
             if (attack.type == 1)
             {
@@ -292,17 +306,17 @@ public class Knight : Monster
 
 
     private bool KnightCreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
+    private static Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
+    private static Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
+    private static Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
+    private static Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
+    private static Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
+    private static Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
 
-    private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
-    private Fixpoint Attack2Damage = new Fixpoint(4, 0);
-    private Fixpoint Attack3Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
+    private static Fixpoint Attack2Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack3Damage = new Fixpoint(4, 0);
     protected virtual void AttackToNext()
     {
         KnightCreatedAttack = false;
@@ -425,7 +439,7 @@ public class Knight : Monster
             if (SkillAttackTimes == 0)
             {
                 PlayMusic("爆裂重击释放语音");
-                Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2.5f, 0);
+                Vector3 pos = new Vector3(f.pos.x.to_float(), f.pos.y.to_float() + 2f, 0);
                 if (AnimaToward < 0) pos.x -= 3f;
                 else pos.x += 3f;
                 Instantiate((GameObject)AB.getobj("knightskill"), pos, Quaternion.identity);
