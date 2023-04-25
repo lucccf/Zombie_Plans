@@ -304,6 +304,7 @@ MonoBehaviour:
   id: 0
   type2: 0
   AnimaToward: 1
+  Attack_fac: 0
   LockId: -1
   Check: 0
   ToHomeFlag: 0

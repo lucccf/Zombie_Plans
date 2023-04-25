@@ -550,7 +550,6 @@ public class Map_create : MonoBehaviour
 
                     if (chos[jj] >= 1)
                     {
-                        Debug.Log("222");
                         for (int ii = 0; ii < sec[1]; ii++)
                         {
                             yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
@@ -719,7 +718,6 @@ public class Map_create : MonoBehaviour
                     }
                 }
             }
-            Debug.Log("???" + boxitems.Count);
             Main_ctrl.wolfboxes[i].InitBoxItem(boxitems);
         }
     }

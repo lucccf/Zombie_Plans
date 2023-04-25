@@ -653,7 +653,6 @@ public class Main_ctrl : MonoBehaviour
                     t.id = cnt;
                     if(info.name == "WolfBox")
                     {
-                        Debug.Log("XXXXXYYY" + info.ToughnessDamage );
                         obj.GetComponent<WolfBoxInMap>().BoxId = info.ToughnessDamage;
                     }
                     if(info.name == "TrapX")
