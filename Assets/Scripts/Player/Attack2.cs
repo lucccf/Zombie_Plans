@@ -54,6 +54,7 @@ public class Attack2 : Attack
             AnimaDestroy = true;
         } else if(AliveTime > MaxAliveTime)
         {
+            transform.rotation = Quaternion.identity;
             Main_ctrl.Desobj(id);
         }
 

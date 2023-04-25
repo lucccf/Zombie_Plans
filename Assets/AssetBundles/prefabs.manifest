@@ -3,10 +3,10 @@ CRC: 2344353935
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: c07064160210220635a184d455c52097
+    Hash: a140547bb9b70ccb4c4a2dab9070ae42
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 17e2f47c7b4b9d508a631825cd07f892
+    Hash: 7237c38e7c01057a0d6293f2fa746be0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -36,9 +36,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -190,4 +190,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/music
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
