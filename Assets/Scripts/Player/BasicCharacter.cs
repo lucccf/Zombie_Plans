@@ -230,10 +230,15 @@ public class BasicCharacter : MonoBehaviour
             Fixpoint HpDamage = attack.HpDamage;
             int ToughnessDamage = attack.ToughnessDamage;
 
-            status.GetAttacked(HpDamage, ToughnessDamage);
-
-            Preform(status.last_damage);
-
+            if (CharacterType == 0 && attack.HpDamage > new Fixpoint(2000, 0))
+            {
+                status.GetAttacked(new Fixpoint(0,0), ToughnessDamage);
+            }
+            else
+            {
+                status.GetAttacked(HpDamage, ToughnessDamage);
+                Preform(status.last_damage);
+            }
             //Debug.Log(HpDamage + " " + ToughnessDamage);
 
             if (attack.type == 1)
@@ -362,6 +367,7 @@ public class BasicCharacter : MonoBehaviour
             Main_ctrl.NewItem(f.pos, xx.Key, xx.Value,1, new Fix_vector2(new Fixpoint((int)(Rand.rand() % 800 - 400), 2), new Fixpoint(4, 0)));
             //Main_ctrl.NewItem(f.pos + new Fix_vector2(new Fixpoint((long)(Rand.rand() % 21 - 10), 1), new Fixpoint(0, 0)), xx.Key, xx.Value, 1f, new Fix_vector2(new Fixpoint((int)(Rand.rand() % 800 - 400), 2), new Fixpoint(4, 0)));
         }
+        Main_ctrl.NewItem(f.pos, "Clock", 1, 0.2f, new Fix_vector2(0, 0));
     }
 
     public float CheckHealth()

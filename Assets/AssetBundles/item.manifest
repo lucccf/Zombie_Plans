@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 170742090
+CRC: 3590393368
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d854b1fad1e9621cdcdc62c81a45e33b
+    Hash: 1dadacd9ea817e7e2fd96b3d5ce94ab8
   TypeTreeHash:
     serializedVersion: 2
     Hash: 9d77e6eae0edcdad553d2dedda84ea37
@@ -22,6 +22,7 @@ Assets:
 - Assets/Prefabs/items/BlueBigMaterial.asset
 - Assets/Prefabs/items/YellowBigMaterial.asset
 - Assets/Prefabs/items/Herb.asset
+- Assets/Prefabs/items/Clock.asset
 - Assets/Prefabs/items/Medicine.asset
 - Assets/Prefabs/items/RedMaterial.asset
 - Assets/Prefabs/items/Mineral.asset

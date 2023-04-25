@@ -509,7 +509,7 @@ public class Map_create : MonoBehaviour
                     }
                     else
                     {
-                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(411, 2));
                     }
                     Monster_create.pos_monster.Add(new Mon_pos(k, getXX(xx, id)));
                     Monster_create.size_monster.Add(yy);

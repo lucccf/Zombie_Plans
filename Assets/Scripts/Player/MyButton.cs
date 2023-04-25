@@ -16,13 +16,13 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // 鼠标移入按钮
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("VVVMouse Enter" + id);
+        //Debug.Log("VVVMouse Enter" + id);
     }
 
     // 鼠标移出按钮
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("VVVMouse Exit" + id);
+        //Debug.Log("VVVMouse Exit" + id);
     }
 
     // 点击按钮
@@ -30,6 +30,11 @@ public class MyButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            PlayerOptData x = new PlayerOptData();
+            x.Opt = PlayerOpt.Useitem;
+            x.Userid = (int)Main_ctrl.user_id;
+            x.Itemid = id;
+            Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
             //Debug.Log("VVVLeft" + id);
         }
         else if (eventData.button == PointerEventData.InputButton.Right)

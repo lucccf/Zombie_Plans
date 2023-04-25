@@ -34,6 +34,7 @@ public class Terrorist : Knight
         RealStatus = StatusType.Search;
         audiosource = GetComponent<AudioSource>();
         PlayMusic("恐怖分子奔跑附带的音效");
+        HitMisuc = "恐怖分子挨打-只因";
     }
 
     // Update is called once per frame
@@ -79,7 +80,8 @@ public class Terrorist : Knight
     {
         if (first == true)
         {
-            Main_ctrl.NewAttack(f.pos, new Fix_vector2(0, 0), new Fixpoint(6, 0), new Fixpoint(6, 0), status.Damage(), 120, id, AnimaToward, false, CharacterType, 3, "");//最后一个参数是击飞类型
+            Player_ctrl.audiox.PlayMusic("恐怖分子死亡-你干嘛哎哟");
+            Main_ctrl.NewAttack(f.pos, new Fix_vector2(0, 0), new Fixpoint(6, 0), new Fixpoint(6, 0), new Fixpoint(4000,0), 120, id, AnimaToward, false, CharacterType, 3, "");//最后一个参数是击飞类型
             Main_ctrl.Desobj(id);
             GameObject obj = Instantiate((GameObject)AB.getobj("Bomb2"));
             Instantiate(obj, transform.position, transform.rotation);
