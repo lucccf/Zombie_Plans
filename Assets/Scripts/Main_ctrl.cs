@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Net;
 using System.Xml;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -738,6 +739,7 @@ public class Main_ctrl : MonoBehaviour
 
     private static void DestoryObj(long id)
     {
+        if (!All_objs.ContainsKey(id)) return;
         Object_ctrl obj = All_objs[id];
         foreach (Object_ctrl.class_name m in obj.modules.Keys)
         {
