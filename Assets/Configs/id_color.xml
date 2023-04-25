@@ -1,0 +1,45 @@
+<id_color>
+	
+	<info>
+		<id>1</id>
+		<r>255</r>
+		<g>0</g>
+		<b>0</b>
+	</info>
+
+	<info>
+		<id>2</id>
+		<r>255</r>
+		<g>103</g>
+		<b>0</b>
+	</info>
+
+	<info>
+		<id>3</id>
+		<r>255</r>
+		<g>239</g>
+		<b>0</b>
+	</info>
+		
+	<info>
+		<id>4</id>
+		<r>12</r>
+		<g>193</g>
+		<b>0</b>
+	</info>
+	
+	<info>
+		<id>5</id>
+		<r>0</r>
+		<g>42</g>
+		<b>255</b>
+	</info>
+	
+	<info>
+		<id>6</id>
+		<r>147</r>
+		<g>0</g>
+		<b>138</b>
+	</info>
+
+</id_color>
