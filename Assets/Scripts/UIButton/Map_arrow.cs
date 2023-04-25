@@ -63,7 +63,6 @@ public class Map_arrow : MonoBehaviour
             }
         }
         p3.z = 0;
-        Debug.Log(obj.name + p3);
         p3 = p3 * 6.2f;
         return p3;
     }
