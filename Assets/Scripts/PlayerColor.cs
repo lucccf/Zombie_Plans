@@ -11,4 +11,5 @@ public class PlayerColor : MonoBehaviour
     public static Color Player4 = new Color(0.04f, 0.756f, 0);
     public static Color Player5 = new Color(0, 0.16f, 1f);
     public static Color Player6 = new Color(0.576f, 0, 0.149f);
+    public static List<Color> playercolors = new List<Color> { Player1, Player2, Player3, Player4, Player5, Player6 };
 }
