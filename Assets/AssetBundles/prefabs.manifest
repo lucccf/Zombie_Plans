@@ -1,20 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 4107581399
+CRC: 497754766
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ab521d255e9eb6b06abbc4873822eb6f
-=======
-CRC: 1702572586
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: 99e5f8594322c2d13da7fb00087810aa
->>>>>>> 7a4d40677388b526e5e1db5976a9dc7289836120
+    Hash: 92374ad816d083c07b8141606c244464
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 8b716ec86558d60b91fe417cd4b155b7
+    Hash: bbf7850d786b0d8fcfddfacef2df78aa
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -44,9 +36,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -193,4 +185,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/music
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music

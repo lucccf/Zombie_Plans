@@ -712,8 +712,8 @@ MonoBehaviour:
     type: 1
   - obj: {fileID: 4609951894155913624}
     type: 2
-  - obj: {fileID: 4609951895016195879}
-    type: 2
+  - obj: {fileID: 4609951894523545944}
+    type: 6
   - obj: {fileID: 4609951893710466133}
     type: 2
   - obj: {fileID: 1340757044433269944}
@@ -1163,8 +1163,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4609951894523545947}
   m_TextComponent: {fileID: 4609951895016195873}
   m_Placeholder: {fileID: 4609951894881123128}
-  m_ContentType: 0
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0

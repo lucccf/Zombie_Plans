@@ -891,6 +891,7 @@ public class Player : BasicCharacter
 
     private GameObject Building;
     private GameObject Protal;
+    private GameObject Taliban;
     private void GetTrigger()
     {
         GetColider();
@@ -927,6 +928,14 @@ public class Player : BasicCharacter
                     GameObject protalbutton = (GameObject)AB.getobj("ProtalButton");
                     Protal = Instantiate(protalbutton, parent.transform);
                 }
+                else if (trigger.triggername == "saveboom" && checkid() == true)
+                {
+                    GameObject parent = GameObject.Find("PlayerPanel");
+                    GameObject protalbutton = (GameObject)AB.getobj("Building");
+                    Taliban = Instantiate(protalbutton, parent.transform);
+                    Taliban.GetComponent<BuildingButton>().talibanid = a.opsite.id;
+                    Taliban.name = trigger.name;
+                }
                 else if (trigger.triggername == "TrapX")
                 {
                     trigger.Explore();
@@ -938,7 +947,7 @@ public class Player : BasicCharacter
             else if (a.type == Fix_col2d_act.col_action.Trigger_out)
             {
                 Trigger trigger = (Trigger)(Main_ctrl.All_objs[a.opsite.id].modules[Object_ctrl.class_name.Trigger]);
-                //Debug.Log("Trigger out" + trigger.triggername);
+                Debug.Log("Trigger out" + trigger.triggername);
                 if (trigger.triggertype == "building")
                 {
                     Destroy(Building);
@@ -946,7 +955,12 @@ public class Player : BasicCharacter
                 else if (trigger.triggertype == "protal")
                 {
                     Destroy(Protal);
-                } else if(trigger.triggername == "WolfBox" && checkid() == true)
+                }
+                else if (trigger.triggertype == "saveboom")
+                {
+                    Destroy(Taliban);
+                }
+                else if(trigger.triggername == "WolfBox" && checkid() == true)
                 {
                     trigger.BoxTriggerOut();
                 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class BuildingButton : MonoBehaviour
 {
     public long buildingid;
+    public long talibanid;
     GameObject playerpanel;
     GameObject WorkTable;
     GameObject tmp;
@@ -17,6 +18,7 @@ public class BuildingButton : MonoBehaviour
     GameObject worktableclosebutton;
     GameObject itemprogress;
     GameObject itemprogresstext;
+    
     void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(HandleUI);
@@ -45,6 +47,13 @@ public class BuildingButton : MonoBehaviour
             //材料列表
 
             tmp.GetComponent<FacilityUpdate>().buildingid = buildingid;
+        }
+        if (gameObject.name == "saveboom(Clone)")
+        {
+            tmp = playerpanel.transform.Find("SaveUI").gameObject;
+            //关闭键
+            closebutton = playerpanel.transform.Find("SaveUI/background/CloseButton").gameObject;
+            closebutton.GetComponent<Button>().onClick.AddListener(CloseUI);
         }
     }
 

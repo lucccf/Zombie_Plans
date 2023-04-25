@@ -11,6 +11,7 @@ public enum objtype
     Image,
     AudioSource,
     Slider,
+    InputField
     /*other type*/
 }
 
