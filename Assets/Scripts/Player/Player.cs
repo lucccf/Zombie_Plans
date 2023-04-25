@@ -380,7 +380,7 @@ public class Player : BasicCharacter
                     Obj_info p = new Obj_info();
                     p.name = "Terrorist";
                     p.cre_type = 1;
-                    Fix_vector2 p2 = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    Fix_vector2 p2 = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(411, 2));
                     p.hei = p2.y.Clone();
                     p.wid = p2.x.Clone();
                     p.pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
