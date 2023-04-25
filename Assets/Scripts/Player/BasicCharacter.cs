@@ -213,6 +213,7 @@ public class BasicCharacter : MonoBehaviour
             {
                 continue;
             }
+            Debug.Log("Hit" + id);
 
             PlayMusic(HitMisuc);
             attack.PlayMusic();
@@ -352,9 +353,18 @@ public class BasicCharacter : MonoBehaviour
     protected void RemoveHited()
     {
         GetColider();
-        if (AttackQueue.Count > 0)
+        while (AttackQueue.Count > 0)
         {
             AttackQueue.Dequeue();
+        }
+    }
+
+    protected void RemoveTrigger()
+    {
+        GetColider();
+        while (TriggerQueue.Count > 0)
+        {
+            TriggerQueue.Dequeue();
         }
     }
 

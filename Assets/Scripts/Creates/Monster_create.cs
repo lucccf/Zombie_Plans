@@ -34,6 +34,7 @@ public class Monster_create : MonoBehaviour
         size_zombies1 = new List<Fix_vector2>();
         pos_zombies2 = new List<Mon_pos>();
         size_zombies2 = new List<Fix_vector2>();
+        Getdebuff();
     }
 
     public class cre_items
@@ -50,6 +51,7 @@ public class Monster_create : MonoBehaviour
 
     public static void Get_mon_items()
     {
+        All_m_items = new Dictionary<string, cre_items>();
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(Application.dataPath + "/Configs/monster_item.xml");
         XmlNodeList mos = xmlDoc.SelectNodes("/monster_item/monster");
@@ -94,6 +96,20 @@ public class Monster_create : MonoBehaviour
                 }
             }
             All_m_items[name] = c1;
+        }
+    }
+
+    static Dictionary<int, int> debuff_rate = new Dictionary<int, int>();
+
+    public static void Getdebuff()
+    {
+        debuff_rate = new Dictionary<int, int>();
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load(Application.dataPath + "/Configs/buff_txt.xml");
+        XmlNodeList debuffs = xmlDoc.SelectNodes("/buff_txt/buff");
+        foreach (XmlNode xx in debuffs)
+        {
+            debuff_rate[int.Parse(xx.SelectSingleNode("id").InnerText)] = int.Parse(xx.SelectSingleNode("value").InnerText);
         }
     }
 
@@ -153,7 +169,7 @@ public class Monster_create : MonoBehaviour
                 p.name = "Terrorist";
                 break;
         }
-        if (All_m_items.ContainsKey(p.name))
+        if (All_m_items.ContainsKey(p.name) && type2 == 0)
         {
             p.falls = get_item(All_m_items[p.name], 1);
         }
@@ -170,7 +186,31 @@ public class Monster_create : MonoBehaviour
         p.classnames.Add(Object_ctrl.class_name.Moster);
         p.classnames.Add(Object_ctrl.class_name.Tinymap);
         //Debug.Log(p.pos.x.to_float() + " " + p.pos.y.to_float());
-        Main_ctrl.CreateObj(p);
+        Monster g1 =  Main_ctrl.CreateObj(p).GetComponent<Monster>();
+        foreach (var xx in Flow_path.facilities.Values)
+        {
+            if (xx.buff)
+            {
+                switch (xx.debuff)
+                {
+                    case 1:
+                        g1.WeakenHp(new Fixpoint(debuff_rate[1], 2));
+                        break;
+                    case 2:
+                        g1.WeakenAttack(new Fixpoint(debuff_rate[2], 2));
+                        break;
+                    case 3:
+                        g1.WeakenSpeed();
+                        break;
+                    case 4:
+                        g1.WeakenCD(new Fixpoint(debuff_rate[4], 2));
+                        break;
+                    case 5:
+                        g1.WeakenToughness();
+                        break;
+                }
+            }
+        }
         Flow_path.zombie_cnt++;
     }
 

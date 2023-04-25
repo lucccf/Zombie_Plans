@@ -9,6 +9,7 @@ public class Facility : BasicCharacter
     public int cond;
     public bool repaired;
     public bool buff;
+    public int debuff;
 
     // Start is called before the first frame update
     void Start()

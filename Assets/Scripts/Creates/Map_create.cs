@@ -201,6 +201,7 @@ public class Map_create : MonoBehaviour
 
     static int[] chos;
     static (int, int)[] fac_pos;
+    static int[] debuffs;
 
     public static void Facility_create()
     {
@@ -209,7 +210,23 @@ public class Map_create : MonoBehaviour
         XmlNodeList mill_info = ItemxmlDoc.SelectNodes("/background/mill/mill_info");
 
         chos = new int[mill_info.Count];
+        debuffs = new int[mill_info.Count];
         fac_pos = new (int, int)[mill_info.Count];
+        int[] nums = new int[mill_info.Count];
+
+        for(int i = 0; i < 5; i++)
+        {
+            debuffs[i] = (int)(Rand.rand() % 5);
+            int jj = 0;
+            while (nums[debuffs[i]] != 0)
+            {
+                jj++;
+                debuffs[i] = (int)(Rand.rand() % 5);
+                if (jj > 100) break;
+            }
+            nums[debuffs[i]] = 1;
+        }
+
         for (int i = 0; i < 3; i++)
         {
             int k = (int)(Rand.rand() % (ulong)mill_info.Count);
@@ -247,7 +264,7 @@ public class Map_create : MonoBehaviour
 
             if (chos[ix] == 1)
             {
-                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp);
+                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp, debuffs[ix] + 1);
             }
             ix++;
         }
@@ -275,7 +292,7 @@ public class Map_create : MonoBehaviour
 
             if (chos[ix] == 2)
             {
-                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp);
+                Building_single_create(name, new Fixpoint(floor_hei * 3, 1), new Fixpoint(floor_hei * 4, 1), pos, "building", Bud_cnt++, tmp, debuffs[ix] + 1);
             }
             ix++;
         }
@@ -345,7 +362,7 @@ public class Map_create : MonoBehaviour
     }
 
 
-    public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material) 
+    public static void Building_single_create(string name , Fixpoint hei, Fixpoint wid, Fix_vector2 pos, string type , long id , Dictionary<int,int> material, int debuff) 
     {
         Obj_info home_info = new Obj_info();
         home_info.name = "facility";
@@ -357,6 +374,7 @@ public class Map_create : MonoBehaviour
         home_info.type = type;
         home_info.attacker_id = id;
         home_info.materials = material;
+        home_info.debuff = debuff;
         home_info.classnames.Add(Object_ctrl.class_name.Tinymap);
         home_info.classnames.Add(Object_ctrl.class_name.Trigger);
         home_info.classnames.Add(Object_ctrl.class_name.Facility);
@@ -502,16 +520,8 @@ public class Map_create : MonoBehaviour
 
                 if (xml_name == "boss_pos")
                 {
-                    int k = (int)(Rand.rand() % 2 + 4);
-                    if (k == 2)
-                    {
-                        yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
-                    }
-                    else
-                    {
-                        yy = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(411, 2));
-                    }
-                    Monster_create.pos_monster.Add(new Mon_pos(k, getXX(xx, id)));
+                    yy = new Fix_vector2(new Fixpoint(155, 2), new Fixpoint(295, 2));
+                    Monster_create.pos_monster.Add(new Mon_pos(4, getXX(xx, id)));
                     Monster_create.size_monster.Add(yy);
                 }
 

@@ -21,6 +21,7 @@ public class Mineral : Monster
 
     public override void Updatex()
     {
+        RemoveTrigger();
         BasicCharacterGetHited();
         if(status.death == true)
         {

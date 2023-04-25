@@ -20,8 +20,9 @@ public class Terrorist : Knight
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         CharacterType = 2;
-        SetStatus(100, 10);//血量，基础攻击力
+        SetStatus(2000, 10);//血量，基础攻击力
         status.max_toughness = 100000000;
         status.toughness = 100000000;
         animator = GetComponent<Animator>();
@@ -45,6 +46,7 @@ public class Terrorist : Knight
 
     public override void Updatex()
     {
+        RemoveTrigger();
         BasicCharacterGetHited();
         StatusTime += Dt.dt;
         if (status.death == true)
