@@ -50,6 +50,7 @@ public class Monster1 : Monster
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
+        HitMisuc = "嗷~F K boy~";
         //ToHome();
     }
 

@@ -57,6 +57,7 @@ public class Knight : Monster
         ToughnessStatus = new int[2] { 20, 0 };//阶段
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
+        HitMisuc = "骑士挨打";
         //ToHome();
 
     }

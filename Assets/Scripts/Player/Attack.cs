@@ -18,7 +18,22 @@ public class Attack : MonoBehaviour
     public int hited_fly_type;
     public string MusicName;
 
-    protected Fixpoint AliveTime = new Fixpoint(0, 0); 
+    protected Fixpoint AliveTime = new Fixpoint(0, 0);
+
+    AudioSource audiosource;
+    public void Awake()
+    {
+        audiosource = GetComponent<AudioSource>();
+    }
+
+    public void PlayMusic()
+    {
+        //Debug.Log("Music " + Time.time + " " + MusicName);
+        if (MusicName == "") return;
+        audiosource.Stop();
+        audiosource.clip = (AudioClip)AB.getobj(MusicName);
+        audiosource.Play();
+    }
 
     public virtual void Updatex()
     {

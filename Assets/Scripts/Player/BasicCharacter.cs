@@ -36,6 +36,8 @@ public class BasicCharacter : MonoBehaviour
     protected Fix_vector2 Rebound = new Fix_vector2(new Fixpoint(3, 0), new Fixpoint(11, 1));//倒地的x速度和y速度
 
     protected int FlyTimes = 0;
+
+    protected string HitMisuc = "";
     protected enum StatusType
     {
         Normal,
@@ -212,7 +214,9 @@ public class BasicCharacter : MonoBehaviour
                 continue;
             }
 
-            PlayMusic(attack.MusicName);
+            PlayMusic(HitMisuc);
+            attack.PlayMusic();
+            //PlayMusic(attack.MusicName);
 
             AnimaToward = -attack.toward;
             this_hited = true;

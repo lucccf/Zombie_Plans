@@ -112,6 +112,7 @@ public class Player : BasicCharacter
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
         bag = new PlayerBag(id);
         audiosource = GetComponent<AudioSource>();
+        HitMisuc = "主角挨打";
 
     }
 
@@ -281,6 +282,7 @@ public class Player : BasicCharacter
                         }
                         else
                         {
+                            //激光
                             //GameObject effect = (GameObject)AB.getobj("解锁特效");
                             //Camera effectCamera = GameObject.Find("EffectCamera").GetComponent<Camera>();
 
@@ -305,6 +307,7 @@ public class Player : BasicCharacter
                         }
                         else
                         {
+                            //三连波
                             ECD = new Fixpoint(0, 0);
                         }
 
@@ -315,6 +318,7 @@ public class Player : BasicCharacter
                     }
                     if (checkid() == true)
                     {
+                        PlayMusic("合成成功");
                         GameObject ui = (GameObject)AB.getobj("提示UI");
                         GameObject tmp = Instantiate(ui, Player_ctrl.BagUI.transform);
                         tmp.GetComponent<MakeSuccess>().Type = 1;
@@ -324,6 +328,7 @@ public class Player : BasicCharacter
                 {
                     if (checkid() == true)
                     {
+                        PlayMusic("合成失败");
                         GameObject ui = (GameObject)AB.getobj("提示UI");
                         Instantiate(ui, Player_ctrl.BagUI.transform);
                     }
