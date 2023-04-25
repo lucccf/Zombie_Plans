@@ -18,7 +18,7 @@ public class Terrorist : Knight
         ToughnessStatus = new int[2] { 20, 0 };//阶段
     }
 
-    void Start()
+    public override void Startx()
     {
         CharacterType = 2;
         SetStatus(100, 10);//血量，基础攻击力
