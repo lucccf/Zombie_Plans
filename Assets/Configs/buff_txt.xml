@@ -20,13 +20,13 @@
 
 	<buff>
 		<id>4</id>
-		<value>200</value>
-		<txt>怪物韧性值不再翻倍</txt>
+		<value>1</value>
+		<txt>怪物韧性值缩减30%</txt>
 	</buff>
 
 	<buff>
 		<id>5</id>
-		<value>40</value>
+		<value>30</value>
 		<txt>怪物技能CD缩减30%</txt>
 	</buff>
 	
