@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taliban>
+	<basic_info>
+	    <matrial_id>1</matrial_id>
+        <matrial_number>10</matrial_number>
+	</basic_info>
+	
+    <info>
+		<floor>1</floor>
+        <pos>84</pos>
+	    <pos>168</pos>
+    </info>
+    
+	<info>
+		<floor>2</floor>
+        <pos>196</pos>
+    </info>
+	
+    <info>
+        <floor>3</floor>
+        <pos>14</pos>
+    </info>
+	
+	<info>
+        <floor>8</floor>
+        <pos>10</pos>
+    </info>
+
+	<info>
+        <floor>9</floor>
+        <pos>224</pos>
+    </info>
+
+	<info>
+        <floor>10</floor>
+        <pos>84</pos>
+	    <pos>170</pos>
+    </info>
+
+</taliban>
