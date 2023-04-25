@@ -703,6 +703,7 @@ public class Main_ctrl : MonoBehaviour
                     ctrl.modules[Object_ctrl.class_name.Facility] = fa;
                     fa.id = cnt;
                     fa.materials = info.materials;
+                    fa.debuff = info.debuff;
                     Dictionary<int, int> newCommited = new Dictionary<int, int>();
                     foreach (KeyValuePair<int, int> mat in info.materials)
                     {
@@ -958,6 +959,7 @@ public class Obj_info
     public int cre_type;
     public string MusicName;
     public Dictionary<string, int> falls;
+    public int debuff;
     public Obj_info()
     {
         classnames = new List<Object_ctrl.class_name>();
