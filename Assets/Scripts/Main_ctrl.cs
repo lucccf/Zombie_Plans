@@ -85,7 +85,6 @@ public class Main_ctrl : MonoBehaviour
     void Start()
     {
         init();
-        Rand.Setseed(114514);
         camara = GameObject.Find("Main Camera");
         Tinymap = GameObject.Find("Tiny_camera(Clone)");
         Map_create.Wall_create();
