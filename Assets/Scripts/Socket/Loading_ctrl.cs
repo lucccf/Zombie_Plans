@@ -35,7 +35,6 @@ public class Loading_ctrl : MonoBehaviour
                 }
                 else if (f.Opts[i].Opt == PlayerOpt.SendSeed)
                 {
-                    Debug.Log("Recvseed" + f.Opts[i].Itemid);
                     Rand.Setseed((ulong)f.Opts[i].Itemid);
                 }
             }

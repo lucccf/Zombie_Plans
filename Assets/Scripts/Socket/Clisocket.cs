@@ -179,14 +179,15 @@ public class Clisocket : MonoBehaviour
 
                     if (bodyType == BODYTYPE.Frame)
                     {
+                        
                         Frame opts = Frame.Parser.ParseFrom(body);
+                        
                         if (opts.Index == -1)
                         {
                             Loading_ctrl.Frames.Enqueue(opts);
                         }
                         else
                         {
-                            //Debug.Log(opts);
                             Main_ctrl.Frames.Enqueue(opts);
                         }
                         
