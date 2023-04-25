@@ -82,6 +82,7 @@ public class PlayerStatus
         last_damage = real_damage.to_int();
         if(hp <= 0)
         {
+            hp = 0;
             death = true;
         }
     }

@@ -9,7 +9,12 @@ public class Knight : Monster
     protected int KnightAnimaHited = 0;
 
     private Fixpoint KnightSkillCD = new Fixpoint(0, 0);
-    private static Fixpoint KnightSkillCD_MAX = new Fixpoint(10, 0);
+    private Fixpoint KnightSkillCD_MAX = new Fixpoint(10, 0);
+
+    public override void WeakenCD(Fixpoint rate)
+    {
+        KnightSkillCD_MAX = KnightSkillCD_MAX * rate;
+    }
 
     public override void InitStatic()
     {
@@ -33,7 +38,7 @@ public class Knight : Monster
         SkillBetweenTime = new Fixpoint(21, 2);//伤害的间隔
         SkillAttackRate = new Fixpoint(3, 0);//攻击倍率
 
-        KnightSkillCD_MAX = new Fixpoint(10, 0);
+        //KnightSkillCD_MAX = new Fixpoint(10, 0);
     }
     public override void InitNormal()
     {
@@ -301,17 +306,17 @@ public class Knight : Monster
 
 
     private bool KnightCreatedAttack = false;
-    private Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
-    private Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
-    private Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
+    private static Fixpoint Attack1DuringTime = new Fixpoint(59, 2);//攻击的持续时间
+    private static Fixpoint Attack2DuringTime = new Fixpoint(61, 2);
+    private static Fixpoint Attack3DuringTime = new Fixpoint(64, 2);
 
-    private Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
-    private Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
-    private Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
+    private static Fixpoint Attack1BeginToHitTime = new Fixpoint(33, 2);//攻击的判定时间
+    private static Fixpoint Attack2BeginToHitTime = new Fixpoint(2, 1);
+    private static Fixpoint Attack3BeginToHitTime = new Fixpoint(25, 2);
 
-    private Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
-    private Fixpoint Attack2Damage = new Fixpoint(4, 0);
-    private Fixpoint Attack3Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack1Damage = new Fixpoint(4, 0);//伤害倍率
+    private static Fixpoint Attack2Damage = new Fixpoint(4, 0);
+    private static Fixpoint Attack3Damage = new Fixpoint(4, 0);
     protected virtual void AttackToNext()
     {
         KnightCreatedAttack = false;

@@ -51,6 +51,8 @@ public class Monster : BasicCharacter
         CheckCatchQuit();
     }
 
+    
+
     protected void SetFindStatus()
     {
         FindPosUp = new Fixpoint(7, 0);
@@ -71,6 +73,28 @@ public class Monster : BasicCharacter
             Debug.LogError("Find Home Error" + f.pos.x.to_float() + " " + f.pos.y.to_float());
         }
     }
+
+    public void WeakenHp(Fixpoint rate)
+    {
+        status.max_hp = ( new Fixpoint(status.max_hp, 0) * rate ).to_int();
+        status.hp = (new Fixpoint(status.hp, 0) * rate).to_int();
+    }
+
+    public void WeakenAttack(Fixpoint rate)
+    {
+        status.attack = (new Fixpoint(status.attack, 0) * rate).to_int();
+    }
+
+    public void WeakenSpeed()
+    {
+        status.WalkSpeed = new Fixpoint(3, 0);
+    }
+
+    public virtual void WeakenCD(Fixpoint rate)
+    {
+
+    }
+
     public virtual void ToHome()
     {
         if (HasToHome == true) return;
