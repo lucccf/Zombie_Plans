@@ -1266,9 +1266,27 @@ public class Player : BasicCharacter
         if (checkid() == true)
         {
             if (QCD > new Fixpoint(100, 0)) Player_ctrl.QCD.text = "Unable";
-            else Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+            else if (QCD > new Fixpoint(0, 0))
+            {
+                Player_ctrl.QCD.text = (((int)(QCD.to_float() * 10)) * 1.0 / 10).ToString();
+                Player_ctrl.QCD_mask.fillAmount = QCD.to_float() / QCD_MAX.to_float();
+            }
+            else 
+            { 
+                Player_ctrl.QCD.text = "";
+                Player_ctrl.QCD_mask.fillAmount = 0;
+            }
             if (ECD > new Fixpoint(100, 0)) Player_ctrl.ECD.text = "Unable";
-            else Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
+            else if (ECD > new Fixpoint(0, 0))
+            {
+                Player_ctrl.ECD.text = (((int)(ECD.to_float() * 10)) * 1.0 / 10).ToString();
+                Player_ctrl.ECD_mask.fillAmount = ECD.to_float() / ECD_MAX.to_float();
+            }
+            else 
+            {
+                Player_ctrl.ECD.text = "";
+                Player_ctrl.ECD_mask.fillAmount = 0;
+            }
         }
         animator.SetFloat("speed", AnimaSpeed);
         animator.SetFloat("toward", AnimaToward);
