@@ -240,7 +240,7 @@ public class Monster : BasicCharacter
     {
         for (int i = 0; i < Player_ctrl.plays.Count; ++i)
         {
-            if (InFindSpace(Player_ctrl.plays[i].f.pos) == true)
+            if (Player_ctrl.plays[i].Die == false && InFindSpace(Player_ctrl.plays[i].f.pos) == true)
             {
                 LockId = i;
                 LockPos = Player_ctrl.plays[i].f.pos;
@@ -252,6 +252,12 @@ public class Monster : BasicCharacter
     protected void CheckCatchQuit()
     {
         if (LockId == -1) return;
+        if (Player_ctrl.plays[(int)LockId].Die == true)
+        {
+            LockId = -1;
+            LockPos = new Fix_vector2(0, 0);
+            return;
+        }
         if (InCatahSpace(LockPos) == false)
         {
             LockId = -1;
@@ -400,7 +406,7 @@ public class Monster : BasicCharacter
         List<Fixpoint> list = new List<Fixpoint>();
         foreach (Player i in Player_ctrl.plays)
         {
-            if (i.f.pos.y - f.pos.y <= new Fixpoint(1, 0) && i.f.pos.y - f.pos.y >= new Fixpoint(-1, 0))
+            if (i.Die == false && i.f.pos.y - f.pos.y <= new Fixpoint(1, 0) && i.f.pos.y - f.pos.y >= new Fixpoint(-1, 0))
             {
                 list.Add(i.f.pos.x);
             }
@@ -449,6 +455,7 @@ public class Monster : BasicCharacter
         Fixpoint Miny = new Fixpoint(100, 0);
         foreach (Player i in Player_ctrl.plays)
         {
+            if (i.Die == true) continue;
             Fixpoint Dis = new Fixpoint(0, 0);
             if (i.f.pos.x < f.pos.x)
             {

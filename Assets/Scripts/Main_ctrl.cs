@@ -677,15 +677,7 @@ public class Main_ctrl : MonoBehaviour
                         obj.transform.localScale = new Vector3(info.toward, info.toward, 1f);
                         gg.r = (Fix_rig2d)ctrl.modules[Object_ctrl.class_name.Fix_rig2d];
                         gg.f = f;
-                        if (info.with_pos == new Fix_vector2(0, 0)) 
-                        {
-                            Debug.Log("Normal Fall");
-                            gg.r.velocity = new Fix_vector2(new Fixpoint((int)(Rand.rand() % 400 - 200), 2), new Fixpoint(2, 0));
-                        }
-                        else
-                        {
-                            gg.r.velocity = info.with_pos;
-                        }
+                        gg.r.velocity = info.with_pos;
                         t.r = gg.r;
                         t.f = gg.f;
                         t.itemid = x.id;
