@@ -559,6 +559,11 @@ public class Main_ctrl : MonoBehaviour
         Fix_col2d f = new Fix_col2d(info.pos, info.hei, info.wid, cnt, info.col_type);
         ctrl.modules[Object_ctrl.class_name.Fix_col2d] = f;
         Collider_ctrl.cols.Add(f);
+        AudioSource aa = obj.GetComponent<AudioSource>();
+        if (aa != null)
+        {
+            Music.aas[(int)cnt] = aa;
+        }
 
         foreach (Object_ctrl.class_name c in info.classnames)
         {
@@ -741,6 +746,11 @@ public class Main_ctrl : MonoBehaviour
     {
         if (!All_objs.ContainsKey(id)) return;
         Object_ctrl obj = All_objs[id];
+        AudioSource aa = obj.GetComponent<AudioSource>();
+        if (aa != null)
+        {
+            Music.aas.Remove((int)id);
+        }
         foreach (Object_ctrl.class_name m in obj.modules.Keys)
         {
             switch (m)

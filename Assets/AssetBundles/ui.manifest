@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1987804614
+CRC: 3750831378
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 759eeb58298f4187a783cea8d53a765f
+    Hash: 14f08f3f6fa9ce5b945d6085b0939e22
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 0f90d079ca7dd7477beb6736a25d862a
+    Hash: b6db42f64e3e05d87f65cc4ba027c64a
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,11 +28,9 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -49,6 +47,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 0571e0f141cfcb54f8ced3945ecec18f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: cc8c34424b045aa44bc5ae710df04353, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 980d3f9293bbb6048801aac05d02b727, type: 3}
 - Class: 114
@@ -100,6 +100,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d37e33fbea2308746a2f7086103e3a20, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: b36895ac12c122141bb41f68ddcf27a9, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 9f49690dc1ce16e4cb04762578a72007, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 17bab69d8dcd405478ad6bc2c1d649a5, type: 3}
@@ -148,5 +150,5 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
-- D:/pro/Zombie_Plans/Assets/AssetBundles/item
-- D:/pro/Zombie_Plans/Assets/AssetBundles/prefabs
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
