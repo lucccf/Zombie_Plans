@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1838233831
+CRC: 218264209
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8750e8035b8225606b28b842521c05db
+    Hash: 3bcc3655e9aac15505b8ce591328e3e1
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 93aad9e3f3bfd5bc0cb3c8c73db0fcf3
+    Hash: b2e9b0d0f8fe552a01ee209776b2e3e2
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -109,6 +109,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 3cfb1dde69215cb4c9ebfdcfbb2de064, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cf812383ecb84a4449ee57fd8d360fc9, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -188,4 +190,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music
+- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music

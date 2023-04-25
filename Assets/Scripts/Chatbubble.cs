@@ -8,6 +8,9 @@ public class Chatbubble : MonoBehaviour
     public Text txt;
     public Player player;
     public GameObject bub;
+    public Transform target;
+    private Vector3 offset = new Vector3(0f, 1f, 0f);
+    Vector3 screenPos;
 
     private float t = 0;
     // Start is called before the first frame update
@@ -19,6 +22,8 @@ public class Chatbubble : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        screenPos = Camera.main.WorldToScreenPoint(target.position + offset);
+        bub.transform.position = screenPos;
         txt.text = player.words;
         if (player.words_ok)
         {
