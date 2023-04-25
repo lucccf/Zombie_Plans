@@ -12,7 +12,7 @@ public class Music : MonoBehaviour
     public Slider sl_music, sl_Battle;
     public static Dictionary<int, AudioSource> aas = new Dictionary<int, AudioSource>();
 
-    void Start()
+    public static void Startx()
     {
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(Application.dataPath + "/Configs/Music_volume.xml");
@@ -24,10 +24,6 @@ public class Music : MonoBehaviour
         if (Music_Volume < 0)
         {
             Music_Volume = float.Parse(vol.SelectSingleNode("music").InnerText);
-        }
-        foreach(var aa in aas.Values)
-        {
-            aa.maxDistance = 50;
         }
     }
 
