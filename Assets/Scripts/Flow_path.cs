@@ -108,7 +108,13 @@ public class Flow_path : MonoBehaviour
                 }
                 break;
             case 4:
-                //怪暴怒
+                foreach (var xx in Main_ctrl.All_objs.Values)
+                {
+                    if (xx.modules.ContainsKey(Object_ctrl.class_name.Moster))
+                    {
+                        ((Monster)xx.modules[Object_ctrl.class_name.Moster]).BeAngry();
+                    }
+                }
                 if (zombie_cnt == 0) cnt_flag = 5;
                 countdown = countdown + Dt.dt;
                 break;

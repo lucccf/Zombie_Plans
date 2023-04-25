@@ -120,6 +120,7 @@ public class Main_ctrl : MonoBehaviour
         hb = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         hb.Startx();
         Music.Startx();
+        Player_ctrl.init_color();
     }
 
     static void Wolf_create()

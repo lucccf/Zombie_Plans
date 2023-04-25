@@ -17,6 +17,8 @@ public class Player : BasicCharacter
     private Fixpoint QCD_MAX = new Fixpoint(10, 0);
     private Fixpoint ECD_MAX = new Fixpoint(10, 0);
 
+    public Text Name;
+
 
     public string words = string.Empty;
     public bool words_ok = false;

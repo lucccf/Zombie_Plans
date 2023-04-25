@@ -121,9 +121,11 @@ MonoBehaviour:
   type2: 0
   AnimaToward: 1
   Attack_fac: 0
+  Name: {fileID: 5568085133401030092}
   words: 
   words_ok: 0
   musicClip: {fileID: 8300000, guid: 38968ae759bd60e4d9d024430624543c, type: 3}
+  Die: 0
   identity: 0
 --- !u!114 &8563102221698559907
 MonoBehaviour:
@@ -247,7 +249,7 @@ GameObject:
   - component: {fileID: 8654285189765811373}
   - component: {fileID: 8885845013467125756}
   - component: {fileID: 5568085133401030092}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: UserRoomID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3523196563711131030}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +363,7 @@ GameObject:
   - component: {fileID: 4564087623149576293}
   - component: {fileID: 8416280302421035463}
   - component: {fileID: 8331335838348941971}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +437,7 @@ GameObject:
   - component: {fileID: 3865041995353516026}
   - component: {fileID: 8841593241766070142}
   - component: {fileID: 5323934723024812061}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -541,7 +543,7 @@ GameObject:
   - component: {fileID: 2953022845554880197}
   - component: {fileID: 460633352578578386}
   - component: {fileID: 710319977652373753}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +643,7 @@ GameObject:
   - component: {fileID: 8438227234656142734}
   - component: {fileID: 5936839578566833462}
   - component: {fileID: 8725823184826366956}
-  m_Layer: 5
+  m_Layer: 4
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -718,6 +720,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 432937802103883704, guid: 30127e7612390c94288a012e9e495730,
         type: 3}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 432937802103883704, guid: 30127e7612390c94288a012e9e495730,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -730,6 +737,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4297447783061665770, guid: 30127e7612390c94288a012e9e495730,
+        type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7948383325209632125, guid: 30127e7612390c94288a012e9e495730,
         type: 3}
