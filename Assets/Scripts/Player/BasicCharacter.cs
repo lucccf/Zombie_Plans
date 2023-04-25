@@ -367,6 +367,7 @@ public class BasicCharacter : MonoBehaviour
             Main_ctrl.NewItem(f.pos, xx.Key, xx.Value,1, new Fix_vector2(new Fixpoint((int)(Rand.rand() % 800 - 400), 2), new Fixpoint(4, 0)));
             //Main_ctrl.NewItem(f.pos + new Fix_vector2(new Fixpoint((long)(Rand.rand() % 21 - 10), 1), new Fixpoint(0, 0)), xx.Key, xx.Value, 1f, new Fix_vector2(new Fixpoint((int)(Rand.rand() % 800 - 400), 2), new Fixpoint(4, 0)));
         }
+        if(CharacterType != -1)
         Main_ctrl.NewItem(f.pos, "Clock", 1, 0.2f, new Fix_vector2(0, 0));
     }
 
