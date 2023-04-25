@@ -60,10 +60,10 @@ public class Monster : BasicCharacter
         FindPosLeft = new Fixpoint(-15, 0);
         FindPosRight = new Fixpoint(15, 0);
 
-        CatchPosUp = f.pos.y.Clone() + new Fixpoint(22, 0);
-        CatchPosDown = f.pos.y.Clone() - new Fixpoint(22, 0);
-        CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
-        CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(7, 0);
+        CatchPosDown = f.pos.y.Clone() - new Fixpoint(7, 0);
+        CatchPosLeft = f.pos.x.Clone() - new Fixpoint(15, 0);
+        CatchPosRight = f.pos.x.Clone() + new Fixpoint(15, 0);
 
 
         HomePos = f.pos.Clone();
