@@ -10,7 +10,7 @@ end
 Onclick_Login_but = function ()
     local p = Net.LoginData()
     p.Username = panel.Name_txt.text
-    p.Passwd = panel.Pwd_txt.text
+    p.Passwd = panel.pwd.text
     p.Opt = Net.LoginData.Types.Operation.Login
     Clisocket.Sendmessage(BODYTYPE.LoginData, p)
 end
@@ -18,7 +18,7 @@ end
 Onclick_Rig_but = function ()
     local p = Net.LoginData()
     p.Username = panel.Name_txt.text
-    p.Passwd = panel.Pwd_txt.text
+    p.Passwd = panel.pwd.text
     p.Opt = Net.LoginData.Types.Operation.Register
     Clisocket.Sendmessage(BODYTYPE.LoginData, p)
 end
