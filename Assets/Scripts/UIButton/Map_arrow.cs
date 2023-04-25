@@ -44,5 +44,9 @@ public class Map_arrow : MonoBehaviour
         {
             home.SetActive(false);
         }
+        if (taliban.activeSelf)
+        {
+            
+        }
     }
 }
