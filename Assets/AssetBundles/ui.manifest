@@ -1,4 +1,5 @@
 ManifestFileVersion: 0
+<<<<<<< HEAD
 CRC: 880735717
 Hashes:
   AssetFileHash:
@@ -7,6 +8,16 @@ Hashes:
   TypeTreeHash:
     serializedVersion: 2
     Hash: 6899202b4849f6e92ce699d6db8fb1ef
+=======
+CRC: 3750831378
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 14f08f3f6fa9ce5b945d6085b0939e22
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b6db42f64e3e05d87f65cc4ba027c64a
+>>>>>>> 164a7997318d66f6bee9ba11ecb4c3cbbfbcb647
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -28,9 +39,12 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-- Class: 114
+<<<<<<< HEAD
+=======
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+>>>>>>> 164a7997318d66f6bee9ba11ecb4c3cbbfbcb647
+  Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
 - Class: 114
@@ -100,6 +114,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d37e33fbea2308746a2f7086103e3a20, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: b36895ac12c122141bb41f68ddcf27a9, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 9f49690dc1ce16e4cb04762578a72007, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 17bab69d8dcd405478ad6bc2c1d649a5, type: 3}
@@ -148,5 +164,10 @@ Assets:
 - Assets/Prefabs/UI/All_camera.prefab
 - "Assets/Prefabs/UI/\u63D0\u793AUI.prefab"
 Dependencies:
+<<<<<<< HEAD
 - D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/item
 - D:/JieJiSha/Zombie_Plans/Assets/AssetBundles/prefabs
+=======
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/item
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/prefabs
+>>>>>>> 164a7997318d66f6bee9ba11ecb4c3cbbfbcb647

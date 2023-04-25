@@ -5650,6 +5650,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: map_BK
       objectReference: {fileID: 0}
+    - target: {fileID: 3426453272433151712, guid: c359b7d0695e09345ad89a0893f16fde,
+        type: 3}
+      propertyPath: ri2
+      value: 
+      objectReference: {fileID: 2552652099132536517}
+    - target: {fileID: 3426453272433151712, guid: c359b7d0695e09345ad89a0893f16fde,
+        type: 3}
+      propertyPath: ri3
+      value: 
+      objectReference: {fileID: 2552652098358868341}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c359b7d0695e09345ad89a0893f16fde, type: 3}
 --- !u!224 &6851046134269719030 stripped

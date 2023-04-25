@@ -10,6 +10,7 @@ public class Option : MonoBehaviour
     public Button but;
     void Start()
     {
+        op.SetActive(false);
         but.onClick.AddListener(opt);
     }
 
