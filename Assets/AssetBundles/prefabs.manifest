@@ -1,20 +1,12 @@
 ManifestFileVersion: 0
-<<<<<<< HEAD
-CRC: 753761606
+CRC: 2764743721
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: bdae73f8b49ae965716786056f88e1b4
-=======
-CRC: 2974563942
-Hashes:
-  AssetFileHash:
-    serializedVersion: 2
-    Hash: cc516fccda15cdc49805b31c77861734
->>>>>>> f52cf7b3b479d6eb693af6c78b11d30b19ef323c
+    Hash: 97ab29079581cc27211e66f60cf9bdbd
   TypeTreeHash:
     serializedVersion: 2
-    Hash: a8c1f043bef2078d753a357ea76353fd
+    Hash: c4ca1abed9d5b9842b5985b63bed5c98
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -42,13 +34,11 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
@@ -61,6 +51,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: a684d35155ad3fa44b5483e458c34f8d, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 3dc8cd91b5bb4f744a385a5927fc3726, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: e8119a724da3eec4bb4f91f7b2b4fa8b, type: 3}
 - Class: 114
@@ -195,11 +187,8 @@ Assets:
 - Assets/Prefabs/Map_item/Devil_m.prefab
 - Assets/Prefabs/WolfBox.prefab
 - Assets/Prefabs/Monster1.prefab
+- Assets/Prefabs/Effects/Monster_out.prefab
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-<<<<<<< HEAD
 - D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
-=======
-- D:/pro/Zombie_Plans/Assets/AssetBundles/music
->>>>>>> f52cf7b3b479d6eb693af6c78b11d30b19ef323c
