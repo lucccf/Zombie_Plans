@@ -8,9 +8,12 @@ public class Debuff : MonoBehaviour
 {
     // Start is called before the first frame update
     ParticleSystem particle;
+    public Monster mos;
     bool showbuf = false;
+    
     void Start()
     {
+
         particle = gameObject.GetComponent<ParticleSystem>();
         particle.Stop();
     }
@@ -18,10 +21,15 @@ public class Debuff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (var m in Flow_path.facilities) {
-            if (m.Value.repaired) {
-                showbuf= true;
-                break;
+        if (mos.CharacterType == 2)
+        {
+            foreach (var m in Flow_path.facilities)
+            {
+                if (m.Value.buff)
+                {
+                    showbuf = true;
+                    break;
+                }
             }
         }
         if (showbuf) {

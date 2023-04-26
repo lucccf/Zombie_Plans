@@ -536,6 +536,7 @@ public class Map_create : MonoBehaviour
                     int time = 0;
                     if (chos[jj] == 1)
                     {
+                        
                         Debug.Log("111");
                         for (int ii = 0; ii < fst[1]; ii++)
                         {

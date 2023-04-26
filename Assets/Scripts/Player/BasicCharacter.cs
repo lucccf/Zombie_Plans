@@ -26,7 +26,7 @@ public class BasicCharacter : MonoBehaviour
     protected StatusType RealStatus;
     protected Fixpoint StatusTime = new Fixpoint(0, 0);
 
-    protected int CharacterType = 0;
+    public int CharacterType = 0;
 
     protected int[] ToughnessStatus;
     protected Fix_vector2[] HitFlySpeed = new Fix_vector2[4] { new Fix_vector2(new Fixpoint(0,0),new Fixpoint(9,0)),//击飞0,x轴y轴速度

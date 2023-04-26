@@ -305,6 +305,7 @@ MonoBehaviour:
   type2: 0
   AnimaToward: 1
   Attack_fac: 0
+  CharacterType: 0
   LockId: -1
   Check: 0
   ToHomeFlag: 0
@@ -631,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 830913925390428426, guid: 4aee0d2dc836414499493a1cc6872c3d,
+        type: 3}
+      propertyPath: mos
+      value: 
+      objectReference: {fileID: 7312551899255156350}
     - target: {fileID: 5046087499321705248, guid: 4aee0d2dc836414499493a1cc6872c3d,
         type: 3}
       propertyPath: m_RootOrder

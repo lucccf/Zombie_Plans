@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 1856814516
+CRC: 2073075952
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 65e1d5bdd5489746165fe93eb2fbd95c
+    Hash: cb6ef760f7a3b93b6b242b9cff249ede
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 17e2f47c7b4b9d508a631825cd07f892
+    Hash: c4ca1abed9d5b9842b5985b63bed5c98
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -187,6 +187,7 @@ Assets:
 - Assets/Prefabs/Map_item/Devil_m.prefab
 - Assets/Prefabs/WolfBox.prefab
 - Assets/Prefabs/Monster1.prefab
+- Assets/Prefabs/Effects/Monster_out.prefab
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:

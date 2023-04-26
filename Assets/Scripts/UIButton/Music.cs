@@ -55,7 +55,6 @@ public class Music : MonoBehaviour
         }
         if (ab == null) return;
         ab.volume = Music_Volume;
-        Debug.Log(p + " " + Flow_path.get_flag());
         if (Flow_path.get_flag() == 1 && p != 1)
         {
             ab.clip = (AudioClip)AB.getobj("second_music");
