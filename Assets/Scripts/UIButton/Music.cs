@@ -33,6 +33,7 @@ public class Music : MonoBehaviour
 
     private void Start()
     {
+        aas = new Dictionary<int, AudioSource>();
         sl_Battle.value = Battle_Volume;
         sl_music.value = Music_Volume;
     }
