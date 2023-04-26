@@ -241,31 +241,42 @@ public class Player : BasicCharacter
 
                         if (value)
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 3;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 3;
+                            }
                         }
                         else
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 0;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 0;
+                            }
                         }
                         if (fa.commited[m.Key] == fa.materials[m.Key])
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 2;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 2;
+                            }
                             if (fa.repaired == false)
                             {
                                 fa.repaired = true;
                                 fa.buff = true;
                             }
                         }
-
-                        GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
-                        GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
-                        GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                        if (checkid())
+                        {
+                            GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
+                            GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
+                            GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                        }
                         if ((fa.commited[m.Key] * 100 / fa.materials[m.Key]) >= 70)
                         {
                             if (fa.repaired)
@@ -423,9 +434,13 @@ public class Player : BasicCharacter
                     p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                     p.classnames.Add(Object_ctrl.class_name.Moster);
                     p.classnames.Add(Object_ctrl.class_name.Tinymap);
-                    GameObject tlbui =  GameObject.Find("PlayerPanel/SaveUI");
-                    if (tlbui.activeSelf) {
-                        tlbui.SetActive(false);
+                    if (checkid())
+                    {
+                        GameObject tlbui = GameObject.Find("PlayerPanel/SaveUI");
+                        if (tlbui.activeSelf)
+                        {
+                            tlbui.SetActive(false);
+                        }
                     }
                     Main_ctrl.Creobj(p);
                     Main_ctrl.Desobj(inputs.Itemid);
