@@ -32,6 +32,7 @@ public class Dead_panel : MonoBehaviour
     {
         if (flag) return;
         flag = true;
+        ClientSend.Send = false;
         dr1.SetActive(true);
     }
 
@@ -39,11 +40,13 @@ public class Dead_panel : MonoBehaviour
     {
         if (flag) return;
         flag = true;
+        ClientSend.Send = false;
         def1.SetActive(true);
     }
 
     public static void dead()
     {
+        ClientSend.Send = false;
         de1.SetActive(true);
     }
 
@@ -51,6 +54,7 @@ public class Dead_panel : MonoBehaviour
     {
         if (flag) return;
         flag = true;
+        ClientSend.Send = false;
         vic1.SetActive(true);
     }
 }

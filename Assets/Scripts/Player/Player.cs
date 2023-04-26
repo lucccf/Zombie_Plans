@@ -109,7 +109,7 @@ public class Player : BasicCharacter
     {
         transform.rotation = Quaternion.identity;
         animator = GetComponent<Animator>();
-        SetStatus(1000, 10);//血量。基础攻击力       
+        SetStatus(2000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
         HitSpeed = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(9, 1), new Fixpoint(9, 1), new Fixpoint(4, 1) };//击退速度，第一个为占位
         ToughnessStatus = new int[4] { 75, 50, 25, 0 };//阶段
@@ -241,31 +241,42 @@ public class Player : BasicCharacter
 
                         if (value)
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 3;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 3;
+                            }
                         }
                         else
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 0;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 0;
+                            }
                         }
                         if (fa.commited[m.Key] == fa.materials[m.Key])
                         {
-                            GameObject facui = (GameObject)AB.getobj("提示UI");
-                            GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
-                            factmp.GetComponent<MakeSuccess>().Type = 2;
+                            if (checkid())
+                            {
+                                GameObject facui = (GameObject)AB.getobj("提示UI");
+                                GameObject factmp = Instantiate(facui, Player_ctrl.BagUI.transform);
+                                factmp.GetComponent<MakeSuccess>().Type = 2;
+                            }
                             if (fa.repaired == false)
                             {
                                 fa.repaired = true;
                                 fa.buff = true;
                             }
                         }
-
-                        GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
-                        GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
-                        GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                        if (checkid())
+                        {
+                            GameObject.Find("PlayerPanel/Facility/ItemTitle/ItemDetail/ItemImage/Text").gameObject.GetComponent<Text>().text = "还需数量：" + (fa.materials[m.Key] - (fa.commited[m.Key])).ToString();
+                            GameObject.Find("PlayerPanel/Facility/progress").gameObject.GetComponent<Image>().fillAmount = ((float)fa.commited[m.Key] / (float)fa.materials[m.Key]);
+                            GameObject.Find("PlayerPanel/Facility/progress/progressText").gameObject.GetComponent<Text>().text = (fa.commited[m.Key] * 100 / fa.materials[m.Key]).ToString() + "%";
+                        }
                         if ((fa.commited[m.Key] * 100 / fa.materials[m.Key]) >= 70)
                         {
                             if (fa.repaired)
@@ -369,10 +380,12 @@ public class Player : BasicCharacter
             case PlayerOpt.MarkUser:
                 if (Player_ctrl.checkattack((int)id, inputs.Itemid))
                 {
+                    Debug.Log("XXX" + id + " " + inputs.Itemid + " " + 1);
                     Player_ctrl.Attack[((int)id, inputs.Itemid)] = 0;
                 }
                 else
                 {
+                    Debug.Log("XXX" + id + " " + inputs.Itemid + " " + 2);
                     Player_ctrl.Attack[((int)id, inputs.Itemid)] = 1;
                 }
                 break;
@@ -423,9 +436,13 @@ public class Player : BasicCharacter
                     p.classnames.Add(Object_ctrl.class_name.Fix_rig2d);
                     p.classnames.Add(Object_ctrl.class_name.Moster);
                     p.classnames.Add(Object_ctrl.class_name.Tinymap);
-                    GameObject tlbui =  GameObject.Find("PlayerPanel/SaveUI");
-                    if (tlbui.activeSelf) {
-                        tlbui.SetActive(false);
+                    if (checkid())
+                    {
+                        GameObject tlbui = GameObject.Find("PlayerPanel/SaveUI");
+                        if (tlbui.activeSelf)
+                        {
+                            tlbui.SetActive(false);
+                        }
                     }
                     Main_ctrl.Creobj(p);
                     Main_ctrl.Desobj(inputs.Itemid);

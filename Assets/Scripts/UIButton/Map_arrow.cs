@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Map_arrow : MonoBehaviour
@@ -67,6 +68,11 @@ public class Map_arrow : MonoBehaviour
         return p3;
     }
 
+    Vector3 dz(Vector3 x)
+    {
+        return new Vector3(x.x, x.y, 0);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -87,11 +93,15 @@ public class Map_arrow : MonoBehaviour
         }
         if (taliban.activeSelf)
         {
+            //Vector2 xx = Main_ctrl.camara.transform.position - Main_ctrl.taliban.transform.position;
             taliban.transform.localPosition = getpos(Main_ctrl.taliban);
+            taliban.transform.rotation = Quaternion.FromToRotation(dz(Main_ctrl.camara.transform.position), dz(Main_ctrl.taliban.transform.position));
+            //taliban.transform.rotation.SetEulerAngles(0, 0, math.acos(xx.x, xx.));
         }
         if (home.activeSelf)
         {
             home.transform.localPosition = getpos(Main_ctrl.home);
+            home.transform.rotation = Quaternion.FromToRotation(dz(Main_ctrl.camara.transform.position), dz(Main_ctrl.home.transform.position));
         }
     }
 }
