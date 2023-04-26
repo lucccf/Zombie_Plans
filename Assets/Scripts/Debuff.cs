@@ -21,10 +21,8 @@ public class Debuff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("DebufUpdate");
         if (mos!=null &&mos.CharacterType == 2)
         {
-            Debug.Log("Monstertrue");
             foreach (var m in Flow_path.facilities)
             {
                 if (m.Value.buff)

@@ -11,5 +11,6 @@ public class Load_start : MonoBehaviour
     {
         Instantiate((GameObject)AB.getobj("Start_scene"), canvas.transform);
         Music.Startx();
+        Option.Startx();
     }
 }
