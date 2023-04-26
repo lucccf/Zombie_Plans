@@ -16,7 +16,7 @@ public class MakeSuccess : MonoBehaviour
     {
         image = GetComponent<Image>();
         text = gameObject.GetComponentInChildren<Text>();
-        transform.Translate(100, 0, 1);
+        transform.Translate(90, 0, 1);
         if(Type == 0)
         {
             Color color = image.color;
