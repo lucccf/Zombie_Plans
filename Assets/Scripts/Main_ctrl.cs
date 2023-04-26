@@ -65,6 +65,7 @@ public class Main_ctrl : MonoBehaviour
     private void init()
     {
         Pool.init();
+        Music.aas = new Dictionary<int, AudioSource>();
         homegg = false;
         All_objs = new Dictionary<long, Object_ctrl>();
         Ser_to_cli = new Dictionary<long, long>();
