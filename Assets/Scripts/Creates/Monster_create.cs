@@ -33,6 +33,7 @@ public class Monster_create : MonoBehaviour
     static Fixpoint tt = new Fixpoint(0);
     static Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>> zombies = new Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>>();
     static Dictionary<int, Queue<Fix_vector2>> outs = new Dictionary<int, Queue<Fix_vector2>>();
+    static Dictionary<int, Queue<GameObject>> des = new Dictionary<int, Queue<GameObject>>();
 
     public static void init()
     {
@@ -180,9 +181,32 @@ public class Monster_create : MonoBehaviour
                 p.name = "Terrorist";
                 break;
         }
+        int k = 1;
+        if (p1.pos.x < new Fixpoint(130, 0))
+        {
+            if (p1.pos.y < new Fixpoint(40, 0))
+            {
+                k = 1;
+            }
+            else
+            {
+                k = 2;
+            }
+        }
+        else
+        {
+            if (p1.pos.y < new Fixpoint(40, 0))
+            {
+                k = 3;
+            }
+            else
+            {
+                k = 4;
+            }
+        }
         if (All_m_items.ContainsKey(p.name) && type2 == 0)
         {
-            p.falls = get_item(All_m_items[p.name], 1);
+            p.falls = get_item(All_m_items[p.name], k);
         }
         else
         {
@@ -257,13 +281,27 @@ public class Monster_create : MonoBehaviour
         }
     }
 
-    private static void cre_out(Fix_vector2 p1)
+    private static void cre_out(Fix_vector2 p1, int time)
     {
         Debug.Log(p1.x.to_float() + p1.y.to_float());
         GameObject a1 = Instantiate((GameObject)AB.getobj("Monster_out"));
         a1.transform.position = new Vector3(p1.x.to_float(), p1.y.to_float(), 5);
         ParticleSystem particle = a1.GetComponent<ParticleSystem>();
         particle.Play();
+        des_out(a1, time + 5);
+    }
+
+    private static void des_out(GameObject g1, int time)
+    {
+        if (des.ContainsKey(time))
+        {
+            des[time].Enqueue(g1);
+        }
+        else
+        {
+            des[time] = new Queue<GameObject>();
+            des[time].Enqueue(g1);
+        }
     }
 
     public static void Zom_create2()  //生成僵尸，后期替换模型和ai
@@ -299,7 +337,16 @@ public class Monster_create : MonoBehaviour
             while (q.Count > 0)
             {
                 Fix_vector2 pp = q.Dequeue();
-                cre_out(pp);
+                cre_out(pp, tt.to_int());
+            }
+        }
+        if (des.ContainsKey(tt.to_int()))
+        {
+            Queue<GameObject> q = des[tt.to_int()];
+            while (q.Count > 0)
+            {
+                GameObject pp = q.Dequeue();
+                Destroy(pp);
             }
         }
     }
