@@ -643,7 +643,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 1080825480604336155, guid: a485908c18d715e4ab52d8b3e68d1bfb,
     type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -917,8 +917,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -107.24}
-  m_SizeDelta: {x: 244.39294, y: 175}
+  m_AnchoredPosition: {x: 0, y: -118.8}
+  m_SizeDelta: {x: 244.39294, y: 198.1037}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6135168009067770483
 CanvasRenderer:
@@ -978,10 +978,10 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 70, y: 70}
+  m_CellSize: {x: 70, y: 40}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 2
-  m_ConstraintCount: 3
+  m_ConstraintCount: 4
 --- !u!1 &6177584909892473419
 GameObject:
   m_ObjectHideFlags: 0
