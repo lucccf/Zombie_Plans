@@ -2219,9 +2219,9 @@ RectTransform:
   - {fileID: 2552652098369043189}
   - {fileID: 3328121248681106692}
   - {fileID: 2663785194428737579}
+  - {fileID: 509625976935570372}
   - {fileID: 3021266391393395692}
   - {fileID: 5766569997907015452}
-  - {fileID: 509625976935570372}
   - {fileID: 85713310479349775}
   - {fileID: 2552652099167761641}
   - {fileID: 5843695250068735738}
@@ -3460,7 +3460,7 @@ PrefabInstance:
     - target: {fileID: 8316511697493627820, guid: c5866ae380a73904d8a0561600ea8899,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8316511697493627820, guid: c5866ae380a73904d8a0561600ea8899,
         type: 3}
@@ -3554,6 +3554,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5866ae380a73904d8a0561600ea8899, type: 3}
+--- !u!224 &5766569997907015452 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8316511697493627820, guid: c5866ae380a73904d8a0561600ea8899,
+    type: 3}
+  m_PrefabInstance: {fileID: 2552652098845090992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5766569997907015453 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8316511697493627821, guid: c5866ae380a73904d8a0561600ea8899,
@@ -3566,12 +3572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &5766569997907015452 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8316511697493627820, guid: c5866ae380a73904d8a0561600ea8899,
-    type: 3}
-  m_PrefabInstance: {fileID: 2552652098845090992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2552652099308385349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3999,7 +3999,7 @@ PrefabInstance:
     - target: {fileID: 756998679892950427, guid: 3b20c035ff3d3af4997a9c8d87968c1c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 756998679892950427, guid: 3b20c035ff3d3af4997a9c8d87968c1c,
         type: 3}
@@ -5101,6 +5101,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2552652099808040648}
     m_Modifications:
+    - target: {fileID: 5066734741852883032, guid: 226b90948c507c847a33366fc6b89711,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u4EFB\u52A1\u6E05\u5355"
+      objectReference: {fileID: 0}
     - target: {fileID: 5066734741889169974, guid: 226b90948c507c847a33366fc6b89711,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5114,7 +5119,7 @@ PrefabInstance:
     - target: {fileID: 5066734741889169974, guid: 226b90948c507c847a33366fc6b89711,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5066734741889169974, guid: 226b90948c507c847a33366fc6b89711,
         type: 3}

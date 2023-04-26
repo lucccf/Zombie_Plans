@@ -27,6 +27,17 @@ public class Infomation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (txt.text.Length == 0)
+        {
+            if (Main_ctrl.main_identity == Player.Identity.Populace)
+            {
+                txt.text = p1;
+            }
+            else
+            {
+                txt.text = w1;
+            }
+        }
         if (Flow_path.get_flag() == 2 && p != 2)
         {
             if (Main_ctrl.main_identity == Player.Identity.Populace)
