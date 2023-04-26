@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 
@@ -28,6 +29,11 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> size_zombies2 = new List<Fix_vector2>();
     public static List<int> time_zombies2 = new List<int>();
     public static float cnt1 = 0;
+
+    static int p = 0;
+    static Fixpoint tt = new Fixpoint(0);
+    static Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>> zombies = new Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>>();
+    static Dictionary<int, Queue<Fix_vector2>> outs = new Dictionary<int, Queue<Fix_vector2>>();
 
     public static void init()
     {
@@ -217,46 +223,59 @@ public class Monster_create : MonoBehaviour
                 }
             }
         }
-        if (type2 == 1)
-        {
-            Flow_path.zombie_cnt++;
-        }
     }
 
     private static void cre(Mon_pos p1, Fix_vector2 p2, int type2, int time)
     {
-        if (zombies.ContainsKey(time))
+        if (zombies.ContainsKey(time + 2))
         {
-            zombies[time].Enqueue((p1, p2, type2));
+            zombies[time + 2].Enqueue((p1, p2, type2));
         }
         else
         {
-            zombies[time] = new Queue<(Mon_pos, Fix_vector2, int)>();
-            zombies[time].Enqueue((p1, p2, type2));
+            zombies[time + 2] = new Queue<(Mon_pos, Fix_vector2, int)>();
+            zombies[time + 2].Enqueue((p1, p2, type2));
+        }
+
+        if (outs.ContainsKey(time))
+        {
+            outs[time].Enqueue(p1.pos);
+        }
+        else
+        {
+            outs[time] = new Queue<Fix_vector2>();
+            outs[time].Enqueue(p1.pos);
         }
     }
 
     public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
+        Flow_path.zombie_cnt += pos_zombies1.Count;
         for (int i = 0; i < pos_zombies1.Count; i++)
         {
-            cre(pos_zombies1[i], size_zombies1[i], 1, time_zombies1[i]);
+            cre(pos_zombies1[i], size_zombies1[i], 1, time_zombies1[i] + 2);
             //create(pos_zombies1[i], size_zombies1[i], 1);
         }
     }
 
+    private static void cre_out(Fix_vector2 p1)
+    {
+        Debug.Log(p1.x.to_float() + p1.y.to_float());
+        GameObject a1 = Instantiate((GameObject)AB.getobj("Monster_out"));
+        a1.transform.position = new Vector3(p1.x.to_float(), p1.y.to_float(), 5);
+        ParticleSystem particle = a1.GetComponent<ParticleSystem>();
+        particle.Play();
+    }
+
     public static void Zom_create2()  //生成僵尸，后期替换模型和ai
     {
+        Flow_path.zombie_cnt += pos_zombies2.Count;
         for (int i = 0; i < pos_zombies2.Count; i++)
         {
-            cre(pos_zombies2[i], size_zombies2[i], 1, time_zombies2[i]);
+            cre(pos_zombies2[i], size_zombies2[i], 1, time_zombies2[i] + 2);
             //create(pos_zombies2[i], size_zombies2[i], 1);
         }
     }
-
-    static int p = 0;
-    static Fixpoint tt = new Fixpoint(0);
-    static Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>> zombies = new Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>>();
 
     public static void Updatex()
     {
@@ -273,6 +292,15 @@ public class Monster_create : MonoBehaviour
             {
                 (Mon_pos, Fix_vector2, int) pp = q.Dequeue();
                 create(pp.Item1, pp.Item2, pp.Item3);
+            }
+        }
+        if (outs.ContainsKey(tt.to_int()))
+        {
+            Queue<Fix_vector2> q = outs[tt.to_int()];
+            while (q.Count > 0)
+            {
+                Fix_vector2 pp = q.Dequeue();
+                cre_out(pp);
             }
         }
     }

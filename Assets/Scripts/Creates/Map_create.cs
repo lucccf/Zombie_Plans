@@ -466,7 +466,7 @@ public class Map_create : MonoBehaviour
 
     static Fix_vector2 getXX(Fix_vector2 xx, int id)
     {
-        Fix_vector2 xx1= xx + new Fix_vector2(new Fixpoint((long)(Rand.rand() % (ulong)(floor_wid - 3)) - (floor_wid - 3) / 2, 0), new Fixpoint(0));
+        Fix_vector2 xx1= xx + new Fix_vector2(new Fixpoint((long)(Rand.rand() % (ulong)(floor_wid * 10 - 29)) - (floor_wid * 5 - 14), 1), new Fixpoint(0));
         for (int ii = 0; ii < 10; ii++)
         {
             xx1 = xx + new Fix_vector2(new Fixpoint((long)(Rand.rand() % (ulong)(floor_wid - 3)) - (floor_wid - 3) / 2, 0), new Fixpoint(0));
@@ -536,8 +536,6 @@ public class Map_create : MonoBehaviour
                     int time = 0;
                     if (chos[jj] == 1)
                     {
-                        
-                        Debug.Log("111");
                         for (int ii = 0; ii < fst[1]; ii++)
                         {
                             yy = new Fix_vector2(new Fixpoint(113, 2), new Fixpoint(225, 2));
