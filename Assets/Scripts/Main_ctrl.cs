@@ -854,8 +854,10 @@ public class Main_ctrl : MonoBehaviour
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
+                Debug.Log(f.Opts[i]);
                 if (f.Opts[i].Opt == PlayerOpt.ExitRoom2)
                 {
+                    Debug.Log("EXIT2");
                     if (f.Opts[i].Userid == user_id) SceneManager.LoadScene("Start");
                     continue;
                 }
@@ -923,6 +925,7 @@ public class Main_ctrl : MonoBehaviour
 
             if (Exit)
             {
+                Debug.Log("EXIT1");
                 PlayerOptData y = new PlayerOptData();
                 y.Opt = PlayerOpt.ExitRoom2;
                 y.Userid = (int)user_id;
