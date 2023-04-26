@@ -16,6 +16,13 @@ public class Option : MonoBehaviour
 
     void opt()
     {
-        op.SetActive(true);
+        if (op.activeSelf)
+        {
+            op.SetActive(false);
+        }
+        else
+        {
+            op.SetActive(true);
+        }
     }
 }
