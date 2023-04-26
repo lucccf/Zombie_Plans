@@ -151,6 +151,12 @@ namespace Net
         [pbr::OriginalName("Use_item")] Useitem = 32,
         [pbr::OriginalName("Save_TLB")] SaveTLB = 33,
         [pbr::OriginalName("Send_Seed")] SendSeed = 34,
+        [pbr::OriginalName("U_Up")] UUp = 35,
+        [pbr::OriginalName("U_Down")] UDown = 36,
+        [pbr::OriginalName("One_Up")] OneUp = 37,
+        [pbr::OriginalName("One_Down")] OneDown = 38,
+        [pbr::OriginalName("Two_Up")] TwoUp = 39,
+        [pbr::OriginalName("Two_Down")] TwoDown = 40,
     }
 
     #endregion
