@@ -24,7 +24,7 @@ public class ClientSend : MonoBehaviour
                     PlayerOptData x = new PlayerOptData();
                     x.Opt = p;
                     x.Userid = (int)Main_ctrl.user_id;
-
+                    Debug.Log("send" + x);
                     Clisocket.Sendmessage(BODYTYPE.PlayerOptData, x);
                 }
             }
