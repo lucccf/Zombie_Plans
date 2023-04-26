@@ -33,7 +33,6 @@ public class Music : MonoBehaviour
 
     private void Start()
     {
-        aas = new Dictionary<int, AudioSource>();
         sl_Battle.value = Battle_Volume;
         sl_music.value = Music_Volume;
     }
@@ -63,7 +62,7 @@ public class Music : MonoBehaviour
         }
         if (Flow_path.get_flag() == 2 && p != 2)
         {
-            ab.clip = (AudioClip)AB.getobj("first");
+            ab.clip = (AudioClip)AB.getobj("first_music");
             ab.Play();
         }
         if (Flow_path.get_flag() == 3 && p != 3)
