@@ -13,7 +13,7 @@ public class Music : MonoBehaviour
     public Slider sl_music, sl_Battle;
     public static Dictionary<int, AudioSource> aas = new Dictionary<int, AudioSource>();
     static AudioSource ab;
-    int p = 0;
+    static int p = 0;
     static XmlDocument xmlDoc;
     static XmlNode vol;
     public static void Startx()
@@ -45,15 +45,31 @@ public class Music : MonoBehaviour
         vol.SelectSingleNode("battle").InnerText = sl_Battle.value.ToString();
         vol.SelectSingleNode("music").InnerText = sl_music.value.ToString();
         xmlDoc.Save(Application.dataPath + "/Configs/Music_volume.xml");
+    }
+    
+    public static void Updatex()
+    {
         foreach (var aa in aas.Values)
         {
             aa.volume = Battle_Volume;
         }
         if (ab == null) return;
         ab.volume = Music_Volume;
-        if (Flow_path.get_flag() == 2 && p != 2)
+        Debug.Log(p + " " + Flow_path.get_flag());
+        if (Flow_path.get_flag() == 1 && p != 1)
         {
             ab.clip = (AudioClip)AB.getobj("second_music");
+            ab.Play();
+        }
+        if (Flow_path.get_flag() == 2 && p != 2)
+        {
+            ab.clip = (AudioClip)AB.getobj("first");
+            ab.Play();
+        }
+        if (Flow_path.get_flag() == 3 && p != 3)
+        {
+            ab.clip = (AudioClip)AB.getobj("second_music");
+            ab.Play();
         }
         p = Flow_path.get_flag();
     }

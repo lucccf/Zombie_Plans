@@ -902,6 +902,8 @@ public class Main_ctrl : MonoBehaviour
             Collider_ctrl.Update_collison();
             Flow_path.Updatex();
             Map_ctrl.Updatex();
+            Monster_create.Updatex();
+            Music.Updatex();
 
             Debug_1((int)frame_index, 4);
 

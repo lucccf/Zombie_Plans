@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
@@ -22,8 +23,10 @@ public class Monster_create : MonoBehaviour
     public static List<Fix_vector2> size_monster = new List<Fix_vector2>();
     public static List<Mon_pos> pos_zombies1 = new List<Mon_pos>();
     public static List<Fix_vector2> size_zombies1 = new List<Fix_vector2>();
+    public static List<int> time_zombies1 = new List<int>();
     public static List<Mon_pos> pos_zombies2 = new List<Mon_pos>();
     public static List<Fix_vector2> size_zombies2 = new List<Fix_vector2>();
+    public static List<int> time_zombies2 = new List<int>();
     public static float cnt1 = 0;
 
     public static void init()
@@ -34,6 +37,8 @@ public class Monster_create : MonoBehaviour
         size_zombies1 = new List<Fix_vector2>();
         pos_zombies2 = new List<Mon_pos>();
         size_zombies2 = new List<Fix_vector2>();
+        p = 0;
+        tt = new Fixpoint(0);
         Getdebuff();
     }
 
@@ -150,6 +155,7 @@ public class Monster_create : MonoBehaviour
 
     private static void create(Mon_pos p1, Fix_vector2 p2, int type2)
     {
+        Debug.Log(Flow_path.zombie_cnt);
         Obj_info p = new Obj_info();
         switch (p1.type)
         {
@@ -203,7 +209,7 @@ public class Monster_create : MonoBehaviour
                         g1.WeakenSpeed();
                         break;
                     case 4:
-                        g1.WeakenCD(new Fixpoint(debuff_rate[4], 2));
+                        g1.WeakenCD(new Fixpoint(100 + debuff_rate[4], 2));
                         break;
                     case 5:
                         g1.WeakenToughness();
@@ -211,14 +217,31 @@ public class Monster_create : MonoBehaviour
                 }
             }
         }
-        Flow_path.zombie_cnt++;
+        if (type2 == 1)
+        {
+            Flow_path.zombie_cnt++;
+        }
+    }
+
+    private static void cre(Mon_pos p1, Fix_vector2 p2, int type2, int time)
+    {
+        if (zombies.ContainsKey(time))
+        {
+            zombies[time].Enqueue((p1, p2, type2));
+        }
+        else
+        {
+            zombies[time] = new Queue<(Mon_pos, Fix_vector2, int)>();
+            zombies[time].Enqueue((p1, p2, type2));
+        }
     }
 
     public static void Zom_create1()  //生成僵尸，后期替换模型和ai
     {
         for (int i = 0; i < pos_zombies1.Count; i++)
         {
-            create(pos_zombies1[i], size_zombies1[i], 1);
+            cre(pos_zombies1[i], size_zombies1[i], 1, time_zombies1[i]);
+            //create(pos_zombies1[i], size_zombies1[i], 1);
         }
     }
 
@@ -226,7 +249,31 @@ public class Monster_create : MonoBehaviour
     {
         for (int i = 0; i < pos_zombies2.Count; i++)
         {
-            create(pos_zombies2[i], size_zombies2[i], 1);
+            cre(pos_zombies2[i], size_zombies2[i], 1, time_zombies2[i]);
+            //create(pos_zombies2[i], size_zombies2[i], 1);
+        }
+    }
+
+    static int p = 0;
+    static Fixpoint tt = new Fixpoint(0);
+    static Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>> zombies = new Dictionary<int, Queue<(Mon_pos, Fix_vector2, int)>>();
+
+    public static void Updatex()
+    {
+        if (p != Flow_path.get_flag())
+        {
+            p = Flow_path.get_flag();
+            tt = new Fixpoint(0);
+        }
+        tt = tt + Dt.dt;
+        if (zombies.ContainsKey(tt.to_int()))
+        {
+            Queue<(Mon_pos, Fix_vector2, int)> q = zombies[tt.to_int()];
+            while (q.Count > 0)
+            {
+                (Mon_pos, Fix_vector2, int) pp = q.Dequeue();
+                create(pp.Item1, pp.Item2, pp.Item3);
+            }
         }
     }
 }
