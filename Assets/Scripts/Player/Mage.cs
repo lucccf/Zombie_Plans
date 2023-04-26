@@ -63,6 +63,7 @@ public class Mage : Knight
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         CharacterType = 1 + type2;
         SetStatus(370, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
@@ -91,6 +92,7 @@ public class Mage : Knight
     }
     public override void Updatex()
     {
+        RemoveTrigger();
         FireBallCD -= Dt.dt;
         MoveCD -= Dt.dt;
         RecoverCD -= Dt.dt;
@@ -337,7 +339,11 @@ public class Mage : Knight
     }
     protected void Attack(bool first)
     {
-        Fixpoint Near = GetNearDistance();
+        Fixpoint Near = LockPos.x - f.pos.x;
+        if (Near < new Fixpoint(0, 0))
+        {
+            Near = new Fixpoint(0, 0) - Near;
+        }
         if (first == true)
         {
             AttackToNext();

@@ -297,7 +297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  type2: 0
   AnimaToward: 0
+  Attack_fac: 0
+  LockId: -1
+  Check: 0
+  ToHomeFlag: 0
 --- !u!1 &1499604567
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +754,11 @@ PrefabInstance:
     - target: {fileID: 1134169115993394507, guid: 968201a4486d54340a7b67fee7fefb1f,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2228427980512293839, guid: 968201a4486d54340a7b67fee7fefb1f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2842267021973806773, guid: 968201a4486d54340a7b67fee7fefb1f,

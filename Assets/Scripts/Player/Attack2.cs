@@ -12,6 +12,11 @@ public class Attack2 : Attack
     private Fixpoint DestroyTime = new Fixpoint(95, 1);
     private Fixpoint FlySpeed = new Fixpoint(15, 0);
 
+    public override void Startx()
+    {
+        base.Startx();
+        AnimaDestroy = false;
+    }
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -49,6 +54,7 @@ public class Attack2 : Attack
             AnimaDestroy = true;
         } else if(AliveTime > MaxAliveTime)
         {
+            transform.rotation = Quaternion.identity;
             Main_ctrl.Desobj(id);
         }
 

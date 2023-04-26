@@ -20,8 +20,8 @@
 
 	<buff>
 		<id>4</id>
-		<value>1</value>
-		<txt>怪物韧性值缩减30%</txt>
+		<value>20</value>
+		<txt>怪物韧性值缩减20%</txt>
 	</buff>
 
 	<buff>

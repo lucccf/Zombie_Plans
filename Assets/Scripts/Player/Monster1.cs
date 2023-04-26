@@ -42,6 +42,7 @@ public class Monster1 : Monster
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         SetStatus(620, 10);
         animator = GetComponent<Animator>();
         CharacterType = 1 + type2;
@@ -56,6 +57,7 @@ public class Monster1 : Monster
 
     public override void Updatex()
     {
+        RemoveTrigger();
         StatusTime += Dt.dt;
         status.RecoverToughness(Dt.dt * new Fixpoint(20, 0));//韧性值恢复
         if (AnimaStatus != 6) CheckDeath();

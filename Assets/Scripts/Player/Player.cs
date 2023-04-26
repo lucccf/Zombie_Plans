@@ -107,6 +107,7 @@ public class Player : BasicCharacter
 
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         animator = GetComponent<Animator>();
         SetStatus(1000, 10);//血量。基础攻击力       
         HitTime = new Fixpoint[4] { new Fixpoint(0, 0), new Fixpoint(29, 2), new Fixpoint(29, 2), new Fixpoint(8, 1) };//击退时间，第一个为占位，其余为1段，2段，3段
@@ -393,7 +394,7 @@ public class Player : BasicCharacter
                     Obj_info p = new Obj_info();
                     p.name = "Terrorist";
                     p.cre_type = 1;
-                    Fix_vector2 p2 = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(303, 2));
+                    Fix_vector2 p2 = new Fix_vector2(new Fixpoint(148, 2), new Fixpoint(411, 2));
                     p.hei = p2.y.Clone();
                     p.wid = p2.x.Clone();
                     p.pos = ((Fix_col2d)Main_ctrl.All_objs[inputs.Itemid].modules[Object_ctrl.class_name.Fix_col2d]).pos;
@@ -987,7 +988,7 @@ public class Player : BasicCharacter
                 else if (trigger.triggername == "TrapX")
                 {
                     trigger.Explore();
-                } else if(trigger.triggername == "WolfBox" && checkid() == true)
+                } else if(trigger.triggername == "WolfBox" && checkid() == true && identity == Identity.Wolf)
                 {
                     trigger.BoxTriggerIn();
                 }
@@ -1025,7 +1026,7 @@ public class Player : BasicCharacter
     private static Fixpoint KickShiftx = new Fixpoint(1, 0);//飞踢攻击框
     private static Fixpoint KickShifty = new Fixpoint(-1, 0);
 
-    private static Fixpoint KickDamage = new Fixpoint(5, 0);
+    private static Fixpoint KickDamage = new Fixpoint(3, 0);
     private bool is_kicked = false;
     private void Kick()
     {
@@ -1041,7 +1042,7 @@ public class Player : BasicCharacter
             is_kicked = true;
             PlayMusic("飞踢");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(KickShiftx, KickShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 105, AnimaToward, 3, "飞踢命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * KickDamage, 220, AnimaToward, 3, "飞踢命中");//最后一个参数是击飞类型
         }
 
         if (Press[KeyCode.A])
@@ -1101,7 +1102,7 @@ public class Player : BasicCharacter
             HeavyAttackHasHited = true;
             PlayMusic("前冲拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(HeavyAttackShiftx, HeavyAttackShifty),
-                new Fixpoint(2, 0), new Fixpoint(7, 1), status.Damage() * HeavyAttackDamage, 105, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(7, 1), status.Damage() * HeavyAttackDamage, 220, AnimaToward, 0, "前冲拳命中");//最后一个参数是击飞类型
         }
 
         if (!f.onground || StatusTime > HeavyAttackDuring)
@@ -1117,7 +1118,7 @@ public class Player : BasicCharacter
     private static Fixpoint UpattackShifty = new Fixpoint(1, 0);
     private bool UpAttackHasHited = false;
 
-    private static Fixpoint UpattackDamage = new Fixpoint(3, 0);
+    private static Fixpoint UpattackDamage = new Fixpoint(88, 1);
 
     private void UpAttack(bool first)
     {
@@ -1151,7 +1152,7 @@ public class Player : BasicCharacter
             UpAttackHasHited = true;
             PlayMusic("升龙拳");
             CreateAttackWithCharacter(f.pos.Clone(), new Fix_vector2(UpattackShiftx, UpattackShifty),
-                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 105, AnimaToward, 2, "升龙拳命中");//最后一个参数是击飞类型
+                new Fixpoint(2, 0), new Fixpoint(3, 0), status.Damage() * UpattackDamage, 220, AnimaToward, 2, "升龙拳命中");//最后一个参数是击飞类型
         }
 
         if (f.onground && StatusTime > new Fixpoint(5, 1))//最短进入下蹲状态的时间

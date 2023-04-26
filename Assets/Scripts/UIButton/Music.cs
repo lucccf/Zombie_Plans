@@ -11,7 +11,8 @@ public class Music : MonoBehaviour
     public static float Music_Volume = -1;
     public Slider sl_music, sl_Battle;
     public static Dictionary<int, AudioSource> aas = new Dictionary<int, AudioSource>();
-
+    static AudioSource ab;
+    int p = 0;
     public static void Startx()
     {
         XmlDocument xmlDoc = new XmlDocument();
@@ -25,15 +26,27 @@ public class Music : MonoBehaviour
         {
             Music_Volume = float.Parse(vol.SelectSingleNode("music").InnerText);
         }
+        ab = Main_ctrl.camara.GetComponent<AudioSource>();
+        ab.loop = true;
+        ab.spatialBlend = 1;
+        ab.clip = (AudioClip)AB.getobj("first_music");
+        ab.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
         Battle_Volume = sl_Battle.value;
+        Music_Volume = sl_music.value;
         foreach (var aa in aas.Values)
         {
             aa.volume = Battle_Volume;
         }
+        ab.volume = Music_Volume;
+        if (Flow_path.get_flag() == 2 && p != 2)
+        {
+            ab.clip = (AudioClip)AB.getobj("second_music");
+        }
+        p = Flow_path.get_flag();
     }
 }

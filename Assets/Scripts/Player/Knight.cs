@@ -54,6 +54,7 @@ public class Knight : Monster
     }
     public override void Startx()
     {
+        transform.rotation = Quaternion.identity;
         CharacterType = 1 + type2;
         SetStatus(930, 10);//血量，基础攻击力
         animator = GetComponent<Animator>();
@@ -85,6 +86,7 @@ public class Knight : Monster
 
     public override void Updatex()
     {
+        RemoveTrigger();
         KnightSkillCD -= Dt.dt;
         NormalUpdate();
 
@@ -339,7 +341,12 @@ public class Knight : Monster
     }
     private void Attack(bool first)
     {
-        Fixpoint Near = LockPos.x;
+        Fixpoint Near = LockPos.x - f.pos.x;
+        if(Near < new Fixpoint(0,0))
+        {
+            Near = new Fixpoint(0, 0) - Near;
+        }
+        //Debug.Log("Knight" + KnightAnimaAttack+ " " + Near.to_float());
         if (first == true)
         {
             AttackToNext();

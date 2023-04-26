@@ -95,6 +95,12 @@ public class Monster : BasicCharacter
 
     }
 
+    public void WeakenToughness()
+    {
+        status.max_toughness = 80;
+        status.toughness = 80;
+    }
+
     public virtual void ToHome()
     {
         if (HasToHome == true) return;
