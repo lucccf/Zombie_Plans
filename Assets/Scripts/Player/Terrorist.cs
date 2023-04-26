@@ -36,6 +36,7 @@ public class Terrorist : Knight
         audiosource = GetComponent<AudioSource>();
         PlayMusic("恐怖分子奔跑附带的音效");
         HitMisuc = "恐怖分子挨打-只因";
+        status.WalkSpeed = new Fixpoint(3, 0);
     }
 
     // Update is called once per frame
