@@ -380,10 +380,12 @@ public class Player : BasicCharacter
             case PlayerOpt.MarkUser:
                 if (Player_ctrl.checkattack((int)id, inputs.Itemid))
                 {
+                    Debug.Log("XXX" + id + " " + inputs.Itemid + " " + 1);
                     Player_ctrl.Attack[((int)id, inputs.Itemid)] = 0;
                 }
                 else
                 {
+                    Debug.Log("XXX" + id + " " + inputs.Itemid + " " + 2);
                     Player_ctrl.Attack[((int)id, inputs.Itemid)] = 1;
                 }
                 break;
