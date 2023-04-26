@@ -867,6 +867,8 @@ public class Main_ctrl : MonoBehaviour
             Debug_1((int)frame_index, 2);
 
 
+            Rigid_ctrl.rig_update();
+            Collider_ctrl.Update_collison();
 
             for (int i = 0; i < f.Msgs.Count; i++)
             {
@@ -900,8 +902,6 @@ public class Main_ctrl : MonoBehaviour
 
             Debug_1((int)frame_index, 3);
 
-            Rigid_ctrl.rig_update();
-            Collider_ctrl.Update_collison();
             Flow_path.Updatex();
             Map_ctrl.Updatex();
             Monster_create.Updatex();

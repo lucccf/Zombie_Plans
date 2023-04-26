@@ -161,7 +161,6 @@ public class Monster_create : MonoBehaviour
 
     private static void create(Mon_pos p1, Fix_vector2 p2, int type2)
     {
-        Debug.Log(Flow_path.zombie_cnt);
         Obj_info p = new Obj_info();
         switch (p1.type)
         {

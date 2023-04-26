@@ -990,7 +990,6 @@ public class Player : BasicCharacter
                 if (trigger.triggertype == "building" && checkid() == true)
                 {
                     Flow_path.Now_fac = a.opsite.id;
-                    Debug.Log("Trigger");
                     Debug.Log(a.opsite.id);
                     GameObject parent = GameObject.Find("PlayerPanel");
                     Building = Instantiate((GameObject)AB.getobj("Building"), parent.transform);

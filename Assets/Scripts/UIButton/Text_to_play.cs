@@ -28,7 +28,6 @@ public class Text_to_play : MonoBehaviour
                 s1.Add(xx.InnerText);
             }
             words1[int.Parse(pp.SelectSingleNode("id").InnerText)] = s1;
-            Debug.Log(pp.SelectSingleNode("id").InnerText);
         }
         foreach (XmlNode pp in wolf)
         {
@@ -38,7 +37,6 @@ public class Text_to_play : MonoBehaviour
                 s1.Add(xx.InnerText);
             }
             words2[int.Parse(pp.SelectSingleNode("id").InnerText)] = s1;
-            Debug.Log(pp.SelectSingleNode("id").InnerText);
         }
 
         foreach(var xx in words1[-1])
