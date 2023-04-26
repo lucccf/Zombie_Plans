@@ -46,11 +46,13 @@ public class WorkTable : MonoBehaviour
     }
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             OpenNemu = !OpenNemu;
             worktable.SetActive(OpenNemu);
         }
+        */
     }
 
     private GameObject TmpNeedItem;
