@@ -7,6 +7,7 @@ public class Rand : MonoBehaviour
 
     public static void Setseed(ulong s)
     {
+        Debug.Log("setseed" + s);
         seed = s;
         nw = s;
     }

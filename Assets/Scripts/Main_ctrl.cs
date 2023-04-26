@@ -854,7 +854,6 @@ public class Main_ctrl : MonoBehaviour
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                Debug.Log("recv" + f.Opts[i]);
                 if (f.Opts[i].Opt == PlayerOpt.ExitRoom2)
                 {
                     Debug.Log("EXIT2");
