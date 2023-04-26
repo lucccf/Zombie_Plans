@@ -130,7 +130,10 @@ public class Player : BasicCharacter
         [KeyCode.Q] = false,
         [KeyCode.E] = false,
         [KeyCode.LeftShift] = false,
-        [KeyCode.Space] = false
+        [KeyCode.Space] = false,
+        [KeyCode.U] = false,
+        [KeyCode.Alpha1] = false,
+        [KeyCode.Alpha2] = false
     };
 
     public void DealMsgs(PlayerMessage msg)
@@ -197,6 +200,24 @@ public class Player : BasicCharacter
                 break;
             case PlayerOpt.SpaceUp:
                 Press[KeyCode.Space] = false;
+                break;
+            case PlayerOpt.OneUp:
+                Press[KeyCode.Alpha1] = false;
+                break;
+            case PlayerOpt.OneDown:
+                Press[KeyCode.Alpha1] = true;
+                break;
+            case PlayerOpt.TwoUp:
+                Press[KeyCode.Alpha2] = false;
+                break;
+            case PlayerOpt.TwoDown:
+                Press[KeyCode.Alpha2] = true;
+                break;
+            case PlayerOpt.UUp:
+                Press[KeyCode.U] = false;
+                break;
+            case PlayerOpt.UDown:
+                Press[KeyCode.U] = true;
                 break;
             case PlayerOpt.FixFacility:
                 Facility fa = Flow_path.facilities[inputs.Itemid];
@@ -601,14 +622,14 @@ public class Player : BasicCharacter
 
         }
 
-        else if (Press[KeyCode.Space] && Press[KeyCode.L] && bag.BagCheckItemNums(99, 1))
+        else if (Press[KeyCode.Alpha2] && bag.BagCheckItemNums(99, 1))
         {
             ChangeStatus(StatusType.Trap);
             Trap(true);
             return;
         }
 
-        else if (Press[KeyCode.Space] && Press[KeyCode.J] && f.onground)
+        else if (Press[KeyCode.U] && f.onground)
         {
             ChangeStatus(StatusType.Upattack);
             UpAttack(true);
@@ -641,7 +662,7 @@ public class Player : BasicCharacter
             ChangeStatus(StatusType.Jump);
             return;
         }
-        else if (Press[KeyCode.Space] && Press[KeyCode.LeftShift] && bag.BagCheckItemNums(11, 1))
+        else if (Press[KeyCode.Alpha1] && bag.BagCheckItemNums(11, 1))
         {
             ChangeStatus(StatusType.Recover);
             RecoverHp(true);
@@ -1296,7 +1317,7 @@ public class Player : BasicCharacter
             x.transform.localScale = new Vector3(3, 3, 1);
             ChangeStatus(StatusType.Normal);
             status.RecoverHp(200);//恢复的血量
-            Preform(-100);
+            Preform(-200);
         }
     }
 
