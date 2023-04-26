@@ -157,6 +157,7 @@ namespace Net
         [pbr::OriginalName("One_Down")] OneDown = 38,
         [pbr::OriginalName("Two_Up")] TwoUp = 39,
         [pbr::OriginalName("Two_Down")] TwoDown = 40,
+        [pbr::OriginalName("Exit_Room2")] ExitRoom2 = 41,
     }
 
     #endregion
