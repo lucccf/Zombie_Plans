@@ -258,9 +258,9 @@ public class Devil : Knight
     private static Fixpoint DevilAttack2HitTime = new Fixpoint(6, 1);
     private static Fixpoint DevilAttack3HitTime = new Fixpoint(9, 1);
     private static Fixpoint DevilAttackQuitTime = new Fixpoint(1, 0);
-    private static Fixpoint DevilAttack1Damage = new Fixpoint(4, 0);
-    private static Fixpoint DevilAttack2Damage = new Fixpoint(4, 0);
-    private static Fixpoint DevilAttack3Damage = new Fixpoint(4, 0);
+    private static Fixpoint DevilAttack1Damage = new Fixpoint(1, 0);
+    private static Fixpoint DevilAttack2Damage = new Fixpoint(1, 0);
+    private static Fixpoint DevilAttack3Damage = new Fixpoint(1, 0);
     private int DevilAttackTimes = 0;
 
     private void DevilCreateAttack(Fixpoint HPDamage, int ToughnessDamage)
@@ -284,21 +284,21 @@ public class Devil : Knight
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x + new Fixpoint(5, 1), f.pos.y), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack1Damage, 40, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack1Damage, 0, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack1Damage,40);
         }
         else if (StatusTime <= DevilAttack3HitTime && DevilAttackTimes == 1)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y + new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack2Damage, 40, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack2Damage, 0, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack2Damage, 40);
         }
         else if (StatusTime <= DevilAttackQuitTime && DevilAttackTimes == 2)
         {
             ++DevilAttackTimes;
             Main_ctrl.NewAttack2("skull", new Fix_vector2(f.pos.x, f.pos.y - new Fixpoint(5, 1)), new Fixpoint(1, 0), new Fixpoint(1, 0), status.Damage() *
-                DevilAttack3Damage, 40, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
+                DevilAttack3Damage, 0, id, AnimaToward, CharacterType, 3, "大自爆");//最后一个参数是击飞类型
             //DevilCreateAttack(status.Damage() * DevilAttack3Damage, 40);
         }
         else
