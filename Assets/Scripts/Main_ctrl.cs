@@ -854,7 +854,7 @@ public class Main_ctrl : MonoBehaviour
 
             for (int i = 0; i < f.Opts.Count; i++)
             {
-                if (f.Opts[i].Opt == PlayerOpt.ExitRoom)
+                if (f.Opts[i].Opt == PlayerOpt.ExitRoom2)
                 {
                     if (f.Opts[i].Userid == user_id) SceneManager.LoadScene("Start");
                     continue;
@@ -924,7 +924,7 @@ public class Main_ctrl : MonoBehaviour
             if (Exit)
             {
                 PlayerOptData y = new PlayerOptData();
-                y.Opt = PlayerOpt.ExitRoom;
+                y.Opt = PlayerOpt.ExitRoom2;
                 y.Userid = (int)user_id;
 
                 Clisocket.Sendmessage(BODYTYPE.PlayerOptData, y);
