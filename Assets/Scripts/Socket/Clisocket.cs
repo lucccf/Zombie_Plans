@@ -123,6 +123,12 @@ public class Clisocket : MonoBehaviour
         keys[PlayerOpt.ShiftUp] = new op(KeyCode.LeftShift, 2);
         keys[PlayerOpt.SpaceDown] = new op(KeyCode.Space, 1);
         keys[PlayerOpt.SpaceUp] = new op(KeyCode.Space, 2);
+        keys[PlayerOpt.OneDown] = new op(KeyCode.Alpha1, 1);
+        keys[PlayerOpt.OneUp] = new op(KeyCode.Alpha1, 2);
+        keys[PlayerOpt.TwoDown] = new op(KeyCode.Alpha2, 1);
+        keys[PlayerOpt.TwoUp] = new op(KeyCode.Alpha2, 2);
+        keys[PlayerOpt.UDown] = new op(KeyCode.U, 1);
+        keys[PlayerOpt.UUp] = new op(KeyCode.U, 2);
     }
 
     // Update is called once per frame
