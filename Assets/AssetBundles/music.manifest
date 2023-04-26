@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 884422399
+CRC: 2193072886
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: fbd2086d18b33950cce9556e75ea41ed
+    Hash: d392718bf2e24ef280d2615aa04c835c
   TypeTreeHash:
     serializedVersion: 2
     Hash: 3f7d0c5e0986ec71841622bcb2f9be1c
@@ -157,7 +157,6 @@ Assets:
 - "Assets/music/\u8BED\u97F3\u5305/\u554A~~~\uFF08\u738B\uFF09.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/\u54E6\u54C4\u54C4\uFF0C\u5168\u7ED9\u515A.mp3"
 - "Assets/music/BOSS/\u4EBA\u7269\u558A\u8BDD/\u5927\u51B2\u62F3/\u5927\u51B2\u62F3D.ogg"
-- "Assets/music/\u4E3B\u89D2\u97F3\u6548/\u6280\u80FD\u91CA\u653E\u7684\u97F3\u6548/\u4E09\u8FDE\u6CE2/\u4E09\u8FDE\u6CE2.mp3"
 - "Assets/music/\u8BED\u97F3\u5305/V V.mp3"
 - "Assets/music/\u8865\u5145/\u70B9\u51FB\u77FF\u77F3.ogg"
 - "Assets/music/UI\u97F3\u6548/Loading......ogg"
