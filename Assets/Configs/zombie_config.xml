@@ -2,7 +2,7 @@
 	<first>
 		<monster>
 			<id>1</id>
-			<num>4</num>
+			<num>5</num>
 		</monster>
 
 		<monster>
@@ -12,14 +12,14 @@
 
 		<monster>
 			<id>3</id>
-			<num>1</num>
+			<num>2</num>
 		</monster>
 	</first>
 
 	<second>
 		<monster>
 			<id>1</id>
-			<num>2</num>
+			<num>5</num>
 		</monster>
 
 		<monster>

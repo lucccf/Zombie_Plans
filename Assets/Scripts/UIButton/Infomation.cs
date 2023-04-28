@@ -13,7 +13,6 @@ public class Infomation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Info.SetActive(false);
         if (Main_ctrl.main_identity == Player.Identity.Populace)
         {
             txt.text = p1;

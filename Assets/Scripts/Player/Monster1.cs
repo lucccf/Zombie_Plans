@@ -52,6 +52,7 @@ public class Monster1 : Monster
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
         HitMisuc = "新的挨打";
+        RealStatus = StatusType.Normal;
         //ToHome();
     }
 

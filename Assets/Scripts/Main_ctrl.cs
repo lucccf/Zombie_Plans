@@ -556,8 +556,8 @@ public class Main_ctrl : MonoBehaviour
 
     public static GameObject CreateObj(Obj_info info)
     {
-        //GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
-        GameObject obj = Pool.getobj(info.name);
+        GameObject obj = Instantiate((GameObject)AB.getobj(info.name));
+        //GameObject obj = Pool.getobj(info.name);
         cp = (uint)(cp * 233 + info.pos.x.to_int() * 10 + info.pos.y.to_int()) % 998244353;
         //Debug.Log(cnt + " : " + cp);
         Object_ctrl ctrl = obj.AddComponent<Object_ctrl>();
@@ -613,7 +613,7 @@ public class Main_ctrl : MonoBehaviour
                     if (info.falls == null)
                     {
                         info.falls = new Dictionary<string, int>();
-                        info.falls["Mineral"] = 50;
+                        info.falls["Mineral"] = 5;
                     }
                     m.Falls = info.falls;
                     if (m.type2 == 1)
@@ -811,8 +811,8 @@ public class Main_ctrl : MonoBehaviour
         Destroy(obj);
 
 
-        //Destroy(obj.gameObject);
-        Pool.desobj(obj.gameObject);
+        Destroy(obj.gameObject);
+        //Pool.desobj(obj.gameObject);
         All_objs.Remove(id);
     }
 

@@ -37,6 +37,7 @@ public class Terrorist : Knight
         PlayMusic("恐怖分子奔跑附带的音效");
         HitMisuc = "恐怖分子挨打-只因";
         status.WalkSpeed = new Fixpoint(3, 0);
+        RealStatus = StatusType.Normal;
     }
 
     // Update is called once per frame

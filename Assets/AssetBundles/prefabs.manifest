@@ -3,7 +3,7 @@ CRC: 2985466614
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 97ab29079581cc27211e66f60cf9bdbd
+    Hash: cb6ef760f7a3b93b6b242b9cff249ede
   TypeTreeHash:
     serializedVersion: 2
     Hash: c4ca1abed9d5b9842b5985b63bed5c98
@@ -191,4 +191,4 @@ Assets:
 - Assets/Prefabs/TrapX.prefab
 - Assets/Prefabs/number/99.png
 Dependencies:
-- D:/UnityProject/Zombie_Plan/Zombie_Plans/Assets/AssetBundles/music
+- D:/zt/unity/Zombie_Plans/Assets/AssetBundles/music

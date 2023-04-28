@@ -204,10 +204,10 @@ public class BasicCharacter : MonoBehaviour
             {
                 continue;
             }
-            if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id) && attack.attacker_type == CharacterType)
+            /*if (!Player_ctrl.checkattack((int)attack.attakcer_id, (int)id) && attack.attacker_type == CharacterType)
             {
                 continue;
-            }
+            }*/
 
             if (FlyTimes > 10)
             {

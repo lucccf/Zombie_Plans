@@ -542,7 +542,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies1.Add(new Mon_pos(1, getXX(xx, id)));
                             Monster_create.size_zombies1.Add(yy);
                             Monster_create.time_zombies1.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                         for (int ii = 0; ii < fst[2]; ii++)
                         {
@@ -550,7 +550,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies1.Add(new Mon_pos(2, getXX(xx, id)));
                             Monster_create.size_zombies1.Add(yy);
                             Monster_create.time_zombies1.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                         for (int ii = 0; ii < fst[3]; ii++)
                         {
@@ -558,7 +558,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies1.Add(new Mon_pos(3, getXX(xx, id)));
                             Monster_create.size_zombies1.Add(yy);
                             Monster_create.time_zombies1.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                     }
 
@@ -571,7 +571,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies2.Add(new Mon_pos(1, getXX(xx, id)));
                             Monster_create.size_zombies2.Add(yy);
                             Monster_create.time_zombies2.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                         for (int ii = 0; ii < sec[2]; ii++)
                         {
@@ -579,7 +579,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies2.Add(new Mon_pos(2, getXX(xx, id)));
                             Monster_create.size_zombies2.Add(yy);
                             Monster_create.time_zombies2.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                         for (int ii = 0; ii < sec[3]; ii++)
                         {
@@ -587,7 +587,7 @@ public class Map_create : MonoBehaviour
                             Monster_create.pos_zombies2.Add(new Mon_pos(3, getXX(xx, id)));
                             Monster_create.size_zombies2.Add(yy);
                             Monster_create.time_zombies2.Add(time);
-                            time += 5;
+                            time += 3;
                         }
                     }
                 }

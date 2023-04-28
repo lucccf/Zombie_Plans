@@ -287,7 +287,7 @@ public class Monster_create : MonoBehaviour
         a1.transform.position = new Vector3(p1.x.to_float(), p1.y.to_float(), 5);
         ParticleSystem particle = a1.GetComponent<ParticleSystem>();
         particle.Play();
-        des_out(a1, time + 5);
+        des_out(a1, time + 3);
     }
 
     private static void des_out(GameObject g1, int time)

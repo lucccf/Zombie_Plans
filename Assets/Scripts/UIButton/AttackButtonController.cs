@@ -61,6 +61,7 @@ public class AttackButtonController : MonoBehaviour
     // 控制UI和Button的显示和隐藏
     private void ToggleUI()
     {
+        /*
         bool showUI = !buttonParent.activeSelf;
         buttonParent.SetActive(showUI);
         Debug.Log("Button changed");
@@ -74,5 +75,6 @@ public class AttackButtonController : MonoBehaviour
             // 隐藏所有Button
             ClearButtons();
         }
+        */
     }
 }

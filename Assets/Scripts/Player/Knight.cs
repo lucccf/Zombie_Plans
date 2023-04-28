@@ -64,6 +64,7 @@ public class Knight : Monster
         audiosource = GetComponent<AudioSource>();
         SetFindStatus();
         HitMisuc = "骑士挨打";
+        RealStatus = StatusType.Normal;
         //ToHome();
 
     }
