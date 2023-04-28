@@ -67,6 +67,23 @@ public class Knight : Monster
         RealStatus = StatusType.Normal;
         //ToHome();
 
+        FindPosUp = new Fixpoint(7, 0);//小框
+        FindPosDown = new Fixpoint(-2, 0);
+        FindPosLeft = new Fixpoint(-20, 0);
+        FindPosRight = new Fixpoint(20, 0);
+
+        CatchPosUp = f.pos.y.Clone() + new Fixpoint(20, 0);//大框
+        CatchPosDown = f.pos.y.Clone() - new Fixpoint(20, 0);
+        CatchPosLeft = f.pos.x.Clone() - new Fixpoint(40, 0);
+        CatchPosRight = f.pos.x.Clone() + new Fixpoint(40, 0);
+
+        HomePos = f.pos.Clone();
+        HomeLocation = Main_ctrl.CalPos(f.pos.x.Clone(), f.pos.y.Clone());
+        if (HomeLocation == -1)
+        {
+            Debug.LogError("Find Home Error");
+        }
+
     }
 
     // Update is called once per frame
